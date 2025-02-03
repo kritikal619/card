@@ -315,8 +315,8 @@
     }
     function populateSelectors() {
       const cardSelector = document.getElementById('cardSelector');
-      // 2부터 totalImages까지 짝수 번호 사용
-      for (let i = 2; i <= totalImages; i += 2) {
+      // 모든 카드 (1부터 totalImages까지)
+      for (let i = 1; i <= totalImages; i++) {
         let option = document.createElement('option');
         option.value = getFileName(i);
         option.textContent = `Card ${i}`;
@@ -328,7 +328,7 @@
     function populateBlankCards() {
       const container = document.getElementById('blankCardsContainer');
       container.innerHTML = '';
-      for (let i = 2; i <= totalImages; i += 2) {
+      for (let i = 1; i <= totalImages; i++) {
         const img = document.createElement('img');
         img.src = `Blank/${getFileName(i)}`;
         img.alt = `Card ${i}`;
