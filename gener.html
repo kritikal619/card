@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
   <!-- 검색 엔진 최적화 (SEO) -->
-  <!-- content 속성의 따옴표가 닫히도록 수정 -->
   <meta name="description" content="유로 빈카드, 토티 빈카드, 센츄리온 빈카드, 트로피 아이콘 빈카드, 월드컵 빈카드, 발롱도르 빈카드">
   <meta name="keywords" content="FC모바일, 특성 재료, 패스 마스터, 라인 브레이커, 예리한 감아차기, 선수 정보, 오버롤, 넥슨, 빈카드, 합성, 카드 제작, 카드, 제작">
   <meta name="author" content="해리지팡이">
@@ -28,6 +27,7 @@
   <link rel="manifest" href="./favicons/site.webmanifest" />
   
   <title>FC모바일 카드 제작기</title>
+  <h3>**모바일에서는 가로로 이용해 주세요**</h3>
   <style>
     /* 프로젝트의 fonts 폴더에 있는 3종 폰트 불러오기 */
     @font-face {
@@ -54,7 +54,7 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-    /* 왼쪽 에디터 영역은 최대 높이를 지정하여 내용이 많을 경우 스크롤되도록 함 */
+    /* 왼쪽 에디터 영역: 스크롤되도록 */
     .editor {
       width: 350px;
       background: white;
@@ -176,7 +176,6 @@
       <!-- 빈카드 선택 및 미리보기 -->
       <div class="form-group">
         <label>빈카드 선택</label>
-        <!-- select 박스 -->
         <select id="cardSelector" class="form-control"></select>
         <img id="cardDesignPreview" src="" style="width:100px; display:block; margin-top:10px;">
       </div>
@@ -187,7 +186,7 @@
         <div id="blankCardsContainer"></div>
       </div>
       
-      <!-- 예시: 오버롤 관련 입력란 -->
+      <!-- 오버롤 입력 -->
       <div class="form-group">
         <label>오버롤</label>
         <input type="number" id="ovr" min="0" max="99" value="85">
@@ -207,15 +206,69 @@
         <input type="color" id="ovrColor" value="#FFD700">
       </div>
       
-      <!-- (기타 입력 요소들 추가 가능) -->
+      <!-- 포지션 입력 -->
+      <div class="form-group">
+        <label>포지션</label>
+        <select id="position">
+          <option value="LW">LW</option>
+          <option value="ST">ST</option>
+          <option value="RW">RW</option>
+          <option value="CF">CF</option>
+          <option value="LF">LF</option>
+          <option value="RF">RF</option>
+          <option value="CM">CM</option>
+          <option value="RM">RM</option>
+          <option value="LM">LM</option>
+          <option value="CDM">CDM</option>
+          <option value="CAM">CAM</option>
+          <option value="LB">LB</option>
+          <option value="CB">CB</option>
+          <option value="RB">RB</option>
+          <option value="GK">GK</option>
+        </select>
+        <div class="coord-inputs">
+          <input type="number" id="posX" placeholder="X" value="76">
+          <input type="number" id="posY" placeholder="Y" value="102">
+        </div>
+        <label>포지션 폰트</label>
+        <select id="posFont">
+          <option value="FontA">FontA</option>
+          <option value="FontB" selected>FontB</option>
+          <option value="FontC">FontC</option>
+        </select>
+        <label>포지션 폰트 크기</label>
+        <input type="number" id="posFontSize" placeholder="Font Size" value="19">
+        <label>포지션 폰트 색상</label>
+        <input type="color" id="posColor" value="#FFFFFF">
+      </div>
       
+      <!-- 선수 이름 입력 -->
+      <div class="form-group">
+        <label>선수 이름</label>
+        <input type="text" id="playerName" value="김민재">
+        <div class="coord-inputs">
+          <input type="number" id="nameX" placeholder="X" value="121">
+          <input type="number" id="nameY" placeholder="Y" value="218">
+        </div>
+        <label>이름 폰트</label>
+        <select id="nameFont">
+          <option value="FontA">FontA</option>
+          <option value="FontB">FontB</option>
+          <option value="FontC" selected>FontC</option>
+        </select>
+        <label>이름 폰트 크기</label>
+        <input type="number" id="nameFontSize" placeholder="Font Size" value="20">
+        <label>Name Color</label>
+        <input type="color" id="nameColor" value="#FFFFFF">
+      </div>
+      
+      <!-- (추가 사진, 국기, 시즌 등 다른 입력 요소 추가 가능) -->
       <button onclick="downloadCard()">Download Card</button>
     </div>
     
     <!-- 미리보기 영역 -->
     <div class="preview">
       <h2>카드 미리보기</h2>
-      <!-- 캔버스 (300×300) -->
       <canvas id="cardCanvas" width="300" height="300"></canvas>
       <div id="wrap">
         <section></section>
@@ -262,7 +315,7 @@
     }
     function populateSelectors() {
       const cardSelector = document.getElementById('cardSelector');
-      // 예제에서는 2부터 totalImages까지 짝수 번호로 사용
+      // 2부터 totalImages까지 짝수 번호 사용
       for (let i = 2; i <= totalImages; i += 2) {
         let option = document.createElement('option');
         option.value = getFileName(i);
@@ -280,11 +333,9 @@
         img.src = `Blank/${getFileName(i)}`;
         img.alt = `Card ${i}`;
         img.dataset.cardValue = getFileName(i);
-        // 클릭 시 select 박스의 값 변경 및 카드 로드
         img.addEventListener('click', function() {
           document.getElementById('cardSelector').value = this.dataset.cardValue;
           loadBaseCard();
-          // 선택된 썸네일 표시
           document.querySelectorAll('#blankCardsContainer img').forEach(el => el.classList.remove('selected'));
           this.classList.add('selected');
         });
@@ -477,7 +528,7 @@
       if(baseCard.complete) {
         ctx.drawImage(baseCard, 0, 0, canvas.width, canvas.height);
       }
-      // OVR Rating 그리기
+      // 오버롤 그리기
       const ovrFontSize = document.getElementById('ovrFontSize').value;
       const ovrFont = document.getElementById('ovrFont').value;
       ctx.fillStyle = document.getElementById('ovrColor').value;
@@ -485,7 +536,7 @@
       ctx.fillText(document.getElementById('ovr').value,
                    parseInt(document.getElementById('ovrX').value),
                    parseInt(document.getElementById('ovrY').value));
-      // Position 그리기
+      // 포지션 그리기
       const posFontSize = document.getElementById('posFontSize').value;
       const posFont = document.getElementById('posFont').value;
       ctx.fillStyle = document.getElementById('posColor').value;
@@ -493,7 +544,7 @@
       ctx.fillText(document.getElementById('position').value,
                    parseInt(document.getElementById('posX').value),
                    parseInt(document.getElementById('posY').value));
-      // Player Name 그리기
+      // 선수 이름 그리기
       const nameFontSize = document.getElementById('nameFontSize').value;
       const nameFont = document.getElementById('nameFont').value;
       ctx.fillStyle = document.getElementById('nameColor').value;
@@ -513,7 +564,7 @@
         const seasonH = parseInt(document.getElementById('seasonUploadHeight').value);
         ctx.drawImage(customSeason, customSeasonX, customSeasonY, seasonW, seasonH);
       }
-      // Class Image 그리기 (존재할 경우)
+      // Class Image 그리기 (존재하는 경우)
       if(classImage.complete) {
         ctx.drawImage(classImage,
           parseInt(document.getElementById('classX')?.value) || 0,
