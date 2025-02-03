@@ -302,7 +302,7 @@
     // --- 이미지 로드 함수 ---
     function loadBaseCard() {
       const cardFile = document.getElementById('cardSelector').value;
-      baseCard.src = `Blank/${cardFile}`;
+      baseCard.src = `./Blank/${cardFile}`;
       baseCard.onload = () => {
         document.getElementById('cardDesignPreview').src = baseCard.src;
         drawCard();
