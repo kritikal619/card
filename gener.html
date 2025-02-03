@@ -330,7 +330,7 @@
     function populateSelectors() {
       const cardSelector = document.getElementById('cardSelector');
       // 예시로 1~250 중 짝수 번호 사용
-      for (let i = 2; i <= totalImages; i += 2) {
+      for (let i = 1; i <= totalImages; i += 1) {
         let option = document.createElement('option');
         option.value = getFileName(i);
         option.textContent = `Card ${i}`;
