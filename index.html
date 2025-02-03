@@ -30,6 +30,8 @@
     <meta name="google-site-verification" content="">
     <meta name="naver-site-verification" content="">
     <title>피모 합성소: 빈카드, 국기 및 글자! (FC모바일)</title>
+    
+    
   <style>
     /* 탭 버튼 및 콘텐츠 스타일 */
     #tabs {
@@ -113,9 +115,25 @@
         vertical-align: middle;
       }
     }
+    /* 탭3 버튼 스타일: 크기 키우기 */
+    #tab3 button {
+      font-size: 20px;       /* 폰트 크기를 키움 */
+      padding: 15px 30px;    /* 상하 15px, 좌우 30px 패딩 */
+      border: 2px solid #333; /* 원하는 경우 테두리도 추가 */
+      background-color: #f0f0f0; /* 배경색 */
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+#tab3 button:hover {
+  background-color: #e0e0e0;
+}
+
   </style>
 </head>
 <body> <br>
+
   <h1>피모 합성소 (FC모바일)</h1><br>
   <h3>공지: 안녕하세요</h3><br>
   <a href="http://fcevol.kro.kr/">진화 시뮬레이션을 하고 싶다면?</a><br>
@@ -151,7 +169,9 @@
       
       <!-- 탭3: 만들기 툴 (미공개) -->
       <div class="tab-content" id="tab3">
-        <p>만들기 툴은 아직 미공개입니다.</p>
+        <button type="button" id="navyBtn" onclick="location.href='gener.html'">
+          만들기 툴로 이동
+        </button>
       </div>
       
       <!-- 탭4: 빈 글자 탭 (탭2의 내용을 복제) -->
@@ -179,6 +199,7 @@
   
   
 
+
   <div id="wrap">
     <section>
     </section>
@@ -196,7 +217,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // 폴더 설정
-      const blankCardFolder = "Blank";
+      const blankCardFolder = "BlankCard";
       const blankLetterFolder = "BlankLetter";
       
       // 글자 카드로 분류할 번호 배열 (BlankCard 폴더 내의 이미지 번호 중)
@@ -316,6 +337,7 @@
         blankLetterImageGrid.appendChild(imageItemDiv);
       }
     });
+   
   </script>
 </body>
 </html>
