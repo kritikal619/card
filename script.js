@@ -66,6 +66,8 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }
   });
+  let deferredPrompt; // 이벤트 객체 저장
+
   // beforeinstallprompt 이벤트 캐치
   window.addEventListener("beforeinstallprompt", (event) => {
     event.preventDefault(); // 기본 동작 방지
@@ -100,3 +102,4 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("installPrompt").style.display = "none";
   });
   
+
