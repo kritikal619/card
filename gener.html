@@ -43,9 +43,27 @@
       src: url('fonts/FontC.otf') format('opentype');
     }
     
-    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; }
-    .container { display: flex; gap: 30px; max-width: 1200px; margin: 0 auto; }
-    .editor { width: 350px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    .container {
+      display: flex;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    /* 왼쪽 에디터 영역은 최대 높이를 지정하여 내용이 많을 경우 스크롤되도록 함 */
+    .editor {
+      width: 350px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
     .preview {
       flex-grow: 1;
       background: white;
@@ -56,29 +74,84 @@
       top: 20px;
       align-self: flex-start;
     }
-    canvas { border: 2px solid #ddd; margin-top: 10px; background: white; cursor: default; }
-    .form-group { margin-bottom: 15px; }
-    label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
-    input, select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 5px; }
-    .coord-inputs { display: flex; gap: 5px; margin-top: 5px; }
-    .coord-inputs input { width: 70px; }
-    button { background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-top: 10px; }
-    button:hover { background: #0056b3; }
-    #wrap { display: block; background-color: #f2f2f2; }
-    footer { width: 100%; height: 90px; border-top: 1px solid #c4c4c4; padding-top: 15px; color: #808080; font-size: 11px; background-color: #f2f2f2; }
-    footer a { display: inline-block; margin: 0 20px 10px 20px; color: #808080; font-size: 11px; }
-    footer a:visited { color: #808080 }
-    footer p { margin-top: 0; margin-bottom: 0; }
-    footer p span { display: inline-block; margin-left: 20px; }
-    
-    /* 추가: 빈카드 목록을 위한 그리드 스타일 */
+    canvas {
+      border: 2px solid #ddd;
+      margin-top: 10px;
+      background: white;
+      cursor: default;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 5px;
+    }
+    .coord-inputs {
+      display: flex;
+      gap: 5px;
+      margin-top: 5px;
+    }
+    .coord-inputs input {
+      width: 70px;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    #wrap {
+      display: block;
+      background-color: #f2f2f2;
+    }
+    footer {
+      width: 100%;
+      height: 90px;
+      border-top: 1px solid #c4c4c4;
+      padding-top: 15px;
+      color: #808080;
+      font-size: 11px;
+      background-color: #f2f2f2;
+    }
+    footer a {
+      display: inline-block;
+      margin: 0 20px 10px 20px;
+      color: #808080;
+      font-size: 11px;
+    }
+    footer a:visited {
+      color: #808080;
+    }
+    footer p {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    footer p span {
+      display: inline-block;
+      margin-left: 20px;
+    }
+    /* 빈카드 썸네일 목록 그리드 */
     #blankCardsContainer {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
       gap: 10px;
       margin-top: 15px;
-      max-height: 400px;
-      overflow-y: auto;
       border: 1px solid #ddd;
       padding: 10px;
       background: #fafafa;
@@ -96,25 +169,25 @@
 </head>
 <body>
   <div class="container">
+    <!-- 에디터 영역 -->
     <div class="editor">
       <h2>카드 제작기</h2>
       
-      <!-- Base Card 선택 및 미리보기 -->
+      <!-- 빈카드 선택 및 미리보기 -->
       <div class="form-group">
         <label>빈카드 선택</label>
-        <!-- 기존 select 박스 (선택 시 값이 변경되도록 유지) -->
+        <!-- select 박스 -->
         <select id="cardSelector" class="form-control"></select>
         <img id="cardDesignPreview" src="" style="width:100px; display:block; margin-top:10px;">
       </div>
       
-      <!-- 아래에 모든 빈카드 썸네일 목록을 표시 -->
+      <!-- 모든 빈카드 썸네일 목록 -->
       <div class="form-group">
         <label>모든 빈카드 미리보기</label>
         <div id="blankCardsContainer"></div>
       </div>
       
-      <!-- 그 외 편집 요소들 ... (OVR Rating, Position, 선수 이름 등) -->
-      <!-- 생략: 기존 코드와 동일 -->
+      <!-- 예시: 오버롤 관련 입력란 -->
       <div class="form-group">
         <label>오버롤</label>
         <input type="number" id="ovr" min="0" max="99" value="85">
@@ -134,13 +207,15 @@
         <input type="color" id="ovrColor" value="#FFD700">
       </div>
       
-      <!-- ... 나머지 입력 요소들 생략 ... -->
+      <!-- (기타 입력 요소들 추가 가능) -->
+      
       <button onclick="downloadCard()">Download Card</button>
     </div>
     
+    <!-- 미리보기 영역 -->
     <div class="preview">
       <h2>카드 미리보기</h2>
-      <!-- 캔버스: 정사각형 (300×300) -->
+      <!-- 캔버스 (300×300) -->
       <canvas id="cardCanvas" width="300" height="300"></canvas>
       <div id="wrap">
         <section></section>
@@ -181,40 +256,35 @@
     let draggingCustomSeason = false, customSeasonDragOffsetX = 0, customSeasonDragOffsetY = 0;
     let resizingCustomSeason = false, customSeasonResizeOffsetX = 0, customSeasonResizeOffsetY = 0;
     
-    // --- 선택 박스 채우기 (Base Card, Class Image) ---
+    // --- 빈카드 및 클래스 이미지 선택 박스 채우기 ---
     function getFileName(number) {
       return `image(${number}).png`;
     }
     function populateSelectors() {
       const cardSelector = document.getElementById('cardSelector');
-      const classSelector = document.getElementById('classSelector'); // 만약 사용하지 않는다면 제거해도 됩니다.
-      // 예시로 1~250 중 짝수 번호 사용
+      // 예제에서는 2부터 totalImages까지 짝수 번호로 사용
       for (let i = 2; i <= totalImages; i += 2) {
         let option = document.createElement('option');
         option.value = getFileName(i);
         option.textContent = `Card ${i}`;
         cardSelector.appendChild(option);
       }
-      // 클래스 이미지 선택 관련 코드는 생략하거나 사용하시면 됩니다.
     }
     
     // --- 빈카드 썸네일 목록 채우기 ---
     function populateBlankCards() {
       const container = document.getElementById('blankCardsContainer');
-      // container 내용 초기화
       container.innerHTML = '';
-      // 예제에서는 2부터 totalImages까지 짝수 번호로 가정
       for (let i = 2; i <= totalImages; i += 2) {
         const img = document.createElement('img');
         img.src = `Blank/${getFileName(i)}`;
         img.alt = `Card ${i}`;
         img.dataset.cardValue = getFileName(i);
-        // 클릭 시 해당 카드 선택
+        // 클릭 시 select 박스의 값 변경 및 카드 로드
         img.addEventListener('click', function() {
-          // select 박스의 값을 변경하고 로드
           document.getElementById('cardSelector').value = this.dataset.cardValue;
           loadBaseCard();
-          // 선택된 이미지에 스타일 추가
+          // 선택된 썸네일 표시
           document.querySelectorAll('#blankCardsContainer img').forEach(el => el.classList.remove('selected'));
           this.classList.add('selected');
         });
@@ -232,12 +302,14 @@
       };
     }
     function loadClassImage() {
-      const classFile = document.getElementById('classSelector').value;
-      classImage.src = `Class/${classFile}`;
-      classImage.onload = drawCard;
+      const classFile = document.getElementById('classSelector')?.value;
+      if(classFile) {
+        classImage.src = `Class/${classFile}`;
+        classImage.onload = drawCard;
+      }
     }
     
-    // --- 국기, 시즌, 추가 사진 업로드 처리 (생략: 기존 코드와 동일) ---
+    // --- 국기, 시즌, 추가 사진 업로드 처리 ---
     document.getElementById('flagUploadInput')?.addEventListener('change', function(e) {
       const file = e.target.files[0];
       if(file) {
@@ -250,7 +322,6 @@
         reader.readAsDataURL(file);
       }
     });
-    
     document.getElementById('seasonUploadInput')?.addEventListener('change', function(e) {
       const file = e.target.files[0];
       if(file) {
@@ -263,7 +334,6 @@
         reader.readAsDataURL(file);
       }
     });
-    
     document.getElementById('photoInput')?.addEventListener('change', function(e) {
       const file = e.target.files[0];
       if(file) {
@@ -302,7 +372,6 @@
           return;
         }
       }
-      // 국기, 시즌 이미지 관련 이벤트도 동일하게 처리
       const flagW = parseInt(document.getElementById('flagUploadWidth')?.value) || 40;
       const flagH = parseInt(document.getElementById('flagUploadHeight')?.value) || 30;
       if(customFlag.complete && customFlag.src) {
@@ -404,12 +473,10 @@
     // --- 카드 그리기 ---
     function drawCard() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
       // Base Card 그리기
       if(baseCard.complete) {
         ctx.drawImage(baseCard, 0, 0, canvas.width, canvas.height);
       }
-      
       // OVR Rating 그리기
       const ovrFontSize = document.getElementById('ovrFontSize').value;
       const ovrFont = document.getElementById('ovrFont').value;
@@ -418,7 +485,6 @@
       ctx.fillText(document.getElementById('ovr').value,
                    parseInt(document.getElementById('ovrX').value),
                    parseInt(document.getElementById('ovrY').value));
-      
       // Position 그리기
       const posFontSize = document.getElementById('posFontSize').value;
       const posFont = document.getElementById('posFont').value;
@@ -427,7 +493,6 @@
       ctx.fillText(document.getElementById('position').value,
                    parseInt(document.getElementById('posX').value),
                    parseInt(document.getElementById('posY').value));
-      
       // Player Name 그리기
       const nameFontSize = document.getElementById('nameFontSize').value;
       const nameFont = document.getElementById('nameFont').value;
@@ -436,22 +501,19 @@
       ctx.fillText(document.getElementById('playerName').value,
                    parseInt(document.getElementById('nameX').value),
                    parseInt(document.getElementById('nameY').value));
-      
       // 업로드 국기 그리기
       if(customFlag.complete && customFlag.src) {
         const flagW = parseInt(document.getElementById('flagUploadWidth').value);
         const flagH = parseInt(document.getElementById('flagUploadHeight').value);
         ctx.drawImage(customFlag, customFlagX, customFlagY, flagW, flagH);
       }
-      
       // 업로드 시즌 그리기
       if(customSeason.complete && customSeason.src) {
         const seasonW = parseInt(document.getElementById('seasonUploadWidth').value);
         const seasonH = parseInt(document.getElementById('seasonUploadHeight').value);
         ctx.drawImage(customSeason, customSeasonX, customSeasonY, seasonW, seasonH);
       }
-      
-      // Class Image 그리기 (해당 요소가 있다면)
+      // Class Image 그리기 (존재할 경우)
       if(classImage.complete) {
         ctx.drawImage(classImage,
           parseInt(document.getElementById('classX')?.value) || 0,
@@ -459,7 +521,6 @@
           parseInt(document.getElementById('classWidth')?.value) || 0,
           parseInt(document.getElementById('classHeight')?.value) || 0);
       }
-      
       // 추가 사진 그리기
       if(customPhoto.complete && customPhoto.src) {
         const photoW = parseInt(document.getElementById('photoWidth')?.value) || 100;
