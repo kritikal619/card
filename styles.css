@@ -233,3 +233,17 @@ footer p span {
 display: inline-block;
 margin-left: 20px;
 }
+#copy-button {
+margin-left: 10px; /* 이메일과 버튼 사이 간격 */
+padding: 5px 10px;
+background-color: #73685d;
+color: #fff;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-size: 10px;
+}
+
+#copy-button:hover {
+background-color: #5a5147; /* 호버 시 색상 변경 */
+}
