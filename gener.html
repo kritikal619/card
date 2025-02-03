@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+    
+    <!-- 검색 엔진 최적화 (SEO) -->
+    <meta name="description" content="유로 빈카드, 토티 빈카드, 센츄리온 빈카드, 트로피 아이콘 빈카드, 월드컵 빈카드, 발롱도르 빈카드> <!-- 작동함 -->
+    <meta name="keywords" content="FC모바일, 특성 재료, 패스 마스터, 라인 브레이커, 예리한 감아차기, 선수 정보, 오버롤, 넥슨, 빈카드, 합성, 카드 제작, 카드, 제작">
+    <meta name="author" content="해리지팡이">
+    
+    <!-- Open Graph 데이터 -->
+    <meta property="og:title" content="피모 합성소"> <!-- 도대체 뭐하는지 모르겠다...-->
+    <meta property="og:description" content="FC모바일 합성 툴!: 다양한 빈카드와 카드 제작 툴을 만나보세요!">
+    <meta property="og:image" content="https://kritikal619.github.io/logo/Favicon.png">
+    <meta property="og:url" content="https://kritikal619.github.io/trait/">
+    <meta property="og:site_name" content="FC모바일 카드 합성 툴">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./favicons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./favicons/favicon.svg" />
+    <link rel="shortcut icon" href="./favicons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="피모 합성소" />
+    <link rel="manifest" href="./favicons/site.webmanifest" />
+  <title>FC모바일 카드 제작기</title>
+  <style>
+    /* 프로젝트의 fonts 폴더에 있는 3종 폰트 불러오기 */
+    @font-face {
+      font-family: 'FontA';
+      src: url('fonts/FontA.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'FontB';
+      src: url('fonts/FontB.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'FontC';
+      src: url('fonts/FontC.otf') format('opentype');
+    }
+    
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; }
+    .container { display: flex; gap: 30px; max-width: 1200px; margin: 0 auto; }
+    .editor { width: 350px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .preview {
+      flex-grow: 1;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: sticky;  /* 미리보기 영역이 스크롤에 따라 고정되도록 */
+      top: 20px;
+      align-self: flex-start;
+    }
+    canvas { border: 2px solid #ddd; margin-top: 10px; background: white; cursor: default; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
+    input, select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 5px; }
+    .coord-inputs { display: flex; gap: 5px; margin-top: 5px; }
+    .coord-inputs input { width: 70px; }
+    button { background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+    button:hover { background: #0056b3; }
+    #wrap {
+    display: block; /* 기본 블록 레이아웃 */
+    background-color: #f2f2f2;
+    }
+
+    footer {
+    width: 100%;
+    height: 90px;
+    border-top: 1px solid #c4c4c4;
+    padding-top: 15px;
+    color: #808080;
+    font-size: 11px;
+    background-color: #f2f2f2;
+    }
+    footer a {
+    display: inline-block;
+    margin: 0 20px 10px 20px;
+    color: #808080; font-size: 11px;
+    }
+
+    footer a:visited {
+    color: #808080
+    }
+
+    footer p {
+    margin-top: 0; margin-bottom: 0;
+    }
+
+    footer p span {
+    display: inline-block;
+    margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="editor">
+      <h2>카드 제작기</h2>
+      
+      <!-- (이전 코드 내용: Base Card, OVR Rating, Position, Player Name, 국기, 시즌, 클래스 이미지, 추가 사진 등) -->
+      <!-- 여기에는 앞서 제공한 코드의 편집 영역 내용이 포함됩니다. -->
+      
+      <!-- Base Card 선택 및 미리보기 -->
+      <div class="form-group">
+        <label>빈카드 선택</label>
+        <select id="cardSelector" class="form-control"></select>
+        <img id="cardDesignPreview" src="" style="width:100px; display:block; margin-top:10px;">
+      </div>
+      
+      <!-- OVR Rating (기본 위치: 74,74) -->
+      <div class="form-group">
+        <label>오버롤</label>
+        <input type="number" id="ovr" min="0" max="99" value="85">
+        <div class="coord-inputs">
+          <input type="number" id="ovrX" placeholder="X" value="74">
+          <input type="number" id="ovrY" placeholder="Y" value="74">
+        </div>
+        <label>오버롤 폰트 크기</label>
+        <input type="number" id="ovrFontSize" placeholder="Font Size" value="32">
+        <label>오버롤 폰트</label>
+        <select id="ovrFont">
+          <option value="FontA">FontA</option>
+          <option value="FontB" selected>FontB</option>
+          <option value="FontC">FontC</option>
+        </select>
+        <label>오버롤 폰트 색상</label>
+        <input type="color" id="ovrColor" value="#FFD700">
+      </div>
+      
+      <!-- Position (기본 위치: 76,102) 및 폰트 크기 조절 -->
+      <div class="form-group">
+        <label>포지션</label>
+        <select id="position">
+          <option value="LW">LW</option>
+          <option value="ST">ST</option>
+          <option value="RW">RW</option>
+          <option value="CF">CF</option>
+          <option value="LF">LF</option>
+          <option value="RF">RF</option>
+          <option value="CM">CM</option>
+          <option value="RM">RM</option>
+          <option value="LM">LM</option>
+          <option value="CDM">CDM</option>
+          <option value="CAM">CAM</option>
+          <option value="LB">LB</option>
+          <option value="CB">CB</option>
+          <option value="RB">RB</option>
+          <option value="GK">GK</option>
+        </select>
+        <div class="coord-inputs">
+          <input type="number" id="posX" placeholder="X" value="76">
+          <input type="number" id="posY" placeholder="Y" value="102">
+        </div>
+        <label>포지션 폰트</label>
+        <select id="posFont">
+          <option value="FontA">FontA</option>
+          <option value="FontB" selected>FontB</option>
+          <option value="FontC">FontC</option>
+        </select>
+        <label>포지션 폰트 크기</label>
+        <input type="number" id="posFontSize" placeholder="Font Size" value="19">
+        <label>포지션 폰트 색상</label>
+        <input type="color" id="posColor" value="#FFFFFF">
+      </div>
+      
+      <!-- Player Name (기본 위치: 121,218) 및 폰트 크기 조절 -->
+      <div class="form-group">
+        <label>선수 이름</label>
+        <input type="text" id="playerName" value="김민재">
+        <div class="coord-inputs">
+          <input type="number" id="nameX" placeholder="X" value="121">
+          <input type="number" id="nameY" placeholder="Y" value="218">
+        </div>
+        <label>이름 폰트:</label>
+        <select id="nameFont">
+          <option value="FontA">FontA</option>
+          <option value="FontB">FontB</option>
+          <option value="FontC" selected>FontC</option>
+        </select>
+        <label>이름 폰트 크기</label>
+        <input type="number" id="nameFontSize" placeholder="Font Size" value="20">
+        <label>Name Color:</label>
+        <input type="color" id="nameColor" value="#FFFFFF">
+      </div>
+      
+      <!-- 국기 추가 (파일 업로드, 드래그 및 리사이즈) -->
+      <div class="form-group">
+        <label>국기 추가 (업로드):</label>
+        <input type="file" id="flagUploadInput">
+        <div class="coord-inputs">
+          <input type="number" id="flagUploadWidth" placeholder="Width" value="40">
+          <input type="number" id="flagUploadHeight" placeholder="Height" value="30">
+        </div>
+        <small>국기는 캔버스에서 드래그 또는 오른쪽 아래 모서리를 드래그하여 크기 조절할 수 있습니다.</small>
+      </div>
+      
+      <!-- 시즌 추가 (파일 업로드, 드래그 및 리사이즈) -->
+      <div class="form-group">
+        <label>시즌 추가 (업로드):</label>
+        <input type="file" id="seasonUploadInput">
+        <div class="coord-inputs">
+          <input type="number" id="seasonUploadWidth" placeholder="Width" value="80">
+          <input type="number" id="seasonUploadHeight" placeholder="Height" value="40">
+        </div>
+        <small>시즌 이미지는 캔버스에서 드래그 또는 오른쪽 아래 모서리를 드래그하여 크기 조절할 수 있습니다.</small>
+      </div>
+      
+      <!-- Class Image 선택 -->
+      <div class="form-group">
+        <label>Class Image:</label>
+        <select id="classSelector" class="form-control"></select>
+        <div class="coord-inputs">
+          <input type="number" id="classX" placeholder="X" value="200">
+          <input type="number" id="classY" placeholder="Y" value="50">
+        </div>
+        <div class="coord-inputs">
+          <input type="number" id="classWidth" placeholder="Width" value="50">
+          <input type="number" id="classHeight" placeholder="Height" value="50">
+        </div>
+      </div>
+      
+      <!-- 추가 사진 (파일 업로드, 드래그 및 리사이즈) -->
+      <div class="form-group">
+        <label>추가 사진:</label>
+        <input type="file" id="photoInput">
+        <div class="coord-inputs">
+          <input type="number" id="photoWidth" placeholder="Width" value="100">
+          <input type="number" id="photoHeight" placeholder="Height" value="100">
+        </div>
+        <small>사진은 캔버스에서 드래그하여 이동하거나, 오른쪽 아래 모서리를 드래그하여 크기 조절할 수 있습니다.</small>
+      </div>
+      
+      <button onclick="downloadCard()">Download Card</button>
+    </div>
+    
+    <div class="preview">
+      <h2>Card Preview</h2>
+      <!-- 캔버스: 정사각형 (300×300) -->
+      <canvas id="cardCanvas" width="300" height="300"></canvas>
+
+      <div id="wrap">
+        <section>
+        </section>
+        <footer>
+         <p>
+          <span>Data based on NEXON</span><br/>
+          <span>이메일 :<span id="email">jchae0619@gmail.com</span></span>
+          
+  
+          <span>© 2025 kritikal619. All Rights Reserved.</span>
+         </p>
+        </footer>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // --- 기본 이미지 및 옵션 변수 ---
+    const totalImages = 250;
+    const canvas = document.getElementById('cardCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // 기본 이미지 객체들
+    let baseCard = new Image();
+    let classImage = new Image();
+    
+    // 업로드된 국기, 시즌, 추가 사진용 이미지 객체
+    let customFlag = new Image();
+    let customSeason = new Image();
+    let customPhoto = new Image();
+    
+    // --- 드래그 및 리사이즈 관련 변수 ---
+    // 추가 사진
+    let photoX = 50, photoY = 50;
+    let draggingPhoto = false, photoDragOffsetX = 0, photoDragOffsetY = 0;
+    let resizingPhoto = false, photoResizeOffsetX = 0, photoResizeOffsetY = 0;
+    // 업로드 국기
+    let customFlagX = 30, customFlagY = 30;
+    let draggingCustomFlag = false, customFlagDragOffsetX = 0, customFlagDragOffsetY = 0;
+    let resizingCustomFlag = false, customFlagResizeOffsetX = 0, customFlagResizeOffsetY = 0;
+    // 업로드 시즌
+    let customSeasonX = 200, customSeasonY = 250;
+    let draggingCustomSeason = false, customSeasonDragOffsetX = 0, customSeasonDragOffsetY = 0;
+    let resizingCustomSeason = false, customSeasonResizeOffsetX = 0, customSeasonResizeOffsetY = 0;
+    
+    // --- 선택 박스 채우기 (Base Card, Class Image) ---
+    function getFileName(number) {
+      return `image(${number}).png`;
+    }
+    function populateSelectors() {
+      const cardSelector = document.getElementById('cardSelector');
+      const classSelector = document.getElementById('classSelector');
+      // 예시로 1~250 중 짝수 번호 사용
+      for (let i = 2; i <= totalImages; i += 2) {
+        let option = document.createElement('option');
+        option.value = getFileName(i);
+        option.textContent = `Card ${i}`;
+        cardSelector.appendChild(option);
+      }
+      for (let i = 2; i <= totalImages; i += 2) {
+        let option = document.createElement('option');
+        option.value = getFileName(i);
+        option.textContent = `Class Image ${i}`;
+        classSelector.appendChild(option);
+      }
+    }
+    
+    // --- 이미지 로드 함수 ---
+    function loadBaseCard() {
+      const cardFile = document.getElementById('cardSelector').value;
+      baseCard.src = `BlankCard/${cardFile}`;
+      baseCard.onload = () => {
+        document.getElementById('cardDesignPreview').src = baseCard.src;
+        drawCard();
+      };
+    }
+    function loadClassImage() {
+      const classFile = document.getElementById('classSelector').value;
+      classImage.src = `Class/${classFile}`;
+      classImage.onload = drawCard;
+    }
+    
+    // --- 국기 업로드 처리 ---
+    document.getElementById('flagUploadInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if(file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          customFlag.src = evt.target.result;
+          customFlagX = 30; customFlagY = 30;
+          customFlag.onload = drawCard;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+    
+    // --- 시즌 업로드 처리 ---
+    document.getElementById('seasonUploadInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if(file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          customSeason.src = evt.target.result;
+          customSeasonX = 200; customSeasonY = 250;
+          customSeason.onload = drawCard;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+    
+    // --- 추가 사진 업로드 처리 ---
+    document.getElementById('photoInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if(file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          customPhoto.src = evt.target.result;
+          photoX = 50; photoY = 50;
+          customPhoto.onload = drawCard;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+    
+    // --- 캔버스 내에서 마우스 이벤트 (드래그 및 리사이즈) ---
+    canvas.addEventListener('mousedown', function(e) {
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+      
+      // 추가 사진 리사이즈 체크 (오른쪽 아래 모서리)
+      const photoW = parseInt(document.getElementById('photoWidth').value);
+      const photoH = parseInt(document.getElementById('photoHeight').value);
+      if(customPhoto.complete && customPhoto.src) {
+        if(mouseX >= photoX + photoW - 10 && mouseX <= photoX + photoW + 10 &&
+           mouseY >= photoY + photoH - 10 && mouseY <= photoY + photoH + 10) {
+          resizingPhoto = true;
+          photoResizeOffsetX = (photoX + photoW) - mouseX;
+          photoResizeOffsetY = (photoY + photoH) - mouseY;
+          return;
+        }
+      }
+      
+      // 추가 사진 이동 체크
+      if(customPhoto.complete && customPhoto.src) {
+        if(mouseX >= photoX && mouseX <= photoX + photoW &&
+           mouseY >= photoY && mouseY <= photoY + photoH) {
+          draggingPhoto = true;
+          photoDragOffsetX = mouseX - photoX;
+          photoDragOffsetY = mouseY - photoY;
+          return;
+        }
+      }
+      
+      // 국기 리사이즈 체크
+      const flagW = parseInt(document.getElementById('flagUploadWidth').value);
+      const flagH = parseInt(document.getElementById('flagUploadHeight').value);
+      if(customFlag.complete && customFlag.src) {
+        if(mouseX >= customFlagX + flagW - 10 && mouseX <= customFlagX + flagW + 10 &&
+           mouseY >= customFlagY + flagH - 10 && mouseY <= customFlagY + flagH + 10) {
+          resizingCustomFlag = true;
+          customFlagResizeOffsetX = (customFlagX + flagW) - mouseX;
+          customFlagResizeOffsetY = (customFlagY + flagH) - mouseY;
+          return;
+        }
+        if(mouseX >= customFlagX && mouseX <= customFlagX + flagW &&
+           mouseY >= customFlagY && mouseY <= customFlagY + flagH) {
+          draggingCustomFlag = true;
+          customFlagDragOffsetX = mouseX - customFlagX;
+          customFlagDragOffsetY = mouseY - customFlagY;
+          return;
+        }
+      }
+      
+      // 시즌 리사이즈 체크
+      const seasonW = parseInt(document.getElementById('seasonUploadWidth').value);
+      const seasonH = parseInt(document.getElementById('seasonUploadHeight').value);
+      if(customSeason.complete && customSeason.src) {
+        if(mouseX >= customSeasonX + seasonW - 10 && mouseX <= customSeasonX + seasonW + 10 &&
+           mouseY >= customSeasonY + seasonH - 10 && mouseY <= customSeasonY + seasonH + 10) {
+          resizingCustomSeason = true;
+          customSeasonResizeOffsetX = (customSeasonX + seasonW) - mouseX;
+          customSeasonResizeOffsetY = (customSeasonY + seasonH) - mouseY;
+          return;
+        }
+        if(mouseX >= customSeasonX && mouseX <= customSeasonX + seasonW &&
+           mouseY >= customSeasonY && mouseY <= customSeasonY + seasonH) {
+          draggingCustomSeason = true;
+          customSeasonDragOffsetX = mouseX - customSeasonX;
+          customSeasonDragOffsetY = mouseY - customSeasonY;
+          return;
+        }
+      }
+    });
+    
+    canvas.addEventListener('mousemove', function(e) {
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+      
+      if(resizingPhoto) {
+        let newWidth = mouseX - photoX + photoResizeOffsetX;
+        let newHeight = mouseY - photoY + photoResizeOffsetY;
+        if(newWidth < 10) newWidth = 10;
+        if(newHeight < 10) newHeight = 10;
+        document.getElementById('photoWidth').value = newWidth;
+        document.getElementById('photoHeight').value = newHeight;
+        drawCard();
+      } else if(draggingPhoto) {
+        photoX = mouseX - photoDragOffsetX;
+        photoY = mouseY - photoDragOffsetY;
+        drawCard();
+      } else if(resizingCustomFlag) {
+        let newWidth = mouseX - customFlagX + customFlagResizeOffsetX;
+        let newHeight = mouseY - customFlagY + customFlagResizeOffsetY;
+        if(newWidth < 10) newWidth = 10;
+        if(newHeight < 10) newHeight = 10;
+        document.getElementById('flagUploadWidth').value = newWidth;
+        document.getElementById('flagUploadHeight').value = newHeight;
+        drawCard();
+      } else if(draggingCustomFlag) {
+        customFlagX = mouseX - customFlagDragOffsetX;
+        customFlagY = mouseY - customFlagDragOffsetY;
+        drawCard();
+      } else if(resizingCustomSeason) {
+        let newWidth = mouseX - customSeasonX + customSeasonResizeOffsetX;
+        let newHeight = mouseY - customSeasonY + customSeasonResizeOffsetY;
+        if(newWidth < 10) newWidth = 10;
+        if(newHeight < 10) newHeight = 10;
+        document.getElementById('seasonUploadWidth').value = newWidth;
+        document.getElementById('seasonUploadHeight').value = newHeight;
+        drawCard();
+      } else if(draggingCustomSeason) {
+        customSeasonX = mouseX - customSeasonDragOffsetX;
+        customSeasonY = mouseY - customSeasonDragOffsetY;
+        drawCard();
+      }
+    });
+    
+    canvas.addEventListener('mouseup', function() {
+      resizingPhoto = false;
+      draggingPhoto = false;
+      resizingCustomFlag = false;
+      draggingCustomFlag = false;
+      resizingCustomSeason = false;
+      draggingCustomSeason = false;
+    });
+    canvas.addEventListener('mouseleave', function() {
+      resizingPhoto = false;
+      draggingPhoto = false;
+      resizingCustomFlag = false;
+      draggingCustomFlag = false;
+      resizingCustomSeason = false;
+      draggingCustomSeason = false;
+    });
+    
+    // --- 카드 그리기 ---
+    function drawCard() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Base Card 그리기
+      if(baseCard.complete) {
+        ctx.drawImage(baseCard, 0, 0, canvas.width, canvas.height);
+      }
+      
+      // OVR Rating 그리기
+      const ovrFontSize = document.getElementById('ovrFontSize').value;
+      const ovrFont = document.getElementById('ovrFont').value;
+      ctx.fillStyle = document.getElementById('ovrColor').value;
+      ctx.font = `bold ${ovrFontSize}px ${ovrFont}`;
+      ctx.fillText(document.getElementById('ovr').value,
+                   parseInt(document.getElementById('ovrX').value),
+                   parseInt(document.getElementById('ovrY').value));
+      
+      // Position 그리기
+      const posFontSize = document.getElementById('posFontSize').value;
+      const posFont = document.getElementById('posFont').value;
+      ctx.fillStyle = document.getElementById('posColor').value;
+      ctx.font = `bold ${posFontSize}px ${posFont}`;
+      ctx.fillText(document.getElementById('position').value,
+                   parseInt(document.getElementById('posX').value),
+                   parseInt(document.getElementById('posY').value));
+      
+      // Player Name 그리기
+      const nameFontSize = document.getElementById('nameFontSize').value;
+      const nameFont = document.getElementById('nameFont').value;
+      ctx.fillStyle = document.getElementById('nameColor').value;
+      ctx.font = `${nameFontSize}px ${nameFont}`;
+      ctx.fillText(document.getElementById('playerName').value,
+                   parseInt(document.getElementById('nameX').value),
+                   parseInt(document.getElementById('nameY').value));
+      
+      // 업로드 국기 그리기
+      if(customFlag.complete && customFlag.src) {
+        const flagW = parseInt(document.getElementById('flagUploadWidth').value);
+        const flagH = parseInt(document.getElementById('flagUploadHeight').value);
+        ctx.drawImage(customFlag, customFlagX, customFlagY, flagW, flagH);
+      }
+      
+      // 업로드 시즌 그리기
+      if(customSeason.complete && customSeason.src) {
+        const seasonW = parseInt(document.getElementById('seasonUploadWidth').value);
+        const seasonH = parseInt(document.getElementById('seasonUploadHeight').value);
+        ctx.drawImage(customSeason, customSeasonX, customSeasonY, seasonW, seasonH);
+      }
+      
+      // Class Image 그리기
+      if(classImage.complete) {
+        ctx.drawImage(classImage,
+                      parseInt(document.getElementById('classX').value),
+                      parseInt(document.getElementById('classY').value),
+                      parseInt(document.getElementById('classWidth').value),
+                      parseInt(document.getElementById('classHeight').value));
+      }
+      
+      // 추가 사진 그리기
+      if(customPhoto.complete && customPhoto.src) {
+        const photoW = parseInt(document.getElementById('photoWidth').value);
+        const photoH = parseInt(document.getElementById('photoHeight').value);
+        ctx.drawImage(customPhoto, photoX, photoY, photoW, photoH);
+      }
+    }
+    
+    // --- 다운로드 ---
+    function downloadCard() {
+      const link = document.createElement('a');
+      link.download = 'kfc-card.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    }
+    
+    // --- 이벤트 리스너 등록 ---
+    document.querySelectorAll('input, select').forEach(el => {
+      el.addEventListener('input', drawCard);
+    });
+    document.getElementById('cardSelector').addEventListener('change', loadBaseCard);
+    document.getElementById('classSelector').addEventListener('change', loadClassImage);
+    
+    // --- 초기 설정 ---
+    populateSelectors();
+    loadBaseCard();
+    loadClassImage();
+  </script>
+</body>
+</html>
