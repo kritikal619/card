@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+    
+    <!-- 검색 엔진 최적화 (SEO) -->
+    <meta name="description" content="유로 빈카드, 토티 빈카드, 센츄리온 빈카드, 트로피 아이콘 빈카드, 월드컵 빈카드, 발롱도르 빈카드> <!-- 작동함 -->
+    <meta name="keywords" content="FC모바일, 특성 재료, 패스 마스터, 라인 브레이커, 예리한 감아차기, 선수 정보, 오버롤, 넥슨, 빈카드, 합성, 카드 제작, 카드, 제작">
+    <meta name="author" content="해리지팡이">
+    
+    <!-- Open Graph 데이터 -->
+    <meta property="og:title" content="피모 합성소"> <!-- 도대체 뭐하는지 모르겠다...-->
+    <meta property="og:description" content="FC모바일 합성 툴!: 다양한 빈카드와 카드 제작 툴을 만나보세요!">
+    <meta property="og:image" content="https://kritikal619.github.io/logo/Favicon.png">
+    <meta property="og:url" content="https://kritikal619.github.io/trait/">
+    <meta property="og:site_name" content="FC모바일 카드 합성 툴">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./favicons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./favicons/favicon.svg" />
+    <link rel="shortcut icon" href="./favicons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="피모 합성소" />
+    <link rel="manifest" href="./favicons/site.webmanifest" />
+    <!-- 검증 메타 -->
+    <meta name="google-site-verification" content="">
+    <meta name="naver-site-verification" content="">
+    <title>피모 합성소: 빈카드, 국기 및 글자! (FC모바일)</title>
+  <style>
+    /* 탭 버튼 및 콘텐츠 스타일 */
+    #tabs {
+      margin-bottom: 10px;
+    }
+    #tabs .tab-button {
+      padding: 5px 10px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      background: #eee;
+      margin-right: 5px;
+    }
+    #tabs .tab-button.active {
+      font-weight: bold;
+      color: green;
+      background: #fff;
+    }
+    .tab-content {
+      display: none;
+    }
+    /* 이미지 그리드 스타일 (기본은 flex) */
+    .image-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .image-item {
+      width: 250px;
+      text-align: center;
+      border: 1px solid #ddd;
+      padding: 5px;
+    }
+    .image-item img {
+      max-width: 100%;
+      height: auto;
+    }
+    /* 모바일에서는 한 줄에 사진 2개씩 표시 (더 크게 보이도록) */
+    @media only screen and (max-width: 768px) {
+      .image-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .image-item {
+        width: 100%;
+      }
+    }
+    /* 다운로드 버튼 스타일: 원래 갈색, 클릭하면 더 진하게, 크기를 좀 더 작게 */
+    .img-download-btn {
+      background-color: #a39485 solid; /* 기본 갈색 */
+      border: none;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+      color: white;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .img-download-btn:active {
+      background-color: #5a5147; /* 클릭 시 더 진한 갈색 */
+    }
+    /* 기본: 텍스트 표시, 아이콘 숨김 */
+    .btn-text {
+      display: inline-block;
+    }
+    .btn-icon {
+      display: none;
+    }
+    /* 모바일: 텍스트 숨김, 아이콘 보이기 (아이콘 크기도 약간 축소) */
+    @media only screen and (max-width: 768px) {
+      .btn-text {
+        display: none;
+      }
+      .btn-icon {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+      }
+    }
+  </style>
+</head>
+<body> <br>
+  <h1>피모 합성소 (FC모바일)</h1><br>
+  <h3>공지: 안녕하세요</h3><br>
+  <a href="http://fcevol.kro.kr/">진화 시뮬레이션을 하고 싶다면?</a><br>
+  <a href="https://kritikal619.github.io/trait/">특성 재료를 찾고 싶다면?</a><br>
+  <br><br>
+  
+  <div id="card-builder">
+    <!-- 탭 버튼 영역 (총 4개의 탭) -->
+    <div id="tabs">
+      <button class="tab-button active" data-tab="tab1">빈카드 다운도르</button>
+      <button class="tab-button" data-tab="tab2">국기 다운도르</button>
+      <button class="tab-button" data-tab="tab5">카드 제작용 글자 다운도르</button>
+      <button class="tab-button" data-tab="tab3">만들기 툴 (미공개)</button>
+    </div>
+    
+    <!-- 탭 콘텐츠 영역 -->
+    <div id="tab-contents">
+      <!-- 탭1: 빈카드 다운도르 (BlankCard 폴더의 이미지, textNumbers에 없는 것) -->
+      <div class="tab-content" id="tab1">
+        <p>FC모바일 카드 합성용 빈카드</p>
+        <div class="image-grid" id="blank-image-grid">
+          <!-- 동적으로 생성 -->
+        </div>
+      </div>
+      
+      <!-- 탭2: 글자 다운도르 (BlankCard 폴더의 이미지, textNumbers에 포함된 것) -->
+      <div class="tab-content" id="tab2">
+        <p>FC모바일 카드 합성용 국기</p>
+        <div class="image-grid" id="text-image-grid">
+          <!-- 동적으로 생성 -->
+        </div>
+      </div>
+      
+      <!-- 탭3: 만들기 툴 (미공개) -->
+      <div class="tab-content" id="tab3">
+        <p>만들기 툴은 아직 미공개입니다.</p>
+      </div>
+      
+      <!-- 탭4: 빈 글자 탭 (탭2의 내용을 복제) -->
+      <div class="tab-content" id="tab4">
+        <!-- 아래 내용은 스크립트에서 탭2의 내용을 복제하여 채워집니다 -->
+      </div>
+      
+      <!-- 탭5: BlankLetter 다운도르 (BlankLetter 폴더의 이미지 1~15) -->
+      <div class="tab-content" id="tab5">
+        <p>FC모바일 카드 합성용 글자 (흰색 글자는 잘 안 보일 수도 있으니 주의!)</p>
+        <div class="image-grid" id="blankletter-image-grid">
+          <!-- 동적으로 생성 -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="installPrompt" style="display: none; position: fixed; bottom: 20px; right: 20px; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.2); border-radius: 10px; padding: 16px; z-index: 1000;">
+    <p>홈 화면에 추가하시겠습니까?</p>
+    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+      <button id="installConfirm">추가하기</button>
+      <button id="installCancel">취소</button>
+      
+    </div>
+  </div>
+  
+  
+
+  <div id="wrap">
+    <section>
+    </section>
+    <footer>
+     <p>
+      <span>Data based on NEXON</span><br/>
+      <span>이메일 :<span id="email">jchae0619@gmail.com</span></span>
+      <button id="copy-button">복사</button><br/>
+
+      <span>© 2025 kritikal619. All Rights Reserved.</span>
+     </p>
+    </footer>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 폴더 설정
+      const blankCardFolder = "BlankCard";
+      const blankLetterFolder = "BlankLetter";
+      
+      // 글자 카드로 분류할 번호 배열 (BlankCard 폴더 내의 이미지 번호 중)
+      const textNumbers = [130, 131, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 162, 214, 219, 225, 237];
+      
+      // 다운로드 아이콘 (SVG 코드)
+      const downloadIcon = `
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 20h14v-2H5v2zm7-18L5.33 11h3.84v6h4.66v-6h3.84L12 2z"/>
+        </svg>
+      `;
+      
+      // 컨테이너 요소 가져오기 (탭1, 탭2)
+      const blankImageGrid = document.getElementById('blank-image-grid');
+      const textImageGrid = document.getElementById('text-image-grid');
+      
+      // 1부터 249까지 이미지 항목 생성 (BlankCard 폴더)
+      for (let i = 1; i <= 249; i++) {
+        const imgHTML = `<img src="${blankCardFolder}/image(${i}).png" alt="이미지 ${i}" onerror="this.style.display='none'">`;
+        // 버튼 타입: textNumbers에 포함되면 "text", 아니면 "blank"
+        const btnType = textNumbers.includes(i) ? 'text' : 'blank';
+        
+        const imageItemDiv = document.createElement('div');
+        imageItemDiv.className = 'image-item';
+        imageItemDiv.innerHTML = `
+          ${imgHTML}
+          <button class="img-download-btn" data-type="${btnType}">
+            <span class="btn-text">다운로드</span>
+            <span class="btn-icon">${downloadIcon}</span>
+          </button>
+        `;
+        
+        // textNumbers에 포함되면 탭2, 아니면 탭1에 추가
+        if (textNumbers.includes(i)) {
+          textImageGrid.appendChild(imageItemDiv);
+        } else {
+          blankImageGrid.appendChild(imageItemDiv);
+        }
+      }
+      
+      // 탭 전환 기능 (총 5개 탭)
+      const tabButtons = document.querySelectorAll('#tabs .tab-button');
+      const tabContents = document.querySelectorAll('#tab-contents .tab-content');
+      tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          tabContents.forEach(content => content.style.display = 'none');
+          this.classList.add('active');
+          const targetTab = this.getAttribute('data-tab');
+          document.getElementById(targetTab).style.display = 'block';
+        });
+      });
+      // 초기에는 탭1 보이기
+      document.getElementById('tab1').style.display = 'block';
+      
+      // 다운로드 버튼 클릭 이벤트 처리
+      document.addEventListener('click', function(e) {
+        const btn = e.target.closest('.img-download-btn');
+        if (btn) {
+          const imageItem = btn.closest('.image-item');
+          const imgSrc = imageItem.querySelector('img').getAttribute('src');
+          const downloadType = btn.getAttribute('data-type');
+          if (downloadType === 'blank') {
+            downloadBlankCard(imgSrc);
+          } else if (downloadType === 'text') {
+            downloadTextCard(imgSrc);
+          } else if (downloadType === 'blankletter') {
+            downloadBlankLetter(imgSrc);
+          }
+        }
+      });
+      
+      function downloadBlankCard(src) {
+        const link = document.createElement('a');
+        link.href = src;
+        link.download = src.substring(src.lastIndexOf('/') + 1);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+      
+      function downloadTextCard(src) {
+        const link = document.createElement('a');
+        link.href = src;
+        link.download = src.substring(src.lastIndexOf('/') + 1);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+      
+      function downloadBlankLetter(src) {
+        const link = document.createElement('a');
+        link.href = src;
+        link.download = src.substring(src.lastIndexOf('/') + 1);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+      
+      // 탭4: 빈 글자 탭 -> 탭2의 내용을 복제하여 채움
+      const tab4 = document.getElementById('tab4');
+      tab4.innerHTML = document.getElementById('tab2').innerHTML;
+      
+      // 탭5: BlankLetter 다운도르 -> BlankLetter 폴더의 이미지 1~15 생성
+      const blankLetterImageGrid = document.getElementById('blankletter-image-grid');
+      for (let i = 1; i <= 15; i++) {
+        const imgHTML = `<img src="${blankLetterFolder}/image(${i}).png" alt="BlankLetter 이미지 ${i}" onerror="this.style.display='none'">`;
+        const imageItemDiv = document.createElement('div');
+        imageItemDiv.className = 'image-item';
+        imageItemDiv.innerHTML = `
+          ${imgHTML}
+          <button class="img-download-btn" data-type="blankletter">
+            <span class="btn-text">다운로드</span>
+            <span class="btn-icon">${downloadIcon}</span>
+          </button>
+        `;
+        blankLetterImageGrid.appendChild(imageItemDiv);
+      }
+    });
+  </script>
+</body>
+</html>
