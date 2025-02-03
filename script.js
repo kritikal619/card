@@ -102,4 +102,22 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("installPrompt").style.display = "none";
   });
   
+document.getElementById('copy-button').addEventListener('click', function() {
+    // 이메일 텍스트 가져오기
+    const emailText = document.getElementById('email').textContent;
 
+    // 임시 텍스트 입력 요소 생성
+    const tempInput = document.createElement('input');
+    tempInput.value = emailText;
+    document.body.appendChild(tempInput);
+
+    // 텍스트 선택 및 복사
+    tempInput.select();
+    document.execCommand('copy');
+
+    // 임시 입력 요소 삭제
+    document.body.removeChild(tempInput);
+
+    // 알림 메시지 출력
+    alert('이메일이 복사되었습니다: ' + emailText);
+  });
