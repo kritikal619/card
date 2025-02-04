@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
-    
-    <!-- 검색 엔진 최적화 (SEO) -->
-    <meta name="description" content="유로 빈카드, 토티 빈카드, 센츄리온 빈카드, 트로피 아이콘 빈카드, 월드컵 빈카드, 발롱도르 빈카드"> 
-    <meta name="keywords" content="FC모바일, 특성 재료, 패스 마스터, 라인 브레이커, 예리한 감아차기, 선수 정보, 오버롤, 넥슨, 빈카드, 합성, 카드 제작, 카드, 제작">
-    <meta name="author" content="해리지팡이">
-    
-    <!-- Open Graph 데이터 -->
-    <meta property="og:title" content="피모 합성소"> <!-- 도대체 뭐하는지 모르겠다...-->
-    <meta property="og:description" content="FC모바일 합성 툴!: 다양한 빈카드와 카드 제작 툴을 만나보세요!">
-    <meta property="og:image" content="https://kritikal619.github.io/logo/Favicon.png">
-    <meta property="og:url" content="https://kritikal619.github.io/trait/">
-    <meta property="og:site_name" content="FC모바일 카드 합성 툴">
-    <meta property="og:type" content="website">
-    
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="./favicons/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="./favicons/favicon.svg" />
-    <link rel="shortcut icon" href="./favicons/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="피모 합성소" />
-    <link rel="manifest" href="./favicons/site.webmanifest" />
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+
+  <!-- 검색 엔진 최적화 (SEO) -->
+  <meta name="description" content="유로 빈카드, 토티 빈카드, 센츄리온 빈카드, 트로피 아이콘 빈카드, 월드컵 빈카드, 발롱도르 빈카드"> 
+  <meta name="keywords" content="FC모바일, 특성 재료, 패스 마스터, 라인 브레이커, 예리한 감아차기, 선수 정보, 오버롤, 넥슨, 빈카드, 합성, 카드 제작, 카드, 제작">
+  <meta name="author" content="해리지팡이">
+
+  <!-- Open Graph 데이터 -->
+  <meta property="og:title" content="피모 합성소">
+  <meta property="og:description" content="FC모바일 합성 툴!: 다양한 빈카드와 카드 제작 툴을 만나보세요!">
+  <meta property="og:image" content="https://kritikal619.github.io/logo/Favicon.png">
+  <meta property="og:url" content="https://kritikal619.github.io/trait/">
+  <meta property="og:site_name" content="FC모바일 카드 합성 툴">
+  <meta property="og:type" content="website">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./favicons/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="./favicons/favicon.svg" />
+  <link rel="shortcut icon" href="./favicons/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="피모 합성소" />
+  <link rel="manifest" href="./favicons/site.webmanifest" />
+
   <!-- 프로젝트 폴더의 폰트 사용 -->
   <style>
     @font-face {
@@ -396,7 +396,6 @@
       const newName = prompt("다운로드할 파일 이름을 입력하세요:", cardFileName);
       if(newName !== null && newName.trim() !== ""){
         cardFileName = newName.trim();
-        // 중앙 제목 갱신 (펜 아이콘 포함, 흰색 텍스트 유지)
         cardTitleElem.innerHTML = `<span style="color:#fff;">${cardFileName}</span> <span class="editIcon">✏️</span>`;
       }
     });
@@ -487,7 +486,6 @@
     
     // === 텍스트 그리기 (텍스트 그림자 효과 추가) ===
     function drawText() {
-      // 텍스트 그림자 효과
       ctx.save();
       ctx.shadowColor = "rgba(0,0,0,0.7)";
       ctx.shadowBlur = 4;
@@ -529,7 +527,6 @@
       ctx.strokeStyle = "red";
       ctx.lineWidth = 2;
       ctx.strokeRect(props.x, props.y, props.width, props.height);
-      // 오른쪽 하단 핸들 (8x8 사각형)
       const handleSize = 8;
       ctx.fillStyle = "red";
       ctx.fillRect(props.x + props.width - handleSize, props.y + props.height - handleSize, handleSize, handleSize);
@@ -542,46 +539,42 @@
       if(baseCard.complete) {
         ctx.drawImage(baseCard, 0, 0, canvas.width, canvas.height);
       }
-      // 국기 이미지 (정사각형 고정)
       if(customFlag.complete && customFlag.src) {
         let flagProps = {
           x: parseInt(document.getElementById('flagX').value),
           y: parseInt(document.getElementById('flagY').value),
           width: parseInt(document.getElementById('flagUploadWidth').value),
-          height: parseInt(document.getElementById('flagUploadWidth').value) // width와 동일하게
+          height: parseInt(document.getElementById('flagUploadWidth').value)
         };
         ctx.drawImage(customFlag, flagProps.x, flagProps.y, flagProps.width, flagProps.height);
         if(activeImage === 'flag') {
           drawHandles(flagProps);
         }
       }
-      // 시즌 이미지 (정사각형 고정)
       if(customSeason.complete && customSeason.src) {
         let seasonProps = {
           x: parseInt(document.getElementById('seasonX').value),
           y: parseInt(document.getElementById('seasonY').value),
           width: parseInt(document.getElementById('seasonUploadWidth').value),
-          height: parseInt(document.getElementById('seasonUploadWidth').value) // width와 동일하게
+          height: parseInt(document.getElementById('seasonUploadWidth').value)
         };
         ctx.drawImage(customSeason, seasonProps.x, seasonProps.y, seasonProps.width, seasonProps.height);
         if(activeImage === 'season') {
           drawHandles(seasonProps);
         }
       }
-      // 포토(미니 페이스온) 이미지 (정사각형 고정)
       if(customPhoto.complete && customPhoto.src) {
         let photoProps = {
           x: parseInt(document.getElementById('photoX').value),
           y: parseInt(document.getElementById('photoY').value),
           width: parseInt(document.getElementById('photoWidth').value),
-          height: parseInt(document.getElementById('photoWidth').value) // width와 동일하게
+          height: parseInt(document.getElementById('photoWidth').value)
         };
         ctx.drawImage(customPhoto, photoProps.x, photoProps.y, photoProps.width, photoProps.height);
         if(activeImage === 'photo') {
           drawHandles(photoProps);
         }
       }
-      // 마지막에 텍스트를 그려서 모든 이미지 위에 표시
       drawText();
     }
     
@@ -591,7 +584,6 @@
     let offsetX = 0, offsetY = 0;
     const handleSize = 10;
     
-    // mousedown 이벤트: 오른쪽 하단 리사이즈 핸들과 상단 10px 제외한 영역에서만 드래그
     canvas.addEventListener('mousedown', function(e) {
       const rect = canvas.getBoundingClientRect();
       const mx = e.clientX - rect.left;
@@ -600,28 +592,23 @@
       function checkImage(img, propFunc) {
         if(img.complete && img.src) {
           let props = propFunc();
-          // 먼저 오른쪽 하단 리사이즈 핸들 영역 검사
           if(mx >= props.x + props.width - handleSize && mx <= props.x + props.width + handleSize &&
              my >= props.y + props.height - handleSize && my <= props.y + props.height + handleSize) {
             activeImage = props.name;
             mode = 'resize';
             offsetX = (props.x + props.width) - mx;
             offsetY = (props.y + props.height) - my;
-            console.log("mousedown: resizing", activeImage);
             return true;
           }
-          // 클릭한 위치가 이미지 상단 10px 이내이면 드래그 실행하지 않음
           if(my - props.y < 10) {
             return false;
           }
-          // 그 외 영역에서 드래그
           if(mx >= props.x && mx <= props.x + props.width &&
              my >= props.y && my <= props.y + props.height) {
             activeImage = props.name;
             mode = 'drag';
             offsetX = mx - props.x;
             offsetY = my - props.y;
-            console.log("mousedown: dragging", activeImage);
             return true;
           }
         }
@@ -650,10 +637,7 @@
         width: parseInt(document.getElementById('photoWidth').value),
         height: parseInt(document.getElementById('photoHeight').value),
         name: 'photo'
-      }))) {
-        console.log("mousedown: photo 영역 선택됨");
-        return;
-      }
+      }))) return;
       
       activeImage = null;
     });
@@ -673,7 +657,7 @@
           let newW = mx - parseInt(xElem.value) + offsetX;
           if(newW < 10) newW = 10;
           wElem.value = newW;
-          hElem.value = newW;  // 정사각형 유지
+          hElem.value = newW;
         } else if(mode === 'drag') {
           xElem.value = mx - offsetX;
           yElem.value = my - offsetY;
@@ -687,7 +671,7 @@
           let newW = mx - parseInt(xElem.value) + offsetX;
           if(newW < 10) newW = 10;
           wElem.value = newW;
-          hElem.value = newW;  // 정사각형 유지
+          hElem.value = newW;
         } else if(mode === 'drag') {
           xElem.value = mx - offsetX;
           yElem.value = my - offsetY;
@@ -700,9 +684,8 @@
         if(mode === 'resize') {
           let newW = mx - parseInt(xElem.value) + offsetX;
           if(newW < 10) newW = 10;
-          console.log("mousemove photo resizing: newW =", newW);
           wElem.value = newW;
-          hElem.value = newW;  // 정사각형 유지
+          hElem.value = newW;
         } else if(mode === 'drag') {
           xElem.value = mx - offsetX;
           yElem.value = my - offsetY;
@@ -712,7 +695,6 @@
     });
     
     canvas.addEventListener('mouseup', function() {
-      console.log("mouseup: activeImage reset");
       activeImage = null;
     });
     canvas.addEventListener('mouseleave', function() {
@@ -724,12 +706,10 @@
       const tempActive = activeImage;
       activeImage = null;
       drawCard();
-      
       const link = document.createElement('a');
       link.download = cardFileName + '.png';
       link.href = canvas.toDataURL();
       link.click();
-      
       activeImage = tempActive;
       drawCard();
     }
@@ -744,8 +724,21 @@
       });
     });
     
-    loadBaseCard();
-    populateBlankCards();
+    // 폰트 로딩 완료 또는 5초 타임아웃 후 초기화 실행
+    Promise.race([
+      document.fonts.ready,
+      new Promise(resolve => setTimeout(resolve, 5000))
+    ]).then(() => {
+      console.log("폰트 로드 완료 또는 타임아웃 발생");
+      loadBaseCard();
+      populateBlankCards();
+    });
+    
+    // 디버깅: 10초 후 로딩 오버레이 강제 해제
+    setTimeout(() => {
+      hideLoading();
+      console.warn("로딩 오버레이 강제 해제 (디버깅)");
+    }, 10000);
   </script>
   
   <!-- Live-server 코드 (옵션) -->
