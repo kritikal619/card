@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
     
     <!-- 검색 엔진 최적화 (SEO) -->
-    <meta name="description" content="유로 빈카드, 토티 빈카드, 센츄리온 빈카드, 트로피 아이콘 빈카드, 월드컵 빈카드, 발롱도르 빈카드> <!-- 작동함 -->
+    <meta name="description" content="유로 빈카드, 토티 빈카드, 센츄리온 빈카드, 트로피 아이콘 빈카드, 월드컵 빈카드, 발롱도르 빈카드"> 
     <meta name="keywords" content="FC모바일, 특성 재료, 패스 마스터, 라인 브레이커, 예리한 감아차기, 선수 정보, 오버롤, 넥슨, 빈카드, 합성, 카드 제작, 카드, 제작">
     <meta name="author" content="해리지팡이">
     
@@ -17,6 +17,7 @@
     <meta property="og:url" content="https://kritikal619.github.io/trait/">
     <meta property="og:site_name" content="FC모바일 카드 합성 툴">
     <meta property="og:type" content="website">
+    
     <link rel="stylesheet" href="styles.css">
     
     <!-- Favicon -->
@@ -27,7 +28,7 @@
     <meta name="apple-mobile-web-app-title" content="피모 합성소" />
     <link rel="manifest" href="./favicons/site.webmanifest" />
   
-  <!-- 프로젝트 폴더의 폰트 사용: fonts 폴더 내의 폰트 파일을 @font-face로 등록 -->
+  <!-- 프로젝트 폴더의 폰트 사용 -->
   <style>
     @font-face {
       font-family: 'FontA';
@@ -326,7 +327,7 @@
         <small>시즌 이미지는 캔버스에서 드래그하여 이동하거나, 오른쪽 하단의 점(리사이즈 핸들)을 제외한 모든 곳에서 움직이면 이동합니다.</small>
       </div>
       
-      <!-- 추가 사진 업로드 (정사각형 고정) -->
+      <!-- 미니 페이스온 업로드 (정사각형 고정) -->
       <div class="form-group">
         <label>미니 페이스온 업로드</label>
         <input type="file" id="photoInput">
@@ -484,8 +485,13 @@
       }
     });
     
-    // === 텍스트 그리기 ===
+    // === 텍스트 그리기 (텍스트 그림자 효과 추가) ===
     function drawText() {
+      // 텍스트 그림자 효과
+      ctx.save();
+      ctx.shadowColor = "rgba(0,0,0,0.7)";
+      ctx.shadowBlur = 4;
+      
       // 오버롤 텍스트
       const ovrFontSize = document.getElementById('ovrFontSize').value;
       const ovrFont = document.getElementById('ovrFont').value;
@@ -512,6 +518,8 @@
       ctx.fillText(document.getElementById('playerName').value,
                    parseInt(document.getElementById('nameX').value),
                    parseInt(document.getElementById('nameY').value));
+      
+      ctx.restore();
     }
     
     // === 선택된 이미지의 테두리 및 핸들 그리기 함수 ===
@@ -521,7 +529,7 @@
       ctx.strokeStyle = "red";
       ctx.lineWidth = 2;
       ctx.strokeRect(props.x, props.y, props.width, props.height);
-      // 오른쪽 아래 핸들 (8x8 사각형)
+      // 오른쪽 하단 핸들 (8x8 사각형)
       const handleSize = 8;
       ctx.fillStyle = "red";
       ctx.fillRect(props.x + props.width - handleSize, props.y + props.height - handleSize, handleSize, handleSize);
@@ -560,7 +568,7 @@
           drawHandles(seasonProps);
         }
       }
-      // 포토(사진) 이미지 (정사각형 고정)
+      // 포토(미니 페이스온) 이미지 (정사각형 고정)
       if(customPhoto.complete && customPhoto.src) {
         let photoProps = {
           x: parseInt(document.getElementById('photoX').value),
@@ -573,6 +581,7 @@
           drawHandles(photoProps);
         }
       }
+      // 마지막에 텍스트를 그려서 모든 이미지 위에 표시
       drawText();
     }
     
@@ -582,7 +591,7 @@
     let offsetX = 0, offsetY = 0;
     const handleSize = 10;
     
-    // mousedown 이벤트: 각 객체 내에서 (단, 상단 10px과 오른쪽 하단 핸들은 제외)
+    // mousedown 이벤트: 오른쪽 하단 리사이즈 핸들과 상단 10px 제외한 영역에서만 드래그
     canvas.addEventListener('mousedown', function(e) {
       const rect = canvas.getBoundingClientRect();
       const mx = e.clientX - rect.left;
@@ -591,7 +600,7 @@
       function checkImage(img, propFunc) {
         if(img.complete && img.src) {
           let props = propFunc();
-          // 오른쪽 하단 핸들 영역 우선 검사 (리사이즈)
+          // 먼저 오른쪽 하단 리사이즈 핸들 영역 검사
           if(mx >= props.x + props.width - handleSize && mx <= props.x + props.width + handleSize &&
              my >= props.y + props.height - handleSize && my <= props.y + props.height + handleSize) {
             activeImage = props.name;
@@ -601,11 +610,11 @@
             console.log("mousedown: resizing", activeImage);
             return true;
           }
-          // 클릭한 위치가 이미지의 상단 10px 이내라면 드래그 실행 안함
+          // 클릭한 위치가 이미지 상단 10px 이내이면 드래그 실행하지 않음
           if(my - props.y < 10) {
             return false;
           }
-          // 이미지 내부 (상단 10px 제외) 드래그 영역 검사
+          // 그 외 영역에서 드래그
           if(mx >= props.x && mx <= props.x + props.width &&
              my >= props.y && my <= props.y + props.height) {
             activeImage = props.name;
@@ -663,9 +672,8 @@
         if(mode === 'resize') {
           let newW = mx - parseInt(xElem.value) + offsetX;
           if(newW < 10) newW = 10;
-          xElem.value = xElem.value; // 불필요하지만 그대로
           wElem.value = newW;
-          hElem.value = newW; // 정사각형 유지
+          hElem.value = newW;  // 정사각형 유지
         } else if(mode === 'drag') {
           xElem.value = mx - offsetX;
           yElem.value = my - offsetY;
@@ -678,9 +686,8 @@
         if(mode === 'resize') {
           let newW = mx - parseInt(xElem.value) + offsetX;
           if(newW < 10) newW = 10;
-          xElem.value = xElem.value;
           wElem.value = newW;
-          hElem.value = newW; // 정사각형 유지
+          hElem.value = newW;  // 정사각형 유지
         } else if(mode === 'drag') {
           xElem.value = mx - offsetX;
           yElem.value = my - offsetY;
