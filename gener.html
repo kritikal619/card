@@ -282,7 +282,7 @@
       <!-- 선수 이름 -->
       <div class="form-group">
         <label>선수 이름</label>
-        <input type="text" id="playerName" value="김민재">
+        <input type="text" id="playerName" value="R.레반도프스키">
         <div class="coord-inputs">
           <input type="number" id="nameX" placeholder="X" value="121">
           <input type="number" id="nameY" placeholder="Y" value="218">
@@ -431,7 +431,7 @@
     }
     function loadBaseCard() {
       showLoading();
-      baseCard.src = `Blank/${getFileName(1)}`;
+      baseCard.src = `Blank/${getFileName(251)}`;
       baseCard.onload = function() {
         hideLoading();
         drawCard();
