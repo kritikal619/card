@@ -254,7 +254,7 @@
         </div>
         <div class="coord-inputs">
           <input type="number" id="flagUploadWidth" placeholder="Width" value="40">
-          <input type="number" id="flagUploadHeight" placeholder="Height" value="30">
+          <input type="number" id="flagUploadHeight" placeholder="Height" value="40">
         </div>
         <small>국기는 캔버스에서 드래그하여 이동하거나, 오른쪽 아래 모서리를 드래그하여 크기 조절할 수 있습니다.</small>
       </div>
@@ -268,7 +268,7 @@
           <input type="number" id="seasonY" placeholder="Y" value="250">
         </div>
         <div class="coord-inputs">
-          <input type="number" id="seasonUploadWidth" placeholder="Width" value="80">
+          <input type="number" id="seasonUploadWidth" placeholder="Width" value="40">
           <input type="number" id="seasonUploadHeight" placeholder="Height" value="40">
         </div>
         <small>시즌 이미지는 캔버스에서 드래그하여 이동하거나, 오른쪽 아래 모서리를 드래그하여 크기 조절할 수 있습니다.</small>
@@ -363,36 +363,44 @@
       if(file) {
         const reader = new FileReader();
         reader.onload = function(evt) {
+          customFlag.onload = function() {
+            drawCard();
+          };
           customFlag.src = evt.target.result;
-          drawCard();
-        }
+        };
         reader.readAsDataURL(file);
       }
     });
-    
+
     document.getElementById('seasonUploadInput').addEventListener('change', function(e) {
       const file = e.target.files[0];
       if(file) {
         const reader = new FileReader();
         reader.onload = function(evt) {
+          customSeason.onload = function() {
+            drawCard();
+          };
           customSeason.src = evt.target.result;
-          drawCard();
-        }
+        };
         reader.readAsDataURL(file);
       }
     });
+
     
     document.getElementById('photoInput').addEventListener('change', function(e) {
       const file = e.target.files[0];
       if(file) {
         const reader = new FileReader();
         reader.onload = function(evt) {
+          customPhoto.onload = function() {
+            drawCard(); // 이미지가 완전히 로드된 후에 캔버스에 그림
+          };
           customPhoto.src = evt.target.result;
-          drawCard();
-        }
+        };
         reader.readAsDataURL(file);
       }
     });
+
     
     // === 글꼴 예시 업데이트 함수 ===
     function updateFontExample() {
