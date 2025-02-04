@@ -111,7 +111,7 @@
     button:hover {
       background: #0056b3;
     }
-    /* 빈카드 썸네일 목록 (옵션) */
+    /* 빈카드 미리보기 영역 */
     #blankCardsContainer {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
@@ -142,11 +142,10 @@
     <div class="editor">
       <h2>카드 제작기</h2>
       
-      <!-- 빈카드 선택 및 미리보기 -->
+      <!-- 빈카드 미리보기 영역 (드롭다운 메뉴 대신) -->
       <div class="form-group">
-        <label>빈카드 선택</label>
-        <select id="cardSelector" class="form-control"></select>
-        <img id="cardDesignPreview" src="" style="width:100px; display:block; margin-top:10px;">
+        <label>빈카드 미리보기</label>
+        <div id="blankCardsContainer"></div>
       </div>
       
       <!-- 오버롤 -->
@@ -295,33 +294,43 @@
     const canvas = document.getElementById('cardCanvas');
     const ctx = canvas.getContext('2d');
     
-    // 기본 카드 이미지
+    // 기본 카드 이미지 객체
     let baseCard = new Image();
     // 업로드 이미지들
     let customFlag = new Image();
     let customSeason = new Image();
     let customPhoto = new Image();
     
-    // === 빈카드 선택 박스 채우기 ===
+    // === 빈카드 미리보기 영역 채우기 ===
     function getFileName(number) {
       return `image(${number}).png`;
     }
-    function populateSelectors() {
-      const cardSelector = document.getElementById('cardSelector');
+    function populateBlankCards() {
+      const container = document.getElementById('blankCardsContainer');
       for (let i = 1; i <= totalImages; i++) {
-        let option = document.createElement('option');
-        option.value = getFileName(i);
-        option.textContent = `Card ${i}`;
-        cardSelector.appendChild(option);
+        const img = new Image();
+        img.src = `Blank/${getFileName(i)}`;
+        img.alt = `Card ${i}`;
+        img.addEventListener('click', function() {
+          // 클릭 시 해당 빈카드로 설정 후, 카드 재로딩
+          baseCard.src = `Blank/${getFileName(i)}`;
+          baseCard.onload = () => {
+            drawCard();
+          };
+          // 선택된 이미지에 selected 클래스 추가
+          document.querySelectorAll('#blankCardsContainer img').forEach(el => el.classList.remove('selected'));
+          img.classList.add('selected');
+        });
+        container.appendChild(img);
       }
     }
     
-    // === 기본 카드 이미지 로드 ===
+    // === 기본 카드 이미지 로드 (미리보기에서 선택 시 호출됨) ===
     function loadBaseCard() {
-      const cardFile = document.getElementById('cardSelector').value;
-      baseCard.src = `Blank/${cardFile}`;
+      // 기본 카드 이미지는 populateBlankCards()의 클릭 이벤트에서 처리됩니다.
+      // 만약 초기 로드 시 첫 번째 카드로 설정하고 싶다면 아래와 같이 작성할 수 있습니다.
+      baseCard.src = `Blank/${getFileName(1)}`;
       baseCard.onload = () => {
-        document.getElementById('cardDesignPreview').src = baseCard.src;
         drawCard();
       };
     }
@@ -585,49 +594,48 @@
     document.querySelectorAll('input, select').forEach(el => {
       el.addEventListener('input', drawCard);
     });
-    document.getElementById('cardSelector').addEventListener('change', loadBaseCard);
     
     // === 초기 설정 ===
-    populateSelectors();
-    loadBaseCard();
+    loadBaseCard();         // 첫 번째 빈카드 로드 (원하는 경우 초기 빈카드 설정)
+    populateBlankCards();   // 빈카드 미리보기 영역 채우기
   </script>
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
-</script>
+  <!-- Code injected by live-server -->
+  <script>
+    // <![CDATA[  <-- For SVG support
+    if ('WebSocket' in window) {
+      (function () {
+        function refreshCSS() {
+          var sheets = [].slice.call(document.getElementsByTagName("link"));
+          var head = document.getElementsByTagName("head")[0];
+          for (var i = 0; i < sheets.length; ++i) {
+            var elem = sheets[i];
+            var parent = elem.parentElement || head;
+            parent.removeChild(elem);
+            var rel = elem.rel;
+            if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+              var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+              elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+            }
+            parent.appendChild(elem);
+          }
+        }
+        var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+        var address = protocol + window.location.host + window.location.pathname + '/ws';
+        var socket = new WebSocket(address);
+        socket.onmessage = function (msg) {
+          if (msg.data == 'reload') window.location.reload();
+          else if (msg.data == 'refreshcss') refreshCSS();
+        };
+        if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+          console.log('Live reload enabled.');
+          sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+        }
+      })();
+    }
+    else {
+      console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+    }
+    // ]]>
+  </script>
 </body>
 </html>
