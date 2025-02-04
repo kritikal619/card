@@ -15,6 +15,9 @@
   <meta property="og:url" content="https://kritikal619.github.io/trait/">
   <meta property="og:site_name" content="FC모바일 카드 합성 툴">
   <meta property="og:type" content="website">
+  
+  <!-- 부트스트랩 CSS (v5.x) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   
   <!-- Favicon 관련 -->
@@ -26,24 +29,17 @@
   <link rel="manifest" href="./favicons/site.webmanifest" />
   
   <title>FC모바일 카드 제작기</title>
-  <h3>**모바일에서는 가로로 이용해 주세요**</h3>
+  
   <style>
-    /* 탭 버튼 스타일 */
-    #tabs {
-      margin-bottom: 20px;
+    /* 커스텀 네비게이션 바 스타일 */
+    #navbar {
+      background: #73685d !important; /* 지정한 색상 */
+      padding: 0.3rem 1rem; /* 세로 패딩 축소 */
     }
-    #tabs button {
-      padding: 8px 12px;
-      margin-right: 10px;
-      border: 1px solid #ccc;
-      background: #eee;
-      cursor: pointer;
-      border-radius: 4px;
+    body {
+      padding-top: 60px; /* 네비게이션 바 높이 만큼 여백 추가 */
     }
-    #tabs button:hover {
-      background: #ddd;
-    }
-    
+    /* 나머지 기존 스타일 */
     .container {
       display: flex;
       gap: 30px;
@@ -133,16 +129,40 @@
   </style>
 </head>
 <body>
-  <!-- 상단 탭 버튼: "만들기 툴" 클릭 시 index.html로 이동 -->
-  <div id="tabs">
-    <button id="toolTabButton">뒤로가기</button>
-  </div>
+  <!-- 부트스트랩 네비게이션 바 -->
+  <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container-fluid">
+      <!-- 왼쪽 '뒤로가기' 링크 -->
+      <a class="navbar-brand" href="#" id="toolTabButton">뒤로가기</a>
+      <!-- 중앙 제목 -->
+      <span class="navbar-text mx-auto">FC모바일 카드 제작기</span>
+      <!-- 오른쪽 햄버거 메뉴 -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" 
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- 오른쪽 메뉴 아이템 (햄버거 메뉴 내부) -->
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="https://kritikal619.github.io/card/" target="_blank">피모합성소</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://kritikal619.github.io/trait/" target="_blank">피모 특성</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://fcevol.kro.kr" target="_blank">진화 시뮬레이션</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
   
   <div class="container">
     <div class="editor">
       <h2>카드 제작기</h2>
       
-      <!-- 빈카드 미리보기 영역 (드롭다운 메뉴 대신) -->
+      <!-- 빈카드 미리보기 영역 -->
       <div class="form-group">
         <label>빈카드 미리보기</label>
         <div id="blankCardsContainer"></div>
@@ -288,6 +308,9 @@
     </div>
   </div>
   
+  <!-- 부트스트랩 JS (옵션: 필요 시) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
   <script>
     // === 기본 변수들 ===
     const totalImages = 250;
@@ -327,8 +350,7 @@
     
     // === 기본 카드 이미지 로드 (미리보기에서 선택 시 호출됨) ===
     function loadBaseCard() {
-      // 기본 카드 이미지는 populateBlankCards()의 클릭 이벤트에서 처리됩니다.
-      // 만약 초기 로드 시 첫 번째 카드로 설정하고 싶다면 아래와 같이 작성할 수 있습니다.
+      // 첫 번째 카드로 초기 설정
       baseCard.src = `Blank/${getFileName(1)}`;
       baseCard.onload = () => {
         drawCard();
@@ -371,6 +393,44 @@
         reader.readAsDataURL(file);
       }
     });
+    
+    // === 글꼴 예시 업데이트 함수 ===
+    function updateFontExample() {
+      // 오버롤 예시
+      const exampleOvr = document.getElementById('exampleOvr');
+      if(exampleOvr){
+        exampleOvr.style.fontFamily = document.getElementById('ovrFont').value;
+        exampleOvr.style.fontSize = document.getElementById('ovrFontSize').value + 'px';
+        exampleOvr.textContent = "오버롤 예시: " + document.getElementById('ovr').value;
+      }
+      
+      // 포지션 예시
+      const examplePos = document.getElementById('examplePos');
+      if(examplePos){
+        examplePos.style.fontFamily = document.getElementById('posFont').value;
+        examplePos.style.fontSize = document.getElementById('posFontSize').value + 'px';
+        examplePos.textContent = "포지션 예시: " + document.getElementById('position').value;
+      }
+      
+      // 선수 이름 예시
+      const exampleName = document.getElementById('exampleName');
+      if(exampleName){
+        exampleName.style.fontFamily = document.getElementById('nameFont').value;
+        exampleName.style.fontSize = document.getElementById('nameFontSize').value + 'px';
+        exampleName.textContent = "선수 이름 예시: " + document.getElementById('playerName').value;
+      }
+    }
+    
+    // 폰트 선택 및 관련 입력 변경 시 예시 업데이트
+    document.getElementById('ovrFont').addEventListener('change', updateFontExample);
+    document.getElementById('ovrFontSize').addEventListener('input', updateFontExample);
+    document.getElementById('ovr').addEventListener('input', updateFontExample);
+    document.getElementById('posFont').addEventListener('change', updateFontExample);
+    document.getElementById('posFontSize').addEventListener('input', updateFontExample);
+    document.getElementById('position').addEventListener('change', updateFontExample);
+    document.getElementById('nameFont').addEventListener('change', updateFontExample);
+    document.getElementById('nameFontSize').addEventListener('input', updateFontExample);
+    document.getElementById('playerName').addEventListener('input', updateFontExample);
     
     // === 드래그/리사이즈 (캔버스 내) ===
     let activeImage = null;  // "flag", "season", "photo"
@@ -592,12 +652,16 @@
     
     // === 이벤트 리스너 등록 (입력 시마다 재그리기) ===
     document.querySelectorAll('input, select').forEach(el => {
-      el.addEventListener('input', drawCard);
+      el.addEventListener('input', function() {
+        drawCard();
+        updateFontExample();
+      });
     });
     
     // === 초기 설정 ===
     loadBaseCard();         // 첫 번째 빈카드 로드 (원하는 경우 초기 빈카드 설정)
     populateBlankCards();   // 빈카드 미리보기 영역 채우기
+    updateFontExample();    // 글꼴 예시 업데이트
   </script>
   <!-- Code injected by live-server -->
   <script>
