@@ -26,318 +26,756 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="피모 합성소" />
     <link rel="manifest" href="./favicons/site.webmanifest" />
-    <!-- 검증 메타 -->
-    <meta name="google-site-verification" content="">
-    <meta name="naver-site-verification" content="">
-    <title>피모 합성소: 빈카드, 국기 및 글자! (FC모바일)</title>
-    
-    
+  
+  <!-- 프로젝트 폴더의 폰트 사용: fonts 폴더 내의 폰트 파일을 @font-face로 등록 -->
   <style>
-    /* 탭 버튼 및 콘텐츠 스타일 */
-    #tabs {
-      margin-bottom: 10px;
+    @font-face {
+      font-family: 'FontA';
+      src: url('./fonts/FCOVR.otf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
     }
-    #tabs .tab-button {
-      padding: 5px 10px;
-      cursor: pointer;
-      border: 1px solid #ccc;
-      background: #eee;
-      margin-right: 5px;
+    @font-face {
+      font-family: 'FontB';
+      src: url('./fonts/FIMOOVR.otf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
     }
-    #tabs .tab-button.active {
-      font-weight: bold;
-      color: green;
-      background: #fff;
+    @font-face {
+      font-family: 'FontC';
+      src: url('./fonts/NAME.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
     }
-    .tab-content {
-      display: none;
+    @font-face {
+      font-family: 'FontD';
+      src: url('./fonts/POSITION.otf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
     }
-    /* 이미지 그리드 스타일 (기본은 flex) */
-    .image-grid {
+    
+    /* 네비게이션 바 스타일 */
+    #navbar {
+      background: #73685d !important;
+      padding: 0.3rem 1rem;
+    }
+    #navbar .nav-container {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .image-item {
-      width: 250px;
-      text-align: center;
-      border: 1px solid #ddd;
-      padding: 5px;
-    }
-    .image-item img {
-      max-width: 100%;
-      height: auto;
-    }
-    /* 모바일에서는 한 줄에 사진 2개씩 표시 (더 크게 보이도록) */
-    @media only screen and (max-width: 768px) {
-      .image-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
-      .image-item {
-        width: 100%;
-      }
-    }
-    /* 다운로드 버튼 스타일: 원래 갈색, 클릭하면 더 진하게, 크기를 좀 더 작게 */
-    .img-download-btn {
-      background-color: #a39485 solid; /* 기본 갈색 */
-      border: none;
-      cursor: pointer;
-      padding: 4px 8px;
-      border-radius: 4px;
-      transition: background-color 0.3s ease;
-      color: white;
-      font-size: 14px;
-      display: inline-flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 4px;
+      width: 100%;
     }
-    .img-download-btn:active {
-      background-color: #5a5147; /* 클릭 시 더 진한 갈색 */
-    }
-    /* 기본: 텍스트 표시, 아이콘 숨김 */
-    .btn-text {
-      display: inline-block;
-    }
-    .btn-icon {
-      display: none;
-    }
-    /* 모바일: 텍스트 숨김, 아이콘 보이기 (아이콘 크기도 약간 축소) */
-    @media only screen and (max-width: 768px) {
-      .btn-text {
-        display: none;
-      }
-      .btn-icon {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        vertical-align: middle;
-      }
-    }
-    /* 탭3 버튼 스타일: 크기 키우기 */
-    #tab3 button {
-      font-size: 20px;       /* 폰트 크기를 키움 */
-      padding: 15px 30px;    /* 상하 15px, 좌우 30px 패딩 */
-      border: 2px solid #333; /* 원하는 경우 테두리도 추가 */
-      background-color: #f0f0f0; /* 배경색 */
+    /* 중앙 카드 제목 (편집 가능, 흰색 텍스트) */
+    #cardTitle {
       cursor: pointer;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
+      font-size: 1.2em;
+      color: #fff;
     }
-
-#tab3 button:hover {
-  background-color: #e0e0e0;
-}
-
+    #cardTitle .editIcon {
+      margin-left: 5px;
+      font-size: 0.8em;
+      vertical-align: middle;
+    }
+    
+    body {
+      padding-top: 60px;
+    }
+    .container {
+      display: flex;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .editor {
+      width: 350px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .preview {
+      flex-grow: 1;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: relative;
+      align-self: flex-start;
+    }
+    canvas {
+      border: 2px solid #ddd;
+      margin-top: 10px;
+      background: white;
+      cursor: default;
+    }
+    /* 로딩 오버레이: 화면 전체를 덮고 중앙에 로딩 GIF 표시, 터치 차단 */
+    #loadingOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(128, 128, 128, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      pointer-events: all;
+    }
+    #loadingOverlay img {
+      width: 100px;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 5px;
+    }
+    .coord-inputs {
+      display: flex;
+      gap: 5px;
+      margin-top: 5px;
+    }
+    .coord-inputs input {
+      width: 70px;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    /* 빈카드 미리보기 영역 */
+    #blankCardsContainer {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: 10px;
+      margin-top: 15px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      background: #fafafa;
+    }
+    #blankCardsContainer img {
+      width: 100%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      border-radius: 4px;
+    }
+    #blankCardsContainer img.selected {
+      border-color: #007bff;
+    }
   </style>
-</head>
-<body> <br>
-
-  <h1>피모 합성소 (FC모바일)</h1><br>
-  <h3>공지: 안녕하세요</h3><br>
-  <a href="http://fcevol.kro.kr/">진화 시뮬레이션을 하고 싶다면?</a><br>
-  <a href="https://kritikal619.github.io/trait/">특성 재료를 찾고 싶다면?</a><br>
-  <br><br>
   
-  <div id="card-builder">
-    <!-- 탭 버튼 영역 (총 4개의 탭) -->
-    <div id="tabs">
-      <button class="tab-button active" data-tab="tab1">빈카드 다운도르</button>
-      <button class="tab-button" data-tab="tab2">국기 다운도르</button>
-      <button class="tab-button" data-tab="tab5">카드 제작용 글자 다운도르</button>
-      <button class="tab-button" data-tab="tab3">카드 제작기</button>
+  <!-- 부트스트랩 CSS (v5.x) 추가 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <title>FC모바일 카드 제작기</title>
+</head>
+<body>
+  <!-- 네비게이션 바 -->
+  <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container-fluid nav-container">
+      <!-- 왼쪽: 뒤로가기 -->
+      <div id="leftNav">
+        <a class="navbar-brand" href="#" id="toolTabButton">뒤로가기</a>
+      </div>
+      <!-- 중앙: 편집 가능한 카드 제목 (흰색 텍스트) -->
+      <div id="centerNav">
+        <span id="cardTitle">
+          카드 이름 (클릭하여 수정) <span class="editIcon">✏️</span>
+        </span>
+      </div>
+      <!-- 오른쪽: 기존 네비게이션 링크 -->
+      <div id="rightNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="https://kritikal619.github.io/card/" target="_blank">피모합성소</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://kritikal619.github.io/trait/" target="_blank">피모 특성</a></li>
+          <li class="nav-item"><a class="nav-link" href="http://fcevol.kro.kr" target="_blank">진화 시뮬레이션</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container">
+    <div class="editor">
+      <h2>카드 제작기</h2>
+      
+      <!-- 빈카드 미리보기 영역 -->
+      <div class="form-group">
+        <label>빈카드 미리보기</label>
+        <div id="blankCardsContainer"></div>
+      </div>
+      
+      <!-- 오버롤 -->
+      <div class="form-group">
+        <label>오버롤</label>
+        <input type="number" id="ovr" min="0" max="99" value="85">
+        <div class="coord-inputs">
+          <input type="number" id="ovrX" placeholder="X" value="74">
+          <input type="number" id="ovrY" placeholder="Y" value="74">
+        </div>
+        <label>오버롤 폰트 크기</label>
+        <input type="number" id="ovrFontSize" placeholder="Font Size" value="32">
+        <label>오버롤 폰트</label>
+        <select id="ovrFont">
+          <option value="FontA" selected>FC모바일 오버롤 폰트</option>
+          <option value="FontB">피파모바일 오버롤 폰트</option>
+        </select>
+        <label>오버롤 폰트 색상</label>
+        <input type="color" id="ovrColor" value="#FFD700">
+      </div>
+      
+      <!-- 포지션 -->
+      <div class="form-group">
+        <label>포지션</label>
+        <select id="position">
+          <option value="LW">LW</option>
+          <option value="ST">ST</option>
+          <option value="RW">RW</option>
+          <option value="CF">CF</option>
+          <option value="LF">LF</option>
+          <option value="RF">RF</option>
+          <option value="CM">CM</option>
+          <option value="RM">RM</option>
+          <option value="LM">LM</option>
+          <option value="CDM">CDM</option>
+          <option value="CAM">CAM</option>
+          <option value="LB">LB</option>
+          <option value="CB">CB</option>
+          <option value="RB">RB</option>
+          <option value="GK">GK</option>
+        </select>
+        <div class="coord-inputs">
+          <input type="number" id="posX" placeholder="X" value="76">
+          <input type="number" id="posY" placeholder="Y" value="102">
+        </div>
+        <label>포지션 폰트</label>
+        <select id="posFont">
+          <option value="FontD">포지션 폰트</option>
+        </select>
+        <label>포지션 폰트 크기</label>
+        <input type="number" id="posFontSize" placeholder="Font Size" value="19">
+        <label>포지션 폰트 색상</label>
+        <input type="color" id="posColor" value="#FFFFFF">
+      </div>
+      
+      <!-- 선수 이름 -->
+      <div class="form-group">
+        <label>선수 이름</label>
+        <input type="text" id="playerName" value="김민재">
+        <div class="coord-inputs">
+          <input type="number" id="nameX" placeholder="X" value="121">
+          <input type="number" id="nameY" placeholder="Y" value="218">
+        </div>
+        <label>이름 폰트</label>
+        <select id="nameFont">
+          <option value="FontC" selected>이름 폰트</option>
+        </select>
+        <label>이름 폰트 크기</label>
+        <input type="number" id="nameFontSize" placeholder="Font Size" value="20">
+        <label>이름 폰트 색상</label>
+        <input type="color" id="nameColor" value="#FFFFFF">
+      </div>
+      
+      <!-- 국기 업로드 -->
+      <div class="form-group">
+        <label>국기 업로드</label>
+        <input type="file" id="flagUploadInput">
+        <div class="coord-inputs">
+          <input type="number" id="flagX" placeholder="X" value="30">
+          <input type="number" id="flagY" placeholder="Y" value="30">
+        </div>
+        <div class="coord-inputs">
+          <input type="number" id="flagUploadWidth" placeholder="Width" value="40">
+          <input type="number" id="flagUploadHeight" placeholder="Height" value="40">
+        </div>
+        <small>국기는 캔버스에서 드래그하여 이동하거나, 오른쪽 하단의 점(리사이즈 핸들)을 제외한 모든 곳에서 움직이면 이동합니다.</small>
+      </div>
+      
+      <!-- 시즌 업로드 -->
+      <div class="form-group">
+        <label>시즌 업로드</label>
+        <input type="file" id="seasonUploadInput">
+        <div class="coord-inputs">
+          <input type="number" id="seasonX" placeholder="X" value="200">
+          <input type="number" id="seasonY" placeholder="Y" value="250">
+        </div>
+        <div class="coord-inputs">
+          <input type="number" id="seasonUploadWidth" placeholder="Width" value="40">
+          <input type="number" id="seasonUploadHeight" placeholder="Height" value="40">
+        </div>
+        <small>시즌 이미지는 캔버스에서 드래그하여 이동하거나, 오른쪽 하단의 점(리사이즈 핸들)을 제외한 모든 곳에서 움직이면 이동합니다.</small>
+      </div>
+      
+      <!-- 추가 사진 업로드 (정사각형 고정) -->
+      <div class="form-group">
+        <label>미니 페이스온 업로드</label>
+        <input type="file" id="photoInput">
+        <div class="coord-inputs">
+          <input type="number" id="photoX" placeholder="X" value="50">
+          <input type="number" id="photoY" placeholder="Y" value="50">
+        </div>
+        <div class="coord-inputs">
+          <input type="number" id="photoWidth" placeholder="Width" value="100">
+          <input type="number" id="photoHeight" placeholder="Height" value="100">
+        </div>
+        <small>
+          사진은 캔버스에서 드래그하여 이동하거나, 오른쪽 하단의 점(리사이즈 핸들)을 제외한 모든 곳에서 움직이면 이동합니다.<br>
+          (가로 또는 세로 값 중 하나가 바뀌면 두 값이 동일하게 변경됩니다.)
+        </small>
+      </div>
+      
+      <button onclick="downloadCard()">Download Card</button>
     </div>
     
-    <!-- 탭 콘텐츠 영역 -->
-    <div id="tab-contents">
-      <!-- 탭1: 빈카드 다운도르 (BlankCard 폴더의 이미지, textNumbers에 없는 것) -->
-      <div class="tab-content" id="tab1">
-        <p>FC모바일 카드 합성용 빈카드</p>
-        <div class="image-grid" id="blank-image-grid">
-          <!-- 동적으로 생성 -->
+    <div class="preview">
+      <h2>카드 미리보기</h2>
+      <!-- 로딩 오버레이를 포함하는 캔버스 영역 -->
+      <div style="position: relative; display: inline-block;">
+        <canvas id="cardCanvas" width="300" height="300"></canvas>
+        <div id="loadingOverlay">
+          <img src="https://i.gifer.com/ZKZg.gif" alt="로딩중...">
         </div>
       </div>
-      
-      <!-- 탭2: 글자 다운도르 (BlankCard 폴더의 이미지, textNumbers에 포함된 것) -->
-      <div class="tab-content" id="tab2">
-        <p>FC모바일 카드 합성용 국기</p>
-        <div class="image-grid" id="text-image-grid">
-          <!-- 동적으로 생성 -->
-        </div>
-      </div>
-      
-      <!-- 탭3: 만들기 툴 (미공개) -->
-      <div class="tab-content" id="tab3">
-        <button type="button" id="navyBtn" onclick="location.href='gener.html'">
-          만들기 툴로 이동
-        </button>
-      </div>
-      
-      <!-- 탭4: 빈 글자 탭 (탭2의 내용을 복제) -->
-      <div class="tab-content" id="tab4">
-        <!-- 아래 내용은 스크립트에서 탭2의 내용을 복제하여 채워집니다 -->
-      </div>
-      
-      <!-- 탭5: BlankLetter 다운도르 (BlankLetter 폴더의 이미지 1~15) -->
-      <div class="tab-content" id="tab5">
-        <p>FC모바일 카드 합성용 글자 (흰색 글자는 잘 안 보일 수도 있으니 주의!)</p>
-        <div class="image-grid" id="blankletter-image-grid">
-          <!-- 동적으로 생성 -->
-        </div>
+      <div id="wrap">
+        <section></section>
+        <footer>
+          <p>
+            <span>Data based on NEXON</span><br/>
+            <span>이메일 : <span id="email">jchae0619@gmail.com</span></span><br/>
+            <span>© 2025 kritikal619. All Rights Reserved.</span>
+          </p>
+        </footer>
       </div>
     </div>
   </div>
-  <div id="installPrompt" style="display: none; position: fixed; bottom: 20px; right: 20px; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.2); border-radius: 10px; padding: 16px; z-index: 1000;">
-    <p>홈 화면에 추가하시겠습니까?</p>
-    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
-      <button id="installConfirm">추가하기</button>
-      <button id="installCancel">취소</button>
-      
-    </div>
-  </div>
   
-  
-
-
-  <div id="wrap">
-    <section>
-    </section>
-    <footer>
-     <p>
-      <span>Data based on NEXON</span><br/>
-      <span>이메일 :<span id="email">jchae0619@gmail.com</span></span>
-      <button id="copy-button">복사</button><br/>
-
-      <span>© 2025 kritikal619. All Rights Reserved.</span>
-     </p>
-    </footer>
-  </div>
+  <!-- 부트스트랩 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // 폴더 설정
-      const blankCardFolder = "Blank";
-      const blankLetterFolder = "BlankLetter";
-      
-      // 글자 카드로 분류할 번호 배열 (BlankCard 폴더 내의 이미지 번호 중)
-      const textNumbers = [130, 131, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 162, 214, 219, 225, 237];
-      
-      // 다운로드 아이콘 (SVG 코드)
-      const downloadIcon = `
-        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5 20h14v-2H5v2zm7-18L5.33 11h3.84v6h4.66v-6h3.84L12 2z"/>
-        </svg>
-      `;
-      
-      // 컨테이너 요소 가져오기 (탭1, 탭2)
-      const blankImageGrid = document.getElementById('blank-image-grid');
-      const textImageGrid = document.getElementById('text-image-grid');
-      
-      // 1부터 249까지 이미지 항목 생성 (BlankCard 폴더)
-      for (let i = 1; i <= 249; i++) {
-        const imgHTML = `<img src="${blankCardFolder}/image(${i}).png" alt="이미지 ${i}" onerror="this.style.display='none'">`;
-        // 버튼 타입: textNumbers에 포함되면 "text", 아니면 "blank"
-        const btnType = textNumbers.includes(i) ? 'text' : 'blank';
-        
-        const imageItemDiv = document.createElement('div');
-        imageItemDiv.className = 'image-item';
-        imageItemDiv.innerHTML = `
-          ${imgHTML}
-          <button class="img-download-btn" data-type="${btnType}">
-            <span class="btn-text">다운로드</span>
-            <span class="btn-icon">${downloadIcon}</span>
-          </button>
-        `;
-        
-        // textNumbers에 포함되면 탭2, 아니면 탭1에 추가
-        if (textNumbers.includes(i)) {
-          textImageGrid.appendChild(imageItemDiv);
-        } else {
-          blankImageGrid.appendChild(imageItemDiv);
-        }
-      }
-      
-      // 탭 전환 기능 (총 5개 탭)
-      const tabButtons = document.querySelectorAll('#tabs .tab-button');
-      const tabContents = document.querySelectorAll('#tab-contents .tab-content');
-      tabButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          tabButtons.forEach(btn => btn.classList.remove('active'));
-          tabContents.forEach(content => content.style.display = 'none');
-          this.classList.add('active');
-          const targetTab = this.getAttribute('data-tab');
-          document.getElementById(targetTab).style.display = 'block';
-        });
-      });
-      // 초기에는 탭1 보이기
-      document.getElementById('tab1').style.display = 'block';
-      
-      // 다운로드 버튼 클릭 이벤트 처리
-      document.addEventListener('click', function(e) {
-        const btn = e.target.closest('.img-download-btn');
-        if (btn) {
-          const imageItem = btn.closest('.image-item');
-          const imgSrc = imageItem.querySelector('img').getAttribute('src');
-          const downloadType = btn.getAttribute('data-type');
-          if (downloadType === 'blank') {
-            downloadBlankCard(imgSrc);
-          } else if (downloadType === 'text') {
-            downloadTextCard(imgSrc);
-          } else if (downloadType === 'blankletter') {
-            downloadBlankLetter(imgSrc);
-          }
-        }
-      });
-      
-      function downloadBlankCard(src) {
-        const link = document.createElement('a');
-        link.href = src;
-        link.download = src.substring(src.lastIndexOf('/') + 1);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }
-      
-      function downloadTextCard(src) {
-        const link = document.createElement('a');
-        link.href = src;
-        link.download = src.substring(src.lastIndexOf('/') + 1);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }
-      
-      function downloadBlankLetter(src) {
-        const link = document.createElement('a');
-        link.href = src;
-        link.download = src.substring(src.lastIndexOf('/') + 1);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }
-      
-      // 탭4: 빈 글자 탭 -> 탭2의 내용을 복제하여 채움
-      const tab4 = document.getElementById('tab4');
-      tab4.innerHTML = document.getElementById('tab2').innerHTML;
-      
-      // 탭5: BlankLetter 다운도르 -> BlankLetter 폴더의 이미지 1~15 생성
-      const blankLetterImageGrid = document.getElementById('blankletter-image-grid');
-      for (let i = 1; i <= 15; i++) {
-        const imgHTML = `<img src="${blankLetterFolder}/image(${i}).png" alt="BlankLetter 이미지 ${i}" onerror="this.style.display='none'">`;
-        const imageItemDiv = document.createElement('div');
-        imageItemDiv.className = 'image-item';
-        imageItemDiv.innerHTML = `
-          ${imgHTML}
-          <button class="img-download-btn" data-type="blankletter">
-            <span class="btn-text">다운로드</span>
-            <span class="btn-icon">${downloadIcon}</span>
-          </button>
-        `;
-        blankLetterImageGrid.appendChild(imageItemDiv);
+    // === 기본 변수들 ===
+    const totalImages = 253;
+    const canvas = document.getElementById('cardCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // 파일명(카드 이름) 전역 변수 (기본값)
+    let cardFileName = "card";
+    
+    // 로딩 오버레이 제어 함수
+    function showLoading() {
+      document.getElementById('loadingOverlay').style.display = "flex";
+    }
+    function hideLoading() {
+      document.getElementById('loadingOverlay').style.display = "none";
+    }
+    
+    // 네비게이션 중앙 제목 편집 기능 (텍스트는 흰색)
+    const cardTitleElem = document.getElementById('cardTitle');
+    cardTitleElem.addEventListener('click', function() {
+      const newName = prompt("다운로드할 파일 이름을 입력하세요:", cardFileName);
+      if(newName !== null && newName.trim() !== ""){
+        cardFileName = newName.trim();
+        // 중앙 제목 갱신 (펜 아이콘 포함, 흰색 텍스트 유지)
+        cardTitleElem.innerHTML = `<span style="color:#fff;">${cardFileName}</span> <span class="editIcon">✏️</span>`;
       }
     });
-   
+    
+    let baseCard = new Image();
+    let customFlag = new Image();
+    let customSeason = new Image();
+    let customPhoto = new Image();
+    
+    // === 빈카드 미리보기 영역 채우기 ===
+    function getFileName(number) {
+      return `image(${number}).png`;
+    }
+    function populateBlankCards() {
+      const container = document.getElementById('blankCardsContainer');
+      for (let i = 1; i <= totalImages; i++) {
+        const img = new Image();
+        img.src = `Blank/${getFileName(i)}`;
+        img.alt = `Card ${i}`;
+        img.addEventListener('click', function() {
+          showLoading();
+          baseCard.src = `Blank/${getFileName(i)}`;
+          baseCard.onload = function() {
+            hideLoading();
+            drawCard();
+          };
+          document.querySelectorAll('#blankCardsContainer img').forEach(el => el.classList.remove('selected'));
+          img.classList.add('selected');
+        });
+        container.appendChild(img);
+      }
+    }
+    function loadBaseCard() {
+      showLoading();
+      baseCard.src = `Blank/${getFileName(1)}`;
+      baseCard.onload = function() {
+        hideLoading();
+        drawCard();
+      };
+    }
+    
+    // === 업로드 이미지 처리 ===
+    document.getElementById('flagUploadInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if(file) {
+        showLoading();
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          customFlag.onload = function() {
+            hideLoading();
+            drawCard();
+          };
+          customFlag.src = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+    document.getElementById('seasonUploadInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if(file) {
+        showLoading();
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          customSeason.onload = function() {
+            hideLoading();
+            drawCard();
+          };
+          customSeason.src = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+    document.getElementById('photoInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if(file) {
+        showLoading();
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          customPhoto.onload = function() {
+            hideLoading();
+            drawCard();
+          };
+          customPhoto.src = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+    
+    // === 텍스트 그리기 ===
+    function drawText() {
+      // 오버롤 텍스트
+      const ovrFontSize = document.getElementById('ovrFontSize').value;
+      const ovrFont = document.getElementById('ovrFont').value;
+      ctx.fillStyle = document.getElementById('ovrColor').value;
+      ctx.font = `bold ${ovrFontSize}px ${ovrFont}`;
+      ctx.fillText(document.getElementById('ovr').value,
+                   parseInt(document.getElementById('ovrX').value),
+                   parseInt(document.getElementById('ovrY').value));
+      
+      // 포지션 텍스트
+      const posFontSize = document.getElementById('posFontSize').value;
+      const posFont = document.getElementById('posFont').value;
+      ctx.fillStyle = document.getElementById('posColor').value;
+      ctx.font = `bold ${posFontSize}px ${posFont}`;
+      ctx.fillText(document.getElementById('position').value,
+                   parseInt(document.getElementById('posX').value),
+                   parseInt(document.getElementById('posY').value));
+      
+      // 선수 이름 텍스트
+      const nameFontSize = document.getElementById('nameFontSize').value;
+      const nameFont = document.getElementById('nameFont').value;
+      ctx.fillStyle = document.getElementById('nameColor').value;
+      ctx.font = `${nameFontSize}px ${nameFont}`;
+      ctx.fillText(document.getElementById('playerName').value,
+                   parseInt(document.getElementById('nameX').value),
+                   parseInt(document.getElementById('nameY').value));
+    }
+    
+    // === 선택된 이미지의 테두리 및 핸들 그리기 함수 ===
+    function drawHandles(props) {
+      ctx.save();
+      ctx.setLineDash([5, 3]);
+      ctx.strokeStyle = "red";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(props.x, props.y, props.width, props.height);
+      // 오른쪽 아래 핸들 (8x8 사각형)
+      const handleSize = 8;
+      ctx.fillStyle = "red";
+      ctx.fillRect(props.x + props.width - handleSize, props.y + props.height - handleSize, handleSize, handleSize);
+      ctx.restore();
+    }
+    
+    // === 전체 그리기 함수 ===
+    function drawCard() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if(baseCard.complete) {
+        ctx.drawImage(baseCard, 0, 0, canvas.width, canvas.height);
+      }
+      // 국기 이미지 (정사각형 고정)
+      if(customFlag.complete && customFlag.src) {
+        let flagProps = {
+          x: parseInt(document.getElementById('flagX').value),
+          y: parseInt(document.getElementById('flagY').value),
+          width: parseInt(document.getElementById('flagUploadWidth').value),
+          height: parseInt(document.getElementById('flagUploadWidth').value) // width와 동일하게
+        };
+        ctx.drawImage(customFlag, flagProps.x, flagProps.y, flagProps.width, flagProps.height);
+        if(activeImage === 'flag') {
+          drawHandles(flagProps);
+        }
+      }
+      // 시즌 이미지 (정사각형 고정)
+      if(customSeason.complete && customSeason.src) {
+        let seasonProps = {
+          x: parseInt(document.getElementById('seasonX').value),
+          y: parseInt(document.getElementById('seasonY').value),
+          width: parseInt(document.getElementById('seasonUploadWidth').value),
+          height: parseInt(document.getElementById('seasonUploadWidth').value) // width와 동일하게
+        };
+        ctx.drawImage(customSeason, seasonProps.x, seasonProps.y, seasonProps.width, seasonProps.height);
+        if(activeImage === 'season') {
+          drawHandles(seasonProps);
+        }
+      }
+      // 포토(사진) 이미지 (정사각형 고정)
+      if(customPhoto.complete && customPhoto.src) {
+        let photoProps = {
+          x: parseInt(document.getElementById('photoX').value),
+          y: parseInt(document.getElementById('photoY').value),
+          width: parseInt(document.getElementById('photoWidth').value),
+          height: parseInt(document.getElementById('photoWidth').value) // width와 동일하게
+        };
+        ctx.drawImage(customPhoto, photoProps.x, photoProps.y, photoProps.width, photoProps.height);
+        if(activeImage === 'photo') {
+          drawHandles(photoProps);
+        }
+      }
+      drawText();
+    }
+    
+    // === 드래그/리사이즈 (캔버스 내) ===
+    let activeImage = null;  // "flag", "season", "photo"
+    let mode = '';           // "drag" 또는 "resize"
+    let offsetX = 0, offsetY = 0;
+    const handleSize = 10;
+    
+    // mousedown 이벤트: 각 객체 내에서 (단, 상단 10px과 오른쪽 하단 핸들은 제외)
+    canvas.addEventListener('mousedown', function(e) {
+      const rect = canvas.getBoundingClientRect();
+      const mx = e.clientX - rect.left;
+      const my = e.clientY - rect.top;
+      
+      function checkImage(img, propFunc) {
+        if(img.complete && img.src) {
+          let props = propFunc();
+          // 오른쪽 하단 핸들 영역 우선 검사 (리사이즈)
+          if(mx >= props.x + props.width - handleSize && mx <= props.x + props.width + handleSize &&
+             my >= props.y + props.height - handleSize && my <= props.y + props.height + handleSize) {
+            activeImage = props.name;
+            mode = 'resize';
+            offsetX = (props.x + props.width) - mx;
+            offsetY = (props.y + props.height) - my;
+            console.log("mousedown: resizing", activeImage);
+            return true;
+          }
+          // 클릭한 위치가 이미지의 상단 10px 이내라면 드래그 실행 안함
+          if(my - props.y < 10) {
+            return false;
+          }
+          // 이미지 내부 (상단 10px 제외) 드래그 영역 검사
+          if(mx >= props.x && mx <= props.x + props.width &&
+             my >= props.y && my <= props.y + props.height) {
+            activeImage = props.name;
+            mode = 'drag';
+            offsetX = mx - props.x;
+            offsetY = my - props.y;
+            console.log("mousedown: dragging", activeImage);
+            return true;
+          }
+        }
+        return false;
+      }
+      
+      if(checkImage(customFlag, () => ({
+        x: parseInt(document.getElementById('flagX').value),
+        y: parseInt(document.getElementById('flagY').value),
+        width: parseInt(document.getElementById('flagUploadWidth').value),
+        height: parseInt(document.getElementById('flagUploadHeight').value),
+        name: 'flag'
+      }))) return;
+      
+      if(checkImage(customSeason, () => ({
+        x: parseInt(document.getElementById('seasonX').value),
+        y: parseInt(document.getElementById('seasonY').value),
+        width: parseInt(document.getElementById('seasonUploadWidth').value),
+        height: parseInt(document.getElementById('seasonUploadHeight').value),
+        name: 'season'
+      }))) return;
+      
+      if(checkImage(customPhoto, () => ({
+        x: parseInt(document.getElementById('photoX').value),
+        y: parseInt(document.getElementById('photoY').value),
+        width: parseInt(document.getElementById('photoWidth').value),
+        height: parseInt(document.getElementById('photoHeight').value),
+        name: 'photo'
+      }))) {
+        console.log("mousedown: photo 영역 선택됨");
+        return;
+      }
+      
+      activeImage = null;
+    });
+    
+    canvas.addEventListener('mousemove', function(e) {
+      if(!activeImage) return;
+      const rect = canvas.getBoundingClientRect();
+      const mx = e.clientX - rect.left;
+      const my = e.clientY - rect.top;
+      
+      if(activeImage === 'flag') {
+        let xElem = document.getElementById('flagX');
+        let yElem = document.getElementById('flagY');
+        let wElem = document.getElementById('flagUploadWidth');
+        let hElem = document.getElementById('flagUploadHeight');
+        if(mode === 'resize') {
+          let newW = mx - parseInt(xElem.value) + offsetX;
+          if(newW < 10) newW = 10;
+          xElem.value = xElem.value; // 불필요하지만 그대로
+          wElem.value = newW;
+          hElem.value = newW; // 정사각형 유지
+        } else if(mode === 'drag') {
+          xElem.value = mx - offsetX;
+          yElem.value = my - offsetY;
+        }
+      } else if(activeImage === 'season') {
+        let xElem = document.getElementById('seasonX');
+        let yElem = document.getElementById('seasonY');
+        let wElem = document.getElementById('seasonUploadWidth');
+        let hElem = document.getElementById('seasonUploadHeight');
+        if(mode === 'resize') {
+          let newW = mx - parseInt(xElem.value) + offsetX;
+          if(newW < 10) newW = 10;
+          xElem.value = xElem.value;
+          wElem.value = newW;
+          hElem.value = newW; // 정사각형 유지
+        } else if(mode === 'drag') {
+          xElem.value = mx - offsetX;
+          yElem.value = my - offsetY;
+        }
+      } else if(activeImage === 'photo') {
+        let xElem = document.getElementById('photoX');
+        let yElem = document.getElementById('photoY');
+        let wElem = document.getElementById('photoWidth');
+        let hElem = document.getElementById('photoHeight');
+        if(mode === 'resize') {
+          let newW = mx - parseInt(xElem.value) + offsetX;
+          if(newW < 10) newW = 10;
+          console.log("mousemove photo resizing: newW =", newW);
+          wElem.value = newW;
+          hElem.value = newW;  // 정사각형 유지
+        } else if(mode === 'drag') {
+          xElem.value = mx - offsetX;
+          yElem.value = my - offsetY;
+        }
+      }
+      drawCard();
+    });
+    
+    canvas.addEventListener('mouseup', function() {
+      console.log("mouseup: activeImage reset");
+      activeImage = null;
+    });
+    canvas.addEventListener('mouseleave', function() {
+      activeImage = null;
+    });
+    
+    // === 다운로드 함수 (핸들 제거 후 다운로드, 파일명에 카드 이름 사용) ===
+    function downloadCard() {
+      const tempActive = activeImage;
+      activeImage = null;
+      drawCard();
+      
+      const link = document.createElement('a');
+      link.download = cardFileName + '.png';
+      link.href = canvas.toDataURL();
+      link.click();
+      
+      activeImage = tempActive;
+      drawCard();
+    }
+    
+    document.getElementById('toolTabButton').addEventListener('click', function() {
+      window.location.href = "index.html";
+    });
+    
+    document.querySelectorAll('input, select').forEach(el => {
+      el.addEventListener('input', function() {
+        drawCard();
+      });
+    });
+    
+    loadBaseCard();
+    populateBlankCards();
+  </script>
+  
+  <!-- Live-server 코드 (옵션) -->
+  <script>
+    if ('WebSocket' in window) {
+      (function () {
+        function refreshCSS() {
+          var sheets = [].slice.call(document.getElementsByTagName("link"));
+          var head = document.getElementsByTagName("head")[0];
+          for (var i = 0; i < sheets.length; ++i) {
+            var elem = sheets[i];
+            var parent = elem.parentElement || head;
+            parent.removeChild(elem);
+            var rel = elem.rel;
+            if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+              var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+              elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+            }
+            parent.appendChild(elem);
+          }
+        }
+        var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+        var address = protocol + window.location.host + window.location.pathname + '/ws';
+        var socket = new WebSocket(address);
+        socket.onmessage = function (msg) {
+          if (msg.data == 'reload') window.location.reload();
+          else if (msg.data == 'refreshcss') refreshCSS();
+        };
+        if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+          console.log('Live reload enabled.');
+          sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+        }
+      })();
+    }
+    else {
+      console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+    }
   </script>
 </body>
 </html>
