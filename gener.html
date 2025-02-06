@@ -787,15 +787,16 @@
         let hElem = document.getElementById('flagUploadHeight');
 
         if(mode === 'resize') {
-          let newW = mx - parseInt(xElem.value) + offsetX;
-          if(newW < 10) newW = 10;
-          wElem.value = newW;
-          hElem.value = newW; // 정사각형
-        } else if(mode === 'drag') {
-          xElem.value = mx - offsetX;
-          yElem.value = my - offsetY;
-        }
+        let newW = mx - parseInt(xElem.value) + offsetX;
+        if(newW < 10) newW = 10;
+        wElem.value = newW;
+        // 4:3 비율 적용: 높이는 너비의 3/4
+        hElem.value = Math.round(newW * 3 / 4);
+      } else if(mode === 'drag') {
+        xElem.value = mx - offsetX;
+        yElem.value = my - offsetY;
       }
+    }
       else if(activeImage === 'season') {
         let xElem = document.getElementById('seasonX');
         let yElem = document.getElementById('seasonY');
