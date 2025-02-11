@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
-    
   <!-- 검색 엔진 최적화 (SEO) -->
   <meta name="description" content="유로 빈카드, 토티 빈카드, 센츄리온 빈카드, 트로피 아이콘 빈카드, 월드컵 빈카드, 발롱도르 빈카드">
   <meta name="keywords" content="FC모바일, 특성 재료, 패스 마스터, 라인 브레이커, 예리한 감아차기, 선수 정보, 오버롤, 넥슨, 빈카드, 합성, 카드 제작, 카드, 제작">
@@ -394,7 +393,7 @@
         <!-- 국기 업로드 -->
         <div class="form-group">
           <label>국기 업로드</label>
-          <input type="file" id="flagUploadInput">
+          <input type="file" id="flagUploadInput" accept="image/*,video/*">
           <div class="coord-inputs">
             <input type="number" id="flagX" placeholder="X" value="30">
             <input type="number" id="flagY" placeholder="Y" value="30">
@@ -403,14 +402,13 @@
             <input type="number" id="flagUploadWidth" placeholder="Width" value="40">
             <input type="number" id="flagUploadHeight" placeholder="Height" value="40">
           </div>
-          <!-- 국기 삭제 버튼 (크기를 줄임) -->
           <button class="delete-btn" onclick="removeFlag()">국기 삭제</button>
         </div>
 
         <!-- 시즌 업로드 -->
         <div class="form-group">
           <label>시즌 업로드</label>
-          <input type="file" id="seasonUploadInput">
+          <input type="file" id="seasonUploadInput" accept="image/*,video/*">
           <div class="coord-inputs">
             <input type="number" id="seasonX" placeholder="X" value="200">
             <input type="number" id="seasonY" placeholder="Y" value="250">
@@ -419,14 +417,13 @@
             <input type="number" id="seasonUploadWidth" placeholder="Width" value="40">
             <input type="number" id="seasonUploadHeight" placeholder="Height" value="40">
           </div>
-          <!-- 시즌 삭제 버튼 -->
           <button class="delete-btn" onclick="removeSeason()">시즌 삭제</button>
         </div>
 
         <!-- 미니 페이스온 업로드 -->
         <div class="form-group">
           <label>미니 페이스온 업로드</label>
-          <input type="file" id="photoInput">
+          <input type="file" id="photoInput" accept="image/*,video/*">
           <div class="coord-inputs">
             <input type="number" id="photoX" placeholder="X" value="50">
             <input type="number" id="photoY" placeholder="Y" value="50">
@@ -435,11 +432,15 @@
             <input type="number" id="photoWidth" placeholder="Width" value="100">
             <input type="number" id="photoHeight" placeholder="Height" value="100">
           </div>
-          <!-- 미니 페이스온 삭제 버튼 -->
           <button class="delete-btn" onclick="removePhoto()">미니 페이스온 삭제</button>
         </div>
 
-        <button onclick="downloadCard()">Download Card</button>
+        <!-- 버튼들 -->
+        <button onclick="downloadCardImage()">이미지 다운로드</button>
+        <button onclick="downloadCardState()">저장 (편집 가능)</button>
+        <button onclick="document.getElementById('jsonLoadInput').click()">불러오기 (JSON 불러오기)</button>
+        <!-- JSON 파일 선택 input (숨김) -->
+        <input type="file" id="jsonLoadInput" style="display:none;" accept=".json,application/json">
       </div>
     </div>
   </div>
@@ -496,7 +497,9 @@
       document.getElementById('loadingOverlay').style.display = "none";
     }
 
-    // 이미지 객체 (CORS 문제 방지를 위해 crossOrigin 설정)
+    // -------------------------------
+    //  이미지 객체 (CORS 문제 방지를 위해 crossOrigin 설정)
+    // -------------------------------
     let baseCard = new Image();
     baseCard.crossOrigin = "anonymous";
     let customFlag = new Image();
@@ -506,7 +509,9 @@
     let customPhoto = new Image();
     customPhoto.crossOrigin = "anonymous";
 
-    // 파일 이름
+    // -------------------------------
+    //  파일 이름
+    // -------------------------------
     function getFileName(number) {
       return `image(${number}).png`;
     }
@@ -529,7 +534,7 @@
       }
       $('.selectpicker').selectpicker('refresh');
 
-      // 선택 시 카드 로드
+      // 빈카드 선택 시 카드 로드
       select.addEventListener('change', function() {
         const cardNum = select.value;
         showLoading();
@@ -606,19 +611,16 @@
     //  업로드한 이미지 삭제 함수
     // -------------------------------
     function removeFlag() {
-      // 국기 이미지 삭제
       customFlag.src = "";
-      document.getElementById('flagUploadInput').value = ""; // 파일 인풋 초기화
+      document.getElementById('flagUploadInput').value = "";
       drawCard();
     }
     function removeSeason() {
-      // 시즌 이미지 삭제
       customSeason.src = "";
       document.getElementById('seasonUploadInput').value = "";
       drawCard();
     }
     function removePhoto() {
-      // 미니 페이스온 이미지 삭제
       customPhoto.src = "";
       document.getElementById('photoInput').value = "";
       drawCard();
@@ -630,7 +632,7 @@
     function drawCard() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // 베이스카드
+      // 베이스 카드
       if(baseCard.complete && baseCard.src) {
         ctx.drawImage(baseCard, 0, 0, canvas.width, canvas.height);
       }
@@ -667,10 +669,10 @@
         ctx.drawImage(customPhoto, photoProps.x, photoProps.y, photoProps.width, photoProps.height);
         if(activeImage === 'photo') drawHandles(photoProps);
       }
-      // 텍스트
+      // 텍스트 그리기
       drawText();
 
-      // PIP 캔버스 업데이트 (PIP가 보일 때)
+      // PIP 캔버스 업데이트 (보일 때)
       if(document.getElementById('pipPreview').style.opacity === "1") {
         updatePipCanvas();
       }
@@ -724,7 +726,7 @@
       ctx.lineWidth = 2;
       ctx.strokeRect(props.x, props.y, props.width, props.height);
 
-      // 오른쪽 하단 모서리에 조절점
+      // 오른쪽 하단 조절점
       const handleSize = 8;
       ctx.fillStyle = "red";
       ctx.fillRect(
@@ -736,7 +738,7 @@
     }
 
     // -------------------------------
-    //  캔버스 상 이미지 드래그/리사이즈
+    //  캔버스 내 이미지 드래그/리사이즈
     // -------------------------------
     let activeImage = null;
     let mode = '';
@@ -752,7 +754,7 @@
       function checkImage(img, getProps) {
         if(img.complete && img.src) {
           let props = getProps();
-          // 리사이즈 핸들(오른쪽 하단) 범위
+          // 리사이즈 핸들 (오른쪽 하단)
           if(
             mx >= props.x + props.width - 10 && mx <= props.x + props.width + 10 &&
             my >= props.y + props.height - 10 && my <= props.y + props.height + 10
@@ -763,7 +765,7 @@
             offsetY = (props.y + props.height) - my;
             return true;
           }
-          // 이미지 내부 범위 (드래그)
+          // 이미지 내부 (드래그)
           if(mx >= props.x && mx <= props.x + props.width &&
              my >= props.y && my <= props.y + props.height) {
             activeImage = props.name;
@@ -776,7 +778,7 @@
         return false;
       }
 
-      // 순서대로 확인 (국기 → 시즌 → 페이스온)
+      // 순서: 국기 → 시즌 → 미니 페이스온
       if(checkImage(customFlag, () => ({
         x: parseInt(document.getElementById('flagX').value),
         y: parseInt(document.getElementById('flagY').value),
@@ -821,7 +823,7 @@
           let newW = mx - parseInt(xElem.value) + offsetX;
           if(newW < 10) newW = 10;
           wElem.value = newW;
-          hElem.value = newW; // 정사각형
+          hElem.value = newW;
         } else if(mode === 'drag') {
           xElem.value = mx - offsetX;
           yElem.value = my - offsetY;
@@ -837,7 +839,7 @@
           let newW = mx - parseInt(xElem.value) + offsetX;
           if(newW < 10) newW = 10;
           wElem.value = newW;
-          hElem.value = newW; // 정사각형
+          hElem.value = newW;
         } else if(mode === 'drag') {
           xElem.value = mx - offsetX;
           yElem.value = my - offsetY;
@@ -853,7 +855,7 @@
           let newW = mx - parseInt(xElem.value) + offsetX;
           if(newW < 10) newW = 10;
           wElem.value = newW;
-          hElem.value = newW; // 정사각형
+          hElem.value = newW;
         } else if(mode === 'drag') {
           xElem.value = mx - offsetX;
           yElem.value = my - offsetY;
@@ -868,15 +870,12 @@
     });
 
     // -------------------------------
-    //  다운로드 (개선된 버전)
+    //  이미지 다운로드 (PNG) 기능
     // -------------------------------
-    function downloadCard() {
-      // 액티브 이미지 상태 해제 및 테두리 제거 후 캔버스 업데이트
+    function downloadCardImage() {
       const tempActive = activeImage;
       activeImage = null;
       drawCard();
-
-      // 캔버스 업데이트 후 약간의 지연 후 다운로드 진행
       setTimeout(() => {
         const dataURL = canvas.toDataURL("image/png");
         const link = document.createElement('a');
@@ -891,20 +890,141 @@
     }
 
     // -------------------------------
-    //  뒤로가기 버튼 (index.html로 이동)
+    //  JSON 내보내기 (편집 상태 저장) 기능
     // -------------------------------
-    document.getElementById('toolTabButton').addEventListener('click', function() {
-      window.location.href = "index.html";
-    });
+    function downloadCardState() {
+      const cardState = {
+        blankCard: document.getElementById('blankCardSelect').value,
+        ovr: {
+          value: document.getElementById('ovr').value,
+          x: document.getElementById('ovrX').value,
+          y: document.getElementById('ovrY').value,
+          fontSize: document.getElementById('ovrFontSize').value,
+          font: document.getElementById('ovrFont').value,
+          color: document.getElementById('ovrColor').value
+        },
+        position: {
+          value: document.getElementById('position').value,
+          x: document.getElementById('posX').value,
+          y: document.getElementById('posY').value,
+          font: document.getElementById('posFont').value,
+          fontSize: document.getElementById('posFontSize').value,
+          color: document.getElementById('posColor').value
+        },
+        playerName: {
+          value: document.getElementById('playerName').value,
+          x: document.getElementById('nameX').value,
+          y: document.getElementById('nameY').value,
+          font: document.getElementById('nameFont').value,
+          fontSize: document.getElementById('nameFontSize').value,
+          color: document.getElementById('nameColor').value
+        },
+        flag: {
+          x: document.getElementById('flagX').value,
+          y: document.getElementById('flagY').value,
+          width: document.getElementById('flagUploadWidth').value,
+          height: document.getElementById('flagUploadHeight').value,
+          src: customFlag.src
+        },
+        season: {
+          x: document.getElementById('seasonX').value,
+          y: document.getElementById('seasonY').value,
+          width: document.getElementById('seasonUploadWidth').value,
+          height: document.getElementById('seasonUploadHeight').value,
+          src: customSeason.src
+        },
+        photo: {
+          x: document.getElementById('photoX').value,
+          y: document.getElementById('photoY').value,
+          width: document.getElementById('photoWidth').value,
+          height: document.getElementById('photoHeight').value,
+          src: customPhoto.src
+        }
+      };
+
+      const json = JSON.stringify(cardState, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'cardState.json';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
 
     // -------------------------------
-    //  모든 input/select → 실시간 반영
+    //  JSON 불러오기 (편집 상태 복원) 기능
     // -------------------------------
-    document.querySelectorAll('input, select').forEach(el => {
-      el.addEventListener('input', function() {
-        drawCard();
-      });
+    document.getElementById('jsonLoadInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          try {
+            const state = JSON.parse(evt.target.result);
+            applyCardState(state);
+          } catch (err) {
+            console.error('JSON 파싱 오류:', err);
+          }
+        };
+        reader.readAsText(file);
+      }
     });
+
+    // JSON 데이터를 폼에 반영하는 함수
+    function applyCardState(state) {
+      document.getElementById('blankCardSelect').value = state.blankCard;
+      $('.selectpicker').selectpicker('refresh');
+      showLoading();
+      baseCard.src = `Blank/${getFileName(state.blankCard)}`;
+      baseCard.onload = function() {
+        hideLoading();
+        drawCard();
+      };
+
+      document.getElementById('ovr').value = state.ovr.value;
+      document.getElementById('ovrX').value = state.ovr.x;
+      document.getElementById('ovrY').value = state.ovr.y;
+      document.getElementById('ovrFontSize').value = state.ovr.fontSize;
+      document.getElementById('ovrFont').value = state.ovr.font;
+      document.getElementById('ovrColor').value = state.ovr.color;
+
+      document.getElementById('position').value = state.position.value;
+      document.getElementById('posX').value = state.position.x;
+      document.getElementById('posY').value = state.position.y;
+      document.getElementById('posFont').value = state.position.font;
+      document.getElementById('posFontSize').value = state.position.fontSize;
+      document.getElementById('posColor').value = state.position.color;
+
+      document.getElementById('playerName').value = state.playerName.value;
+      document.getElementById('nameX').value = state.playerName.x;
+      document.getElementById('nameY').value = state.playerName.y;
+      document.getElementById('nameFont').value = state.playerName.font;
+      document.getElementById('nameFontSize').value = state.playerName.fontSize;
+      document.getElementById('nameColor').value = state.playerName.color;
+
+      document.getElementById('flagX').value = state.flag.x;
+      document.getElementById('flagY').value = state.flag.y;
+      document.getElementById('flagUploadWidth').value = state.flag.width;
+      document.getElementById('flagUploadHeight').value = state.flag.height;
+      customFlag.src = state.flag.src;
+
+      document.getElementById('seasonX').value = state.season.x;
+      document.getElementById('seasonY').value = state.season.y;
+      document.getElementById('seasonUploadWidth').value = state.season.width;
+      document.getElementById('seasonUploadHeight').value = state.season.height;
+      customSeason.src = state.season.src;
+
+      document.getElementById('photoX').value = state.photo.x;
+      document.getElementById('photoY').value = state.photo.y;
+      document.getElementById('photoWidth').value = state.photo.width;
+      document.getElementById('photoHeight').value = state.photo.height;
+      customPhoto.src = state.photo.src;
+
+      drawCard();
+    }
 
     // -------------------------------
     //  PIP 캔버스 업데이트
@@ -915,7 +1035,14 @@
     }
 
     // -------------------------------
-    //  IntersectionObserver로 미리보기 영역 감지 및 애니메이션 처리
+    //  에디터 내 모든 input, select 변경 시 미리보기 바로 업데이트
+    // -------------------------------
+    document.querySelectorAll('.editor input, .editor select').forEach(el => {
+      el.addEventListener('input', drawCard);
+    });
+
+    // -------------------------------
+    //  IntersectionObserver (PIP 보이기/숨기기)
     // -------------------------------
     const previewElem = document.querySelector('.preview');
     const pipContainer = document.getElementById('pipPreview');
@@ -923,11 +1050,9 @@
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if(entry.isIntersecting) {
-          // 미리보기 영역이 보이면 PIP 서서히 숨김
           pipContainer.style.opacity = "0";
           pipContainer.style.pointerEvents = "none";
         } else {
-          // 미리보기 영역이 안 보이면 PIP 서서히 보임
           pipContainer.style.opacity = "1";
           pipContainer.style.pointerEvents = "auto";
           updatePipCanvas();
@@ -949,7 +1074,7 @@
     });
 
     // -------------------------------
-    //  로딩 오버레이 (디버깅용)
+    //  디버깅용: 로딩 오버레이 강제 해제
     // -------------------------------
     setTimeout(() => {
       hideLoading();
