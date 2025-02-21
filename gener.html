@@ -153,19 +153,11 @@
     .coord-inputs input {
       width: 70px;
     }
+    /* 부트스트랩 버튼 스타일 (추가 적용) */
     button {
-      background: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
-      cursor: pointer;
       margin-top: 10px;
     }
-    button:hover {
-      background: #0056b3;
-    }
-    /* 삭제 버튼의 크기를 줄이기 위한 스타일 */
+    /* 삭제 버튼은 작은 크기와 danger 스타일 */
     .delete-btn {
       padding: 5px 10px;
       font-size: 0.8rem;
@@ -402,7 +394,7 @@
             <input type="number" id="flagUploadWidth" placeholder="Width" value="40">
             <input type="number" id="flagUploadHeight" placeholder="Height" value="40">
           </div>
-          <button class="delete-btn" onclick="removeFlag()">국기 삭제</button>
+          <button class="btn btn-primary btn-sm delete-btn" onclick="removeFlag()">국기 삭제</button>
         </div>
 
         <!-- 시즌 업로드 -->
@@ -417,7 +409,7 @@
             <input type="number" id="seasonUploadWidth" placeholder="Width" value="40">
             <input type="number" id="seasonUploadHeight" placeholder="Height" value="40">
           </div>
-          <button class="delete-btn" onclick="removeSeason()">시즌 삭제</button>
+          <button class="btn btn-primary btn-sm delete-btn" onclick="removeSeason()">시즌 삭제</button>
         </div>
 
         <!-- 미니 페이스온 업로드 -->
@@ -432,13 +424,37 @@
             <input type="number" id="photoWidth" placeholder="Width" value="100">
             <input type="number" id="photoHeight" placeholder="Height" value="100">
           </div>
-          <button class="delete-btn" onclick="removePhoto()">미니 페이스온 삭제</button>
+          <button class="btn btn-primary btn-sm delete-btn" onclick="removePhoto()">미니 페이스온 삭제</button>
         </div>
 
+        <!-- 새로운 선택 옵션 (라이브 / 아이콘) -->
+        <fieldset>
+          <legend>라이브/아이콘</legend>
+          <div class="form-group">
+            <label>옵션 선택</label>
+            <select id="newOption" class="form-select">
+              <option value="live" selected>라이브</option>
+              <option value="icon">아이콘</option>
+            </select>
+          </div>
+          <!-- 아이콘 옵션 선택 시 사용할 좌표/크기 입력 -->
+          <div id="iconOptions" style="display: none;">
+            <div class="coord-inputs">
+              <input type="number" id="iconX" placeholder="X" value="20">
+              <input type="number" id="iconY" placeholder="Y" value="20">
+            </div>
+            <div class="coord-inputs">
+              <input type="number" id="iconWidth" placeholder="Width" value="40">
+              <input type="number" id="iconHeight" placeholder="Height" value="40">
+            </div>
+            <button class="btn btn-primary btn-sm delete-btn" onclick="removeIcon()">아이콘 삭제</button>
+          </div>
+        </fieldset>
+      </br>
         <!-- 버튼들 -->
-        <button onclick="downloadCardImage()">이미지 다운로드</button>
-        <button onclick="downloadCardState()">저장 (편집 가능)</button>
-        <button onclick="document.getElementById('jsonLoadInput').click()">불러오기 (JSON 불러오기)</button>
+        <button class="btn btn-primary" onclick="downloadCardImage()">이미지 다운로드</button> </br>
+        <button class="btn btn-primary" onclick="downloadCardState()">저장 (편집 가능)</button> </br>
+        <button class="btn btn-primary" onclick="document.getElementById('jsonLoadInput').click()">불러오기 (JSON 불러오기)</button>
         <!-- JSON 파일 선택 input (숨김) -->
         <input type="file" id="jsonLoadInput" style="display:none;" accept=".json,application/json">
       </div>
@@ -468,7 +484,7 @@
     // -------------------------------
     //  전역 변수 & 초기 세팅
     // -------------------------------
-    const totalImages = 255;
+    const totalImages = 253;
     const canvas = document.getElementById('cardCanvas');
     const ctx = canvas.getContext('2d');
     let cardFileName = "card";
@@ -508,6 +524,9 @@
     customSeason.crossOrigin = "anonymous";
     let customPhoto = new Image();
     customPhoto.crossOrigin = "anonymous";
+    // 아이콘 이미지 객체
+    let customIcon = new Image();
+    customIcon.crossOrigin = "anonymous";
 
     // -------------------------------
     //  파일 이름
@@ -551,7 +570,7 @@
     // -------------------------------
     function loadBaseCard() {
       showLoading();
-      baseCard.src = `Blank/${getFileName(255)}`;
+      baseCard.src = `Blank/${getFileName(251)}`;
       baseCard.onload = function() {
         hideLoading();
         drawCard();
@@ -625,62 +644,88 @@
       document.getElementById('photoInput').value = "";
       drawCard();
     }
+    function removeIcon() {
+      customIcon.src = "";
+      document.getElementById('iconX').value = 20;
+      document.getElementById('iconY').value = 20;
+      document.getElementById('iconWidth').value = 40;
+      document.getElementById('iconHeight').value = 40;
+      drawCard();
+    }
 
     // -------------------------------
     //  카드 그리기
     // -------------------------------
     function drawCard() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // 1. 빈카드 그리기
-  if (baseCard.complete && baseCard.src) {
-    ctx.drawImage(baseCard, 0, 0, canvas.width, canvas.height);
-  }
+      // 1. 빈카드 그리기
+      if (baseCard.complete && baseCard.src) {
+        ctx.drawImage(baseCard, 0, 0, canvas.width, canvas.height);
+      }
 
-  // 2. 미니 페이스온 그리기 (빈카드 바로 위)
-  if (customPhoto.complete && customPhoto.src) {
-    let photoProps = {
-      x: parseInt(document.getElementById('photoX').value),
-      y: parseInt(document.getElementById('photoY').value),
-      width: parseInt(document.getElementById('photoWidth').value),
-      height: parseInt(document.getElementById('photoHeight').value)
-    };
-    ctx.drawImage(customPhoto, photoProps.x, photoProps.y, photoProps.width, photoProps.height);
-    if(activeImage === 'photo') drawHandles(photoProps);
-  }
+      // 2. 미니 페이스온 그리기 (빈카드 바로 위)
+      if (customPhoto.complete && customPhoto.src) {
+        let photoProps = {
+          x: parseInt(document.getElementById('photoX').value),
+          y: parseInt(document.getElementById('photoY').value),
+          width: parseInt(document.getElementById('photoWidth').value),
+          height: parseInt(document.getElementById('photoHeight').value)
+        };
+        ctx.drawImage(customPhoto, photoProps.x, photoProps.y, photoProps.width, photoProps.height);
+        if(activeImage === 'photo') drawHandles(photoProps);
+      }
 
-  // 3. 국기 그리기
-  if (customFlag.complete && customFlag.src) {
-    let flagProps = {
-      x: parseInt(document.getElementById('flagX').value),
-      y: parseInt(document.getElementById('flagY').value),
-      width: parseInt(document.getElementById('flagUploadWidth').value),
-      height: parseInt(document.getElementById('flagUploadHeight').value)
-    };
-    ctx.drawImage(customFlag, flagProps.x, flagProps.y, flagProps.width, flagProps.height);
-    if(activeImage === 'flag') drawHandles(flagProps);
-  }
+      // 3. 국기 그리기
+      if (customFlag.complete && customFlag.src) {
+        let flagProps = {
+          x: parseInt(document.getElementById('flagX').value),
+          y: parseInt(document.getElementById('flagY').value),
+          width: parseInt(document.getElementById('flagUploadWidth').value),
+          height: parseInt(document.getElementById('flagUploadHeight').value)
+        };
+        ctx.drawImage(customFlag, flagProps.x, flagProps.y, flagProps.width, flagProps.height);
+        if(activeImage === 'flag') drawHandles(flagProps);
+      }
 
-  // 4. 시즌 그리기
-  if (customSeason.complete && customSeason.src) {
-    let seasonProps = {
-      x: parseInt(document.getElementById('seasonX').value),
-      y: parseInt(document.getElementById('seasonY').value),
-      width: parseInt(document.getElementById('seasonUploadWidth').value),
-      height: parseInt(document.getElementById('seasonUploadHeight').value)
-    };
-    ctx.drawImage(customSeason, seasonProps.x, seasonProps.y, seasonProps.width, seasonProps.height);
-    if(activeImage === 'season') drawHandles(seasonProps);
-  }
+      // 4. 시즌 그리기
+      if (customSeason.complete && customSeason.src) {
+        let seasonProps = {
+          x: parseInt(document.getElementById('seasonX').value),
+          y: parseInt(document.getElementById('seasonY').value),
+          width: parseInt(document.getElementById('seasonUploadWidth').value),
+          height: parseInt(document.getElementById('seasonUploadHeight').value)
+        };
+        ctx.drawImage(customSeason, seasonProps.x, seasonProps.y, seasonProps.width, seasonProps.height);
+        if(activeImage === 'season') drawHandles(seasonProps);
+      }
 
-  // 5. 텍스트 그리기 (오버롤, 포지션, 선수 이름)
-  drawText();
+      // 5. 텍스트 그리기 (오버롤, 포지션, 선수 이름)
+      drawText();
 
-  // PIP 캔버스 업데이트 (보일 때)
-  if(document.getElementById('pipPreview').style.opacity === "1") {
-    updatePipCanvas();
-  }
-}
+      // 6. 새로운 옵션: 아이콘 그리기
+      const newOption = document.getElementById('newOption').value;
+      if(newOption === 'icon') {
+        const iconX = parseInt(document.getElementById('iconX').value),
+              iconY = parseInt(document.getElementById('iconY').value),
+              iconWidth = parseInt(document.getElementById('iconWidth').value),
+              iconHeight = parseInt(document.getElementById('iconHeight').value);
+        if(customIcon.complete && customIcon.src) {
+          ctx.drawImage(customIcon, iconX, iconY, iconWidth, iconHeight);
+          if(activeImage === 'icon') drawHandles({ x: iconX, y: iconY, width: iconWidth, height: iconHeight, name: 'icon' });
+        } else {
+          customIcon.src = 'icon.png';
+          customIcon.onload = function() {
+            drawCard();
+          };
+        }
+      }
+
+      // PIP 캔버스 업데이트 (보일 때)
+      if(document.getElementById('pipPreview').style.opacity === "1") {
+        updatePipCanvas();
+      }
+    }
 
     // -------------------------------
     //  텍스트 그리기
@@ -721,7 +766,7 @@
     }
 
     // -------------------------------
-    //  드래그/리사이즈 표시
+    //  드래그/리사이즈 표시 (핸들)
     // -------------------------------
     function drawHandles(props) {
       ctx.save();
@@ -782,7 +827,7 @@
         return false;
       }
 
-      // 순서: 국기 → 시즌 → 미니 페이스온
+      // 순서: 국기 → 시즌 → 미니 페이스온 → 아이콘
       if(checkImage(customFlag, () => ({
         x: parseInt(document.getElementById('flagX').value),
         y: parseInt(document.getElementById('flagY').value),
@@ -807,7 +852,17 @@
         name: 'photo'
       }))) return;
 
+      if(checkImage(customIcon, () => ({
+        x: parseInt(document.getElementById('iconX').value),
+        y: parseInt(document.getElementById('iconY').value),
+        width: parseInt(document.getElementById('iconWidth').value),
+        height: parseInt(document.getElementById('iconHeight').value),
+        name: 'icon'
+      }))) return;
+
+      // 만약 위 어느 부분도 클릭되지 않았다면 선택 해제
       activeImage = null;
+      drawCard();
     });
 
     canvas.addEventListener('pointermove', function(e) {
@@ -854,6 +909,22 @@
         let yElem = document.getElementById('photoY');
         let wElem = document.getElementById('photoWidth');
         let hElem = document.getElementById('photoHeight');
+
+        if(mode === 'resize') {
+          let newW = mx - parseInt(xElem.value) + offsetX;
+          if(newW < 10) newW = 10;
+          wElem.value = newW;
+          hElem.value = newW;
+        } else if(mode === 'drag') {
+          xElem.value = mx - offsetX;
+          yElem.value = my - offsetY;
+        }
+      }
+      else if(activeImage === 'icon') {
+        let xElem = document.getElementById('iconX');
+        let yElem = document.getElementById('iconY');
+        let wElem = document.getElementById('iconWidth');
+        let hElem = document.getElementById('iconHeight');
 
         if(mode === 'resize') {
           let newW = mx - parseInt(xElem.value) + offsetX;
@@ -943,6 +1014,13 @@
           width: document.getElementById('photoWidth').value,
           height: document.getElementById('photoHeight').value,
           src: customPhoto.src
+        },
+        icon: {
+          x: document.getElementById('iconX').value,
+          y: document.getElementById('iconY').value,
+          width: document.getElementById('iconWidth').value,
+          height: document.getElementById('iconHeight').value,
+          src: customIcon.src
         }
       };
 
@@ -1027,6 +1105,14 @@
       document.getElementById('photoHeight').value = state.photo.height;
       customPhoto.src = state.photo.src;
 
+      if(state.icon) {
+        document.getElementById('iconX').value = state.icon.x;
+        document.getElementById('iconY').value = state.icon.y;
+        document.getElementById('iconWidth').value = state.icon.width;
+        document.getElementById('iconHeight').value = state.icon.height;
+        customIcon.src = state.icon.src;
+      }
+
       drawCard();
     }
 
@@ -1043,6 +1129,13 @@
     // -------------------------------
     document.querySelectorAll('.editor input, .editor select').forEach(el => {
       el.addEventListener('input', drawCard);
+    });
+
+    // 새 옵션 변경 시 아이콘 관련 옵션 보이기/숨기기
+    document.getElementById('newOption').addEventListener('change', function() {
+      const option = document.getElementById('newOption').value;
+      document.getElementById('iconOptions').style.display = (option === 'icon') ? "block" : "none";
+      drawCard();
     });
 
     // -------------------------------
