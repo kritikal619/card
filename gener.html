@@ -630,53 +630,57 @@
     //  카드 그리기
     // -------------------------------
     function drawCard() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // 베이스 카드
-      if(baseCard.complete && baseCard.src) {
-        ctx.drawImage(baseCard, 0, 0, canvas.width, canvas.height);
-      }
-      // 국기
-      if(customFlag.complete && customFlag.src) {
-        let flagProps = {
-          x: parseInt(document.getElementById('flagX').value),
-          y: parseInt(document.getElementById('flagY').value),
-          width: parseInt(document.getElementById('flagUploadWidth').value),
-          height: parseInt(document.getElementById('flagUploadHeight').value)
-        };
-        ctx.drawImage(customFlag, flagProps.x, flagProps.y, flagProps.width, flagProps.height);
-        if(activeImage === 'flag') drawHandles(flagProps);
-      }
-      // 시즌
-      if(customSeason.complete && customSeason.src) {
-        let seasonProps = {
-          x: parseInt(document.getElementById('seasonX').value),
-          y: parseInt(document.getElementById('seasonY').value),
-          width: parseInt(document.getElementById('seasonUploadWidth').value),
-          height: parseInt(document.getElementById('seasonUploadHeight').value)
-        };
-        ctx.drawImage(customSeason, seasonProps.x, seasonProps.y, seasonProps.width, seasonProps.height);
-        if(activeImage === 'season') drawHandles(seasonProps);
-      }
-      // 미니 페이스온
-      if(customPhoto.complete && customPhoto.src) {
-        let photoProps = {
-          x: parseInt(document.getElementById('photoX').value),
-          y: parseInt(document.getElementById('photoY').value),
-          width: parseInt(document.getElementById('photoWidth').value),
-          height: parseInt(document.getElementById('photoHeight').value)
-        };
-        ctx.drawImage(customPhoto, photoProps.x, photoProps.y, photoProps.width, photoProps.height);
-        if(activeImage === 'photo') drawHandles(photoProps);
-      }
-      // 텍스트 그리기
-      drawText();
+  // 1. 빈카드 그리기
+  if (baseCard.complete && baseCard.src) {
+    ctx.drawImage(baseCard, 0, 0, canvas.width, canvas.height);
+  }
 
-      // PIP 캔버스 업데이트 (보일 때)
-      if(document.getElementById('pipPreview').style.opacity === "1") {
-        updatePipCanvas();
-      }
-    }
+  // 2. 미니 페이스온 그리기 (빈카드 바로 위)
+  if (customPhoto.complete && customPhoto.src) {
+    let photoProps = {
+      x: parseInt(document.getElementById('photoX').value),
+      y: parseInt(document.getElementById('photoY').value),
+      width: parseInt(document.getElementById('photoWidth').value),
+      height: parseInt(document.getElementById('photoHeight').value)
+    };
+    ctx.drawImage(customPhoto, photoProps.x, photoProps.y, photoProps.width, photoProps.height);
+    if(activeImage === 'photo') drawHandles(photoProps);
+  }
+
+  // 3. 국기 그리기
+  if (customFlag.complete && customFlag.src) {
+    let flagProps = {
+      x: parseInt(document.getElementById('flagX').value),
+      y: parseInt(document.getElementById('flagY').value),
+      width: parseInt(document.getElementById('flagUploadWidth').value),
+      height: parseInt(document.getElementById('flagUploadHeight').value)
+    };
+    ctx.drawImage(customFlag, flagProps.x, flagProps.y, flagProps.width, flagProps.height);
+    if(activeImage === 'flag') drawHandles(flagProps);
+  }
+
+  // 4. 시즌 그리기
+  if (customSeason.complete && customSeason.src) {
+    let seasonProps = {
+      x: parseInt(document.getElementById('seasonX').value),
+      y: parseInt(document.getElementById('seasonY').value),
+      width: parseInt(document.getElementById('seasonUploadWidth').value),
+      height: parseInt(document.getElementById('seasonUploadHeight').value)
+    };
+    ctx.drawImage(customSeason, seasonProps.x, seasonProps.y, seasonProps.width, seasonProps.height);
+    if(activeImage === 'season') drawHandles(seasonProps);
+  }
+
+  // 5. 텍스트 그리기 (오버롤, 포지션, 선수 이름)
+  drawText();
+
+  // PIP 캔버스 업데이트 (보일 때)
+  if(document.getElementById('pipPreview').style.opacity === "1") {
+    updatePipCanvas();
+  }
+}
 
     // -------------------------------
     //  텍스트 그리기
