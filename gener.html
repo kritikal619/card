@@ -484,7 +484,7 @@
     // -------------------------------
     //  전역 변수 & 초기 세팅
     // -------------------------------
-    const totalImages = 253;
+    const totalImages = 255;
     const canvas = document.getElementById('cardCanvas');
     const ctx = canvas.getContext('2d');
     let cardFileName = "card";
@@ -570,7 +570,7 @@
     // -------------------------------
     function loadBaseCard() {
       showLoading();
-      baseCard.src = `Blank/${getFileName(251)}`;
+      baseCard.src = `Blank/${getFileName(255)}`;
       baseCard.onload = function() {
         hideLoading();
         drawCard();
