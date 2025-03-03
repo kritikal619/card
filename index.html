@@ -235,7 +235,7 @@
       const textImageGrid = document.getElementById('text-image-grid');
       
       // 1부터 249까지 이미지 항목 생성 (BlankCard 폴더)
-      for (let i = 1; i <= 255; i++) {
+      for (let i = 1; i <= 264; i++) {
         const imgHTML = `<img src="${blankCardFolder}/image(${i}).png" alt="이미지 ${i}" onerror="this.style.display='none'">`;
         // 버튼 타입: textNumbers에 포함되면 "text", 아니면 "blank"
         const btnType = textNumbers.includes(i) ? 'text' : 'blank';
