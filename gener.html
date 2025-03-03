@@ -490,7 +490,7 @@
     // -------------------------------
     //  전역 변수 & 초기 세팅
     // -------------------------------
-    const totalImages = 255;
+    const totalImages = 264;
     const canvas = document.getElementById('cardCanvas');
     const ctx = canvas.getContext('2d');
     let cardFileName = "card";
@@ -554,7 +554,7 @@
           'data-content',
           `<img src="Blank/${getFileName(i)}" style="width:30px; height:auto; vertical-align:middle;"> Card ${i}`
         );
-        if(i === 255) option.selected = true;
+        if(i === 264) option.selected = true;
         select.appendChild(option);
       }
       $('.selectpicker').selectpicker('refresh');
@@ -576,7 +576,7 @@
     // -------------------------------
     function loadBaseCard() {
       showLoading();
-      baseCard.src = `Blank/${getFileName(255)}`;
+      baseCard.src = `Blank/${getFileName(264)}`;
       baseCard.onload = function() {
         hideLoading();
         drawCard();
