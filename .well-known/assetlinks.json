@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.kritikal619.twa",
+        "sha256_cert_fingerprints": ["DB:E3:42:35:73:9D:45:F8:28:16:D7:C2:BF:6E:33:35:E9:87:B9:4B:C0:56:9E:DA:09:AD:24:E5:9A:42:68:C9"]
+      }
+    }]
