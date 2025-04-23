@@ -3,6 +3,6 @@
   "target": {
     "namespace": "android_app",
     "package_name": "io.github.kritikal619.twa", // 예: com.example.myapp
-    "sha256_cert_fingerprints": ["앱_서명키의_SHA256_지문"]
+    "sha256_cert_fingerprints": ["my-key-alias"]
   }
 }]
