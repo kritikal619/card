@@ -159,6 +159,18 @@
       background-color: #333;
       color: #fff;
     }
+    .footer {
+      position: fixed;
+      bottom: 60px; /* 바텀 네비게이션 위에 위치 */
+      left: 0;
+      width: 100%;
+      background: #f9f9f9;
+      text-align: center;
+      padding: 10px 0;
+      box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+      z-index: 500;
+    }
+    
   </style>
 </head>
 <body>
@@ -203,6 +215,13 @@
     <div class="nav-item" data-tab="tab5">글자</div>
     <div class="nav-item tool-item">툴</div>
   </nav>
+  <footer class="footer">
+    <p>
+      <span>Data based on NEXON</span><br/>
+      <span>이메일 : <span id="email">jchae0619@gmail.com</span></span><br/>
+      <span>© 2025 kritikal619. All Rights Reserved.</span>
+    </p>
+  </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
