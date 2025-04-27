@@ -3,14 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
-  
-  <!-- 검색 엔진 최적화 (SEO) -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="description" content="피모합성소 다양한 FC모바일 빈카드부터 오버롤 글자, 포지션 폰트에 카드 제작이 쉬워지는 카드 제작 툴 ( 카드 만들기 사이트) 까지 있어서 멋있는 FC모바일 카드를 쉽고 간편하게 만들 수 있습니다!">
   <meta name="keywords" content="FC모바일,카드합성,카드 만들기,사이트,합성,카드 합성기">
   <meta name="author" content="해리지팡이">
-  
-  <!-- Open Graph 데이터 -->
   <meta property="og:title" content="FC모바일 카드 제작 툴 - 피모합성소 - 피모툴킷">
   <meta property="og:description" content="피모합소 다양한 FC모바일 빈카드부터 오버롤 글자, 포지션 폰트에 카드 제작이 쉬워지는 카드 제작 툴 ( 카드 만들기 사이트) 까지 있어서 멋있는 FC모바일 카드를 쉽고 간편하게 만들 수 있습니다!">
   <meta property="og:image" content="https://kritikal619.github.io/card/logo/Favicon.png">
@@ -18,12 +14,9 @@
   <meta property="og:site_name" content="피모합성소">
   <meta property="og:type" content="website">
   <title>FC모바일 카드 합성기, 빈카드, 폰트, 오버롤 - 피모합성소 - 피모툴킷</title>
-  
-  <!-- 외부 CSS -->
   <link rel="stylesheet" href="styles.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css">
-
   <style>
     /* 폰트 등록 */
     @font-face { font-family: 'FontA'; src: url('./fonts/FCOVR.otf') format('truetype'); }
@@ -207,12 +200,9 @@
       white-space: nowrap;
     }
   </style>
-
-  <!-- PDF.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 </head>
 <body>
-  <!-- 네비게이션 바 -->
   <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container-fluid">
       <input id="cardTitleInput" type="text" placeholder="카드 제목 입력" style="margin: 10px 0; padding:5px; width: 200px;">
@@ -229,16 +219,11 @@
       </div>
     </div>
   </nav>
-
-  <!-- 배너 -->
   <div id="banner">
     <a href="banner.html">FC모바일 카드 합성 방법 (클릭시 이동)</a>
   </div>
-
-  <!-- 메인 콘텐츠 -->
   <div class="main-content">
     <div class="custom-container">
-      <!-- 미리보기 -->
       <div class="preview order-1 order-md-2">
         <h2>카드 미리보기</h2>
         <div style="position: relative; display: inline-block; width: 100%;">
@@ -248,18 +233,14 @@
           </div>
         </div>
       </div>
-
-      <!-- 에디터 -->
       <div class="editor order-2 order-md-1">
         <h2>카드 제작기</h2>
 
-        <!-- 빈카드 선택 -->
         <div class="form-group">
           <label for="blankCardSelect">빈카드 선택</label>
           <select id="blankCardSelect" class="selectpicker" data-width="100%"></select>
         </div>
 
-        <!-- 오버롤 설정 -->
         <fieldset>
           <legend>오버롤 설정</legend>
           <div class="form-group">
@@ -287,7 +268,6 @@
           </div>
         </fieldset>
 
-        <!-- 포지션 설정 -->
         <fieldset>
           <legend>포지션 설정</legend>
           <div class="form-group">
@@ -330,7 +310,6 @@
           </div>
         </fieldset>
 
-        <!-- 선수 이름 설정 -->
         <fieldset>
           <legend>선수 이름 설정</legend>
           <div class="form-group">
@@ -357,10 +336,9 @@
           </div>
         </fieldset>
 
-        <!-- 국기 업로드 -->
         <div class="form-group">
           <label>국기 업로드</label>
-          <input type="file" id="flagUploadInput" accept="image/*,video/*">
+          <input type="file" id="flagUploadInput" accept="image/*">
           <div class="coord-inputs">
             <input type="number" id="flagX" placeholder="X" value="30">
             <input type="number" id="flagY" placeholder="Y" value="30">
@@ -372,10 +350,9 @@
           <button class="btn btn-primary btn-sm delete-btn" onclick="removeFlag()">국기 삭제</button>
         </div>
 
-        <!-- 시즌 업로드 -->
         <div class="form-group">
           <label>시즌 업로드</label>
-          <input type="file" id="seasonUploadInput" accept="image/*,video/*">
+          <input type="file" id="seasonUploadInput" accept="image/*">
           <div class="coord-inputs">
             <input type="number" id="seasonX" placeholder="X" value="200">
             <input type="number" id="seasonY" placeholder="Y" value="250">
@@ -387,10 +364,9 @@
           <button class="btn btn-primary btn-sm delete-btn" onclick="removeSeason()">시즌 삭제</button>
         </div>
 
-        <!-- 미니 페이스온 업로드 -->
         <div class="form-group">
           <label>미니 페이스온 업로드</label>
-          <input type="file" id="photoInput" accept="image/*,video/*">
+          <input type="file" id="photoInput" accept="image/*">
           <div class="coord-inputs">
             <input type="number" id="photoX" placeholder="X" value="50">
             <input type="number" id="photoY" placeholder="Y" value="50">
@@ -402,7 +378,6 @@
           <button class="btn btn-primary btn-sm delete-btn" onclick="removePhoto()">미니 페이스온 삭제</button>
         </div>
 
-        <!-- 새로운 선택 옵션 (라이브 / 아이콘) -->
         <fieldset>
           <legend>라이브/아이콘</legend>
           <div class="form-group">
@@ -413,19 +388,21 @@
             </select>
           </div>
           <div id="iconOptions" style="display: none;">
-            <div class="coord-inputs">
-              <input type="number" id="iconX" placeholder="X" value="20">
-              <input type="number" id="iconY" placeholder="Y" value="20">
-            </div>
-            <div class="coord-inputs">
-              <input type="number" id="iconWidth" placeholder="Width" value="40">
-              <input type="number" id="iconHeight" placeholder="Height" value="40">
-            </div>
+             <div class="form-group">
+                <label>아이콘 좌표 및 크기</label>
+                <div class="coord-inputs">
+                  <input type="number" id="iconX" placeholder="X" value="20">
+                  <input type="number" id="iconY" placeholder="Y" value="20">
+                </div>
+                <div class="coord-inputs">
+                  <input type="number" id="iconWidth" placeholder="Width" value="40">
+                  <input type="number" id="iconHeight" placeholder="Height" value="40">
+                </div>
+              </div>
             <button class="btn btn-primary btn-sm delete-btn" onclick="removeIcon()">아이콘 삭제</button>
           </div>
         </fieldset>
 
-        <!-- 기타 버튼들 -->
         <button class="btn btn-primary" onclick="downloadCardImage()">이미지 다운로드</button><br>
         <button class="btn btn-primary" onclick="downloadCardState()">저장 (편집 가능)</button><br>
         <button class="btn btn-primary" onclick="document.getElementById('jsonLoadInput').click()">불러오기 (JSON 불러오기)</button>
@@ -433,14 +410,11 @@
         <input type="file" id="jsonLoadInput" style="display:none" accept=".json,application/json">
       </div>
     </div>
-  </div>
 
-  <!-- PIP 미리보기 -->
+  </div>
   <div id="pipPreview">
     <canvas id="pipCanvas" width="300" height="300"></canvas>
   </div>
-
-  <!-- 푸터 -->
   <footer class="footer">
     <p>
       <span>Data based on NEXON</span><br>
@@ -448,12 +422,9 @@
       <span>© 2025 kritikal619. All Rights Reserved.</span>
     </p>
   </footer>
-
-  <!-- JS 라이브러리 -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script>
-
   <script>
     // -------------------------------
     // 캔버스 초기화 & 드로잉 로직
@@ -489,6 +460,33 @@
     let customPhoto = new Image(); customPhoto.crossOrigin = "anonymous";
     let customIcon = new Image(); customIcon.crossOrigin = "anonymous";
 
+    // Store aspect ratios for images
+    const aspectRatios = {}; // { flag: ratio, season: ratio, photo: ratio, icon: ratio }
+
+    // Modify image onload handlers to store aspect ratio
+    const imageOnLoad = function(img, aspectRatioKey) {
+        hideLoading();
+        if (img.width > 0 && img.height > 0) {
+            aspectRatios[aspectRatioKey] = img.width / img.height;
+        } else {
+            aspectRatios[aspectRatioKey] = undefined; // Clear if dimensions are zero or invalid
+        }
+        drawCard();
+    };
+     const imageOnError = function(aspectRatioKey) {
+        console.error(`Failed to load image for ${aspectRatioKey}`);
+        // imgElement.src = ""; // No need to clear src here, handled in drawCard if dimensions invalid
+        aspectRatios[aspectRatioKey] = undefined;
+        hideLoading();
+        drawCard();
+     };
+
+    customFlag.onload = () => imageOnLoad(customFlag, 'flag'); customFlag.onerror = () => imageOnError('flag');
+    customSeason.onload = () => imageOnLoad(customSeason, 'season'); customSeason.onerror = () => imageOnError('season');
+    customPhoto.onload = () => imageOnLoad(customPhoto, 'photo'); customPhoto.onerror = () => imageOnError('photo');
+    customIcon.onload = () => imageOnLoad(customIcon, 'icon'); customIcon.onerror = () => imageOnError('icon');
+
+
     function getFileName(number) {
       return `image(${number}).png`;
     }
@@ -512,20 +510,22 @@
         const cardNum = select.value;
         showLoading();
         baseCard.src = `Blank/${getFileName(cardNum)}`;
-        baseCard.onload = function() {
-          hideLoading();
-          drawCard();
-        };
+        // onload handler is already defined for baseCard
       });
     }
 
     function loadBaseCard() {
       showLoading();
       baseCard.src = `Blank/${getFileName(264)}`;
-      baseCard.onload = function() {
+      baseCard.onload = function() { // baseCard doesn't need aspect ratio stored
         hideLoading();
         drawCard();
       };
+       baseCard.onerror = function() {
+         console.error("Failed to load base card");
+         hideLoading();
+         drawCard();
+       };
     }
 
     document.getElementById('flagUploadInput').addEventListener('change', function(e) {
@@ -534,11 +534,7 @@
         showLoading();
         const reader = new FileReader();
         reader.onload = function(evt) {
-          customFlag.onload = function() {
-            hideLoading();
-            drawCard();
-          };
-          customFlag.src = evt.target.result;
+          customFlag.src = evt.target.result; // onload handler will handle drawCard and aspect ratio
         };
         reader.readAsDataURL(file);
       }
@@ -549,11 +545,7 @@
         showLoading();
         const reader = new FileReader();
         reader.onload = function(evt) {
-          customSeason.onload = function() {
-            hideLoading();
-            drawCard();
-          };
-          customSeason.src = evt.target.result;
+          customSeason.src = evt.target.result; // onload handler will handle drawCard and aspect ratio
         };
         reader.readAsDataURL(file);
       }
@@ -564,23 +556,21 @@
         showLoading();
         const reader = new FileReader();
         reader.onload = function(evt) {
-          customPhoto.onload = function() {
-            hideLoading();
-            drawCard();
-          };
-          customPhoto.src = evt.target.result;
+          customPhoto.src = evt.target.result; // onload handler will handle drawCard and aspect ratio
         };
         reader.readAsDataURL(file);
       }
     });
 
-    function removeFlag()   { customFlag.src = ""; document.getElementById('flagUploadInput').value = ""; drawCard(); }
-    function removeSeason() { customSeason.src = ""; document.getElementById('seasonUploadInput').value = ""; drawCard(); }
-    function removePhoto()  { customPhoto.src = ""; document.getElementById('photoInput').value = ""; drawCard(); }
+    function removeFlag()   { customFlag.src = ""; aspectRatios.flag = undefined; document.getElementById('flagUploadInput').value = ""; drawCard(); }
+    function removeSeason() { customSeason.src = ""; aspectRatios.season = undefined; document.getElementById('seasonUploadInput').value = ""; drawCard(); }
+    function removePhoto()  { customPhoto.src = ""; aspectRatios.photo = undefined; document.getElementById('photoInput').value = ""; drawCard(); }
     function removeIcon()   {
       customIcon.src = "";
+      aspectRatios.icon = undefined;
       document.getElementById('newOption').value = 'live';
       document.getElementById('iconOptions').style.display = 'none';
+      // Reset icon inputs to default values
       document.getElementById('iconX').value = 20;
       document.getElementById('iconY').value = 20;
       document.getElementById('iconWidth').value = 40;
@@ -590,33 +580,88 @@
 
     function drawCard() {
       ctx.clearRect(0,0,canvas.width,canvas.height);
-      if (baseCard.complete && baseCard.src) ctx.drawImage(baseCard,0,0,canvas.width,canvas.height);
-      if (customPhoto.complete && customPhoto.src) {
-        const p = { x:+document.getElementById('photoX').value, y:+document.getElementById('photoY').value, width:+document.getElementById('photoWidth').value, height:+document.getElementById('photoHeight').value };
-        ctx.drawImage(customPhoto,p.x,p.y,p.width,p.height);
+      // Draw base card first
+      if (baseCard.complete && baseCard.src) {
+          ctx.drawImage(baseCard,0,0,canvas.width,canvas.height);
+      }
+
+      // Draw custom images
+      const minSize = 10; // Minimum size for images
+
+      if (customPhoto.complete && customPhoto.src && customPhoto.width > 0 && customPhoto.height > 0) {
+        const p = { x:+document.getElementById('photoX').value, y:+document.getElementById('photoY').value, width:+document.getElementById('photoWidth').value, height:+document.getElementById('photoHeight').value, name:'photo' };
+        // Ensure dimensions are at least minSize
+        p.width = Math.max(p.width, minSize);
+        p.height = Math.max(p.height, minSize);
+         // Update input values in case they were clamped
+         document.getElementById('photoWidth').value = p.width;
+         document.getElementById('photoHeight').value = p.height;
+        ctx.drawImage(customPhoto, p.x, p.y, p.width, p.height);
         if(activeImage==='photo') drawHandles(p);
+      } else {
+         // If image failed to load or dimensions are invalid, clear its src
+         // customPhoto.src = ""; // Avoid clearing src here, let it be null/empty if not loaded
+         aspectRatios.photo = undefined;
       }
-      if (customFlag.complete && customFlag.src) {
-        const p = { x:+document.getElementById('flagX').value, y:+document.getElementById('flagY').value, width:+document.getElementById('flagUploadWidth').value, height:+document.getElementById('flagUploadHeight').value };
-        ctx.drawImage(customFlag,p.x,p.y,p.width,p.height);
+
+      if (customFlag.complete && customFlag.src && customFlag.width > 0 && customFlag.height > 0) {
+        const p = { x:+document.getElementById('flagX').value, y:+document.getElementById('flagY').value, width:+document.getElementById('flagUploadWidth').value, height:+document.getElementById('flagUploadHeight').value, name:'flag' };
+        // Ensure dimensions are at least minSize
+        p.width = Math.max(p.width, minSize);
+        p.height = Math.max(p.height, minSize);
+        // Update input values in case they were clamped
+         document.getElementById('flagUploadWidth').value = p.width;
+         document.getElementById('flagUploadHeight').value = p.height;
+        ctx.drawImage(customFlag, p.x, p.y, p.width, p.height);
         if(activeImage==='flag') drawHandles(p);
+      } else {
+         // customFlag.src = "";
+         aspectRatios.flag = undefined;
       }
-      if (customSeason.complete && customSeason.src) {
-        const p = { x:+document.getElementById('seasonX').value, y:+document.getElementById('seasonY').value, width:+document.getElementById('seasonUploadWidth').value, height:+document.getElementById('seasonUploadHeight').value };
-        ctx.drawImage(customSeason,p.x,p.y,p.width,p.height);
+
+      if (customSeason.complete && customSeason.src && customSeason.width > 0 && customSeason.height > 0) {
+        const p = { x:+document.getElementById('seasonX').value, y:+document.getElementById('seasonY').value, width:+document.getElementById('seasonUploadWidth').value, height:+document.getElementById('seasonUploadHeight').value, name:'season' };
+         // Ensure dimensions are at least minSize
+        p.width = Math.max(p.width, minSize);
+        p.height = Math.max(p.height, minSize);
+         // Update input values in case they were clamped
+         document.getElementById('seasonUploadWidth').value = p.width;
+         document.getElementById('seasonUploadHeight').value = p.height;
+        ctx.drawImage(customSeason, p.x, p.y, p.width, p.height);
         if(activeImage==='season') drawHandles(p);
+      } else {
+         // customSeason.src = "";
+         aspectRatios.season = undefined;
       }
+
+      // Draw text (OVR, Position, Name)
       drawText();
+
+      // Draw icon only if selected and loaded
       if(document.getElementById('newOption').value==='icon') {
-        const p = { x:+document.getElementById('iconX').value, y:+document.getElementById('iconY').value, width:+document.getElementById('iconWidth').value, height:+document.getElementById('iconHeight').value };
-        if(customIcon.complete && customIcon.src) {
-          ctx.drawImage(customIcon,p.x,p.y,p.width,p.height);
-          if(activeImage==='icon') drawHandles({ ...p, name:'icon' });
-        } else {
-          customIcon.src='icon.png';
-          customIcon.onload=()=>drawCard();
-        }
+          if (customIcon.complete && customIcon.src && customIcon.width > 0 && customIcon.height > 0) {
+            const p = { x:+document.getElementById('iconX').value, y:+document.getElementById('iconY').value, width:+document.getElementById('iconWidth').value, height:+document.getElementById('iconHeight').value, name:'icon' };
+            // Ensure dimensions are at least minSize
+            p.width = Math.max(p.width, minSize);
+            p.height = Math.max(p.height, minSize);
+             // Update input values in case they were clamped
+             document.getElementById('iconWidth').value = p.width;
+             document.getElementById('iconHeight').value = p.height;
+            ctx.drawImage(customIcon, p.x, p.y, p.width, p.height);
+            if(activeImage==='icon') drawHandles({ ...p, name:'icon' });
+          } else {
+             // customIcon.src = ""; // Avoid clearing src here
+             aspectRatios.icon = undefined;
+             // Attempt to reload icon.png if src was cleared (shouldn't happen now) or if not loaded
+             if (!customIcon.src && document.getElementById('newOption').value === 'icon') {
+                 console.log("Attempting to load default icon.png");
+                 showLoading(); // Show loading while loading the default icon
+                 customIcon.src = 'icon.png'; // This will trigger the onload/onerror handler
+             }
+          }
       }
+
+
       if(document.getElementById('pipPreview').style.opacity==='1') updatePipCanvas();
     }
 
@@ -642,21 +687,35 @@
       ctx.strokeStyle="red"; ctx.lineWidth=2;
       ctx.strokeRect(p.x,p.y,p.width,p.height);
       ctx.fillStyle="red";
-      ctx.fillRect(p.x+p.width-8, p.y+p.height-8, 8,8);
+      // Make resize handle slightly larger and easier to grab
+      const handleSize = 10; // Handle size
+      ctx.fillRect(p.x+p.width-handleSize/2, p.y+p.height-handleSize/2, handleSize, handleSize);
       ctx.restore();
     }
 
     let activeImage=null, mode='', offsetX=0, offsetY=0;
+    const minImageSize = 10; // Minimum size for images during resize
+    let hideHandlesTimeout = null; // Variable to store timeout ID
+
     canvas.addEventListener('pointerdown', e=>{
+      // Clear the previous timeout if it exists
+      if (hideHandlesTimeout) {
+        clearTimeout(hideHandlesTimeout);
+        hideHandlesTimeout = null;
+      }
+
       e.preventDefault(); canvas.setPointerCapture(e.pointerId);
       const r=canvas.getBoundingClientRect(), mx=e.clientX-r.left, my=e.clientY-r.top;
       const check=(img,getP)=>{
-        if(img.complete&&img.src){ const p=getP();
-          if(mx>=p.x+p.width-10&&mx<=p.x+p.width+10&&my>=p.y+p.height-10&&my<=p.y+p.height+10){
-            activeImage=p.name; mode='resize'; offsetX=(p.x+p.width)-mx; offsetY=(p.y+p.height)-my; return true;
+        if(img.complete&&img.src && img.width > 0 && img.height > 0){ // Ensure image is loaded and valid
+          const p=getP();
+          // Add a larger hit area for the resize handle
+          const resizeHandleHitArea = 15; // Increased hit area
+          if(mx>=p.x+p.width-resizeHandleHitArea&&mx<=p.x+p.width+resizeHandleHitArea&&my>=p.y+p.height-resizeHandleHitArea&&my<=p.y+p.height+resizeHandleHitArea){
+            activeImage=p.name; mode='resize'; offsetX=(p.x+p.width)-mx; offsetY=(p.y+p.height)-my; drawCard(); return true; // Draw immediately on activation
           }
           if(mx>=p.x&&mx<=p.x+p.width&&my>=p.y&&my<=p.y+p.height){
-            activeImage=p.name; mode='drag'; offsetX=mx-p.x; offsetY=my-p.y; return true;
+            activeImage=p.name; mode='drag'; offsetX=mx-p.x; offsetY=my-p.y; drawCard(); return true; // Draw immediately on activation
           }
         }
         return false;
@@ -664,113 +723,210 @@
       if(check(customFlag,()=>({ x:+document.getElementById('flagX').value, y:+document.getElementById('flagY').value, width:+document.getElementById('flagUploadWidth').value, height:+document.getElementById('flagUploadHeight').value, name:'flag' }))) return;
       if(check(customSeason,()=>({ x:+document.getElementById('seasonX').value, y:+document.getElementById('seasonY').value, width:+document.getElementById('seasonUploadWidth').value, height:+document.getElementById('seasonUploadHeight').value, name:'season' }))) return;
       if(check(customPhoto,()=>({ x:+document.getElementById('photoX').value, y:+document.getElementById('photoY').value, width:+document.getElementById('photoWidth').value, height:+document.getElementById('photoHeight').value, name:'photo' }))) return;
-      if(check(customIcon,()=>({ x:+document.getElementById('iconX').value, y:+document.getElementById('iconY').value, width:+document.getElementById('iconWidth').value, height:+document.getElementById('iconHeight').value, name:'icon' }))) return;
-      activeImage=null; drawCard();
+      // Check icon only if it's active in the UI
+      if(document.getElementById('newOption').value==='icon' && check(customIcon,()=>({ x:+document.getElementById('iconX').value, y:+document.getElementById('iconY').value, width:+document.getElementById('iconWidth').value, height:+document.getElementById('iconHeight').value, name:'icon' }))) return;
+
+      // If no image was clicked, set activeImage to null and draw immediately
+      activeImage = null;
+      mode = ''; // Also reset mode
+      drawCard(); // Redraw to ensure handles are removed if nothing was clicked
     });
 
     canvas.addEventListener('pointermove', e=>{
-      if(!activeImage) return; e.preventDefault();
+      if(!activeImage || !mode) return; // Ensure mode is set
+      e.preventDefault();
       const r=canvas.getBoundingClientRect(), mx=e.clientX-r.left, my=e.clientY-r.top;
       let xE,yE,wE,hE;
+      let currentX, currentY; // Store current position before update
+
       switch(activeImage){
-        case 'flag':   xE=document.getElementById('flagX'); yE=document.getElementById('flagY'); wE=document.getElementById('flagUploadWidth'); hE=document.getElementById('flagUploadHeight'); break;
-        case 'season': xE=document.getElementById('seasonX'); yE=document.getElementById('seasonY'); wE=document.getElementById('seasonUploadWidth'); hE=document.getElementById('seasonUploadHeight'); break;
-        case 'photo':  xE=document.getElementById('photoX'); yE=document.getElementById('photoY'); wE=document.getElementById('photoWidth'); hE=document.getElementById('photoHeight'); break;
-        case 'icon':   xE=document.getElementById('iconX'); yE=document.getElementById('iconY'); wE=document.getElementById('iconWidth'); hE=document.getElementById('iconHeight'); break;
+        case 'flag':
+           xE=document.getElementById('flagX'); yE=document.getElementById('flagY'); wE=document.getElementById('flagUploadWidth'); hE=document.getElementById('flagUploadHeight');
+           currentX = +xE.value; currentY = +yE.value;
+           break;
+        case 'season':
+           xE=document.getElementById('seasonX'); yE=document.getElementById('seasonY'); wE=document.getElementById('seasonUploadWidth'); hE=document.getElementById('seasonUploadHeight');
+           currentX = +xE.value; currentY = +yE.value;
+           break;
+        case 'photo':
+           xE=document.getElementById('photoX'); yE=document.getElementById('photoY'); wE=document.getElementById('photoWidth'); hE=document.getElementById('photoHeight');
+           currentX = +xE.value; currentY = +yE.value;
+           break;
+        case 'icon':
+           xE=document.getElementById('iconX'); yE=document.getElementById('iconY'); wE=document.getElementById('iconWidth'); hE=document.getElementById('iconHeight');
+           currentX = +xE.value; currentY = +yE.value;
+           break;
+         default: return; // Should not happen
       }
+
       if(mode==='resize'){
-        let nw=mx-parseInt(xE.value)+offsetX;
-        if(nw<10) nw=10;
-        wE.value=nw; hE.value=nw;
-      } else {
-        xE.value=mx-offsetX; yE.value=my-offsetY;
+        const aspectRatio = aspectRatios[activeImage];
+        if (aspectRatio) {
+             // Calculate potential new width based on mouse position and offset
+            let potentialNewWidth = (mx + offsetX) - currentX;
+
+             // Clamp potential width to minimum size
+             if (potentialNewWidth < minImageSize) {
+                 potentialNewWidth = minImageSize;
+             }
+
+            // Calculate the corresponding new height based on aspect ratio
+            let newHeight = potentialNewWidth / aspectRatio;
+
+            // Clamp new height to minimum size as well, recalculating width if needed
+            if (newHeight < minImageSize) {
+                 newHeight = minImageSize;
+                 potentialNewWidth = newHeight * aspectRatio; // Recalculate width based on clamped height
+            }
+
+             // Update input values
+             wE.value = Math.round(potentialNewWidth);
+             hE.value = Math.round(newHeight);
+
+        } else {
+             // If aspect ratio is not known, just resize both freely (fallback)
+             let newWidth = (mx + offsetX) - currentX;
+             let newHeight = (my + offsetY) - currentY;
+             wE.value = Math.max(minImageSize, Math.round(newWidth));
+             hE.value = Math.max(minImageSize, Math.round(newHeight));
+        }
+
+      } else if (mode==='drag'){
+        xE.value = Math.round(mx - offsetX);
+        yE.value = Math.round(my - offsetY);
       }
-      drawCard();
+      drawCard(); // Draw continuously during drag/resize
     });
 
     canvas.addEventListener('pointerup', e=>{
-      activeImage=null; canvas.releasePointerCapture(e.pointerId);
+      canvas.releasePointerCapture(e.pointerId);
+      // Keep the active image selected for 3 seconds
+      // drawCard is called in pointermove, so the final state is already drawn.
+      // We just need to schedule the removal of handles.
+
+      // Clear any existing timeout before setting a new one
+      if (hideHandlesTimeout) {
+        clearTimeout(hideHandlesTimeout);
+      }
+
+      // Only set timeout if an image was actively dragged or resized
+      if (activeImage && mode) {
+         hideHandlesTimeout = setTimeout(() => {
+           activeImage = null; // Deselect the image
+           mode = ''; // Reset mode
+           drawCard(); // Redraw to remove handles
+           hideHandlesTimeout = null; // Clear timeout ID
+         }, 3000); // 3000 milliseconds = 3 seconds
+      } else {
+        // If pointerup happened without drag/resize (e.g., just a click that selected an image)
+        // the activeImage is already set in pointerdown, and drawCard was called.
+        // We still want the handles to disappear after a delay.
+         if (activeImage) { // If an image is currently selected
+             hideHandlesTimeout = setTimeout(() => {
+               activeImage = null; // Deselect the image
+               mode = ''; // Reset mode
+               drawCard(); // Redraw to remove handles
+               hideHandlesTimeout = null; // Clear timeout ID
+             }, 3000); // 3000 milliseconds = 3 seconds
+         }
+      }
+
+      // No need to call drawCard immediately here, pointermove already did the final draw if movement occurred.
+      // If only a click happened, pointerdown already called drawCard.
     });
 
     function downloadCardImage(){
-      const tmp=activeImage;
-      activeImage=null; drawCard();
-      setTimeout(()=>{
+      const tmp=activeImage; // Save current active image state
+      const tmpMode = mode; // Save current mode
+      activeImage=null; // Temporarily remove active image to hide handles
+      mode = '';
+      drawCard(); // Draw without handles
+
+      // Clear any pending hide handles timeout so handles don't reappear after download
+      if (hideHandlesTimeout) {
+        clearTimeout(hideHandlesTimeout);
+        hideHandlesTimeout = null;
+      }
+
+
+      setTimeout(()=>{ // Use a small delay to ensure canvas is redrawn
         const dataURL=canvas.toDataURL("image/png");
         const link=document.createElement('a');
         link.href=dataURL; link.download=cardFileName+'.png';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        activeImage=tmp; drawCard();
-      },100);
+        activeImage=tmp; // Restore active image state
+        mode = tmpMode; // Restore mode
+        drawCard(); // Redraw with handles if there was an active image before download
+      },50); // 50ms delay should be enough
     }
 
     function downloadCardState(){
-      const state={
-        blankCard: document.getElementById('blankCardSelect').value,
-        ovr: {
-          value: document.getElementById('ovr').value,
-          x: document.getElementById('ovrX').value,
-          y: document.getElementById('ovrY').value,
-          fontSize: document.getElementById('ovrFontSize').value,
-          font: document.getElementById('ovrFont').value,
-          color: document.getElementById('ovrColor').value
-        },
-        position: {
-          value: document.getElementById('position').value,
-          x: document.getElementById('posX').value,
-          y: document.getElementById('posY').value,
-          font: document.getElementById('posFont').value,
-          fontSize: document.getElementById('posFontSize').value,
-          color: document.getElementById('posColor').value
-        },
-        playerName: {
-          value: document.getElementById('playerName').value,
-          x: document.getElementById('nameX').value,
-          y: document.getElementById('nameY').value,
-          font: document.getElementById('nameFont').value,
-          fontSize: document.getElementById('nameFontSize').value,
-          color: document.getElementById('nameColor').value
-        },
-        flag: {
-          x: document.getElementById('flagX').value,
-          y: document.getElementById('flagY').value,
-          width: document.getElementById('flagUploadWidth').value,
-          height: document.getElementById('flagUploadHeight').value,
-          src: customFlag.src
-        },
-        season: {
-          x: document.getElementById('seasonX').value,
-          y: document.getElementById('seasonY').value,
-          width: document.getElementById('seasonUploadWidth').value,
-          height: document.getElementById('seasonUploadHeight').value,
-          src: customSeason.src
-        },
-        photo: {
-          x: document.getElementById('photoX').value,
-          y: document.getElementById('photoY').value,
-          width: document.getElementById('photoWidth').value,
-          height: document.getElementById('photoHeight').value,
-          src: customPhoto.src
-        },
-        icon: {
-          x: document.getElementById('iconX').value,
-          y: document.getElementById('iconY').value,
-          width: document.getElementById('iconWidth').value,
-          height: document.getElementById('iconHeight').value,
-          src: customIcon.src
-        }
-      };
-      const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
-      const url=URL.createObjectURL(blob);
-      const link=document.createElement('a');
-      link.href=url; link.download='cardState.json';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-    }
+        const state={
+          blankCard: document.getElementById('blankCardSelect').value,
+          ovr: {
+            value: document.getElementById('ovr').value,
+            x: document.getElementById('ovrX').value,
+            y: document.getElementById('ovrY').value,
+            fontSize: document.getElementById('ovrFontSize').value,
+            font: document.getElementById('ovrFont').value,
+            color: document.getElementById('ovrColor').value
+          },
+          position: {
+            value: document.getElementById('position').value,
+            x: document.getElementById('posX').value,
+            y: document.getElementById('posY').value,
+            font: document.getElementById('posFont').value,
+            fontSize: document.getElementById('posFontSize').value,
+            color: document.getElementById('posColor').value
+          },
+          playerName: {
+            value: document.getElementById('playerName').value,
+            x: document.getElementById('nameX').value,
+            y: document.getElementById('nameY').value,
+            font: document.getElementById('nameFont').value,
+            fontSize: document.getElementById('nameFontSize').value,
+            color: document.getElementById('nameColor').value
+          },
+          flag: {
+            x: document.getElementById('flagX').value,
+            y: document.getElementById('flagY').value,
+            width: document.getElementById('flagUploadWidth').value,
+            height: document.getElementById('flagUploadHeight').value,
+            src: customFlag.src
+          },
+          season: {
+            x: document.getElementById('seasonX').value,
+            y: document.getElementById('seasonY').value,
+            width: document.getElementById('seasonUploadWidth').value,
+            height: document.getElementById('seasonUploadHeight').value,
+            src: customSeason.src
+          },
+          photo: {
+            x: document.getElementById('photoX').value,
+            y: document.getElementById('photoY').value,
+            width: document.getElementById('photoWidth').value,
+            height: document.getElementById('photoHeight').value,
+            src: customPhoto.src
+          },
+          icon: {
+            x: document.getElementById('iconX').value,
+            y: document.getElementById('iconY').value,
+            width: document.getElementById('iconWidth').value,
+            height: document.getElementById('iconHeight').value,
+            src: customIcon.src
+          }
+        };
+        const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
+        const url=URL.createObjectURL(blob);
+        const link=document.createElement('a');
+        link.href=url; link.download='cardState.json';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }
 
     document.getElementById('jsonLoadInput').addEventListener('change', e=>{
       const file=e.target.files[0];
@@ -781,93 +937,116 @@
           applyCardState(JSON.parse(evt.target.result));
         } catch(err){
           console.error('JSON 파싱 오류:',err);
+          alert('카드 상태 파일을 불러오는데 실패했습니다.');
         }
+      };
+      reader.onerror = function() {
+         console.error('파일 읽기 오류');
+         alert('카드 상태 파일을 읽는데 실패했습니다.');
       };
       reader.readAsText(file);
     });
 
     function applyCardState(s){
-      document.getElementById('blankCardSelect').value = s.blankCard;
+      // Clear any existing active image state and timeout before applying new state
+      activeImage = null;
+      mode = '';
+      if (hideHandlesTimeout) {
+         clearTimeout(hideHandlesTimeout);
+         hideHandlesTimeout = null;
+      }
+      drawCard(); // Clear handles from previous state
+
+      // Blank Card
+      document.getElementById('blankCardSelect').value = s.blankCard || 264; // Use default if not in state
       $('.selectpicker').selectpicker('refresh');
       showLoading();
-      baseCard.src = `Blank/${getFileName(s.blankCard)}`;
+      baseCard.src = `Blank/${getFileName(document.getElementById('blankCardSelect').value)}`; // Use potentially defaulted value
       baseCard.onload = () => { hideLoading(); drawCard(); };
+      baseCard.onerror = () => { console.error("Failed to load base card"); hideLoading(); drawCard(); };
 
-      // 오버롤 복원
-      document.getElementById('ovr').value = s.ovr.value;
-      document.getElementById('ovrX').value = s.ovr.x;
-      document.getElementById('ovrY').value = s.ovr.y;
-      document.getElementById('ovrFontSize').value = s.ovr.fontSize;
-      document.getElementById('ovrFont').value = s.ovr.font;
-      document.getElementById('ovrColor').value = s.ovr.color;
 
-      // 포지션 복원
-      document.getElementById('position').value = s.position.value;
-      document.getElementById('posX').value = s.position.x;
-      document.getElementById('posY').value = s.position.y;
-      document.getElementById('posFontSize').value = s.position.fontSize;
-      document.getElementById('posFont').value = s.position.font;
-      document.getElementById('posColor').value = s.position.color;
+      // OVR Restore
+      document.getElementById('ovr').value = s.ovr ? s.ovr.value : 129;
+      document.getElementById('ovrX').value = s.ovr ? s.ovr.x : 67;
+      document.getElementById('ovrY').value = s.ovr ? s.ovr.y : 63;
+      document.getElementById('ovrFontSize').value = s.ovr ? s.ovr.fontSize : 35;
+      document.getElementById('ovrFont').value = s.ovr ? s.ovr.font : 'FontA';
+      document.getElementById('ovrColor').value = s.ovr ? s.ovr.color : '#FFD700';
 
-      // 선수 이름 복원
-      document.getElementById('playerName').value = s.playerName.value;
-      document.getElementById('nameX').value = s.playerName.x;
-      document.getElementById('nameY').value = s.playerName.y;
-      document.getElementById('nameFontSize').value = s.playerName.fontSize;
-      document.getElementById('nameFont').value = s.playerName.font;
-      document.getElementById('nameColor').value = s.playerName.color;
+      // Position Restore
+      document.getElementById('position').value = s.position ? s.position.value : 'ST';
+      document.getElementById('posX').value = s.position ? s.position.x : 78;
+      document.getElementById('posY').value = s.position ? s.position.y : 89;
+      document.getElementById('posFontSize').value = s.position ? s.position.fontSize : 19;
+      document.getElementById('posFont').value = s.position ? s.position.font : 'FontD';
+      document.getElementById('posColor').value = s.position ? s.position.color : '#FFFFFF';
 
-      // 국기 복원
-      if (s.flag.src) {
-        showLoading();
-        customFlag.onload = () => { hideLoading(); drawCard(); };
-        customFlag.src = s.flag.src;
-      }
-      document.getElementById('flagX').value = s.flag.x;
-      document.getElementById('flagY').value = s.flag.y;
-      document.getElementById('flagUploadWidth').value = s.flag.width;
-      document.getElementById('flagUploadHeight').value = s.flag.height;
+      // Player Name Restore
+      document.getElementById('playerName').value = s.playerName ? s.playerName.value : 'R.레반도프스키';
+      document.getElementById('nameX').value = s.playerName ? s.playerName.x : 91;
+      document.getElementById('nameY').value = s.playerName ? s.playerName.y : 218;
+      document.getElementById('nameFontSize').value = s.playerName ? s.playerName.fontSize : 20;
+      document.getElementById('nameFont').value = s.playerName ? s.playerName.font : 'FontC';
+      document.getElementById('nameColor').value = s.playerName ? s.playerName.color : '#FFFFFF';
 
-      // 시즌 복원
-      if (s.season.src) {
-        showLoading();
-        customSeason.onload = () => { hideLoading(); drawCard(); };
-        customSeason.src = s.season.src;
-      }
-      document.getElementById('seasonX').value = s.season.x;
-      document.getElementById('seasonY').value = s.season.y;
-      document.getElementById('seasonUploadWidth').value = s.season.width;
-      document.getElementById('seasonUploadHeight').value = s.season.height;
+      // Helper function to load images from state
+      const loadImageFromState = (imgElement, src, aspectRatioKey, xId, yId, wId, hId, defaultX, defaultY, defaultW, defaultH) => {
+          // Set coordinates and dimensions first, using defaults if not in state
+          document.getElementById(xId).value = (s[aspectRatioKey] && s[aspectRatioKey].x !== undefined) ? s[aspectRatioKey].x : defaultX;
+          document.getElementById(yId).value = (s[aspectRatioKey] && s[aspectRatioKey].y !== undefined) ? s[aspectRatioKey].y : defaultY;
+          document.getElementById(wId).value = (s[aspectRatioKey] && s[aspectRatioKey].width !== undefined) ? s[aspectRatioKey].width : defaultW;
+          document.getElementById(hId).value = (s[aspectRatioKey] && s[aspectRatioKey].height !== undefined) ? s[aspectRatioKey].height : defaultH;
 
-      // 페이스온 복원
-      if (s.photo.src) {
-        showLoading();
-        customPhoto.onload = () => { hideLoading(); drawCard(); };
-        customPhoto.src = s.photo.src;
-      }
-      document.getElementById('photoX').value = s.photo.x;
-      document.getElementById('photoY').value = s.photo.y;
-      document.getElementById('photoWidth').value = s.photo.width;
-      document.getElementById('photoHeight').value = s.photo.height;
+          if (src) {
+              showLoading();
+              // Onload/onerror handlers defined globally handle hiding loading and drawing
+              imgElement.src = src;
+          } else {
+              imgElement.src = ""; // Clear src if not in state or src is empty
+              aspectRatios[aspectRatioKey] = undefined;
+              // No need to call drawCard here, it's called after all state is applied
+              hideLoading(); // Hide loading if an image didn't need to load
+          }
+      };
 
-      // 아이콘 복원 & 옵션 표시
-      if (s.icon.src) {
-        document.getElementById('newOption').value = 'icon';
-        document.getElementById('iconOptions').style.display = 'block';
-        showLoading();
-        customIcon.onload = () => { hideLoading(); drawCard(); };
-        customIcon.src = s.icon.src;
+      // Flag Restore
+      loadImageFromState(customFlag, s.flag ? s.flag.src : null, 'flag', 'flagX', 'flagY', 'flagUploadWidth', 'flagUploadHeight', 30, 30, 40, 40);
+
+      // Season Restore
+      loadImageFromState(customSeason, s.season ? s.season.src : null, 'season', 'seasonX', 'seasonY', 'seasonUploadWidth', 'seasonUploadHeight', 200, 250, 40, 40);
+
+      // Photo Restore
+      loadImageFromState(customPhoto, s.photo ? s.photo.src : null, 'photo', 'photoX', 'photoY', 'photoWidth', 'photoHeight', 50, 50, 100, 100);
+
+      // Icon Restore & Option Display
+      const iconOption = document.getElementById('newOption');
+      if (s.icon && s.icon.src) {
+          iconOption.value = 'icon';
+          document.getElementById('iconOptions').style.display = 'block';
+           loadImageFromState(customIcon, s.icon.src, 'icon', 'iconX', 'iconY', 'iconWidth', 'iconHeight', 20, 20, 40, 40);
       } else {
-        document.getElementById('newOption').value = 'live';
-        document.getElementById('iconOptions').style.display = 'none';
+          iconOption.value = 'live';
+          document.getElementById('iconOptions').style.display = 'none';
+          customIcon.src = ""; // Ensure src is cleared
+          aspectRatios.icon = undefined;
+          // Set icon inputs to defaults even if not displayed, so they have values if switched to
+          document.getElementById('iconX').value = 20;
+          document.getElementById('iconY').value = 20;
+          document.getElementById('iconWidth').value = 40;
+          document.getElementById('iconHeight').value = 40;
       }
-      document.getElementById('iconX').value = s.icon.x;
-      document.getElementById('iconY').value = s.icon.y;
-      document.getElementById('iconWidth').value = s.icon.width;
-      document.getElementById('iconHeight').value = s.icon.height;
 
-      drawCard();
+      // drawCard() will be called by the last image's onload or onerror handler.
+      // If no images are loading, call it once here to ensure everything is drawn.
+      // We need to check if any images are loading.
+      const imagesLoading = [baseCard, customFlag, customSeason, customPhoto, customIcon].some(img => img.src && !img.complete);
+       if (!imagesLoading) {
+           hideLoading(); // Ensure loading is hidden if no images loaded
+           drawCard(); // Draw if no images were loading
+       }
     }
+
 
     function updatePipCanvas(){
       pipCtx.clearRect(0,0,pipCanvas.width,pipCanvas.height);
@@ -876,34 +1055,100 @@
 
     document.querySelectorAll('.editor input, .editor select').forEach(el=>el.addEventListener('input', drawCard));
     document.getElementById('newOption').addEventListener('change', ()=>{
-      document.getElementById('iconOptions').style.display = document.getElementById('newOption').value==='icon'?"block":"none";
+      const optionValue = document.getElementById('newOption').value;
+      document.getElementById('iconOptions').style.display = optionValue === 'icon' ? "block" : "none";
+      // If switching to icon and the customIcon hasn't been loaded yet, load the default icon.png
+      // Also check if the src is already set (e.g., loaded from state)
+      if (optionValue === 'icon' && (!customIcon.src || customIcon.src.startsWith('data:')) && !customIcon.complete) {
+          console.log("Loading default icon.png on option change");
+          showLoading();
+          customIcon.src = 'icon.png'; // This will trigger the onload handler
+      } else if (optionValue === 'live' && customIcon.src) {
+          // If switching away from icon, clear the icon image
+          // customIcon.src = ""; // Don't clear src here, keep it in memory for faster switching back
+          // aspectRatios.icon = undefined; // Keep aspect ratio
+      }
       drawCard();
     });
 
-    new IntersectionObserver(entries=>{
-      entries.forEach(en=>{
-        const pip=document.getElementById('pipPreview');
-        if(en.isIntersecting){
-          pip.style.opacity="0"; pip.style.pointerEvents="none";
+    // Preload icon.png to get its dimensions and aspect ratio early
+    // This avoids a flicker or delay when switching to the icon option for the first time
+    const tempIconLoader = new Image();
+    tempIconLoader.onload = function() {
+        // Don't set customIcon.src here, just get dimensions
+        if (tempIconLoader.width > 0 && tempIconLoader.height > 0) {
+            aspectRatios.icon = tempIconLoader.width / tempIconLoader.height; // Store aspect ratio
+            console.log("Default icon.png preloaded and aspect ratio stored.");
+            // Now load the actual customIcon if the option is already selected
+            if (document.getElementById('newOption').value === 'icon' && !customIcon.src) { // Only load if icon option is selected and customIcon.src is not already set (e.g., from state)
+                 console.log("Loading customIcon with default icon.png after preload.");
+                 showLoading();
+                 customIcon.src = 'icon.png'; // Load the actual image into the customIcon element
+                 // customIcon.onload will handle hiding loading and drawing
+            }
         } else {
-          pip.style.opacity="1"; pip.style.pointerEvents="auto"; updatePipCanvas();
+             console.error("Preloaded icon.png has invalid dimensions.");
+             aspectRatios.icon = undefined;
         }
-      });
-    },{threshold:0.1}).observe(document.querySelector('.preview'));
+    };
+    tempIconLoader.onerror = function() {
+        console.error("Failed to preload icon.png");
+        aspectRatios.icon = undefined;
+        // If icon option is selected and it failed to load, hide loading
+        if (document.getElementById('newOption').value === 'icon' && !customIcon.src) {
+             hideLoading();
+             drawCard(); // Draw without the icon
+        }
+    };
+    tempIconLoader.crossOrigin = "anonymous"; // Needed if icon.png is on a different origin
+    tempIconLoader.src = 'icon.png';
+
 
     Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,5000))]).then(()=>{
       loadBaseCard(); populateBlankCardDropdown();
+       // If the icon option is already selected on page load, the tempIconLoader.onload will handle drawing.
+       // If any other images need loading from applyCardState, their handlers will draw.
+       // An initial draw might be needed if no images are loading from state or default icon isn't needed immediately.
+       // applyCardState handles the final draw logic based on loading status.
     });
 
     setTimeout(()=>{
       hideLoading();
       console.warn("로딩 오버레이 강제 해제 (디버깅)");
-    },10000);
-  </script>
+    },30000); // Increased timeout for safety
 
-  <!-- 공유 버튼 로직 -->
+
+    // Add event listener to canvas to clear handles on click outside an image
+    canvas.addEventListener('click', (e) => {
+        const r = canvas.getBoundingClientRect();
+        const mx = e.clientX - r.left;
+        const my = e.clientY - r.top;
+
+        // Check if the click is within the bounds of any image with handles
+        const isClickInsideImage = [
+            activeImage === 'flag' && customFlag.complete && customFlag.src ? { name: 'flag', x: +document.getElementById('flagX').value, y: +document.getElementById('flagY').value, width: +document.getElementById('flagUploadWidth').value, height: +document.getElementById('flagUploadHeight').value } : null,
+            activeImage === 'season' && customSeason.complete && customSeason.src ? { name: 'season', x: +document.getElementById('seasonX').value, y: +document.getElementById('seasonY').value, width: +document.getElementById('seasonUploadWidth').value, height: +document.getElementById('seasonUploadHeight').value } : null,
+            activeImage === 'photo' && customPhoto.complete && customPhoto.src ? { name: 'photo', x: +document.getElementById('photoX').value, y: +document.getElementById('photoY').value, width: +document.getElementById('photoWidth').value, height: +document.getElementById('photoHeight').value } : null,
+            activeImage === 'icon' && customIcon.complete && customIcon.src && document.getElementById('newOption').value === 'icon' ? { name: 'icon', x: +document.getElementById('iconX').value, y: +document.getElementById('iconY').value, width: +document.getElementById('iconWidth').value, height: +document.getElementById('iconHeight').value } : null,
+        ].some(p => p && mx >= p.x && mx <= p.x + p.width && my >= p.y && my <= p.y + p.height);
+
+        // If there's an active image and the click was outside of it (and not on a handle which pointerdown handles)
+        if (activeImage && !isClickInsideImage) {
+             // Clear the timeout if one is pending, and immediately remove handles
+             if (hideHandlesTimeout) {
+                 clearTimeout(hideHandlesTimeout);
+                 hideHandlesTimeout = null;
+             }
+            activeImage = null;
+            mode = '';
+            drawCard();
+        }
+    });
+
+
+  </script>
   <script type="module">
-    import { db, collection, addDoc } from './firebase.js';
+    import { db, collection, addDoc } from './firebase.js'; // Ensure firebase.js is correctly configured
 
     const shareBtn = document.getElementById('share-btn');
     let isSharing = false;
@@ -938,27 +1183,49 @@
         return;
       }
 
-      try {
-        await addDoc(collection(db, 'cards'), {
-          title,
-          imageUrl,
-          createdAt: new Date()
-        });
-        alert('카드가 성공적으로 공유되었습니다!');
-        localStorage.setItem('lastShareTime', Date.now());
-      } catch (e) {
-        console.error('카드 저장 실패:', e);
-        alert('카드 저장에 실패했습니다. 잠시 후 다시 시도해 주세요.');
-      } finally {
-        setTimeout(() => {
-          isSharing = false;
-          shareBtn.disabled = false;
-          shareBtn.textContent = txt;
-        }, 30_000);
-      }
+      // Temporarily hide handles before capturing image for sharing
+      const tmpActiveImage = activeImage;
+      const tmpMode = mode;
+      activeImage = null;
+      mode = '';
+      drawCard(); // Redraw without handles
+
+      // Clear any pending hide handles timeout so handles don't reappear before capture
+       if (hideHandlesTimeout) {
+          clearTimeout(hideHandlesTimeout);
+          hideHandlesTimeout = null;
+       }
+
+      // Use a small delay to ensure canvas is redrawn before capture
+      setTimeout(async () => {
+           try {
+             await addDoc(collection(db, 'cards'), {
+               title,
+               imageUrl,
+               createdAt: new Date()
+             });
+             alert('카드가 성공적으로 공유되었습니다!');
+             localStorage.setItem('lastShareTime', Date.now());
+           } catch (e) {
+             console.error('카드 저장 실패:', e);
+             alert('카드 저장에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+           } finally {
+             // Restore active image state and mode, and redraw
+             activeImage = tmpActiveImage;
+             mode = tmpMode;
+             drawCard();
+
+              // Re-enable button after a delay regardless of success/failure
+             setTimeout(() => {
+               isSharing = false;
+               shareBtn.disabled = false;
+               shareBtn.textContent = txt;
+             }, 5000); // Short delay after success/failure before re-enabling
+           }
+      }, 50); // 50ms delay
+
     });
   </script>
-
   <button
     id="share-fab"
     data-tooltip="게시판에 공유하기"
@@ -966,12 +1233,13 @@
   >
     공유
   </button>
-      <script>
-  // 기존 share-btn 로직 바로 아래에 추가
-  const shareFab = document.getElementById('share-fab');
-  shareFab.addEventListener('click', () => {
-    document.getElementById('share-btn').click();
-  });
-</script>
+  <script>
+    // 기존 share-btn 로직 바로 아래에 추가
+    const shareFab = document.getElementById('share-fab');
+    shareFab.addEventListener('click', () => {
+      document.getElementById('share-btn').click();
+    });
+  </script>
 </body>
 </html>
+
