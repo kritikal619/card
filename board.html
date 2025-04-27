@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+  <title>공유된 카드 게시판 - 피모합성소</title>
+  <meta name="description" content="FC모바일 카드 제작 툴 - 공유된 카드 게시판"/>
+  <meta name="keywords" content="FC모바일, 카드합성, 카드 만들기, 게시판"/>
+  <meta name="author" content="해리지팡이"/>
+  <link rel="stylesheet" href="styles.css"/>
+
+  <style>
+    body {
+      font-family: 'Apple SD Gothic Neo', sans-serif;
+      margin: 0;
+      padding-bottom: 60px; /* 네비게이션 높이 만큼 */
+      background: #f9f9f9;
+      color: #333;
+      text-align: center;
+    }
+    h1 {
+      font-size: 24px;
+      margin: 20px 0;
+    }
+    /* 반응형 그리드: 화면 크기에 따라 1~4열 */
+    #board-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 15px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card-item {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .card-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .card-item h3 {
+      font-size: 16px;
+      padding: 10px 8px 4px;
+      margin: 0;
+      flex: 1;
+      color: #2c3e50;
+      text-align: center;
+    }
+    .like-btn {
+      margin: 8px 0 12px;
+      padding: 6px 12px;
+      background: #ffebee;
+      border: 1px solid #f44336;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #c62828;
+      display: inline-flex;
+      align-items: center;
+    }
+    .like-btn:hover { background: #ffcdd2; }
+    .like-count { font-weight: bold; margin: 0 4px; }
+
+    /* 하단 네비게이션 */
+    #bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #a39485;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-around;
+      z-index: 1000;
+    }
+    #bottom-nav .nav-item {
+      flex: 1;
+      text-align: center;
+      padding: 10px 0;
+      color: #fff;
+      font-size: 14px;
+      text-decoration: none;
+    }
+    #bottom-nav .nav-item.active {
+      border-top: 2px solid #fff;
+      padding-top: 8px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>공유된 카드 게시판</h1>
+  <div id="board-list"></div>
+
+  <nav id="bottom-nav">
+    <a href="index.html#home" class="nav-item">홈</a>
+    <a href="index.html#tab1" class="nav-item">빈카드</a>
+    <a href="index.html#tab2" class="nav-item">국기</a>
+    <a href="index.html#tab5" class="nav-item">글자</a>
+    <a href="gener.html"   class="nav-item">툴</a>
+    <a href="board.html"   class="nav-item active">게시판</a>
+  </nav>
+
+<script type="module">
+  import { db } from './firebase.js';
+  import {
+    collection,
+    query,
+    orderBy,
+    onSnapshot,
+    doc,
+    updateDoc,
+    increment
+  } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js';
+
+  console.log('board.html 스크립트 시작', db);
+
+  const boardList = document.getElementById('board-list');
+  const cardsQuery = query(
+    collection(db, 'cards'),
+    orderBy('createdAt', 'desc')
+  );
+
+  // 오늘 날짜를 "2025-04-27" 이런 형식으로 가져오기
+  const today = new Date().toISOString().split('T')[0];
+
+  // localStorage에 저장하는 키: 'liked_{cardId}_{today}'
+  function hasLiked(cardId) {
+    return localStorage.getItem(`liked_${cardId}_${today}`) === 'true';
+  }
+  function setLiked(cardId) {
+    localStorage.setItem(`liked_${cardId}_${today}`, 'true');
+  }
+
+  onSnapshot(cardsQuery, snapshot => {
+    console.log('Snapshot 받은 문서 수:', snapshot.size);
+    boardList.innerHTML = '';
+
+    snapshot.forEach(docSnap => {
+      const data  = docSnap.data();
+      const id    = docSnap.id;
+      const likes = data.likes || 0;
+
+      const card = document.createElement('div');
+      card.className = 'card-item';
+      card.innerHTML = `
+        <img src="${data.imageUrl}" alt="카드 이미지">
+        <h3>${data.title}</h3>
+        <button class="like-btn" data-id="${id}">
+          좋아요 <span class="like-count">${likes}</span>♥
+        </button>
+      `;
+      boardList.appendChild(card);
+    });
+
+    document.querySelectorAll('.like-btn').forEach(btn => {
+      btn.onclick = async () => {
+        const id = btn.dataset.id;
+        const span = btn.querySelector('.like-count');
+
+        if (hasLiked(id)) {
+          alert('오늘은 이 카드에 이미 좋아요를 눌렀습니다!');
+          return;
+        }
+
+        try {
+          await updateDoc(doc(db, 'cards', id), { likes: increment(1) });
+          span.textContent = parseInt(span.textContent, 10) + 1;
+          setLiked(id);
+          console.log('좋아요 성공:', id);
+        } catch (error) {
+          console.error('좋아요 실패:', error);
+        }
+      };
+    });
+
+  }, err => {
+    console.error('실시간 업데이트 에러:', err);
+  });
+</script>
+</body>
+</html>
