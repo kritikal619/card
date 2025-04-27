@@ -1,101 +1,61 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
-    
-    <!-- 검색 엔진 최적화 (SEO) -->
-    <meta name="description" content="피모합성소 다양한 FC모바일 빈카드부터 오버롤 글자, 포지션 폰트에 카드 제작이 쉬워지는 카드 제작 툴 ( 카드 만들기 사이트) 까지 있어서 멋있는 FC모바일 카드를 쉽고 간편하게 만들 수 있습니다!"> <!-- 작동함 -->
-    <meta name="keywords" content="FC모바일,카드합성,카드 만들기,사이트,합성,카드 합성기">
-    <meta name="author" content="해리지팡이">
-    
-    <!-- Open Graph 데이터 -->
-    <meta property="og:title" content="FC모바일 카드 제작 툴 - 피모합성소 - 피모툴킷"> <!-- 도대체 뭐하는지 모르겠다...-->
-    <meta property="og:description" content="피모합성소 다양한 FC모바일 빈카드부터 오버롤 글자, 포지션 폰트에 카드 제작이 쉬워지는 카드 제작 툴 ( 카드 만들기 사이트) 까지 있어서 멋있는 FC모바일 카드를 쉽고 간편하게 만들 수 있습니다!">
-    <meta property="og:image" content="https://kritikal619.github.io/card/logo/Favicon.png">
-    <meta property="og:url" content="https://kritikal619.github.io/card/">
-    <meta property="og:site_name" content="피모합성소">
-    <meta property="og:type" content="website">
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="./favicons/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="./favicons/favicon.svg" />
-    <link rel="shortcut icon" href="./favicons/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="피모 합성소" />
-    <link rel="manifest" href="./favicons/manifest.json" />
-    <!-- 검증 메타 -->
-    <meta name="google-site-verification" content="">
-    <meta name="naver-site-verification" content="">
-    <title>FC모바일 카드 합성기, 빈카드, 폰트, 오버롤 - 피모합성소 - 피모툴킷</title>
-    
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
   
-  <!-- Bootstrap / Bootstrap-select CSS -->
+  <!-- 검색 엔진 최적화 (SEO) -->
+  <meta name="description" content="피모합성소 다양한 FC모바일 빈카드부터 오버롤 글자, 포지션 폰트에 카드 제작이 쉬워지는 카드 제작 툴 ( 카드 만들기 사이트) 까지 있어서 멋있는 FC모바일 카드를 쉽고 간편하게 만들 수 있습니다!">
+  <meta name="keywords" content="FC모바일,카드합성,카드 만들기,사이트,합성,카드 합성기">
+  <meta name="author" content="해리지팡이">
+  
+  <!-- Open Graph 데이터 -->
+  <meta property="og:title" content="FC모바일 카드 제작 툴 - 피모합성소 - 피모툴킷">
+  <meta property="og:description" content="피모합소 다양한 FC모바일 빈카드부터 오버롤 글자, 포지션 폰트에 카드 제작이 쉬워지는 카드 제작 툴 ( 카드 만들기 사이트) 까지 있어서 멋있는 FC모바일 카드를 쉽고 간편하게 만들 수 있습니다!">
+  <meta property="og:image" content="https://kritikal619.github.io/card/logo/Favicon.png">
+  <meta property="og:url" content="https://kritikal619.github.io/card/">
+  <meta property="og:site_name" content="피모합성소">
+  <meta property="og:type" content="website">
+  <title>FC모바일 카드 합성기, 빈카드, 폰트, 오버롤 - 피모합성소 - 피모툴킷</title>
+  
+  <!-- 외부 CSS -->
+  <link rel="stylesheet" href="styles.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css">
 
   <style>
-    /* 폰트 등록 (필요하다면 경로 수정) */
-    @font-face {
-      font-family: 'FontA';
-      src: url('./fonts/FCOVR.otf') format('truetype');
-    }
-    @font-face {
-      font-family: 'FontB';
-      src: url('./fonts/FIMOOVR.otf') format('truetype');
-    }
-    @font-face {
-      font-family: 'FontC';
-      src: url('./fonts/NAME.ttf') format('truetype');
-    }
-    @font-face {
-      font-family: 'FontD';
-      src: url('./fonts/POSITION.otf') format('truetype');
-    }
+    /* 폰트 등록 */
+    @font-face { font-family: 'FontA'; src: url('./fonts/FCOVR.otf') format('truetype'); }
+    @font-face { font-family: 'FontB'; src: url('./fonts/FIMOOVR.otf') format('truetype'); }
+    @font-face { font-family: 'FontC'; src: url('./fonts/NAME.ttf') format('truetype'); }
+    @font-face { font-family: 'FontD'; src: url('./fonts/POSITION.otf') format('truetype'); }
 
     /* 기본 레이아웃 */
-    html, body {
-      margin: 0; 
-      padding: 0;
-      height: 100%;
-    }
+    html, body { margin: 0; padding: 0; height: 100%; }
     body {
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      padding-top: 60px; /* fixed-top navbar 높이 고려 */
-      overflow-x: hidden; /* 가로 스크롤 방지 */
+      padding-top: 60px;
+      overflow-x: hidden;
     }
-    .main-content {
-      flex: 1;
-    }
+    .main-content { flex: 1; }
 
     /* 네비게이션 바 */
-    #navbar {
-      background: #73685d;
-      padding: 0.3rem 1rem;
-    }
+    #navbar { background: #73685d; padding: 0.3rem 1rem; }
 
-    /* 주황색 배너 영역 (네비게이션 바 바로 아래) */
+    /* 주황색 배너 영역 */
     #banner {
-      background-color: #FFA500; /* 주황색 배경 */
-      color: #FFFFFF;           /* 흰색 텍스트 */
+      background-color: #FFA500;
+      color: #FFFFFF;
       text-align: center;
       padding: 15px 0;
       font-size: 1.2rem;
       font-weight: bold;
     }
-    #banner a {
-      color: #FFFFFF; /* 링크 텍스트 흰색 */
-      text-decoration: none;
-      cursor: pointer;
-    }
-    #banner a:hover {
-      text-decoration: underline;
-    }
+    #banner a { color: #FFFFFF; text-decoration: none; }
+    #banner a:hover { text-decoration: underline; }
 
     /* 에디터/미리보기 스타일 */
     .editor, .preview {
@@ -114,35 +74,25 @@
       cursor: default;
       width: 100%;
       height: auto;
-      touch-action: none; /* 터치 드래그 처리 */
+      touch-action: none;
     }
 
     /* 로딩 오버레이 */
     #loadingOverlay {
       position: fixed;
-      top: 0; 
-      left: 0;
-      width: 100%; 
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background-color: rgba(128,128,128,0.8);
       display: none;
       justify-content: center;
       align-items: center;
       z-index: 9999;
     }
-    #loadingOverlay img {
-      width: 100px;
-    }
+    #loadingOverlay img { width: 100px; }
 
     /* 폼 요소 */
-    .form-group {
-      margin-bottom: 15px;
-    }
-    label {
-      margin-bottom: 5px;
-      font-weight: bold;
-      color: #333;
-    }
+    .form-group { margin-bottom: 15px; }
+    label { margin-bottom: 5px; font-weight: bold; color: #333; }
     input, select {
       width: 100%;
       padding: 8px;
@@ -150,19 +100,9 @@
       border-radius: 4px;
       margin-bottom: 5px;
     }
-    .coord-inputs {
-      display: flex; 
-      gap: 5px; 
-      margin-top: 5px;
-    }
-    .coord-inputs input {
-      width: 70px;
-    }
-    /* 부트스트랩 버튼 스타일 (추가 적용) */
-    button {
-      margin-top: 10px;
-    }
-    /* 삭제 버튼은 작은 크기와 danger 스타일 */
+    .coord-inputs { display: flex; gap: 5px; margin-top: 5px; }
+    .coord-inputs input { width: 70px; }
+    button { margin-top: 10px; }
     .delete-btn {
       padding: 5px 10px;
       font-size: 0.8rem;
@@ -192,19 +132,11 @@
         overflow-y: auto;
         max-height: calc(100vh - 80px);
       }
-      .preview {
-        position: sticky; /* PC에서는 상단 고정 */
-        top: 80px;
-      }
+      .preview { position: sticky; top: 80px; }
     }
     @media (max-width: 768px) {
-      .custom-container {
-        display: block;
-        padding: 0 15px;
-      }
-      .editor {
-        margin-bottom: 180px;
-      }
+      .custom-container { display: block; padding: 0 15px; }
+      .editor { margin-bottom: 180px; }
     }
 
     /* 푸터 */
@@ -216,37 +148,74 @@
       border-top: 1px solid #ddd;
     }
 
-    /* PIP 미리보기 창 (애니메이션 효과 및 둥근 모서리 적용) */
+    /* PIP 미리보기 창 */
     #pipPreview {
       position: fixed;
-      top: 10px;
-      right: 10px;
+      top: 10px; right: 10px;
       border: 2px solid #ddd;
       background: white;
       padding: 5px;
       z-index: 10000;
-      /* 원본 캔버스와 동일한 비율로 축소 (예: 30%) */
       transform: scale(0.3);
       transform-origin: top right;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.5s ease-in-out;
-      border-radius: 10px; /* 둥근 모서리 */
-      overflow: hidden;   /* 내부 내용도 둥글게 */
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    /* 공유 버튼 강조용 Floating Action Button */
+    #share-fab {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FFB74D, #FFA000);
+      color: #fff;
+      font-size: 18px;
+      border: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse 2s ease-out infinite;
+      transition: transform 0.2s;
+    }
+    #share-fab:hover {
+      transform: scale(1.1);
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(255,160,0,0.7); }
+      50%  { box-shadow: 0 0 0 15px rgba(255,160,0,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,160,0,0); }
+    }
+    #share-fab[data-tooltip]:hover:after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      background: rgba(0,0,0,0.75);
+      color: #fff;
+      padding: 5px 8px;
+      border-radius: 3px;
+      font-size: 12px;
+      white-space: nowrap;
     }
   </style>
-  
-  <!-- PDF.js 라이브러리 포함 -->
+
+  <!-- PDF.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css">
 </head>
 <body>
   <!-- 네비게이션 바 -->
   <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container-fluid">
-      <!-- 뒤로가기 버튼 -->
-      <a class="navbar-brand" href="#" id="toolTabButton">뒤로가기</a>
+      <input id="cardTitleInput" type="text" placeholder="카드 제목 입력" style="margin: 10px 0; padding:5px; width: 200px;">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -260,16 +229,16 @@
       </div>
     </div>
   </nav>
-  
-  <!-- 배너 영역 (주황색 배경, 텍스트가 보이고 클릭 시 banner.html로 이동) -->
+
+  <!-- 배너 -->
   <div id="banner">
     <a href="banner.html">FC모바일 카드 합성 방법 (클릭시 이동)</a>
   </div>
-  
+
   <!-- 메인 콘텐츠 -->
   <div class="main-content">
     <div class="custom-container">
-      <!-- 미리보기 영역 -->
+      <!-- 미리보기 -->
       <div class="preview order-1 order-md-2">
         <h2>카드 미리보기</h2>
         <div style="position: relative; display: inline-block; width: 100%;">
@@ -280,7 +249,7 @@
         </div>
       </div>
 
-      <!-- 에디터 영역 -->
+      <!-- 에디터 -->
       <div class="editor order-2 order-md-1">
         <h2>카드 제작기</h2>
 
@@ -443,7 +412,6 @@
               <option value="icon">아이콘</option>
             </select>
           </div>
-          <!-- 아이콘 옵션 선택 시 사용할 좌표/크기 입력 -->
           <div id="iconOptions" style="display: none;">
             <div class="coord-inputs">
               <input type="number" id="iconX" placeholder="X" value="20">
@@ -456,27 +424,27 @@
             <button class="btn btn-primary btn-sm delete-btn" onclick="removeIcon()">아이콘 삭제</button>
           </div>
         </fieldset>
-      </br>
-        <!-- 버튼들 -->
-        <button class="btn btn-primary" onclick="downloadCardImage()">이미지 다운로드</button> </br>
-        <button class="btn btn-primary" onclick="downloadCardState()">저장 (편집 가능)</button> </br>
+
+        <!-- 기타 버튼들 -->
+        <button class="btn btn-primary" onclick="downloadCardImage()">이미지 다운로드</button><br>
+        <button class="btn btn-primary" onclick="downloadCardState()">저장 (편집 가능)</button><br>
         <button class="btn btn-primary" onclick="document.getElementById('jsonLoadInput').click()">불러오기 (JSON 불러오기)</button>
-        <!-- JSON 파일 선택 input (숨김) -->
-        <input type="file" id="jsonLoadInput" style="display:none;" accept=".json,application/json">
+        <button id="share-btn" class="btn btn-primary">피모합성소 게시판이 내가 만든 카드 공유하기</button>
+        <input type="file" id="jsonLoadInput" style="display:none" accept=".json,application/json">
       </div>
     </div>
   </div>
 
-  <!-- PIP 미리보기 (스크롤로 미리보기 영역이 안 보일 때 표시) -->
+  <!-- PIP 미리보기 -->
   <div id="pipPreview">
     <canvas id="pipCanvas" width="300" height="300"></canvas>
   </div>
 
-  <!-- Footer -->
+  <!-- 푸터 -->
   <footer class="footer">
     <p>
-      <span>Data based on NEXON</span><br/>
-      <span>이메일 : <span id="email">jchae0619@gmail.com</span></span><br/>
+      <span>Data based on NEXON</span><br>
+      <span>이메일 : <span id="email">jchae0619@gmail.com</span></span><br>
       <span>© 2025 kritikal619. All Rights Reserved.</span>
     </p>
   </footer>
@@ -488,18 +456,15 @@
 
   <script>
     // -------------------------------
-    //  전역 변수 & 초기 세팅
+    // 캔버스 초기화 & 드로잉 로직
     // -------------------------------
     const totalImages = 264;
     const canvas = document.getElementById('cardCanvas');
     const ctx = canvas.getContext('2d');
     let cardFileName = "card";
-
-    // PIP 캔버스 (원본 복사)
     const pipCanvas = document.getElementById('pipCanvas');
     const pipCtx = pipCanvas.getContext('2d');
 
-    // 모바일 깜빡임/겹침 방지: 캔버스 크기를 한 번만 설정
     let canvasWidth = 300;
     let canvasHeight = 300;
     if (window.innerWidth < 768) {
@@ -511,7 +476,6 @@
     pipCanvas.width = canvasWidth;
     pipCanvas.height = canvasHeight;
 
-    // 로딩 오버레이
     function showLoading() {
       document.getElementById('loadingOverlay').style.display = "flex";
     }
@@ -519,31 +483,16 @@
       document.getElementById('loadingOverlay').style.display = "none";
     }
 
-    // -------------------------------
-    //  이미지 객체 (CORS 문제 방지를 위해 crossOrigin 설정)
-    // -------------------------------
-    let baseCard = new Image();
-    baseCard.crossOrigin = "anonymous";
-    let customFlag = new Image();
-    customFlag.crossOrigin = "anonymous";
-    let customSeason = new Image();
-    customSeason.crossOrigin = "anonymous";
-    let customPhoto = new Image();
-    customPhoto.crossOrigin = "anonymous";
-    // 아이콘 이미지 객체
-    let customIcon = new Image();
-    customIcon.crossOrigin = "anonymous";
+    let baseCard = new Image(); baseCard.crossOrigin = "anonymous";
+    let customFlag = new Image(); customFlag.crossOrigin = "anonymous";
+    let customSeason = new Image(); customSeason.crossOrigin = "anonymous";
+    let customPhoto = new Image(); customPhoto.crossOrigin = "anonymous";
+    let customIcon = new Image(); customIcon.crossOrigin = "anonymous";
 
-    // -------------------------------
-    //  파일 이름
-    // -------------------------------
     function getFileName(number) {
       return `image(${number}).png`;
     }
 
-    // -------------------------------
-    //  빈카드 목록 생성
-    // -------------------------------
     function populateBlankCardDropdown() {
       const select = document.getElementById('blankCardSelect');
       select.innerHTML = '';
@@ -552,14 +501,13 @@
         option.value = i;
         option.setAttribute(
           'data-content',
-          `<img src="Blank/${getFileName(i)}" style="width:30px; height:auto; vertical-align:middle;"> Card ${i}`
+          `<img src="Blank/${getFileName(i)}" style="width:30px;height:auto;vertical-align:middle;"> Card ${i}`
         );
-        if(i === 264) option.selected = true;
+        if (i === 264) option.selected = true;
         select.appendChild(option);
       }
       $('.selectpicker').selectpicker('refresh');
 
-      // 빈카드 선택 시 카드 로드
       select.addEventListener('change', function() {
         const cardNum = select.value;
         showLoading();
@@ -571,9 +519,6 @@
       });
     }
 
-    // -------------------------------
-    //  기본 카드 로드
-    // -------------------------------
     function loadBaseCard() {
       showLoading();
       baseCard.src = `Blank/${getFileName(264)}`;
@@ -583,9 +528,6 @@
       };
     }
 
-    // -------------------------------
-    //  이미지 업로드
-    // -------------------------------
     document.getElementById('flagUploadInput').addEventListener('change', function(e) {
       const file = e.target.files[0];
       if (file) {
@@ -632,26 +574,13 @@
       }
     });
 
-    // -------------------------------
-    //  업로드한 이미지 삭제 함수
-    // -------------------------------
-    function removeFlag() {
-      customFlag.src = "";
-      document.getElementById('flagUploadInput').value = "";
-      drawCard();
-    }
-    function removeSeason() {
-      customSeason.src = "";
-      document.getElementById('seasonUploadInput').value = "";
-      drawCard();
-    }
-    function removePhoto() {
-      customPhoto.src = "";
-      document.getElementById('photoInput').value = "";
-      drawCard();
-    }
-    function removeIcon() {
+    function removeFlag()   { customFlag.src = ""; document.getElementById('flagUploadInput').value = ""; drawCard(); }
+    function removeSeason() { customSeason.src = ""; document.getElementById('seasonUploadInput').value = ""; drawCard(); }
+    function removePhoto()  { customPhoto.src = ""; document.getElementById('photoInput').value = ""; drawCard(); }
+    function removeIcon()   {
       customIcon.src = "";
+      document.getElementById('newOption').value = 'live';
+      document.getElementById('iconOptions').style.display = 'none';
       document.getElementById('iconX').value = 20;
       document.getElementById('iconY').value = 20;
       document.getElementById('iconWidth').value = 40;
@@ -659,322 +588,126 @@
       drawCard();
     }
 
-    // -------------------------------
-    //  카드 그리기
-    // -------------------------------
     function drawCard() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // 1. 빈카드 그리기
-      if (baseCard.complete && baseCard.src) {
-        ctx.drawImage(baseCard, 0, 0, canvas.width, canvas.height);
-      }
-
-      // 2. 미니 페이스온 그리기 (빈카드 바로 위)
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      if (baseCard.complete && baseCard.src) ctx.drawImage(baseCard,0,0,canvas.width,canvas.height);
       if (customPhoto.complete && customPhoto.src) {
-        let photoProps = {
-          x: parseInt(document.getElementById('photoX').value),
-          y: parseInt(document.getElementById('photoY').value),
-          width: parseInt(document.getElementById('photoWidth').value),
-          height: parseInt(document.getElementById('photoHeight').value)
-        };
-        ctx.drawImage(customPhoto, photoProps.x, photoProps.y, photoProps.width, photoProps.height);
-        if(activeImage === 'photo') drawHandles(photoProps);
+        const p = { x:+document.getElementById('photoX').value, y:+document.getElementById('photoY').value, width:+document.getElementById('photoWidth').value, height:+document.getElementById('photoHeight').value };
+        ctx.drawImage(customPhoto,p.x,p.y,p.width,p.height);
+        if(activeImage==='photo') drawHandles(p);
       }
-
-      // 3. 국기 그리기
       if (customFlag.complete && customFlag.src) {
-        let flagProps = {
-          x: parseInt(document.getElementById('flagX').value),
-          y: parseInt(document.getElementById('flagY').value),
-          width: parseInt(document.getElementById('flagUploadWidth').value),
-          height: parseInt(document.getElementById('flagUploadHeight').value)
-        };
-        ctx.drawImage(customFlag, flagProps.x, flagProps.y, flagProps.width, flagProps.height);
-        if(activeImage === 'flag') drawHandles(flagProps);
+        const p = { x:+document.getElementById('flagX').value, y:+document.getElementById('flagY').value, width:+document.getElementById('flagUploadWidth').value, height:+document.getElementById('flagUploadHeight').value };
+        ctx.drawImage(customFlag,p.x,p.y,p.width,p.height);
+        if(activeImage==='flag') drawHandles(p);
       }
-
-      // 4. 시즌 그리기
       if (customSeason.complete && customSeason.src) {
-        let seasonProps = {
-          x: parseInt(document.getElementById('seasonX').value),
-          y: parseInt(document.getElementById('seasonY').value),
-          width: parseInt(document.getElementById('seasonUploadWidth').value),
-          height: parseInt(document.getElementById('seasonUploadHeight').value)
-        };
-        ctx.drawImage(customSeason, seasonProps.x, seasonProps.y, seasonProps.width, seasonProps.height);
-        if(activeImage === 'season') drawHandles(seasonProps);
+        const p = { x:+document.getElementById('seasonX').value, y:+document.getElementById('seasonY').value, width:+document.getElementById('seasonUploadWidth').value, height:+document.getElementById('seasonUploadHeight').value };
+        ctx.drawImage(customSeason,p.x,p.y,p.width,p.height);
+        if(activeImage==='season') drawHandles(p);
       }
-
-      // 5. 텍스트 그리기 (오버롤, 포지션, 선수 이름)
       drawText();
-
-      // 6. 새로운 옵션: 아이콘 그리기
-      const newOption = document.getElementById('newOption').value;
-      if(newOption === 'icon') {
-        const iconX = parseInt(document.getElementById('iconX').value),
-              iconY = parseInt(document.getElementById('iconY').value),
-              iconWidth = parseInt(document.getElementById('iconWidth').value),
-              iconHeight = parseInt(document.getElementById('iconHeight').value);
+      if(document.getElementById('newOption').value==='icon') {
+        const p = { x:+document.getElementById('iconX').value, y:+document.getElementById('iconY').value, width:+document.getElementById('iconWidth').value, height:+document.getElementById('iconHeight').value };
         if(customIcon.complete && customIcon.src) {
-          ctx.drawImage(customIcon, iconX, iconY, iconWidth, iconHeight);
-          if(activeImage === 'icon') drawHandles({ x: iconX, y: iconY, width: iconWidth, height: iconHeight, name: 'icon' });
+          ctx.drawImage(customIcon,p.x,p.y,p.width,p.height);
+          if(activeImage==='icon') drawHandles({ ...p, name:'icon' });
         } else {
-          customIcon.src = 'icon.png';
-          customIcon.onload = function() {
-            drawCard();
-          };
+          customIcon.src='icon.png';
+          customIcon.onload=()=>drawCard();
         }
       }
-
-      // PIP 캔버스 업데이트 (보일 때)
-      if(document.getElementById('pipPreview').style.opacity === "1") {
-        updatePipCanvas();
-      }
+      if(document.getElementById('pipPreview').style.opacity==='1') updatePipCanvas();
     }
 
-    // -------------------------------
-    //  텍스트 그리기
-    // -------------------------------
     function drawText() {
       ctx.save();
-      ctx.shadowColor = "rgba(0,0,0,0.7)";
-      ctx.shadowBlur = 4;
-
-      // 오버롤
-      ctx.fillStyle = document.getElementById('ovrColor').value;
-      ctx.font = `bold ${document.getElementById('ovrFontSize').value}px ${document.getElementById('ovrFont').value}`;
-      ctx.fillText(
-        document.getElementById('ovr').value,
-        parseInt(document.getElementById('ovrX').value),
-        parseInt(document.getElementById('ovrY').value)
-      );
-
-      // 포지션
-      ctx.fillStyle = document.getElementById('posColor').value;
-      ctx.font = `bold ${document.getElementById('posFontSize').value}px ${document.getElementById('posFont').value}`;
-      ctx.fillText(
-        document.getElementById('position').value,
-        parseInt(document.getElementById('posX').value),
-        parseInt(document.getElementById('posY').value)
-      );
-
-      // 선수 이름
-      ctx.fillStyle = document.getElementById('nameColor').value;
-      ctx.font = `${document.getElementById('nameFontSize').value}px ${document.getElementById('nameFont').value}`;
-      ctx.fillText(
-        document.getElementById('playerName').value,
-        parseInt(document.getElementById('nameX').value),
-        parseInt(document.getElementById('nameY').value)
-      );
-
+      ctx.shadowColor="rgba(0,0,0,0.7)";
+      ctx.shadowBlur=4;
+      ctx.fillStyle=document.getElementById('ovrColor').value;
+      ctx.font=`bold ${document.getElementById('ovrFontSize').value}px ${document.getElementById('ovrFont').value}`;
+      ctx.fillText(document.getElementById('ovr').value, +document.getElementById('ovrX').value, +document.getElementById('ovrY').value);
+      ctx.fillStyle=document.getElementById('posColor').value;
+      ctx.font=`bold ${document.getElementById('posFontSize').value}px ${document.getElementById('posFont').value}`;
+      ctx.fillText(document.getElementById('position').value, +document.getElementById('posX').value, +document.getElementById('posY').value);
+      ctx.fillStyle=document.getElementById('nameColor').value;
+      ctx.font=`${document.getElementById('nameFontSize').value}px ${document.getElementById('nameFont').value}`;
+      ctx.fillText(document.getElementById('playerName').value, +document.getElementById('nameX').value, +document.getElementById('nameY').value);
       ctx.restore();
     }
 
-    // -------------------------------
-    //  드래그/리사이즈 표시 (핸들)
-    // -------------------------------
-    function drawHandles(props) {
+    function drawHandles(p) {
       ctx.save();
-      ctx.setLineDash([5, 3]);
-      ctx.strokeStyle = "red";
-      ctx.lineWidth = 2;
-      ctx.strokeRect(props.x, props.y, props.width, props.height);
-
-      // 오른쪽 하단 조절점
-      const handleSize = 8;
-      ctx.fillStyle = "red";
-      ctx.fillRect(
-        props.x + props.width - handleSize,
-        props.y + props.height - handleSize,
-        handleSize, handleSize
-      );
+      ctx.setLineDash([5,3]);
+      ctx.strokeStyle="red"; ctx.lineWidth=2;
+      ctx.strokeRect(p.x,p.y,p.width,p.height);
+      ctx.fillStyle="red";
+      ctx.fillRect(p.x+p.width-8, p.y+p.height-8, 8,8);
       ctx.restore();
     }
 
-    // -------------------------------
-    //  캔버스 내 이미지 드래그/리사이즈
-    // -------------------------------
-    let activeImage = null;
-    let mode = '';
-    let offsetX = 0, offsetY = 0;
-
-    canvas.addEventListener('pointerdown', function(e) {
-      e.preventDefault();
-      canvas.setPointerCapture(e.pointerId);
-      const rect = canvas.getBoundingClientRect();
-      const mx = e.clientX - rect.left;
-      const my = e.clientY - rect.top;
-
-      function checkImage(img, getProps) {
-        if(img.complete && img.src) {
-          let props = getProps();
-          // 리사이즈 핸들 (오른쪽 하단)
-          if(
-            mx >= props.x + props.width - 10 && mx <= props.x + props.width + 10 &&
-            my >= props.y + props.height - 10 && my <= props.y + props.height + 10
-          ) {
-            activeImage = props.name;
-            mode = 'resize';
-            offsetX = (props.x + props.width) - mx;
-            offsetY = (props.y + props.height) - my;
-            return true;
+    let activeImage=null, mode='', offsetX=0, offsetY=0;
+    canvas.addEventListener('pointerdown', e=>{
+      e.preventDefault(); canvas.setPointerCapture(e.pointerId);
+      const r=canvas.getBoundingClientRect(), mx=e.clientX-r.left, my=e.clientY-r.top;
+      const check=(img,getP)=>{
+        if(img.complete&&img.src){ const p=getP();
+          if(mx>=p.x+p.width-10&&mx<=p.x+p.width+10&&my>=p.y+p.height-10&&my<=p.y+p.height+10){
+            activeImage=p.name; mode='resize'; offsetX=(p.x+p.width)-mx; offsetY=(p.y+p.height)-my; return true;
           }
-          // 이미지 내부 (드래그)
-          if(mx >= props.x && mx <= props.x + props.width &&
-             my >= props.y && my <= props.y + props.height) {
-            activeImage = props.name;
-            mode = 'drag';
-            offsetX = mx - props.x;
-            offsetY = my - props.y;
-            return true;
+          if(mx>=p.x&&mx<=p.x+p.width&&my>=p.y&&my<=p.y+p.height){
+            activeImage=p.name; mode='drag'; offsetX=mx-p.x; offsetY=my-p.y; return true;
           }
         }
         return false;
-      }
-
-      // 순서: 국기 → 시즌 → 미니 페이스온 → 아이콘
-      if(checkImage(customFlag, () => ({
-        x: parseInt(document.getElementById('flagX').value),
-        y: parseInt(document.getElementById('flagY').value),
-        width: parseInt(document.getElementById('flagUploadWidth').value),
-        height: parseInt(document.getElementById('flagUploadHeight').value),
-        name: 'flag'
-      }))) return;
-
-      if(checkImage(customSeason, () => ({
-        x: parseInt(document.getElementById('seasonX').value),
-        y: parseInt(document.getElementById('seasonY').value),
-        width: parseInt(document.getElementById('seasonUploadWidth').value),
-        height: parseInt(document.getElementById('seasonUploadHeight').value),
-        name: 'season'
-      }))) return;
-
-      if(checkImage(customPhoto, () => ({
-        x: parseInt(document.getElementById('photoX').value),
-        y: parseInt(document.getElementById('photoY').value),
-        width: parseInt(document.getElementById('photoWidth').value),
-        height: parseInt(document.getElementById('photoHeight').value),
-        name: 'photo'
-      }))) return;
-
-      if(checkImage(customIcon, () => ({
-        x: parseInt(document.getElementById('iconX').value),
-        y: parseInt(document.getElementById('iconY').value),
-        width: parseInt(document.getElementById('iconWidth').value),
-        height: parseInt(document.getElementById('iconHeight').value),
-        name: 'icon'
-      }))) return;
-
-      // 만약 위 어느 부분도 클릭되지 않았다면 선택 해제
-      activeImage = null;
-      drawCard();
+      };
+      if(check(customFlag,()=>({ x:+document.getElementById('flagX').value, y:+document.getElementById('flagY').value, width:+document.getElementById('flagUploadWidth').value, height:+document.getElementById('flagUploadHeight').value, name:'flag' }))) return;
+      if(check(customSeason,()=>({ x:+document.getElementById('seasonX').value, y:+document.getElementById('seasonY').value, width:+document.getElementById('seasonUploadWidth').value, height:+document.getElementById('seasonUploadHeight').value, name:'season' }))) return;
+      if(check(customPhoto,()=>({ x:+document.getElementById('photoX').value, y:+document.getElementById('photoY').value, width:+document.getElementById('photoWidth').value, height:+document.getElementById('photoHeight').value, name:'photo' }))) return;
+      if(check(customIcon,()=>({ x:+document.getElementById('iconX').value, y:+document.getElementById('iconY').value, width:+document.getElementById('iconWidth').value, height:+document.getElementById('iconHeight').value, name:'icon' }))) return;
+      activeImage=null; drawCard();
     });
 
-    canvas.addEventListener('pointermove', function(e) {
-      if(!activeImage) return;
-      e.preventDefault();
-      const rect = canvas.getBoundingClientRect();
-      const mx = e.clientX - rect.left;
-      const my = e.clientY - rect.top;
-
-      if(activeImage === 'flag') {
-        let xElem = document.getElementById('flagX');
-        let yElem = document.getElementById('flagY');
-        let wElem = document.getElementById('flagUploadWidth');
-        let hElem = document.getElementById('flagUploadHeight');
-
-        if(mode === 'resize') {
-          let newW = mx - parseInt(xElem.value) + offsetX;
-          if(newW < 10) newW = 10;
-          wElem.value = newW;
-          hElem.value = newW;
-        } else if(mode === 'drag') {
-          xElem.value = mx - offsetX;
-          yElem.value = my - offsetY;
-        }
+    canvas.addEventListener('pointermove', e=>{
+      if(!activeImage) return; e.preventDefault();
+      const r=canvas.getBoundingClientRect(), mx=e.clientX-r.left, my=e.clientY-r.top;
+      let xE,yE,wE,hE;
+      switch(activeImage){
+        case 'flag':   xE=document.getElementById('flagX'); yE=document.getElementById('flagY'); wE=document.getElementById('flagUploadWidth'); hE=document.getElementById('flagUploadHeight'); break;
+        case 'season': xE=document.getElementById('seasonX'); yE=document.getElementById('seasonY'); wE=document.getElementById('seasonUploadWidth'); hE=document.getElementById('seasonUploadHeight'); break;
+        case 'photo':  xE=document.getElementById('photoX'); yE=document.getElementById('photoY'); wE=document.getElementById('photoWidth'); hE=document.getElementById('photoHeight'); break;
+        case 'icon':   xE=document.getElementById('iconX'); yE=document.getElementById('iconY'); wE=document.getElementById('iconWidth'); hE=document.getElementById('iconHeight'); break;
       }
-      else if(activeImage === 'season') {
-        let xElem = document.getElementById('seasonX');
-        let yElem = document.getElementById('seasonY');
-        let wElem = document.getElementById('seasonUploadWidth');
-        let hElem = document.getElementById('seasonUploadHeight');
-
-        if(mode === 'resize') {
-          let newW = mx - parseInt(xElem.value) + offsetX;
-          if(newW < 10) newW = 10;
-          wElem.value = newW;
-          hElem.value = newW;
-        } else if(mode === 'drag') {
-          xElem.value = mx - offsetX;
-          yElem.value = my - offsetY;
-        }
-      }
-      else if(activeImage === 'photo') {
-        let xElem = document.getElementById('photoX');
-        let yElem = document.getElementById('photoY');
-        let wElem = document.getElementById('photoWidth');
-        let hElem = document.getElementById('photoHeight');
-
-        if(mode === 'resize') {
-          let newW = mx - parseInt(xElem.value) + offsetX;
-          if(newW < 10) newW = 10;
-          wElem.value = newW;
-          hElem.value = newW;
-        } else if(mode === 'drag') {
-          xElem.value = mx - offsetX;
-          yElem.value = my - offsetY;
-        }
-      }
-      else if(activeImage === 'icon') {
-        let xElem = document.getElementById('iconX');
-        let yElem = document.getElementById('iconY');
-        let wElem = document.getElementById('iconWidth');
-        let hElem = document.getElementById('iconHeight');
-
-        if(mode === 'resize') {
-          let newW = mx - parseInt(xElem.value) + offsetX;
-          if(newW < 10) newW = 10;
-          wElem.value = newW;
-          hElem.value = newW;
-        } else if(mode === 'drag') {
-          xElem.value = mx - offsetX;
-          yElem.value = my - offsetY;
-        }
+      if(mode==='resize'){
+        let nw=mx-parseInt(xE.value)+offsetX;
+        if(nw<10) nw=10;
+        wE.value=nw; hE.value=nw;
+      } else {
+        xE.value=mx-offsetX; yE.value=my-offsetY;
       }
       drawCard();
     });
 
-    canvas.addEventListener('pointerup', function(e) {
-      activeImage = null;
-      canvas.releasePointerCapture(e.pointerId);
+    canvas.addEventListener('pointerup', e=>{
+      activeImage=null; canvas.releasePointerCapture(e.pointerId);
     });
 
-    // -------------------------------
-    //  이미지 다운로드 (PNG) 기능
-    // -------------------------------
-    function downloadCardImage() {
-      const tempActive = activeImage;
-      activeImage = null;
-      drawCard();
-      setTimeout(() => {
-        const dataURL = canvas.toDataURL("image/png");
-        const link = document.createElement('a');
-        link.href = dataURL;
-        link.download = cardFileName + '.png';
+    function downloadCardImage(){
+      const tmp=activeImage;
+      activeImage=null; drawCard();
+      setTimeout(()=>{
+        const dataURL=canvas.toDataURL("image/png");
+        const link=document.createElement('a');
+        link.href=dataURL; link.download=cardFileName+'.png';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        activeImage = tempActive;
-        drawCard();
-      }, 100);
+        activeImage=tmp; drawCard();
+      },100);
     }
 
-    // -------------------------------
-    //  JSON 내보내기 (편집 상태 저장) 기능
-    // -------------------------------
-    function downloadCardState() {
-      const cardState = {
+    function downloadCardState(){
+      const state={
         blankCard: document.getElementById('blankCardSelect').value,
         ovr: {
           value: document.getElementById('ovr').value,
@@ -1029,160 +762,216 @@
           src: customIcon.src
         }
       };
-
-      const json = JSON.stringify(cardState, null, 2);
-      const blob = new Blob([json], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'cardState.json';
+      const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
+      const url=URL.createObjectURL(blob);
+      const link=document.createElement('a');
+      link.href=url; link.download='cardState.json';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
     }
 
-    // -------------------------------
-    //  JSON 불러오기 (편집 상태 복원) 기능
-    // -------------------------------
-    document.getElementById('jsonLoadInput').addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-          try {
-            const state = JSON.parse(evt.target.result);
-            applyCardState(state);
-          } catch (err) {
-            console.error('JSON 파싱 오류:', err);
-          }
-        };
-        reader.readAsText(file);
-      }
+    document.getElementById('jsonLoadInput').addEventListener('change', e=>{
+      const file=e.target.files[0];
+      if(!file) return;
+      const reader=new FileReader();
+      reader.onload=evt=>{
+        try {
+          applyCardState(JSON.parse(evt.target.result));
+        } catch(err){
+          console.error('JSON 파싱 오류:',err);
+        }
+      };
+      reader.readAsText(file);
     });
 
-    // JSON 데이터를 폼에 반영하는 함수
-    function applyCardState(state) {
-      document.getElementById('blankCardSelect').value = state.blankCard;
+    function applyCardState(s){
+      document.getElementById('blankCardSelect').value = s.blankCard;
       $('.selectpicker').selectpicker('refresh');
       showLoading();
-      baseCard.src = `Blank/${getFileName(state.blankCard)}`;
-      baseCard.onload = function() {
-        hideLoading();
-        drawCard();
-      };
+      baseCard.src = `Blank/${getFileName(s.blankCard)}`;
+      baseCard.onload = () => { hideLoading(); drawCard(); };
 
-      document.getElementById('ovr').value = state.ovr.value;
-      document.getElementById('ovrX').value = state.ovr.x;
-      document.getElementById('ovrY').value = state.ovr.y;
-      document.getElementById('ovrFontSize').value = state.ovr.fontSize;
-      document.getElementById('ovrFont').value = state.ovr.font;
-      document.getElementById('ovrColor').value = state.ovr.color;
+      // 오버롤 복원
+      document.getElementById('ovr').value = s.ovr.value;
+      document.getElementById('ovrX').value = s.ovr.x;
+      document.getElementById('ovrY').value = s.ovr.y;
+      document.getElementById('ovrFontSize').value = s.ovr.fontSize;
+      document.getElementById('ovrFont').value = s.ovr.font;
+      document.getElementById('ovrColor').value = s.ovr.color;
 
-      document.getElementById('position').value = state.position.value;
-      document.getElementById('posX').value = state.position.x;
-      document.getElementById('posY').value = state.position.y;
-      document.getElementById('posFont').value = state.position.font;
-      document.getElementById('posFontSize').value = state.position.fontSize;
-      document.getElementById('posColor').value = state.position.color;
+      // 포지션 복원
+      document.getElementById('position').value = s.position.value;
+      document.getElementById('posX').value = s.position.x;
+      document.getElementById('posY').value = s.position.y;
+      document.getElementById('posFontSize').value = s.position.fontSize;
+      document.getElementById('posFont').value = s.position.font;
+      document.getElementById('posColor').value = s.position.color;
 
-      document.getElementById('playerName').value = state.playerName.value;
-      document.getElementById('nameX').value = state.playerName.x;
-      document.getElementById('nameY').value = state.playerName.y;
-      document.getElementById('nameFont').value = state.playerName.font;
-      document.getElementById('nameFontSize').value = state.playerName.fontSize;
-      document.getElementById('nameColor').value = state.playerName.color;
+      // 선수 이름 복원
+      document.getElementById('playerName').value = s.playerName.value;
+      document.getElementById('nameX').value = s.playerName.x;
+      document.getElementById('nameY').value = s.playerName.y;
+      document.getElementById('nameFontSize').value = s.playerName.fontSize;
+      document.getElementById('nameFont').value = s.playerName.font;
+      document.getElementById('nameColor').value = s.playerName.color;
 
-      document.getElementById('flagX').value = state.flag.x;
-      document.getElementById('flagY').value = state.flag.y;
-      document.getElementById('flagUploadWidth').value = state.flag.width;
-      document.getElementById('flagUploadHeight').value = state.flag.height;
-      customFlag.src = state.flag.src;
-
-      document.getElementById('seasonX').value = state.season.x;
-      document.getElementById('seasonY').value = state.season.y;
-      document.getElementById('seasonUploadWidth').value = state.season.width;
-      document.getElementById('seasonUploadHeight').value = state.season.height;
-      customSeason.src = state.season.src;
-
-      document.getElementById('photoX').value = state.photo.x;
-      document.getElementById('photoY').value = state.photo.y;
-      document.getElementById('photoWidth').value = state.photo.width;
-      document.getElementById('photoHeight').value = state.photo.height;
-      customPhoto.src = state.photo.src;
-
-      if(state.icon) {
-        document.getElementById('iconX').value = state.icon.x;
-        document.getElementById('iconY').value = state.icon.y;
-        document.getElementById('iconWidth').value = state.icon.width;
-        document.getElementById('iconHeight').value = state.icon.height;
-        customIcon.src = state.icon.src;
+      // 국기 복원
+      if (s.flag.src) {
+        showLoading();
+        customFlag.onload = () => { hideLoading(); drawCard(); };
+        customFlag.src = s.flag.src;
       }
+      document.getElementById('flagX').value = s.flag.x;
+      document.getElementById('flagY').value = s.flag.y;
+      document.getElementById('flagUploadWidth').value = s.flag.width;
+      document.getElementById('flagUploadHeight').value = s.flag.height;
+
+      // 시즌 복원
+      if (s.season.src) {
+        showLoading();
+        customSeason.onload = () => { hideLoading(); drawCard(); };
+        customSeason.src = s.season.src;
+      }
+      document.getElementById('seasonX').value = s.season.x;
+      document.getElementById('seasonY').value = s.season.y;
+      document.getElementById('seasonUploadWidth').value = s.season.width;
+      document.getElementById('seasonUploadHeight').value = s.season.height;
+
+      // 페이스온 복원
+      if (s.photo.src) {
+        showLoading();
+        customPhoto.onload = () => { hideLoading(); drawCard(); };
+        customPhoto.src = s.photo.src;
+      }
+      document.getElementById('photoX').value = s.photo.x;
+      document.getElementById('photoY').value = s.photo.y;
+      document.getElementById('photoWidth').value = s.photo.width;
+      document.getElementById('photoHeight').value = s.photo.height;
+
+      // 아이콘 복원 & 옵션 표시
+      if (s.icon.src) {
+        document.getElementById('newOption').value = 'icon';
+        document.getElementById('iconOptions').style.display = 'block';
+        showLoading();
+        customIcon.onload = () => { hideLoading(); drawCard(); };
+        customIcon.src = s.icon.src;
+      } else {
+        document.getElementById('newOption').value = 'live';
+        document.getElementById('iconOptions').style.display = 'none';
+      }
+      document.getElementById('iconX').value = s.icon.x;
+      document.getElementById('iconY').value = s.icon.y;
+      document.getElementById('iconWidth').value = s.icon.width;
+      document.getElementById('iconHeight').value = s.icon.height;
 
       drawCard();
     }
 
-    // -------------------------------
-    //  PIP 캔버스 업데이트
-    // -------------------------------
-    function updatePipCanvas() {
-      pipCtx.clearRect(0, 0, pipCanvas.width, pipCanvas.height);
-      pipCtx.drawImage(canvas, 0, 0, pipCanvas.width, pipCanvas.height);
+    function updatePipCanvas(){
+      pipCtx.clearRect(0,0,pipCanvas.width,pipCanvas.height);
+      pipCtx.drawImage(canvas,0,0,pipCanvas.width,pipCanvas.height);
     }
 
-    // -------------------------------
-    //  에디터 내 모든 input, select 변경 시 미리보기 바로 업데이트
-    // -------------------------------
-    document.querySelectorAll('.editor input, .editor select').forEach(el => {
-      el.addEventListener('input', drawCard);
-    });
-
-    // 새 옵션 변경 시 아이콘 관련 옵션 보이기/숨기기
-    document.getElementById('newOption').addEventListener('change', function() {
-      const option = document.getElementById('newOption').value;
-      document.getElementById('iconOptions').style.display = (option === 'icon') ? "block" : "none";
+    document.querySelectorAll('.editor input, .editor select').forEach(el=>el.addEventListener('input', drawCard));
+    document.getElementById('newOption').addEventListener('change', ()=>{
+      document.getElementById('iconOptions').style.display = document.getElementById('newOption').value==='icon'?"block":"none";
       drawCard();
     });
 
-    // -------------------------------
-    //  IntersectionObserver (PIP 보이기/숨기기)
-    // -------------------------------
-    const previewElem = document.querySelector('.preview');
-    const pipContainer = document.getElementById('pipPreview');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting) {
-          pipContainer.style.opacity = "0";
-          pipContainer.style.pointerEvents = "none";
+    new IntersectionObserver(entries=>{
+      entries.forEach(en=>{
+        const pip=document.getElementById('pipPreview');
+        if(en.isIntersecting){
+          pip.style.opacity="0"; pip.style.pointerEvents="none";
         } else {
-          pipContainer.style.opacity = "1";
-          pipContainer.style.pointerEvents = "auto";
-          updatePipCanvas();
+          pip.style.opacity="1"; pip.style.pointerEvents="auto"; updatePipCanvas();
         }
       });
-    }, { threshold: 0.1 });
+    },{threshold:0.1}).observe(document.querySelector('.preview'));
 
-    observer.observe(previewElem);
-
-    // -------------------------------
-    //  폰트 로딩 후 초기화
-    // -------------------------------
-    Promise.race([
-      document.fonts.ready,
-      new Promise(resolve => setTimeout(resolve, 5000))
-    ]).then(() => {
-      loadBaseCard();             // 기본 카드 로드
-      populateBlankCardDropdown(); // 빈카드 목록 채우기
+    Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,5000))]).then(()=>{
+      loadBaseCard(); populateBlankCardDropdown();
     });
 
-    // -------------------------------
-    //  디버깅용: 로딩 오버레이 강제 해제
-    // -------------------------------
-    setTimeout(() => {
+    setTimeout(()=>{
       hideLoading();
       console.warn("로딩 오버레이 강제 해제 (디버깅)");
-    }, 10000);
+    },10000);
   </script>
+
+  <!-- 공유 버튼 로직 -->
+  <script type="module">
+    import { db, collection, addDoc } from './firebase.js';
+
+    const shareBtn = document.getElementById('share-btn');
+    let isSharing = false;
+
+    shareBtn.addEventListener('click', async () => {
+      if (isSharing) return;
+
+      const last = localStorage.getItem('lastShareTime');
+      if (last && Date.now() - last < 60_000) {
+        alert('잠시 후에 다시 공유해 주세요.');
+        return;
+      }
+
+      if (!confirm('정말 이 카드를 공유하시겠습니까?')) {
+        return;
+      }
+
+      isSharing = true;
+      shareBtn.disabled = true;
+      const txt = shareBtn.textContent;
+      shareBtn.textContent = '공유 중…';
+
+      const title = document.getElementById('cardTitleInput').value.trim();
+      const canvasElem = document.getElementById('cardCanvas');
+      const imageUrl = canvasElem.toDataURL('image/png');
+
+      if (!title) {
+        alert('제목을 입력해주세요!');
+        isSharing = false;
+        shareBtn.disabled = false;
+        shareBtn.textContent = txt;
+        return;
+      }
+
+      try {
+        await addDoc(collection(db, 'cards'), {
+          title,
+          imageUrl,
+          createdAt: new Date()
+        });
+        alert('카드가 성공적으로 공유되었습니다!');
+        localStorage.setItem('lastShareTime', Date.now());
+      } catch (e) {
+        console.error('카드 저장 실패:', e);
+        alert('카드 저장에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+      } finally {
+        setTimeout(() => {
+          isSharing = false;
+          shareBtn.disabled = false;
+          shareBtn.textContent = txt;
+        }, 30_000);
+      }
+    });
+  </script>
+
+  <button
+    id="share-fab"
+    data-tooltip="게시판에 공유하기"
+    title="게시판에 공유하기"
+  >
+    공유
+  </button>
+      <script>
+  // 기존 share-btn 로직 바로 아래에 추가
+  const shareFab = document.getElementById('share-fab');
+  shareFab.addEventListener('click', () => {
+    document.getElementById('share-btn').click();
+  });
+</script>
 </body>
 </html>
