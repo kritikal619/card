@@ -157,6 +157,12 @@
       border-radius: 10px;
       overflow: hidden;
     }
+    /* Style for showing the PIP */
+    #pipPreview.show {
+      opacity: 1;
+      pointer-events: auto; /* Allow pointer events only when visible, if needed */
+    }
+
 
     /* 공유 버튼 강조용 Floating Action Button */
     #share-fab {
@@ -199,25 +205,6 @@
       font-size: 12px;
       white-space: nowrap;
     }
-      @media (max-width: 768px) {
-    #pipPreview {
-      display: flex !important;
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      transform: scale(0.3);
-      transform-origin: top right;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease-in-out;
-      overflow: hidden;
-      z-index: 10000;
-    }
-    #pipPreview.show {
-      opacity: 1 !important;
-      pointer-events: auto;
-    }
-      }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 </head>
@@ -432,7 +419,7 @@
 
   </div>
   <div id="pipPreview">
-    <canvas id="pipCanvas" width="300" height="300"></canvas>
+    <canvas id="pipCanvas" width="300" height="300"></canvas> <!-- Ensure these dimensions match main canvas initial setting if needed -->
   </div>
   <footer class="footer">
     <p>
@@ -448,18 +435,6 @@
     // -------------------------------
     // 캔버스 초기화 & 드로잉 로직
     // -------------------------------
-      const pipPreview = document.getElementById('pipPreview');
-      let pipFadeTimeout;
-
-  // PIP 보여주기 + 자동 페이드아웃 함수
-      function showPip() {
-        pipPreview.classList.add('show');
-        clearTimeout(pipFadeTimeout);
-        pipFadeTimeout = setTimeout(() => {
-      pipPreview.classList.remove('show');
-    }, 2000); // 2초 후 페이드아웃
-  }
-  
     const totalImages = 264;
     const canvas = document.getElementById('cardCanvas');
     const ctx = canvas.getContext('2d');
@@ -475,8 +450,9 @@
     }
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
-    pipCanvas.width = canvasWidth;
-    pipCanvas.height = canvasHeight;
+    // Set initial PIP canvas size (adjust if needed, maybe smaller than main)
+    pipCanvas.width = 150; // Example: smaller fixed size for PIP
+    pipCanvas.height = 150; // Example: smaller fixed size for PIP
 
     function showLoading() {
       document.getElementById('loadingOverlay').style.display = "flex";
@@ -610,6 +586,7 @@
     }
 
     function drawCard() {
+      // ---> Start of original drawCard logic
       ctx.clearRect(0,0,canvas.width,canvas.height);
       // Draw base card first
       if (baseCard.complete && baseCard.src) {
@@ -690,25 +667,11 @@
                  customIcon.src = 'icon.png'; // This will trigger the onload/onerror handler
              }
           }
-          const originalDrawCard = drawCard;
-  drawCard = function(...args) {
-    originalDrawCard.apply(this, args);
-    if (window.innerWidth <= 768) {
-      updatePipCanvas();
-      showPip();
-    }
-  };
-
-  // 리사이즈 시에도 PIP 캔버스 업데이트
-  window.addEventListener('resize', () => {
-    if (window.innerWidth <= 768) {
-      updatePipCanvas();
-    }
-  });
       }
+      // ---> End of original drawCard logic
 
-
-      if(document.getElementById('pipPreview').style.opacity==='1') updatePipCanvas();
+      // Note: The PIP update logic will be added by the script block below this one.
+      // We don't call updatePipCanvas or showPip directly inside this function definition anymore.
     }
 
     function drawText() {
@@ -1001,16 +964,14 @@
          clearTimeout(hideHandlesTimeout);
          hideHandlesTimeout = null;
       }
-      drawCard(); // Clear handles from previous state
+      // Don't call drawCard here yet, let the image loads finish or call it at the end
 
       // Blank Card
       document.getElementById('blankCardSelect').value = s.blankCard || 264; // Use default if not in state
       $('.selectpicker').selectpicker('refresh');
       showLoading();
       baseCard.src = `Blank/${getFileName(document.getElementById('blankCardSelect').value)}`; // Use potentially defaulted value
-      baseCard.onload = () => { hideLoading(); drawCard(); };
-      baseCard.onerror = () => { console.error("Failed to load base card"); hideLoading(); drawCard(); };
-
+      // We'll rely on the global onload/onerror for baseCard now
 
       // OVR Restore
       document.getElementById('ovr').value = s.ovr ? s.ovr.value : 129;
@@ -1045,14 +1006,15 @@
           document.getElementById(hId).value = (s[aspectRatioKey] && s[aspectRatioKey].height !== undefined) ? s[aspectRatioKey].height : defaultH;
 
           if (src) {
-              showLoading();
+              showLoading(); // Show loading before setting src
               // Onload/onerror handlers defined globally handle hiding loading and drawing
               imgElement.src = src;
           } else {
               imgElement.src = ""; // Clear src if not in state or src is empty
               aspectRatios[aspectRatioKey] = undefined;
               // No need to call drawCard here, it's called after all state is applied
-              hideLoading(); // Hide loading if an image didn't need to load
+              // We need to manually check if loading should be hidden if this was the *last* image
+              // hideLoading(); // Moved hideLoading logic to the end
           }
       };
 
@@ -1083,18 +1045,21 @@
           document.getElementById('iconHeight').value = 40;
       }
 
-      // drawCard() will be called by the last image's onload or onerror handler.
-      // If no images are loading, call it once here to ensure everything is drawn.
-      // We need to check if any images are loading.
-      const imagesLoading = [baseCard, customFlag, customSeason, customPhoto, customIcon].some(img => img.src && !img.complete);
-       if (!imagesLoading) {
-           hideLoading(); // Ensure loading is hidden if no images loaded
-           drawCard(); // Draw if no images were loading
-       }
+      // Check if any images are still loading AFTER setting all sources
+      // Wait a very short moment to allow browser to register the src changes
+      setTimeout(() => {
+          const imagesStillLoading = [baseCard, customFlag, customSeason, customPhoto, customIcon].some(img => img.src && !img.complete);
+          if (!imagesStillLoading) {
+              hideLoading(); // Ensure loading is hidden if nothing ended up loading
+              drawCard(); // Draw if no images were loading
+          }
+          // Otherwise, the onload/onerror handlers of the loading images will call hideLoading/drawCard
+      }, 50); // 50ms delay might be sufficient
     }
 
 
     function updatePipCanvas(){
+      // Draw the main canvas onto the PIP canvas, scaling it down
       pipCtx.clearRect(0,0,pipCanvas.width,pipCanvas.height);
       pipCtx.drawImage(canvas,0,0,pipCanvas.width,pipCanvas.height);
     }
@@ -1105,32 +1070,26 @@
       document.getElementById('iconOptions').style.display = optionValue === 'icon' ? "block" : "none";
       // If switching to icon and the customIcon hasn't been loaded yet, load the default icon.png
       // Also check if the src is already set (e.g., loaded from state)
-      if (optionValue === 'icon' && (!customIcon.src || customIcon.src.startsWith('data:')) && !customIcon.complete) {
+      if (optionValue === 'icon' && (!customIcon.src || !customIcon.complete) && !(customIcon.src && customIcon.src.startsWith('data:')) ) {
           console.log("Loading default icon.png on option change");
           showLoading();
           customIcon.src = 'icon.png'; // This will trigger the onload handler
-      } else if (optionValue === 'live' && customIcon.src) {
-          // If switching away from icon, clear the icon image
-          // customIcon.src = ""; // Don't clear src here, keep it in memory for faster switching back
-          // aspectRatios.icon = undefined; // Keep aspect ratio
+      } else if (optionValue === 'live') {
+        // Do nothing when switching to live, keep icon loaded if it was.
       }
-      drawCard();
+      drawCard(); // Draw after potential state change
     });
 
-    // Preload icon.png to get its dimensions and aspect ratio early
-    // This avoids a flicker or delay when switching to the icon option for the first time
+    // Preload icon.png logic remains the same
     const tempIconLoader = new Image();
     tempIconLoader.onload = function() {
-        // Don't set customIcon.src here, just get dimensions
         if (tempIconLoader.width > 0 && tempIconLoader.height > 0) {
-            aspectRatios.icon = tempIconLoader.width / tempIconLoader.height; // Store aspect ratio
+            aspectRatios.icon = tempIconLoader.width / tempIconLoader.height;
             console.log("Default icon.png preloaded and aspect ratio stored.");
-            // Now load the actual customIcon if the option is already selected
-            if (document.getElementById('newOption').value === 'icon' && !customIcon.src) { // Only load if icon option is selected and customIcon.src is not already set (e.g., from state)
+            if (document.getElementById('newOption').value === 'icon' && !customIcon.src) {
                  console.log("Loading customIcon with default icon.png after preload.");
                  showLoading();
-                 customIcon.src = 'icon.png'; // Load the actual image into the customIcon element
-                 // customIcon.onload will handle hiding loading and drawing
+                 customIcon.src = 'icon.png';
             }
         } else {
              console.error("Preloaded icon.png has invalid dimensions.");
@@ -1140,47 +1099,54 @@
     tempIconLoader.onerror = function() {
         console.error("Failed to preload icon.png");
         aspectRatios.icon = undefined;
-        // If icon option is selected and it failed to load, hide loading
         if (document.getElementById('newOption').value === 'icon' && !customIcon.src) {
              hideLoading();
-             drawCard(); // Draw without the icon
+             drawCard();
         }
     };
-    tempIconLoader.crossOrigin = "anonymous"; // Needed if icon.png is on a different origin
+    tempIconLoader.crossOrigin = "anonymous";
     tempIconLoader.src = 'icon.png';
 
 
     Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,5000))]).then(()=>{
       loadBaseCard(); populateBlankCardDropdown();
-       // If the icon option is already selected on page load, the tempIconLoader.onload will handle drawing.
-       // If any other images need loading from applyCardState, their handlers will draw.
-       // An initial draw might be needed if no images are loading from state or default icon isn't needed immediately.
-       // applyCardState handles the final draw logic based on loading status.
+       // Initial draw is handled by loadBaseCard -> drawCard chain or applyCardState logic
     });
 
     setTimeout(()=>{
-      hideLoading();
-      console.warn("로딩 오버레이 강제 해제 (디버깅)");
-    },30000); // Increased timeout for safety
+        if (document.getElementById('loadingOverlay').style.display === 'flex') {
+            hideLoading();
+            console.warn("로딩 오버레이 강제 해제 (타임아웃)");
+             // Force a draw if loading was stuck
+            if (!baseCard.complete && !customFlag.complete && !customSeason.complete && !customPhoto.complete && !customIcon.complete) {
+                drawCard();
+            }
+        }
+    },30000);
 
 
-    // Add event listener to canvas to clear handles on click outside an image
+    // Canvas click listener to clear handles
     canvas.addEventListener('click', (e) => {
         const r = canvas.getBoundingClientRect();
         const mx = e.clientX - r.left;
         const my = e.clientY - r.top;
 
-        // Check if the click is within the bounds of any image with handles
-        const isClickInsideImage = [
-            activeImage === 'flag' && customFlag.complete && customFlag.src ? { name: 'flag', x: +document.getElementById('flagX').value, y: +document.getElementById('flagY').value, width: +document.getElementById('flagUploadWidth').value, height: +document.getElementById('flagUploadHeight').value } : null,
-            activeImage === 'season' && customSeason.complete && customSeason.src ? { name: 'season', x: +document.getElementById('seasonX').value, y: +document.getElementById('seasonY').value, width: +document.getElementById('seasonUploadWidth').value, height: +document.getElementById('seasonUploadHeight').value } : null,
-            activeImage === 'photo' && customPhoto.complete && customPhoto.src ? { name: 'photo', x: +document.getElementById('photoX').value, y: +document.getElementById('photoY').value, width: +document.getElementById('photoWidth').value, height: +document.getElementById('photoHeight').value } : null,
-            activeImage === 'icon' && customIcon.complete && customIcon.src && document.getElementById('newOption').value === 'icon' ? { name: 'icon', x: +document.getElementById('iconX').value, y: +document.getElementById('iconY').value, width: +document.getElementById('iconWidth').value, height: +document.getElementById('iconHeight').value } : null,
-        ].some(p => p && mx >= p.x && mx <= p.x + p.width && my >= p.y && my <= p.y + p.height);
+        const checkClick = (img, getP) => {
+             if (activeImage === getP().name && img.complete && img.src) {
+                 const p = getP();
+                 return mx >= p.x && mx <= p.x + p.width && my >= p.y && my <= p.y + p.height;
+             }
+             return false;
+        };
 
-        // If there's an active image and the click was outside of it (and not on a handle which pointerdown handles)
-        if (activeImage && !isClickInsideImage) {
-             // Clear the timeout if one is pending, and immediately remove handles
+        const isClickInsideActiveImage =
+            checkClick(customFlag, () => ({ name: 'flag', x: +document.getElementById('flagX').value, y: +document.getElementById('flagY').value, width: +document.getElementById('flagUploadWidth').value, height: +document.getElementById('flagUploadHeight').value })) ||
+            checkClick(customSeason, () => ({ name: 'season', x: +document.getElementById('seasonX').value, y: +document.getElementById('seasonY').value, width: +document.getElementById('seasonUploadWidth').value, height: +document.getElementById('seasonUploadHeight').value })) ||
+            checkClick(customPhoto, () => ({ name: 'photo', x: +document.getElementById('photoX').value, y: +document.getElementById('photoY').value, width: +document.getElementById('photoWidth').value, height: +document.getElementById('photoHeight').value })) ||
+            (document.getElementById('newOption').value === 'icon' && checkClick(customIcon, () => ({ name: 'icon', x: +document.getElementById('iconX').value, y: +document.getElementById('iconY').value, width: +document.getElementById('iconWidth').value, height: +document.getElementById('iconHeight').value })));
+
+
+        if (activeImage && !isClickInsideActiveImage) {
              if (hideHandlesTimeout) {
                  clearTimeout(hideHandlesTimeout);
                  hideHandlesTimeout = null;
@@ -1191,8 +1157,75 @@
         }
     });
 
-
   </script>
+  <!-- ======================================== -->
+  <!-- == PIP TOGGLE SCRIPT (AFTER drawCard) == -->
+  <!-- ======================================== -->
+  <script>
+    const pipPreview = document.getElementById('pipPreview');
+    let pipFadeTimeout;
+
+    function showPip() {
+      pipPreview.classList.add('show'); // Add class to make visible via CSS transition
+      clearTimeout(pipFadeTimeout); // Clear any existing fade-out timer
+      pipFadeTimeout = setTimeout(() => {
+        pipPreview.classList.remove('show'); // Remove class to fade out
+      }, 2000); // 2 seconds duration
+    }
+
+    // Check if drawCard is already defined before wrapping
+    if (typeof drawCard === 'function') {
+        // Back up the original drawCard function
+        const originalDrawCard = drawCard;
+
+        // Overwrite drawCard with a new function that includes PIP logic
+        drawCard = function(...args) {
+          // Call the original drawing logic first
+          originalDrawCard.apply(this, args);
+
+          // Check if on mobile (or small screen)
+          if (window.innerWidth <= 768) {
+            updatePipCanvas(); // Update the PIP canvas content
+            showPip();         // Show the PIP and start the fade-out timer
+          }
+        };
+    } else {
+        console.error("drawCard function not found before attempting to wrap it for PIP.");
+    }
+
+
+    // Update PIP canvas on window resize if on mobile view
+    window.addEventListener('resize', () => {
+      // Recalculate main canvas size on resize for mobile
+      if (window.innerWidth < 768) {
+          canvasWidth = Math.floor(window.innerWidth * 0.8);
+          canvasHeight = Math.floor(window.innerWidth * 0.8);
+          canvas.width = canvasWidth;
+          canvas.height = canvasHeight;
+          // PIP canvas size could also be adjusted here if needed, or kept fixed
+          // e.g., pipCanvas.width = canvasWidth * 0.5; pipCanvas.height = canvasHeight * 0.5;
+          drawCard(); // Redraw main canvas (which will trigger PIP update via wrapped function)
+      } else {
+          // Optional: Reset main canvas size if resizing back to desktop view
+          // canvasWidth = 300; // Or original desktop default
+          // canvasHeight = 300;
+          // canvas.width = canvasWidth;
+          // canvas.height = canvasHeight;
+          // pipCanvas.width = 150; // Reset PIP size too
+          // pipCanvas.height = 150;
+          // drawCard(); // Redraw main canvas
+      }
+
+      // Independent check: If PIP is currently visible due to recent draw, update its content on resize
+      if (window.innerWidth <= 768 && pipPreview.classList.contains('show')) {
+        updatePipCanvas();
+      }
+    });
+  </script>
+  <!-- ======================================== -->
+  <!-- == END PIP TOGGLE SCRIPT             == -->
+  <!-- ======================================== -->
+
   <script type="module">
     import { db, collection, addDoc } from './firebase.js'; // Ensure firebase.js is correctly configured
 
@@ -1219,7 +1252,7 @@
 
       const title = document.getElementById('cardTitleInput').value.trim();
       const canvasElem = document.getElementById('cardCanvas');
-      const imageUrl = canvasElem.toDataURL('image/png');
+
 
       if (!title) {
         alert('제목을 입력해주세요!');
@@ -1244,6 +1277,7 @@
 
       // Use a small delay to ensure canvas is redrawn before capture
       setTimeout(async () => {
+           const imageUrl = canvasElem.toDataURL('image/png'); // Capture after redraw
            try {
              await addDoc(collection(db, 'cards'), {
                title,
@@ -1259,7 +1293,7 @@
              // Restore active image state and mode, and redraw
              activeImage = tmpActiveImage;
              mode = tmpMode;
-             drawCard();
+             drawCard(); // Redraw potentially with handles again
 
               // Re-enable button after a delay regardless of success/failure
              setTimeout(() => {
@@ -1287,5 +1321,4 @@
     });
   </script>
 </body>
-</html>
-
+            </html>
