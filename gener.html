@@ -199,6 +199,25 @@
       font-size: 12px;
       white-space: nowrap;
     }
+      @media (max-width: 768px) {
+    #pipPreview {
+      display: flex !important;
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      transform: scale(0.3);
+      transform-origin: top right;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease-in-out;
+      overflow: hidden;
+      z-index: 10000;
+    }
+    #pipPreview.show {
+      opacity: 1 !important;
+      pointer-events: auto;
+    }
+      }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 </head>
@@ -429,6 +448,18 @@
     // -------------------------------
     // 캔버스 초기화 & 드로잉 로직
     // -------------------------------
+      const pipPreview = document.getElementById('pipPreview');
+      let pipFadeTimeout;
+
+  // PIP 보여주기 + 자동 페이드아웃 함수
+      function showPip() {
+        pipPreview.classList.add('show');
+        clearTimeout(pipFadeTimeout);
+        pipFadeTimeout = setTimeout(() => {
+      pipPreview.classList.remove('show');
+    }, 2000); // 2초 후 페이드아웃
+  }
+  
     const totalImages = 264;
     const canvas = document.getElementById('cardCanvas');
     const ctx = canvas.getContext('2d');
@@ -659,6 +690,21 @@
                  customIcon.src = 'icon.png'; // This will trigger the onload/onerror handler
              }
           }
+          const originalDrawCard = drawCard;
+  drawCard = function(...args) {
+    originalDrawCard.apply(this, args);
+    if (window.innerWidth <= 768) {
+      updatePipCanvas();
+      showPip();
+    }
+  };
+
+  // 리사이즈 시에도 PIP 캔버스 업데이트
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= 768) {
+      updatePipCanvas();
+    }
+  });
       }
 
 
