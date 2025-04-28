@@ -59,12 +59,23 @@
     #share-fab:hover { transform: scale(1.1); }
     @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,160,0,0.7); } 50% { box-shadow: 0 0 0 15px rgba(255,160,0,0); } 100% { box-shadow: 0 0 0 0 rgba(255,160,0,0); } }
     #share-fab[data-tooltip]:hover:after { content: attr(data-tooltip); position: absolute; bottom: 70px; right: 0; background: rgba(0,0,0,0.75); color: #fff; padding: 5px 8px; border-radius: 3px; font-size: 12px; white-space: nowrap; }
+    #resizeHandle {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #3498db;
+  border-radius: 50%;
+  bottom: 0;
+  right: 0;
+  cursor: nwse-resize;
+  z-index: 10;
+    }
   </style>
 </head>
 <body>
   <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top"> <div class="container-fluid"> <input id="cardTitleInput" type="text" placeholder="카드 제목 입력"> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button> <div class="collapse navbar-collapse" id="navbarContent"> <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> <li class="nav-item"><a class="nav-link" href="https://kritikal619.github.io/card/" target="_blank">피모합성소</a></li> <li class="nav-item"><a class="nav-link" href="https://kritikal619.github.io/trait/" target="_blank">피모 특성</a></li> <li class="nav-item"><a class="nav-link" href="http://fcevol.kro.kr" target="_blank">진화 시뮬레이션</a></li> <li class="nav-item"><a class="nav-link" href="https://kritikal619.github.io/calcu" target="_blank">수수료 계산기</a></li> </ul> </div> </div> </nav>
   <div id="banner"> <a href="banner.html">FC모바일 카드 합성 방법 (클릭시 이동)</a> </div>
-  <div class="main-content"> <div class="container custom-container"> <div class="preview order-1 order-md-2"> <h2>카드 미리보기</h2> <div style="position: relative; width: 100%;"> <canvas id="cardCanvas"></canvas> <div id="loadingOverlay"> <img src="https://i.gifer.com/ZKZg.gif" alt="로딩중..."> </div> </div> </div> <div class="editor order-2 order-md-1"> <h2>카드 제작기</h2>
+  <div class="main-content"> <div class="container custom-container"> <div class="preview order-1 order-md-2"> <h2>카드 미리보기</h2> <div style="position: relative; width: 100%;"> <canvas id="cardCanvas"></canvas>   <div id="resizeHandle"></div> <!-- 리사이즈 핸들 추가 --> <div id="loadingOverlay"> <img src="https://i.gifer.com/ZKZg.gif" alt="로딩중..."> </div> </div> </div> <div class="editor order-2 order-md-1"> <h2>카드 제작기</h2>
   <!-- Editor Form Sections -->
   <div class="form-group"> <label for="blankCardSelect">빈카드 선택</label> <select id="blankCardSelect" class="selectpicker" data-live-search="true" data-width="100%"></select> </div>
   <fieldset> <legend>오버롤 설정</legend> <div class="form-group"> <label for="ovr">오버롤</label> <input type="number" id="ovr" min="0" max="9999999999" value="129"> <label class="mt-2">좌표 (X, Y)</label> <div class="coord-inputs"> <input type="number" id="ovrX" aria-label="OVR X coordinate" placeholder="X" value="88"> <input type="number" id="ovrY" aria-label="OVR Y coordinate" placeholder="Y" value="63"> </div> </div> <div class="form-group"> <label for="ovrFontSize">오버롤 폰트 크기</label> <input type="number" id="ovrFontSize" placeholder="Font Size" value="35"> </div> <div class="form-group"> <label for="ovrFont">오버롤 폰트</label> <select id="ovrFont"> <option value="FontA" selected>FC모바일 오버롤 폰트</option> <option value="FontB">피파모바일 폰트</option> </select> </div> <div class="form-group"> <label for="ovrColor">오버롤 폰트 색상</label> <input type="color" id="ovrColor" value="#FFD700" title="오버롤 색상 선택"> </div> </fieldset>
@@ -43962,6 +43973,28 @@
         const tempIconLoader = new Image(); tempIconLoader.crossOrigin = "anonymous"; tempIconLoader.onload = () => { if (tempIconLoader.width > 0 && tempIconLoader.height > 0) { aspectRatios.icon = tempIconLoader.width / tempIconLoader.height; if (document.getElementById('newOption').value === 'icon' && !customIcon.src && !customIcon.error && !customIcon.loading) { showLoading(); customIcon.loading = true; customIcon.src = ICON_DEFAULT_PATH; } } else { console.error("Preloaded icon.png invalid dimensions."); } }; tempIconLoader.onerror = () => { console.error("Failed to preload icon.png"); }; tempIconLoader.src = ICON_DEFAULT_PATH;
         // Safety timeout
         setTimeout(() => { if (document.getElementById('loadingOverlay').style.display === 'flex') { hideLoading(); console.warn("Loading overlay forced hide (timeout)."); if (!baseCard.complete || !baseCard.src) drawCard(); } }, 20000);
+    });
+    const resizeHandle = document.getElementById('resizeHandle');
+    const canvas = document.getElementById('cardCanvas');
+    let isResizing = false;
+
+    resizeHandle.addEventListener('mousedown', function(e) {
+      e.preventDefault();
+      isResizing = true;
+    });
+
+    window.addEventListener('mousemove', function(e) {
+      if (!isResizing) return;
+      const rect = canvas.getBoundingClientRect();
+      const newWidth = e.clientX - rect.left;
+      const newHeight = e.clientY - rect.top;
+      canvas.width = newWidth;
+      canvas.height = newHeight;
+      drawCard(); // 캔버스 다시 그림
+    });
+
+    window.addEventListener('mouseup', function() {
+      isResizing = false;
     });
   </script>
 
