@@ -43858,10 +43858,75 @@
     function drawHandles(p) { ctx.save(); ctx.setLineDash([5, 3]); ctx.strokeStyle = "red"; ctx.lineWidth = 1; ctx.strokeRect(p.x, p.y, p.width, p.height); const handleRadius = 4; const handleX = p.x + p.width; const handleY = p.y + p.height; ctx.fillStyle = "red"; ctx.beginPath(); ctx.arc(handleX, handleY, handleRadius, 0, Math.PI * 2); ctx.fill(); ctx.restore(); }
 
     // --- Canvas Interaction Listeners --- (Unchanged)
-    canvas.addEventListener('pointerdown', e => { /* ... */ });
-    canvas.addEventListener('pointermove', e => { /* ... */ });
-    canvas.addEventListener('pointerup', e => { /* ... */ });
-    canvas.addEventListener('pointerleave', e => { /* ... */ });
+  
+// --- Canvas Interaction Listeners --- (Replace the placeholders with this)
+
+// pointerdown: 이미지 내부 클릭 → 이동, 우측하단 핸들 클릭 → 리사이즈 시작
+canvas.addEventListener('pointerdown', e => {
+  const x = e.offsetX, y = e.offsetY;
+  const p = getImageParams('photo'); if (!p) return;
+  const handleRadius = 8; // 핸들 반지름
+  const hx = p.x + p.width, hy = p.y + p.height;
+
+  if (Math.hypot(x - hx, y - hy) <= handleRadius) {
+    // 리사이즈 모드
+    activeImage = 'photo'; mode = 'resize';
+    startMouseX = x; startMouseY = y;
+    startImageW = p.width; startImageH = p.height;
+  } else if (x >= p.x && x <= p.x + p.width && y >= p.y && y <= p.y + p.height) {
+    // 이동 모드
+    activeImage = 'photo'; mode = 'move';
+    dragOffsetX = x - p.x; dragOffsetY = y - p.y;
+  }
+  // 핸들부터 보이도록 재렌더
+  if (activeImage) {
+    clearTimeout(hideHandlesTimeout);
+    drawCard();
+  }
+});
+
+// pointermove: 이동 중이면 좌표 변경, 리사이즈 중이면 크기 변경
+canvas.addEventListener('pointermove', e => {
+  const x = e.offsetX, y = e.offsetY;
+  if (mode === 'move') {
+    document.getElementById('photoX').value = Math.round(x - dragOffsetX);
+    document.getElementById('photoY').value = Math.round(y - dragOffsetY);
+    drawCard();
+  } else if (mode === 'resize') {
+    const dx = x - startMouseX, dy = y - startMouseY;
+    const newW = Math.max(minImageSize, startImageW + dx);
+    const newH = Math.max(minImageSize, startImageH + dy);
+    document.getElementById('photoWidth').value  = Math.round(newW);
+    document.getElementById('photoHeight').value = Math.round(newH);
+    drawCard();
+  } else {
+    // 커서 모양 변경 (핸들 위일 땐 리사이즈, 이미지 위일 땐 이동)
+    const p = getImageParams('photo'); if (!p) return;
+    const hx = p.x + p.width, hy = p.y + p.height;
+    if (Math.hypot(x - hx, y - hy) <= 8) {
+      canvas.style.cursor = 'nwse-resize';
+    } else if (x >= p.x && x <= p.x + p.width && y >= p.y && y <= p.y + p.height) {
+      canvas.style.cursor = 'move';
+    } else {
+      canvas.style.cursor = 'default';
+    }
+  }
+});
+
+// pointerup: 인터랙션 종료 후 핸들 1.5초 뒤 숨기기
+canvas.addEventListener('pointerup', () => {
+  mode = '';
+  hideHandlesTimeout = setTimeout(() => {
+    activeImage = null;
+    drawCard();
+  }, 1500);
+});
+
+// pointerleave: 캔버스 밖으로 나가면 모드 초기화
+canvas.addEventListener('pointerleave', () => {
+  mode = '';
+});
+
 
     // --- Download/Save/Load Functions ---
     function downloadCardImage() { /* ... unchanged ... */ }
