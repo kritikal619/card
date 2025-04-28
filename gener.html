@@ -43862,24 +43862,37 @@
 // --- Canvas Interaction Listeners --- (Replace the placeholders with this)
 
 // pointerdown: 이미지 내부 클릭 → 이동, 우측하단 핸들 클릭 → 리사이즈 시작
+const imageKeys = ['photo','flag','season','icon'];
+
 canvas.addEventListener('pointerdown', e => {
   const x = e.offsetX, y = e.offsetY;
-  const p = getImageParams('photo'); if (!p) return;
-  const handleRadius = 8; // 핸들 반지름
-  const hx = p.x + p.width, hy = p.y + p.height;
+  let hit = false;
 
-  if (Math.hypot(x - hx, y - hy) <= handleRadius) {
-    // 리사이즈 모드
-    activeImage = 'photo'; mode = 'resize';
-    startMouseX = x; startMouseY = y;
-    startImageW = p.width; startImageH = p.height;
-  } else if (x >= p.x && x <= p.x + p.width && y >= p.y && y <= p.y + p.height) {
-    // 이동 모드
-    activeImage = 'photo'; mode = 'move';
-    dragOffsetX = x - p.x; dragOffsetY = y - p.y;
+  for (let key of imageKeys) {
+    const p = getImageParams(key);
+    if (!p) continue;
+
+    const hx = p.x + p.width, hy = p.y + p.height;
+    if (Math.hypot(x-hx, y-hy) <= 8) {
+      // 리사이즈 모드
+      activeImage = key;
+      mode = 'resize';
+      startMouseX = x; startMouseY = y;
+      startImageW = p.width; startImageH = p.height;
+      hit = true;
+      break;
+    } else if (x>=p.x && x<=p.x+p.width && y>=p.y && y<=p.y+p.height) {
+      // 이동 모드
+      activeImage = key;
+      mode = 'move';
+      dragOffsetX = x - p.x;
+      dragOffsetY = y - p.y;
+      hit = true;
+      break;
+    }
   }
-  // 핸들부터 보이도록 재렌더
-  if (activeImage) {
+
+  if (hit) {
     clearTimeout(hideHandlesTimeout);
     drawCard();
   }
