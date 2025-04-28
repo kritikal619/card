@@ -43945,6 +43945,101 @@
 
         if (imagesToLoadCount === 0) { hideLoading(); drawCard(); baseCard.onload = originalHandlers.base.onload; baseCard.onerror = originalHandlers.base.onerror; customFlag.onload = originalHandlers.flag.onload; customFlag.onerror = originalHandlers.flag.onerror; customSeason.onload = originalHandlers.season.onload; customSeason.onerror = originalHandlers.season.onerror; customPhoto.onload = originalHandlers.photo.onload; customPhoto.onerror = originalHandlers.photo.onerror; customIcon.onload = originalHandlers.icon.onload; customIcon.onerror = originalHandlers.icon.onerror; }
     }
+    // Draw Image Element & Handles
+    function drawImageElement(imgElement, key) {
+        const params = getImageParams(key); if (!params) return;
+        if (imgElement.complete && imgElement.src && !imgElement.error && imgElement.width > 0 && imgElement.height > 0) {
+            imgElement.loading = false; // Clear loading flag on success
+            const drawWidth = Math.max(minImageSize, params.width); const drawHeight = Math.max(minImageSize, params.height);
+            const inputs = getInputElements(key); if (inputs) { if (params.width < minImageSize) inputs.wE.value = drawWidth; if (params.height < minImageSize) inputs.hE.value = drawHeight; }
+            ctx.drawImage(imgElement, params.x, params.y, drawWidth, drawHeight);
+            if (activeImage === key) { drawHandles({ x: params.x, y: params.y, width: drawWidth, height: drawHeight }); }
+        } else if (imgElement.error) { imgElement.loading = false; const x = params.x, y = params.y, w = params.width, h = params.height; ctx.save(); ctx.fillStyle = "rgba(255, 0, 0, 0.1)"; ctx.fillRect(x, y, w, h); ctx.strokeStyle = "red"; ctx.lineWidth = 1; ctx.strokeRect(x, y, w, h); ctx.fillStyle = "red"; ctx.font = '12px sans-serif'; ctx.textAlign = 'center'; ctx.fillText("Error", x + w / 2, y + h / 2); ctx.restore(); }
+    }
+    function drawText() { /* Unchanged */ ctx.save(); const ovrValue = document.getElementById('ovr').value, ovrX = +document.getElementById('ovrX').value, ovrY = +document.getElementById('ovrY').value, ovrFontSize = document.getElementById('ovrFontSize').value, ovrFont = document.getElementById('ovrFont').value, ovrColor = document.getElementById('ovrColor').value; const posValue = document.getElementById('position').value, posX = +document.getElementById('posX').value, posY = +document.getElementById('posY').value, posFontSize = document.getElementById('posFontSize').value, posFont = document.getElementById('posFont').value, posColor = document.getElementById('posColor').value; const nameValue = document.getElementById('playerName').value, nameX = +document.getElementById('nameX').value, nameY = +document.getElementById('nameY').value, nameFontSize = document.getElementById('nameFontSize').value, nameFont = document.getElementById('nameFont').value, nameColor = document.getElementById('nameColor').value; ctx.shadowColor = "rgba(0,0,0,0.6)"; ctx.shadowBlur = 3; ctx.shadowOffsetX = 1; ctx.shadowOffsetY = 1; ctx.fillStyle = ovrColor; ctx.font = `bold ${ovrFontSize}px "${ovrFont}", sans-serif`; ctx.textAlign = "center"; ctx.fillText(ovrValue, ovrX, ovrY); ctx.fillStyle = posColor; ctx.font = `bold ${posFontSize}px "${posFont}", sans-serif`; ctx.fillText(posValue, posX, posY); ctx.fillStyle = nameColor; ctx.font = `normal ${nameFontSize}px "${nameFont}", sans-serif`; ctx.fillText(nameValue, nameX, nameY); ctx.restore(); }
+
+    // Draw Handles (Red dashed border + red dot handle)
+    function drawHandles(p) {
+      ctx.save();
+      ctx.setLineDash([5, 3]); ctx.strokeStyle = "red"; ctx.lineWidth = 1; ctx.strokeRect(p.x, p.y, p.width, p.height);
+      const handleRadius = 4; const handleX = p.x + p.width; const handleY = p.y + p.height;
+      ctx.fillStyle = "red"; ctx.beginPath(); ctx.arc(handleX, handleY, handleRadius, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+    }
+
+    // --- Canvas Interaction Listeners (Handle 3-sec display logic) ---
+    canvas.addEventListener('pointerdown', e => {
+        // Always clear existing timeout when starting a new potential interaction
+        if (hideHandlesTimeout) { clearTimeout(hideHandlesTimeout); hideHandlesTimeout = null; }
+
+        e.preventDefault(); canvas.setPointerCapture(e.pointerId);
+        const rect = canvas.getBoundingClientRect(); const scaleX = canvas.width / rect.width; const scaleY = canvas.height / rect.height;
+        const canvasX = (e.clientX - rect.left) * scaleX; const canvasY = (e.clientY - rect.top) * scaleY;
+
+        let clickedImage = null; let clickedMode = '';
+        const imageKeys = ['icon', 'season', 'flag', 'photo'];
+        for (const key of imageKeys) {
+            const imgObject = getImageObject(key); const params = getImageParams(key);
+            if (!imgObject?.complete || !imgObject.src || imgObject.error || !params || (key === 'icon' && document.getElementById('newOption').value !== 'icon')) continue;
+            const handleRadius = 4; const handleHitRadius = handleRadius + 6;
+            const handleX = params.x + params.width; const handleY = params.y + params.height;
+            const dxHandle = canvasX - handleX; const dyHandle = canvasY - handleY;
+            // Check resize handle first
+            if (dxHandle * dxHandle + dyHandle * dyHandle <= handleHitRadius * handleHitRadius) {
+                clickedImage = key; clickedMode = 'resize';
+                startMouseX = canvasX; startMouseY = canvasY; startImageX = params.x; startImageY = params.y; startImageW = params.width; startImageH = params.height;
+                break;
+            }
+            // Check drag area
+            if (canvasX >= params.x && canvasX <= params.x + params.width && canvasY >= params.y && canvasY <= params.y + params.height) {
+                clickedImage = key; clickedMode = 'drag';
+                startMouseX = canvasX; startMouseY = canvasY; startImageX = params.x; startImageY = params.y;
+                dragOffsetX = startMouseX - startImageX; dragOffsetY = startMouseY - startImageY;
+                break;
+            }
+        }
+        activeImage = clickedImage; mode = clickedMode; // Set active state
+        drawCard(); // Redraw immediately
+    });
+
+    canvas.addEventListener('pointermove', e => {
+        if (!activeImage || !mode) return; e.preventDefault();
+        const rect = canvas.getBoundingClientRect(); const scaleX = canvas.width / rect.width; const scaleY = canvas.height / rect.height;
+        const canvasX = (e.clientX - rect.left) * scaleX; const canvasY = (e.clientY - rect.top) * scaleY;
+        const inputs = getInputElements(activeImage); if (!inputs) return; const { xE, yE, wE, hE } = inputs;
+
+        if (mode === 'drag') {
+            xE.value = Math.round(canvasX - dragOffsetX); yE.value = Math.round(canvasY - dragOffsetY);
+        } else if (mode === 'resize') {
+            const dx = canvasX - startMouseX; let newWidth = startImageW + dx; let newHeight;
+            const aspectRatio = aspectRatios[activeImage];
+            if (aspectRatio) {
+                newHeight = newWidth / aspectRatio;
+                if (newWidth < minImageSize) { newWidth = minImageSize; newHeight = newWidth / aspectRatio; }
+                if (newHeight < minImageSize) { newHeight = minImageSize; newWidth = newHeight * aspectRatio; }
+                newWidth = Math.max(minImageSize, newWidth); newHeight = Math.max(minImageSize, newHeight);
+            } else { const dy = canvasY - startMouseY; newHeight = startImageH + dy; newWidth = Math.max(minImageSize, newWidth); newHeight = Math.max(minImageSize, newHeight); }
+            wE.value = Math.round(newWidth); hE.value = Math.round(newHeight);
+        }
+        drawCard(); // Redraw
+    });
+
+    canvas.addEventListener('pointerup', e => {
+        if (!activeImage) return; // Do nothing if nothing was selected initially
+        canvas.releasePointerCapture(e.pointerId);
+
+        // ALWAYS clear existing timeout before setting a new one
+        if (hideHandlesTimeout) { clearTimeout(hideHandlesTimeout); }
+
+        // Set a new timeout to hide handles after 3 seconds
+        // This applies after a click, drag, or resize finishes
+        hideHandlesTimeout = setTimeout(() => {
+            // This code runs after 3 seconds
+            activeImage = null; // Deselect image
+            mode = '';          // Reset mode
+            drawCard();         // Redraw canvas (handles will be gone)
+            hideHandlesTimeout = null; // Clear the stored timeout ID
+        }, 3000); 
 
     // --- Initial Setup ---
     document.addEventListener('DOMContentLoaded', () => {
