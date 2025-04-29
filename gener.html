@@ -43858,13 +43858,125 @@
     function drawHandles(p) { ctx.save(); ctx.setLineDash([5, 3]); ctx.strokeStyle = "red"; ctx.lineWidth = 1; ctx.strokeRect(p.x, p.y, p.width, p.height); const handleRadius = 4; const handleX = p.x + p.width; const handleY = p.y + p.height; ctx.fillStyle = "red"; ctx.beginPath(); ctx.arc(handleX, handleY, handleRadius, 0, Math.PI * 2); ctx.fill(); ctx.restore(); }
 
     // --- Canvas Interaction Listeners --- (Unchanged)
-    canvas.addEventListener('pointerdown', e => { /* ... */ });
-    canvas.addEventListener('pointermove', e => { /* ... */ });
-    canvas.addEventListener('pointerup', e => { /* ... */ });
-    canvas.addEventListener('pointerleave', e => { /* ... */ });
+  
+// --- Canvas Interaction Listeners --- (Replace the placeholders with this)
+
+// pointerdown: 이미지 내부 클릭 → 이동, 우측하단 핸들 클릭 → 리사이즈 시작
+const imageKeys = ['photo','flag','season','icon'];
+
+canvas.addEventListener('pointerdown', e => {
+  const x = e.offsetX, y = e.offsetY;
+  let hit = false;
+
+  for (let key of imageKeys) {
+    const p = getImageParams(key);
+    if (!p) continue;
+
+    const hx = p.x + p.width, hy = p.y + p.height;
+    if (Math.hypot(x-hx, y-hy) <= 8) {
+      // 리사이즈 모드
+      activeImage = key;
+      mode = 'resize';
+      startMouseX = x; startMouseY = y;
+      startImageW = p.width; startImageH = p.height;
+      hit = true;
+      break;
+    } else if (x>=p.x && x<=p.x+p.width && y>=p.y && y<=p.y+p.height) {
+      // 이동 모드
+      activeImage = key;
+      mode = 'move';
+      dragOffsetX = x - p.x;
+      dragOffsetY = y - p.y;
+      hit = true;
+      break;
+    }
+  }
+
+  if (hit) {
+    clearTimeout(hideHandlesTimeout);
+    drawCard();
+  }
+});
+
+// pointermove: 이동 중이면 좌표 변경, 리사이즈 중이면 크기 변경
+// --- Canvas Interaction Listeners – pointermove (크기 조절 로직 일반화) ---
+canvas.addEventListener('pointermove', e => {
+  const x = e.offsetX, y = e.offsetY;
+
+  if (mode === 'move') {
+    // 이동 모드 (photo만이 아닌 모든 activeImage에 대응)
+    const inputs = getInputElements(activeImage);
+    if (inputs?.xE && inputs?.yE) {
+      inputs.xE.value = Math.round(x - dragOffsetX);
+      inputs.yE.value = Math.round(y - dragOffsetY);
+    }
+    drawCard();
+
+  } else if (mode === 'resize') {
+    // 리사이즈 모드 – activeImage에 맞춰 width/height 업데이트
+    // 43917번째 줄부터 대체
+const dx = x - startMouseX;
+const ratio = aspectRatios[activeImage] || (startImageW / startImageH);
+const newW = Math.max(minImageSize, startImageW + dx);
+const newH = Math.max(minImageSize, newW / ratio);
+    const inputs = getInputElements(activeImage);
+    if (inputs?.wE && inputs?.hE) {
+      inputs.wE.value = Math.round(newW);
+      inputs.hE.value = Math.round(newH);
+    }
+    drawCard();
+
+  } else {
+    // 커서 모양 변경을 activeImage 기준으로
+    const p = getImageParams(activeImage);
+    if (!p) {
+      canvas.style.cursor = 'default';
+      return;
+    }
+    const hx = p.x + p.width, hy = p.y + p.height;
+    if (Math.hypot(x - hx, y - hy) <= 8) {
+      canvas.style.cursor = 'nwse-resize';
+    } else if (x >= p.x && x <= p.x + p.width && y >= p.y && y <= p.y + p.height) {
+      canvas.style.cursor = 'move';
+    } else {
+      canvas.style.cursor = 'default';
+    }
+  }
+});
+// pointerup: 인터랙션 종료 후 핸들 1.5초 뒤 숨기기
+canvas.addEventListener('pointerup', () => {
+  mode = '';
+  hideHandlesTimeout = setTimeout(() => {
+    activeImage = null;
+    drawCard();
+  }, 1500);
+});
+
+// pointerleave: 캔버스 밖으로 나가면 모드 초기화
+canvas.addEventListener('pointerleave', () => {
+  mode = '';
+});
+
 
     // --- Download/Save/Load Functions ---
-    function downloadCardImage() { /* ... unchanged ... */ }
+    // --- Download/Save/Load Functions ---
+  function downloadCardImage() {
+  const canvasElem = document.getElementById('cardCanvas');
+  // 캔버스를 PNG 데이터 URL로 변환
+  const imageDataURL = canvasElem.toDataURL('image/png');
+  // 다운로드용 링크 생성
+  const link = document.createElement('a');
+  // 제목 입력값이 있으면 파일명으로 사용, 없으면 'card.png'
+  const title = document.getElementById('cardTitleInput').value.trim() || 'card';
+  link.href = imageDataURL;
+  link.download = `${title}.png`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+// 기존 downloadCardState() 함수는 그대로 둡니다.
+function downloadCardState() { /* … */ }
     // Modified: downloadCardState includes selected PID and face version URL
     function downloadCardState() { const state={ blankCard:document.getElementById('blankCardSelect').value, cardTitle:document.getElementById('cardTitleInput').value, ovr:{value:document.getElementById('ovr').value, x:document.getElementById('ovrX').value, y:document.getElementById('ovrY').value, fontSize:document.getElementById('ovrFontSize').value, font:document.getElementById('ovrFont').value, color:document.getElementById('ovrColor').value}, position:{value:document.getElementById('position').value, x:document.getElementById('posX').value, y:document.getElementById('posY').value, font:document.getElementById('posFont').value, fontSize:document.getElementById('posFontSize').value, color:document.getElementById('posColor').value}, playerName:{value:document.getElementById('playerName').value, x:document.getElementById('nameX').value, y:document.getElementById('nameY').value, font:document.getElementById('nameFont').value, fontSize:document.getElementById('nameFontSize').value, color:document.getElementById('nameColor').value}, flag:{x:document.getElementById('flagX').value, y:document.getElementById('flagY').value, width:document.getElementById('flagUploadWidth').value, height:document.getElementById('flagUploadHeight').value, selectedUrl:document.getElementById('flagSelect').value}, season:{x:document.getElementById('seasonX').value, y:document.getElementById('seasonY').value, width:document.getElementById('seasonUploadWidth').value, height:document.getElementById('seasonUploadHeight').value, src:customSeason.src}, photo:{ x:document.getElementById('photoX').value, y:document.getElementById('photoY').value, width:document.getElementById('photoWidth').value, height:document.getElementById('photoHeight').value, src: customPhoto.src, selectedPid: document.getElementById('playerSelect').value, selectedVersionUrl: document.getElementById('faceVersionSelect').value }, iconOption:document.getElementById('newOption').value, icon:{x:document.getElementById('iconX').value, y:document.getElementById('iconY').value, width:document.getElementById('iconWidth').value, height:document.getElementById('iconHeight').value, src:customIcon.src}}; const blob=new Blob([JSON.stringify(state, null, 2)], {type:'application/json'}); const url=URL.createObjectURL(blob); const link=document.createElement('a'); const title=document.getElementById('cardTitleInput').value.trim() || 'cardState'; link.href=url; link.download=`${title}_state.json`; document.body.appendChild(link); link.click(); document.body.removeChild(link); URL.revokeObjectURL(url); }
     document.getElementById('jsonLoadInput').addEventListener('change', e => { /* ... unchanged file reading ... */ });
