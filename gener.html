@@ -43899,22 +43899,39 @@ canvas.addEventListener('pointerdown', e => {
 });
 
 // pointermove: 이동 중이면 좌표 변경, 리사이즈 중이면 크기 변경
+// --- Canvas Interaction Listeners – pointermove (크기 조절 로직 일반화) ---
 canvas.addEventListener('pointermove', e => {
   const x = e.offsetX, y = e.offsetY;
+
   if (mode === 'move') {
-    document.getElementById('photoX').value = Math.round(x - dragOffsetX);
-    document.getElementById('photoY').value = Math.round(y - dragOffsetY);
+    // 이동 모드 (photo만이 아닌 모든 activeImage에 대응)
+    const inputs = getInputElements(activeImage);
+    if (inputs?.xE && inputs?.yE) {
+      inputs.xE.value = Math.round(x - dragOffsetX);
+      inputs.yE.value = Math.round(y - dragOffsetY);
+    }
     drawCard();
+
   } else if (mode === 'resize') {
+    // 리사이즈 모드 – activeImage에 맞춰 width/height 업데이트
     const dx = x - startMouseX, dy = y - startMouseY;
     const newW = Math.max(minImageSize, startImageW + dx);
     const newH = Math.max(minImageSize, startImageH + dy);
-    document.getElementById('photoWidth').value  = Math.round(newW);
-    document.getElementById('photoHeight').value = Math.round(newH);
+
+    const inputs = getInputElements(activeImage);
+    if (inputs?.wE && inputs?.hE) {
+      inputs.wE.value = Math.round(newW);
+      inputs.hE.value = Math.round(newH);
+    }
     drawCard();
+
   } else {
-    // 커서 모양 변경 (핸들 위일 땐 리사이즈, 이미지 위일 땐 이동)
-    const p = getImageParams('photo'); if (!p) return;
+    // 커서 모양 변경을 activeImage 기준으로
+    const p = getImageParams(activeImage);
+    if (!p) {
+      canvas.style.cursor = 'default';
+      return;
+    }
     const hx = p.x + p.width, hy = p.y + p.height;
     if (Math.hypot(x - hx, y - hy) <= 8) {
       canvas.style.cursor = 'nwse-resize';
@@ -43925,7 +43942,6 @@ canvas.addEventListener('pointermove', e => {
     }
   }
 });
-
 // pointerup: 인터랙션 종료 후 핸들 1.5초 뒤 숨기기
 canvas.addEventListener('pointerup', () => {
   mode = '';
