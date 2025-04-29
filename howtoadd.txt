@@ -1,0 +1,26 @@
+Mini Face-On 이미지 추가 설명서
+
+1. 이미지 파일 복사
+   - 리소스 폴더로 새로운 Mini Face-On 이미지를 복사합니다.
+     예시: Son Heung-min의 son_mini3.png 파일을 resources/players/players_22 폴더에 복사합니다.
+
+2. 데이터 정의 업데이트
+   - fcmData.js 파일을 열고, 해당 선수 객체의 miniFaces 배열에 새로운 이미지 경로를 추가합니다.
+     예시:
+       miniFaces: [
+         'resources/players/players_22/son_mini1.png',
+         'resources/players/players_22/son_mini2.png',
+         'resources/players/players_22/son_mini3.png'  <-- 추가
+       ]
+   - faceData2.js를 사용하는 경우 srcList 배열에 추가합니다.
+
+3. UI에서 확인
+   - 브라우저에서 페이지를 새로고침(Ctrl+F5)하여 캐시를 갱신합니다.
+   - 선수명 드롭다운에서 해당 선수를 선택하고, 새로 추가된 Mini Face-On 옵션이 표시되는지 확인합니다.
+   - 필요 시 console.log로 데이터 로드 상태를 확인하세요:
+     console.log(fcmData.find(p => p.name === 'Son Heung-min').miniFaces)
+
+4. 팁
+   - 경로 반복을 줄이려면 상단에 상수 IMG_BASE를 정의해 사용할 수 있습니다.
+   - 여러 시즌 이미지를 관리할 때 폴더 구조를 명확히 유지하세요:
+     resources/players/players_22, players_23, players_24
