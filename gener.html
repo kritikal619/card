@@ -43914,10 +43914,11 @@ canvas.addEventListener('pointermove', e => {
 
   } else if (mode === 'resize') {
     // 리사이즈 모드 – activeImage에 맞춰 width/height 업데이트
-    const dx = x - startMouseX, dy = y - startMouseY;
-    const newW = Math.max(minImageSize, startImageW + dx);
-    const newH = Math.max(minImageSize, startImageH + dy);
-
+    // 43917번째 줄부터 대체
+const dx = x - startMouseX;
+const ratio = aspectRatios[activeImage] || (startImageW / startImageH);
+const newW = Math.max(minImageSize, startImageW + dx);
+const newH = Math.max(minImageSize, newW / ratio);
     const inputs = getInputElements(activeImage);
     if (inputs?.wE && inputs?.hE) {
       inputs.wE.value = Math.round(newW);
