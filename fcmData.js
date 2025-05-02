@@ -3131,8 +3131,8 @@ const fcmData = [
     {
         "pid": "241651",
         "pos": "ST",
-        "nick": "V. 죄케레스",
-        "name": "빅토르 죄케레스",
+        "nick": "V. 요케레스",
+        "name": "빅토르 요케레스",
         "event": "TOTW24_W08",
         "face": "p241651_TOTW24_LIVE_A"
     },
