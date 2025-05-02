@@ -1923,7 +1923,8 @@ const faceData = [
             "https://renderz.app/image-cdn/player_23_239818_TOTY24_LIVE_e989ac92ab3bc7c6/normal",
             "https://renderz.app/image-cdn/player_23_239818_UCL24_LIVE/normal",
             "https://renderz.app/image-cdn/player_23_239818/normal",
-            "./resources/players/players_24/p239818_BLD24.png"
+            "./resources/players/players_24/p239818_BLD24.png",
+            "https://fco.vod.nexoncdn.co.kr/assets/static/players/players_25/p239818_FCKJ_TOTY25.png"
         ]
     },
     {
