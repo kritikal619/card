@@ -64,40 +64,34 @@
     }
 
     /* 홈 탭용 네비게이션 컨테이너 */
-    /* 홈 탭용 네비게이션 컨테이너 */
-.home-nav-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;   /* 버튼 가로 중앙 정렬 */
-  margin: 20px 0;
-  background: none;      /* 컨테이너 배경 제거 */
-}
-
-/* 개별 버튼 스타일 */
-.home-nav-container .nav-item {
-  width: 90%;
-  max-width: 400px;
-  margin: 10px 0;        /* 버튼 간 간격 */
-  padding: 12px 0;
-  background: #a39485;   /* 버튼 배경색 */
-  border-radius: 10px;
-  text-align: center;
-  cursor: pointer;
-  color: #fff;
-  font-size: 14px;
-  transition: background 0.3s, transform 0.2s;
-}
-
-/* 호버/액티브 상태 */
-.home-nav-container .nav-item:hover {
-  background: #8d7b6b;
-  transform: translateY(-2px);
-}
-.home-nav-container .nav-item.active {
-  background: #5a5147;
-  font-weight: bold;
-}
-
+    .home-nav-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px 0;
+      background: none;
+    }
+    .home-nav-container .nav-item {
+      width: 90%;
+      max-width: 400px;
+      margin: 10px 0;
+      padding: 12px 0;
+      background: #a39485;
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+      color: #fff;
+      font-size: 14px;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .home-nav-container .nav-item:hover {
+      background: #8d7b6b;
+      transform: translateY(-2px);
+    }
+    .home-nav-container .nav-item.active {
+      background: #5a5147;
+      font-weight: bold;
+    }
 
     .tab-content {
       display: none;
@@ -161,7 +155,7 @@
     }
     .footer {
       position: fixed;
-      bottom: 60px; /* 바텀 네비게이션 위에 위치 */
+      bottom: 60px;
       left: 0;
       width: 100%;
       background: #f9f9f9;
@@ -170,7 +164,40 @@
       box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
       z-index: 500;
     }
-    
+
+    /* --- 모달 스타일 --- */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      position: relative;
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px 30px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      animation: fadeIn 0.3s ease-out;
+    }
+    .close-btn {
+      position: absolute;
+      top: 12px; right: 16px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #555;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
@@ -179,8 +206,6 @@
       <div class="tab-content" id="home">
         <h1>피모합성소</h1><br><br>
         <p>넥피모 최초 카드 제작 툴!</p><br><br>
-
-        <!-- 홈 탭 내 네비게이션 컨테이너 -->
         <div class="home-nav-container">
           <div class="nav-item active" data-tab="home">홈</div>
           <div class="nav-item" data-tab="tab1">빈카드</div>
@@ -218,18 +243,55 @@
     <div class="nav-item" data-tab="tab5">글자</div>
     <div class="nav-item tool-item">툴</div>
     <a href="board.html" class="nav-item">게시판</a>
-    
   </nav>
-  
+
+  <!-- 모달 마크업 -->
+  <div id="welcome-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>업데이트 안내<h2>
+      <h3>2025-05-02</h3>
+      <h3>25TOTY, CN25, FC치킨, FB25 미니 페이스온 추가, 이름 수정: V.죄케레스 -> V.요케레스</h3>
+    </div>
+  </div>
 
   <script>
+    // --- 쿠키 읽기 함수 ---
+    function getCookie(name) {
+      const matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + "=([^;]*)"
+      ));
+      return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+
+    // --- 쿠키 쓰기 함수: days일 뒤 만료(=24시간 뒤) ---
+    function setCookie(name, value, days) {
+      const date = new Date();
+      date.setTime(date.getTime() + days*24*60*60*1000);
+      document.cookie = `${name}=${encodeURIComponent(value)}; path=/; expires=${date.toUTCString()}`;
+    }
+
+    // --- 하루에 한 번만 모달 띄우기 ---
+    function showWelcomeModalOncePerDay() {
+      if (getCookie('welcome_shown')) return;
+      const modal = document.getElementById('welcome-modal');
+      modal.style.display = 'flex';
+      modal.querySelector('.close-btn').addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+      modal.addEventListener('click', e => {
+        if (e.target === modal) modal.style.display = 'none';
+      });
+      setCookie('welcome_shown', 'yes', 1);
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
       const blankCardFolder = "Blank";
       const blankLetterFolder = "BlankLetter";
       const textNumbers = [130,131,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,162,214,219,225,237];
       const downloadIcon = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 20h14v-2H5v2zm7-18L5.33 11h3.84v6h4.66v-6h3.84L12 2z"/></svg>`;
 
-      // 이미지 그리드 생성
+      // 빈카드 & 국기 그리드 생성
       const blankImageGrid = document.getElementById('blank-image-grid');
       const textImageGrid = document.getElementById('text-image-grid');
       for (let i = 1; i <= 271; i++) {
@@ -242,20 +304,18 @@
         btn.className = 'img-download-btn';
         btn.innerHTML = downloadIcon;
 
-        const imageItem = document.createElement('div');
-        imageItem.className = 'image-item';
-        imageItem.appendChild(img);
-        imageItem.appendChild(btn);
+        const item = document.createElement('div');
+        item.className = 'image-item';
+        item.appendChild(img);
+        item.appendChild(btn);
 
-        if (textNumbers.includes(i)) {
-          textImageGrid.appendChild(imageItem);
-        } else {
-          blankImageGrid.appendChild(imageItem);
-        }
+        if (textNumbers.includes(i)) textImageGrid.appendChild(item);
+        else blankImageGrid.appendChild(item);
       }
       document.getElementById('tab4').innerHTML = document.getElementById('tab2').innerHTML;
 
-      const blankLetterImageGrid = document.getElementById('blankletter-image-grid');
+      // 빈글자 그리드 생성
+      const blankLetterGrid = document.getElementById('blankletter-image-grid');
       for (let i = 1; i <= 15; i++) {
         const img = document.createElement('img');
         img.src = `${blankLetterFolder}/image(${i}).png`;
@@ -266,20 +326,20 @@
         btn.className = 'img-download-btn';
         btn.innerHTML = downloadIcon;
 
-        const imageItem = document.createElement('div');
-        imageItem.className = 'image-item';
-        imageItem.appendChild(img);
-        imageItem.appendChild(btn);
+        const item = document.createElement('div');
+        item.className = 'image-item';
+        item.appendChild(img);
+        item.appendChild(btn);
 
-        blankLetterImageGrid.appendChild(imageItem);
+        blankLetterGrid.appendChild(item);
       }
 
-      // 다운로드 버튼
+      // 다운로드 클릭
       document.addEventListener('click', function(e) {
         if (e.target.closest('.img-download-btn')) {
-          const imgElem = e.target.closest('.image-item').querySelector('img');
+          const imgEl = e.target.closest('.image-item').querySelector('img');
           const link = document.createElement('a');
-          link.href = imgElem.getAttribute('src');
+          link.href = imgEl.src;
           link.download = '';
           document.body.appendChild(link);
           link.click();
@@ -287,29 +347,25 @@
         }
       });
 
-      // 탭 전환 이벤트 (바텀 + 홈 컨테이너 동기화)
+      // 탭 전환 (하단+홈 컨테이너 동기화)
       const navItems = document.querySelectorAll('#bottom-nav .nav-item, .home-nav-container .nav-item');
       const tabContents = document.querySelectorAll('.tab-content');
-
       navItems.forEach(item => {
         if (item.classList.contains('tool-item')) {
-          item.addEventListener('click', () => {
-            location.href = 'gener.html';
-          });
+          item.addEventListener('click', () => location.href='gener.html');
         } else {
           item.addEventListener('click', function() {
-            // active 클래스 토글
-            navItems.forEach(nav => nav.classList.remove('active'));
+            navItems.forEach(n => n.classList.remove('active'));
             this.classList.add('active');
-            // 탭 보이기/숨기기
-            tabContents.forEach(content => content.style.display = 'none');
-            document.getElementById(this.getAttribute('data-tab')).style.display = 'block';
+            tabContents.forEach(c => c.style.display = 'none');
+            document.getElementById(this.dataset.tab).style.display = 'block';
           });
         }
       });
-
-      // 초기에는 홈 탭 표시
       document.getElementById('home').style.display = 'block';
+
+      // 모달 호출
+      showWelcomeModalOncePerDay();
     });
   </script>
 </body>
