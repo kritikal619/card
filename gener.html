@@ -136,7 +136,7 @@
     const ICON_DEFAULT_PATH = 'icon.png';
 
     // Canvas Setup
-    const totalImages = 264; // Adjust if you have more blank cards
+    const totalImages = 271; // Adjust if you have more blank cards
     const canvas = document.getElementById('cardCanvas');
     const ctx = canvas.getContext('2d');
     const pipCanvas = document.getElementById('pipCanvas');
@@ -310,7 +310,7 @@
     }
 
     // --- Initial Load & Removal ---
-    function loadBaseCard(cardPath = `Blank/${getFileName(264)}`) { showLoading(); baseCard.src = cardPath; }
+    function loadBaseCard(cardPath = `Blank/${getFileName(268)}`) { showLoading(); baseCard.src = cardPath; }
 
     // Modified: removeImage handles resetting both selects if key is 'photo'
     function removeImage(imgElement, aspectRatioKey, inputElementId = null) {
