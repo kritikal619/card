@@ -2,190 +2,129 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-  <title>공유된 카드 게시판 - 피모합성소</title>
-  <meta name="description" content="FC모바일 카드 제작 툴 - 공유된 카드 게시판"/>
-  <meta name="keywords" content="FC모바일, 카드합성, 카드 만들기, 게시판"/>
+  <title>게시판 - 피모합성소</title>
+  <meta name="description" content="FC모바일 카드 제작 공유 및 자유게시판 - 피모합성소 커뮤니티"/>
+  <meta name="keywords" content="FC모바일, 카드합성, 카드 만들기, 게시판, 자유게시판, 커뮤니티"/>
   <meta name="author" content="해리지팡이"/>
-  <link rel="stylesheet" href="styles.css"/>
-
-  <style>
-    body {
-      font-family: 'Apple SD Gothic Neo', sans-serif;
-      margin: 0;
-      padding-bottom: 60px; /* 네비게이션 높이 만큼 */
-      background: #f9f9f9;
-      color: #333;
-      text-align: center;
-    }
-    h1 {
-      font-size: 24px;
-      margin: 20px 0;
-    }
-    /* 반응형 그리드: 화면 크기에 따라 1~4열 */
-    #board-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 15px;
-      padding: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .card-item {
-      background: #fff;
-      border: 1px solid #e0e0e0;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .card-item img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .card-item h3 {
-      font-size: 16px;
-      padding: 10px 8px 4px;
-      margin: 0;
-      flex: 1;
-      color: #2c3e50;
-      text-align: center;
-    }
-    .like-btn {
-      margin: 8px 0 12px;
-      padding: 6px 12px;
-      background: #ffebee;
-      border: 1px solid #f44336;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 14px;
-      color: #c62828;
-      display: inline-flex;
-      align-items: center;
-    }
-    .like-btn:hover { background: #ffcdd2; }
-    .like-count { font-weight: bold; margin: 0 4px; }
-
-    /* 하단 네비게이션 */
-    #bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #a39485;
-      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-      display: flex;
-      justify-content: space-around;
-      z-index: 1000;
-    }
-    #bottom-nav .nav-item {
-      flex: 1;
-      text-align: center;
-      padding: 10px 0;
-      color: #fff;
-      font-size: 14px;
-      text-decoration: none;
-    }
-    #bottom-nav .nav-item.active {
-      border-top: 2px solid #fff;
-      padding-top: 8px;
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="app_styles.css"/> <!-- Common app styles -->
+  <link rel="icon" type="image/png" href="./favicons/favicon-96x96.png" sizes="96x96" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="피모합성소" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="./favicons/manifest.json" />
 </head>
 <body>
-  <h1>공유된 카드 게시판</h1>
-  <div id="board-list"></div>
+  <div class="app-container">
+    <header class="app-header">
+      <h1 id="app-header-title">게시판</h1>
+    </header>
 
-  <nav id="bottom-nav">
-    <a href="index.html#home" class="nav-item">홈</a>
-    <a href="index.html#tab1" class="nav-item">빈카드</a>
-    <a href="index.html#tab2" class="nav-item">국기</a>
-    <a href="index.html#tab5" class="nav-item">글자</a>
-    <a href="gener.html"   class="nav-item">툴</a>
-    <a href="board.html"   class="nav-item active">게시판</a>
-  </nav>
+    <main class="app-content">
+      <div class="board-links">
+        <a href="card-board.html" class="board-link">
+          <div class="board-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H4V4h16v16z"/>
+            </svg>
+          </div>
+          <h2>카드제작</h2>
+          <p>다른 사용자들이 만든 카드들을 확인하고 '좋아요'를 눌러보세요.</p>
+        </a>
+        <a href="free-board.html" class="board-link">
+          <div class="board-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zm0-8h14V7H7v2z"/>
+            </svg>
+          </div>
+          <h2>자유게시판</h2>
+          <p>자유롭게 이야기를 나누고 정보를 공유하세요.</p>
+        </a>
+      </div>
+    </main>
 
-<script type="module">
-  import { db } from './firebase.js';
-  import {
-    collection,
-    query,
-    orderBy,
-    onSnapshot,
-    doc,
-    updateDoc,
-    increment
-  } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js';
+    <nav class="app-bottom-nav">
+      <a href="index.html" class="nav-item" data-title="홈">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        <span>홈</span>
+      </a>
+      <a href="index.html#blank-cards-tab" class="nav-item" data-title="빈카드">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H4V4h16v16z"/></svg>
+        <span>빈카드</span>
+      </a>
+      <div class="nav-item" data-tab="flags-tab" data-title="국기">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg>
+        <span>국기</span>
+      </div>
+      <a href="gener.html" class="nav-item" data-title="만들기">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+        <span>만들기</span>
+      </a>
+      <div class="nav-item" data-tab="lettering-tab" data-title="글자">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9.93 13.5h4.14L12 7.98zM20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-4.05 16.5l-1.14-3H9.17l-1.12 3H5.96l5.11-13h1.86l5.11 13h-2.09z"/></svg>
+        <span>글자</span>
+      </div>
+      <a href="board.html" class="nav-item active" data-title="게시판">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zm0-8h14V7H7v2z"/></svg>
+        <span>게시판</span>
+      </a>
+    </nav>
+  </div>
 
-  console.log('board.html 스크립트 시작', db);
+<style>
+.board-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
 
-  const boardList = document.getElementById('board-list');
-  const cardsQuery = query(
-    collection(db, 'cards'),
-    orderBy('createdAt', 'desc')
-  );
+.board-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
 
-  // 오늘 날짜를 "2025-04-27" 이런 형식으로 가져오기
-  const today = new Date().toISOString().split('T')[0];
+.board-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
 
-  // localStorage에 저장하는 키: 'liked_{cardId}_{today}'
-  function hasLiked(cardId) {
-    return localStorage.getItem(`liked_${cardId}_${today}`) === 'true';
-  }
-  function setLiked(cardId) {
-    localStorage.setItem(`liked_${cardId}_${today}`, 'true');
-  }
+.board-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  color: #2196F3;
+}
 
-  onSnapshot(cardsQuery, snapshot => {
-    console.log('Snapshot 받은 문서 수:', snapshot.size);
-    boardList.innerHTML = '';
+.board-link h2 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  color: #333;
+}
 
-    snapshot.forEach(docSnap => {
-      const data  = docSnap.data();
-      const id    = docSnap.id;
-      const likes = data.likes || 0;
-
-      const card = document.createElement('div');
-      card.className = 'card-item';
-      card.innerHTML = `
-        <img src="${data.imageUrl}" alt="카드 이미지">
-        <h3>${data.title}</h3>
-        <button class="like-btn" data-id="${id}">
-          좋아요 <span class="like-count">${likes}</span>♥
-        </button>
-      `;
-      boardList.appendChild(card);
-    });
-
-    document.querySelectorAll('.like-btn').forEach(btn => {
-      btn.onclick = async () => {
-        const id = btn.dataset.id;
-        const span = btn.querySelector('.like-count');
-
-        if (hasLiked(id)) {
-          alert('오늘은 이 카드에 이미 좋아요를 눌렀습니다!');
-          return;
-        }
-
-        try {
-          await updateDoc(doc(db, 'cards', id), { likes: increment(1) });
-          span.textContent = parseInt(span.textContent, 10) + 1;
-          setLiked(id);
-          console.log('좋아요 성공:', id);
-        } catch (error) {
-          console.error('좋아요 실패:', error);
-        }
-      };
-    });
-
-  }, err => {
-    console.error('실시간 업데이트 에러:', err);
-  });
-</script>
+.board-link p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+</style>
 </body>
 </html>
+
