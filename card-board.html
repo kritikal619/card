@@ -20,7 +20,6 @@
   <div class="app-container">
     <header class="app-header">
       <h1 id="app-header-title">카드제작</h1>
-      <!-- Notification Bell and Dropdown -->
       <div class="notifications-container">
         <button id="notification-bell" aria-label="알림">
           🔔 <span id="notification-count">0</span>
@@ -60,7 +59,7 @@
       <div class="nav-item" data-tab="lettering-tab" data-title="글자">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9.93 13.5h4.14L12 7.98zM20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-4.05 16.5l-1.14-3H9.17l-1.12 3H5.96l5.11-13h1.86l5.11 13h-2.09z"/></svg>
         <span>글자</span>
-      </div>
+      </a>
       <a href="board.html" class="nav-item" data-title="게시판">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zm0-8h14V7H7v2z"/></svg>
         <span>게시판</span>
@@ -84,7 +83,8 @@
 .card-item {
   position: relative;
   border-radius: 8px;
-  overflow: hidden;
+  /* overflow: hidden; */ /* UI 겹침 문제 해결을 위해 주석 처리 또는 visible로 변경 */
+  overflow: visible; /* 명시적으로 visible 설정 */
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transition: transform 0.2s;
   background-color: #fff; 
@@ -100,17 +100,20 @@
   aspect-ratio: 1;
   object-fit: cover;
   cursor: pointer; 
+  border-radius: 8px 8px 0 0; /* 카드의 둥근 모서리와 맞추기 위해 상단만 radius 적용 */
 }
 
 .card-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0,0,0,0.7);
-  color: white;
+  /* position: absolute; */ /* 이미지 위에 겹치지 않도록 static으로 변경 */
+  /* bottom: 0; */
+  /* left: 0; */
+  /* right: 0; */
+  /* background: rgba(0,0,0,0.7); */ /* 배경 제거 또는 일반 배경으로 변경 */
+  background: #f8f9fa; /* 밝은 배경색으로 변경 */
+  color: #333; /* 텍스트 색상 변경 */
   padding: 8px;
   font-size: 12px;
+  border-top: 1px solid #eee; /* 이미지와 정보 영역 구분선 */
 }
 
 .like-btn {
@@ -127,7 +130,7 @@
   justify-content: center;
   cursor: pointer;
   transition: transform 0.2s;
-  z-index: 2;
+  z-index: 2; /* card-info 보다 위에 오도록 */
 }
 
 .like-btn:hover {
@@ -149,11 +152,11 @@
   padding: 4px 8px;
   border-radius: 12px;
   font-size: 12px;
-  z-index: 2;
+  z-index: 2; /* card-info 보다 위에 오도록 */
 }
 
 .ip-address {
-  color: #ccc;
+  color: #666; /* 어두운 텍스트에 맞게 조정 */
   font-size: 0.9em;
   margin-left: 5px;
 }
@@ -208,7 +211,7 @@
   font-size: 14px;
 }
 
-.comment-count-display { /* Renamed to avoid conflict with original .comment-count if any */
+.comment-count-display { 
   color: #555;
 }
 
@@ -225,7 +228,6 @@
   margin-top: 10px;
   padding-top: 10px;
   border-top: 1px solid #f0f0f0;
-  /* display: none; */ /* Controlled by JS */
 }
 
 .comments-list {
@@ -558,7 +560,6 @@
         likes: 0,
         cardAuthorId: cardAuthorId 
       };
-      // Use 'comments' collection as per previous design for card-board
       const commentRef = await addDoc(collection(db, 'comments'), commentData);
       
       const cardRefDoc = doc(db, 'cards', cardId);
@@ -657,7 +658,6 @@
       return;
     }
     commentsListEl.innerHTML = '<p>댓글을 불러오는 중...</p>';
-    // Use 'comments' collection
     const q = query(collection(db, 'comments'), where('cardId', '==', cardId), orderBy('createdAt', 'asc'));
     
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -706,7 +706,7 @@
   }
   // --- End Comment Functions ---
 
-  // Main logic to load cards (adapted from original card-board.html, with comment/notification integration)
+  // Main logic to load cards
   const sharedCardsQuery = query(collection(db, 'cards'), orderBy('createdAt', 'desc'));
   onSnapshot(sharedCardsQuery, (snapshot) => {
     if (!cardCreationBoardList) return;
@@ -715,27 +715,42 @@
     snapshot.forEach(cardDoc => {
       const cardData = cardDoc.data();
       const cardId = cardDoc.id;
-      cardData.id = cardId; // Make cardId available in cardData for comment functions
-      // cardData.userId and cardData.nickname should be present from original data structure
+      cardData.id = cardId; 
 
       const cardItemDiv = document.createElement('div');
       cardItemDiv.className = 'card-item';
-      cardItemDiv.id = `card-item-${cardId}`; // ID for linking notifications
+      cardItemDiv.id = `card-item-${cardId}`;
       
-      // Original card item structure
-      cardItemDiv.innerHTML = `
-        <img src="${cardData.imageUrl}" alt="Shared card" class="card-image">
-        <div class="card-info">
-          <div>작성자: ${escapeHTML(cardData.nickname)} <span class="ip-address">(${escapeHTML(cardData.ipAddress || 'IP 정보 없음')})</span></div>
-          <div>${cardData.createdAt ? new Date(cardData.createdAt.seconds * 1000).toLocaleString() : '날짜 없음'}</div>
-        </div>
-        <button class="like-btn" ${hasUserLikedCardToday(cardId) ? 'disabled' : ''}>
-          <svg viewBox="0 0 24 24">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-          </svg>
-        </button>
-        <span class="like-count">${cardData.likes || 0}</span>
+      // Card Image
+      const cardImageEl = document.createElement('img');
+      cardImageEl.src = cardData.imageUrl;
+      cardImageEl.alt = "Shared card";
+      cardImageEl.className = 'card-image';
+      cardItemDiv.appendChild(cardImageEl);
+
+      // Card Info (now below the image)
+      const cardInfoDiv = document.createElement('div');
+      cardInfoDiv.className = 'card-info';
+      cardInfoDiv.innerHTML = `
+        <div>작성자: ${escapeHTML(cardData.nickname)} <span class="ip-address">(${escapeHTML(cardData.ipAddress || 'IP 정보 없음')})</span></div>
+        <div>${cardData.createdAt ? new Date(cardData.createdAt.seconds * 1000).toLocaleString() : '날짜 없음'}</div>
       `;
+      cardItemDiv.appendChild(cardInfoDiv);
+      
+      // Like Button and Count (remain absolute positioned relative to card-item)
+      const likeButton = document.createElement('button');
+      likeButton.className = 'like-btn';
+      likeButton.innerHTML = `<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
+      if (hasUserLikedCardToday(cardId)) {
+        likeButton.disabled = true;
+        likeButton.style.opacity = '0.7';
+      }
+      cardItemDiv.appendChild(likeButton);
+
+      const likeCountSpan = document.createElement('span');
+      likeCountSpan.className = 'like-count';
+      likeCountSpan.textContent = cardData.likes || 0;
+      cardItemDiv.appendChild(likeCountSpan);
       
       // Card Footer for actions and comments
       const cardFooterDiv = document.createElement('div');
@@ -765,15 +780,14 @@
       cardItemDiv.appendChild(cardFooterDiv);
       cardCreationBoardList.appendChild(cardItemDiv);
 
-      // Event listeners (image click, like button, comment toggle, add comment)
-      const cardImage = cardItemDiv.querySelector('.card-image');
-      cardImage.addEventListener('click', (e) => {
+      // Event listeners
+      cardImageEl.addEventListener('click', (e) => {
         e.stopPropagation();
         const fullView = document.createElement('div');
         fullView.className = 'image-full-view';
         fullView.innerHTML = `
           <div class="image-full-view-content">
-            <img src="${cardImage.src}" alt="Full size card">
+            <img src="${cardImageEl.src}" alt="Full size card">
             <button class="close-full-view">×</button>
           </div>
         `;
@@ -790,11 +804,6 @@
         });
       });
 
-      const likeButton = cardItemDiv.querySelector('.like-btn');
-      if (hasUserLikedCardToday(cardId)) {
-        likeButton.disabled = true;
-        likeButton.style.opacity = '0.7';
-      }
       likeButton.addEventListener('click', async (e) => {
         e.stopPropagation();
         if (hasUserLikedCardToday(cardId)) {
@@ -806,9 +815,7 @@
           setUserLikedCardToday(cardId);
           likeButton.disabled = true;
           likeButton.style.opacity = '0.7';
-          // Update like count display immediately
-          const likeCountSpan = cardItemDiv.querySelector('.like-count');
-          if(likeCountSpan) likeCountSpan.textContent = (parseInt(likeCountSpan.textContent) || 0) + 1;
+          likeCountSpan.textContent = (parseInt(likeCountSpan.textContent) || 0) + 1;
         } catch (error) {
           console.error('Error liking card:', error);
           alert('좋아요 처리에 실패했습니다.');
@@ -827,10 +834,6 @@
         } else {
           commentsSectionDiv.style.display = 'none';
           toggleBtn.textContent = '댓글 보기';
-          if (commentListeners[cardId]) {
-            // commentListeners[cardId](); // Detach listener if needed
-            // delete commentListeners[cardId];
-          }
         }
       });
 
@@ -849,7 +852,6 @@
       });
     });
 
-    // Initial load of notifications for the current user
     loadUserNotifications(currentUserNickname);
 
   }, error => {
@@ -860,3 +862,4 @@
 </script>
 </body>
 </html>
+
