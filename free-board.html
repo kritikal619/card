@@ -20,6 +20,14 @@
   <div class="app-container">
     <header class="app-header">
       <h1 id="app-header-title">자유게시판</h1>
+      <div class="notifications-container">
+        <button id="notification-bell" aria-label="알림">
+          🔔 <span id="notification-count">0</span>
+        </button>
+        <div id="notification-list" class="notification-dropdown" style="display: none;">
+          <p>알림이 없습니다.</p>
+        </div>
+      </div>
     </header>
 
     <main class="app-content">
@@ -53,7 +61,7 @@
       <div class="nav-item" data-tab="lettering-tab" data-title="글자">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9.93 13.5h4.14L12 7.98zM20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-4.05 16.5l-1.14-3H9.17l-1.12 3H5.96l5.11-13h1.86l5.11 13h-2.09z"/></svg>
         <span>글자</span>
-      </div>
+      </a>
       <a href="board.html" class="nav-item" data-title="게시판">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zm0-8h14V7H7v2z"/></svg>
         <span>게시판</span>
@@ -62,6 +70,7 @@
   </div>
 
 <style>
+/* Existing styles from free-board.html */
 .floating-write-button {
   position: fixed;
   bottom: 80px;
@@ -92,12 +101,12 @@
   padding: 15px;
   margin-bottom: 15px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  cursor: pointer;
+  /* cursor: pointer; /* Removed to allow interaction with inner elements */
   transition: transform 0.2s;
 }
 
 .post-card:hover {
-  transform: translateY(-2px);
+  /* transform: translateY(-2px); */ /* Can be distracting with many elements */
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
@@ -105,6 +114,7 @@
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 8px;
+  cursor: pointer; /* Add cursor for title click to expand */
 }
 
 .post-meta {
@@ -128,6 +138,7 @@
   gap: 15px;
   font-size: 12px;
   color: #666;
+  margin-top: 10px; /* Added margin */
 }
 
 .post-stat {
@@ -137,15 +148,13 @@
 }
 
 .post-detail {
-  display: none;
+  /* display: none; */ /* Will be controlled by JS, initially hidden is fine */
   margin-top: 15px;
   padding-top: 15px;
   border-top: 1px solid #eee;
 }
 
-.post-detail.active {
-  display: block;
-}
+/* .post-detail.active { display: block; } */ /* JS will handle this */
 
 .recommend-button {
   background: none;
@@ -162,29 +171,6 @@
   background: #e3f2fd;
   color: #1976D2;
   border-color: #1976D2;
-}
-
-.comments-section {
-  margin-top: 15px;
-}
-
-.comment-item {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-}
-
-.comment-author {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.comment-text {
-  margin-bottom: 5px;
-}
-
-.comment-meta {
-  font-size: 12px;
-  color: #666;
 }
 
 .post-images {
@@ -275,6 +261,205 @@
   font-size: 0.9em;
   margin-left: 5px;
 }
+
+/* Comment Section Styles (from card-board-modified-v2.html, adapted) */
+.post-actions-footer { /* New wrapper for comment toggle etc. */
+  padding: 10px 0; /* Adjusted padding */
+  border-top: 1px solid #eee;
+  margin-top: 10px;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.comment-count-display { /* Renamed from .comment-count to avoid conflict if any */
+  color: #555;
+}
+
+.toggle-comments-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.comments-section {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #f0f0f0;
+  /* display: none; */ /* Initially hidden, controlled by JS */
+}
+
+.comments-list {
+  max-height: 300px; /* Or remove for full scroll */
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
+
+.comment-item {
+  padding: 8px 0;
+  border-bottom: 1px dashed #eee;
+}
+.comment-item:last-child {
+  border-bottom: none;
+}
+
+.comment-author {
+  font-weight: bold;
+  color: #333;
+  font-size: 13px;
+}
+
+.comment-timestamp {
+  font-size: 11px;
+  color: #777;
+  margin-left: 8px;
+}
+
+.comment-text {
+  font-size: 14px;
+  color: #555;
+  margin-top: 4px;
+  white-space: pre-wrap; /* To respect newlines */
+}
+
+.comment-form h4 {
+  font-size: 15px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.comment-form input[type="text"],
+.comment-form textarea {
+  width: calc(100% - 16px); /* Account for padding */
+  padding: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.comment-form textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+.comment-form .add-comment-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.comment-form .add-comment-btn:hover {
+  background-color: #218838;
+}
+
+.reply-btn {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 2px 0;
+    margin-top: 4px;
+}
+
+.reply-form-container {
+    margin-left: 20px; /* Indent reply form */
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px dashed #eee;
+}
+
+/* Notification Styles (from card-board-modified-v2.html) */
+.app-header {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+}
+
+.notifications-container {
+  position: relative;
+  margin-right: 15px; 
+}
+
+#notification-bell {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  position: relative; 
+}
+
+#notification-count {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 5px;
+  font-size: 10px;
+  font-weight: bold;
+  display: none; /* Initially hidden, shown if count > 0 */
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: 100%; 
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 1001; 
+}
+
+.notification-dropdown p {
+  padding: 10px;
+  text-align: center;
+  color: #777;
+}
+
+.notification-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+.notification-item:last-child {
+  border-bottom: none;
+}
+.notification-item:hover {
+  background-color: #f9f9f9;
+}
+.notification-item.is-read {
+  background-color: #e9ecef; 
+  opacity: 0.7;
+}
+
+.notification-text {
+  font-size: 13px;
+  color: #333;
+}
+
+.notification-timestamp {
+  font-size: 11px;
+  color: #888;
+  margin-top: 4px;
+}
+
 </style>
 
 <script type="module">
@@ -287,27 +472,342 @@
     doc,
     updateDoc,
     increment,
-    addDoc,
-    serverTimestamp,
-    where
+    addDoc, 
+    serverTimestamp, 
+    where,
+    getDoc // Added for fetching parent comment author
   } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js';
 
   const freeBoardListElement = document.getElementById('free-board-list');
   const postsCollectionRef = collection(db, 'freeBoardPosts');
-  const commentsCollectionRef = collection(db, 'freeBoardComments');
+  // Comments will be stored in 'freeBoardComments' as per original free-board.html logic
+  const commentsCollectionRef = collection(db, 'freeBoardComments'); 
 
+  const notificationBell = document.getElementById('notification-bell');
+  const notificationCountEl = document.getElementById('notification-count');
+  const notificationListEl = document.getElementById('notification-list');
+  
+  let currentUserNickname = localStorage.getItem('currentUserNickname');
+  if (!currentUserNickname) {
+    currentUserNickname = prompt("알림 및 댓글 작성을 위한 닉네임을 입력해주세요 (예: user123):") || "guest" + Math.floor(Math.random() * 1000);
+    localStorage.setItem('currentUserNickname', currentUserNickname);
+  }
+  console.log(`Current user for notifications & comments: ${currentUserNickname}`);
+
+  function escapeHTML(str) {
+    if (str === null || str === undefined) return '';
+    return str.toString().replace(/[&<>'"/]/g, s => (
+      { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '/': '&#x2F;' }[s]
+    ));
+  }
+
+  // --- Notification Functions (from card-board-modified-v2.html) ---
+  async function createNotification(type, postId, commentId, actorNickname, actorUserId, recipientUserId, commentTextPreview, postTitle) {
+    if (!recipientUserId || recipientUserId === actorUserId) { 
+        console.log("Skipping self-notification or no recipient.");
+        return;
+    }
+    try {
+      await addDoc(collection(db, 'notifications'), {
+        recipientUserId: recipientUserId, 
+        actorNickname: actorNickname,     
+        actorUserId: actorUserId,         
+        type: type,                     
+        postId: postId, // Changed from cardId to postId
+        commentId: commentId,           
+        commentTextPreview: commentTextPreview.substring(0, 50) + (commentTextPreview.length > 50 ? '...' : ''),
+        postTitle: postTitle,        
+        createdAt: serverTimestamp(),
+        isRead: false,
+        link: `#post-item-${postId}` // Link to the post item
+      });
+      console.log(`Notification created for ${recipientUserId} about action by ${actorNickname} on post ${postId}`);
+    } catch (error) {
+      console.error('Error creating notification:', error);
+    }
+  }
+
+  async function loadUserNotifications(userId) {
+    if (!userId) return;
+    const q = query(
+      collection(db, 'notifications'), 
+      where('recipientUserId', '==', userId),
+      orderBy('createdAt', 'desc')
+    );
+
+    onSnapshot(q, (snapshot) => {
+      notificationListEl.innerHTML = '';
+      let unreadCount = 0;
+      if (snapshot.empty) {
+        notificationListEl.innerHTML = '<p>새 알림이 없습니다.</p>';
+        notificationCountEl.textContent = '0';
+        notificationCountEl.style.display = 'none';
+        return;
+      }
+      snapshot.forEach(docSnap => {
+        const notification = docSnap.data();
+        if (!notification.isRead) {
+          unreadCount++;
+        }
+        const item = document.createElement('div');
+        item.className = `notification-item ${notification.isRead ? 'is-read' : ''}`;
+        item.dataset.notificationId = docSnap.id;
+        item.innerHTML = `
+          <div class="notification-text"><strong>${escapeHTML(notification.actorNickname)}</strong>님이 ${notification.type === 'new_reply_to_comment' ? '회원님의 댓글에 답글을 남겼습니다' : `${escapeHTML(notification.postTitle)}에 댓글을 남겼습니다`}: ${escapeHTML(notification.commentTextPreview)}</div>
+          <div class="notification-timestamp">${notification.createdAt ? new Date(notification.createdAt.seconds * 1000).toLocaleString() : ''}</div>
+        `;
+        item.addEventListener('click', async () => {
+          if (!notification.isRead) {
+            await updateDoc(doc(db, 'notifications', docSnap.id), { isRead: true });
+          }
+          notificationListEl.style.display = 'none'; 
+          // Attempt to scroll to the post
+          const targetPostElement = document.getElementById(`post-item-${notification.postId}`);
+          if (targetPostElement) {
+            targetPostElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Optionally, expand the comments section if it's for a comment
+            const commentsSection = targetPostElement.querySelector('.comments-section');
+            const toggleBtn = targetPostElement.querySelector('.toggle-comments-btn');
+            if (commentsSection && commentsSection.style.display === 'none' && toggleBtn) {
+                toggleBtn.click();
+            }
+          } else {
+            alert(`알림: ${item.querySelector('.notification-text').textContent}\n(게시글을 찾을 수 없습니다. 페이지를 새로고침 해보세요.)`);
+          }
+        });
+        notificationListEl.appendChild(item);
+      });
+      notificationCountEl.textContent = unreadCount.toString();
+      notificationCountEl.style.display = unreadCount > 0 ? 'inline-block' : 'none';
+    }, error => {
+      console.error("Error loading notifications: ", error);
+      notificationListEl.innerHTML = '<p>알림을 불러오는데 실패했습니다.</p>';
+    });
+  }
+
+  notificationBell.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isHidden = notificationListEl.style.display === 'none';
+    if (isHidden) {
+      notificationListEl.style.display = 'block';
+      loadUserNotifications(currentUserNickname); 
+    } else {
+      notificationListEl.style.display = 'none';
+    }
+  });
+  document.addEventListener('click', (e) => {
+    if (!notificationBell.contains(e.target) && !notificationListEl.contains(e.target)) {
+        notificationListEl.style.display = 'none';
+    }
+  });
+  // --- End Notification Functions ---
+
+  // --- Enhanced Comment Functions (adapted from card-board-modified-v2.html) ---
+  async function addCommentToFreeBoard(postId, nickname, text, parentId = null, postData) {
+    if (!nickname.trim() || !text.trim()) {
+      alert('닉네임과 댓글 내용을 모두 입력해주세요.');
+      return null;
+    }
+    // postData should contain author info, e.g., postData.nickname or postData.userId
+    const postAuthorId = postData.userId || postData.nickname; // Assuming postData.userId or fallback to nickname
+    const postTitle = postData.title || `게시글 '${postId.substring(0,10)}...'`;
+
+    try {
+      const commentData = {
+        postId: postId, // Link comment to post
+        userId: nickname, // Using nickname as userId for simplicity
+        nickname: nickname,
+        text: text,
+        parentId: parentId, // For replies
+        createdAt: serverTimestamp(),
+        likes: 0, // Optional: can add like functionality to comments later
+        postAuthorId: postAuthorId // Store post author ID for notifications
+      };
+      const commentRef = await addDoc(commentsCollectionRef, commentData);
+      
+      const postRefDoc = doc(db, 'freeBoardPosts', postId);
+      await updateDoc(postRefDoc, { commentCount: increment(1) });
+      
+      console.log('Comment added with ID: ', commentRef.id);
+
+      // Create Notification
+      if (parentId) { // It's a reply
+        const parentCommentRef = doc(commentsCollectionRef, parentId);
+        const parentCommentSnap = await getDoc(parentCommentRef);
+        if (parentCommentSnap.exists()) {
+          const parentCommentData = parentCommentSnap.data();
+          await createNotification('new_reply_to_comment', postId, commentRef.id, nickname, nickname, parentCommentData.userId, text, `회원님의 댓글에`);
+        }
+      } else { // It's a new comment on the post
+        await createNotification('new_comment_on_post', postId, commentRef.id, nickname, nickname, postAuthorId, text, `게시글 '${escapeHTML(postTitle)}'`);
+      }
+      return commentRef.id;
+    } catch (error) {
+      console.error('Error adding comment or notification: ', error);
+      alert('댓글 작성 또는 알림 생성에 실패했습니다.');
+      return null;
+    }
+  }
+
+  function renderFreeBoardComment(commentData, commentId, commentsListEl, postId, postData) {
+    const commentItem = document.createElement('div');
+    commentItem.className = 'comment-item';
+    commentItem.dataset.commentId = commentId;
+    commentItem.id = `comment-${commentId}`;
+
+    const authorEl = document.createElement('span');
+    authorEl.className = 'comment-author';
+    authorEl.textContent = escapeHTML(commentData.nickname);
+    if (commentData.ipAddress) { // Display IP if available (as in original)
+        const ipSpan = document.createElement('span');
+        ipSpan.className = 'ip-address';
+        ipSpan.textContent = `(${escapeHTML(commentData.ipAddress)})`;
+        authorEl.appendChild(ipSpan);
+    }
+
+    const timestampEl = document.createElement('span');
+    timestampEl.className = 'comment-timestamp';
+    timestampEl.textContent = commentData.createdAt ? new Date(commentData.createdAt.seconds * 1000).toLocaleString() : '';
+
+    const textEl = document.createElement('p');
+    textEl.className = 'comment-text';
+    textEl.textContent = escapeHTML(commentData.text);
+    
+    commentItem.appendChild(authorEl);
+    commentItem.appendChild(timestampEl);
+    commentItem.appendChild(textEl);
+
+    const replyButton = document.createElement('button');
+    replyButton.className = 'reply-btn';
+    replyButton.textContent = '답글 달기';
+    replyButton.onclick = () => {
+        const existingReplyForm = commentItem.querySelector('.reply-form-container');
+        if (existingReplyForm) existingReplyForm.remove();
+
+        const replyFormContainer = document.createElement('div');
+        replyFormContainer.className = 'reply-form-container';
+        replyFormContainer.innerHTML = `
+            <input type="text" class="reply-nickname-input" placeholder="닉네임" value="${currentUserNickname}">
+            <textarea class="reply-text-input" placeholder="답글 내용을 입력하세요..."></textarea>
+            <button class="add-reply-btn">답글 작성</button>
+        `;
+        commentItem.appendChild(replyFormContainer);
+        replyFormContainer.querySelector('.add-reply-btn').onclick = async () => {
+            const replyNickname = replyFormContainer.querySelector('.reply-nickname-input').value;
+            const replyText = replyFormContainer.querySelector('.reply-text-input').value;
+            const newReplyId = await addCommentToFreeBoard(postId, replyNickname, replyText, commentId, postData);
+            if (newReplyId) {
+                replyFormContainer.remove(); 
+            }
+        };
+    };
+    commentItem.appendChild(replyButton);
+
+    if (commentData.parentId) {
+        commentItem.style.marginLeft = '20px'; 
+        const parentCommentEl = commentsListEl.querySelector(`.comment-item[data-comment-id="${commentData.parentId}"]`);
+        if (parentCommentEl) {
+            let replyContainerTarget = parentCommentEl.querySelector('.reply-form-container');
+            if (replyContainerTarget) {
+                parentCommentEl.insertBefore(commentItem, replyContainerTarget);
+            } else {
+                parentCommentEl.appendChild(commentItem);
+            }
+        } else {
+            commentsListEl.appendChild(commentItem); 
+        }
+    } else {
+        commentsListEl.appendChild(commentItem);
+    }
+  }
+
+  let commentListeners = {}; 
+
+  function loadAndDisplayEnhancedComments(postId, commentsListEl, postData) {
+    if (commentListeners[postId]) { 
+      // Listener already active, maybe refresh or do nothing
+      // For simplicity, not detaching and re-attaching on every toggle here
+      return;
+    }
+    commentsListEl.innerHTML = '<p>댓글을 불러오는 중...</p>';
+    const q = query(commentsCollectionRef, where('postId', '==', postId), orderBy('createdAt', 'asc'));
+    
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      commentsListEl.innerHTML = ''; 
+      if (snapshot.empty) {
+        commentsListEl.innerHTML = '<p>아직 댓글이 없습니다.</p>';
+        return;
+      }
+      const allComments = {};
+      snapshot.forEach(doc => allComments[doc.id] = { id: doc.id, ...doc.data() });
+
+      const rootComments = [];
+      const replies = {}; // Store replies keyed by parentId
+
+      for (const id in allComments) {
+          const comment = allComments[id];
+          if (comment.parentId) {
+              if (!replies[comment.parentId]) {
+                  replies[comment.parentId] = [];
+              }
+              replies[comment.parentId].push(comment);
+          } else {
+              rootComments.push(comment);
+          }
+      }
+      
+      // Function to recursively render comments and their replies
+      function renderNestedComments(comment, container) {
+        renderFreeBoardComment(comment, comment.id, container, postId, postData);
+        // Find the actual DOM element for this comment to append replies to it
+        const commentElement = container.querySelector(`.comment-item[data-comment-id="${comment.id}"]`);
+        if (commentElement && replies[comment.id]) {
+            replies[comment.id].sort((a,b) => a.createdAt.seconds - b.createdAt.seconds).forEach(reply => {
+                renderNestedComments(reply, commentElement); // Render reply within parent's DOM element
+            });
+        }
+      }
+
+      rootComments.forEach(comment => {
+          renderNestedComments(comment, commentsListEl);
+      });
+
+    }, (error) => {
+      console.error(`Error loading comments for post ${postId}:`, error);
+      if (error.code === 'failed-precondition' && error.message.includes('requires an index')) {
+          const indexUrl = error.message.match(/https:\/\/console\.firebase\.google\.com[^\s]+/)?.[0];
+          commentsListEl.innerHTML = `
+            <div class="error-message">
+              <p>댓글을 불러오는 데 실패했습니다. 필요한 Firestore 인덱스가 없습니다.</p>
+              ${indexUrl ? `<p><a href="${indexUrl}" target="_blank">Firestore 콘솔에서 인덱스 생성하기</a></p>` : ''}
+            </div>`;
+      } else {
+        commentsListEl.innerHTML = '<p>댓글을 불러오는데 실패했습니다.</p>';
+      }
+    });
+    commentListeners[postId] = unsubscribe; 
+  }
+  // --- End Enhanced Comment Functions ---
+
+  // Main logic to load posts
   const freePostsQuery = query(postsCollectionRef, orderBy('createdAt', 'desc'));
   onSnapshot(freePostsQuery, (snapshot) => {
     if (!freeBoardListElement) return;
     freeBoardListElement.innerHTML = '';
     
-    const unsubscribeFunctions = new Map();
+    // const unsubscribeFunctions = new Map(); // Already declared above for original comments, reuse or manage carefully
+    // For simplicity, commentListeners map will handle comment unsubscriptions.
 
     snapshot.forEach(postDoc => {
       const postData = postDoc.data();
       const postId = postDoc.id;
+      postData.id = postId; // Make postId available in postData for comment functions
+
       const postCardDiv = document.createElement('div');
       postCardDiv.className = 'post-card';
+      postCardDiv.id = `post-item-${postId}`; // ID for linking notifications
+
+      // Basic post structure (title, meta, content preview, images, stats)
       postCardDiv.innerHTML = `
         <h3 class="post-title">${escapeHTML(postData.title)}</h3>
         <p class="post-meta">
@@ -325,77 +825,86 @@
         ` : ''}
         <div class="post-stats">
           <span class="post-stat">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-            </svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
             <span class="recommend-count">${postData.recommends || 0}</span>
           </span>
-          <span class="post-stat">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/>
-            </svg>
-            <span class="comment-count">${postData.commentCount || 0}</span>
+          <span class="post-stat comment-count-display">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg>
+            <span>${postData.commentCount || 0}</span>
           </span>
         </div>
-        <div class="post-detail">
-          <div class="post-actions">
+        <div class="post-detail" style="display: none;">
+          <!-- Full content can be loaded here if different from preview -->
+          <p>${escapeHTML(postData.content)}</p> 
+          <div class="post-actions-original">
             <button class="recommend-button" data-post-id="${postId}">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-              </svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
               추천
             </button>
           </div>
-          <div class="comments-section">
-            <h4>댓글</h4>
-            <div class="comments-list" id="comments-for-${postId}"></div>
-            <form class="comment-form" data-post-id="${postId}">
-              <input type="text" name="comment-nickname" placeholder="닉네임" required>
-              <textarea name="comment-text" placeholder="댓글을 입력하세요..." rows="2" required></textarea>
-              <button type="submit">댓글 작성</button>
-            </form>
-          </div>
         </div>
       `;
+      
+      // Create and append Post Actions Footer (for comment toggle)
+      const postActionsFooterDiv = document.createElement('div');
+      postActionsFooterDiv.className = 'post-actions-footer';
+      postActionsFooterDiv.innerHTML = `
+        <div class="post-actions">
+            <span class="comment-count-display">💬 ${postData.commentCount || 0}</span>
+            <button class="toggle-comments-btn">댓글 보기</button>
+        </div>
+      `;
+      postCardDiv.appendChild(postActionsFooterDiv);
+
+      // Create and append Comments Section (initially hidden)
+      const commentsSectionDiv = document.createElement('div');
+      commentsSectionDiv.className = 'comments-section';
+      commentsSectionDiv.style.display = 'none'; 
+      commentsSectionDiv.innerHTML = `
+        <div class="comments-list"></div>
+        <div class="comment-form">
+          <h4>새 댓글 작성</h4>
+          <input type="text" class="comment-nickname-input" placeholder="닉네임" value="${currentUserNickname}">
+          <textarea class="comment-text-input" placeholder="댓글을 입력하세요..."></textarea>
+          <button class="add-comment-btn">댓글 작성</button>
+        </div>
+      `;
+      postCardDiv.appendChild(commentsSectionDiv);
       freeBoardListElement.appendChild(postCardDiv);
 
-      // Add click handler for post expansion
-      postCardDiv.addEventListener('click', (e) => {
-        if (!e.target.closest('.recommend-button') && !e.target.closest('.comment-form') && !e.target.closest('.post-image-preview')) {
-          const detailSection = postCardDiv.querySelector('.post-detail');
-          detailSection.classList.toggle('active');
-        }
+      // Event listener for post title click to expand/collapse details
+      const postTitleElement = postCardDiv.querySelector('.post-title');
+      const detailSection = postCardDiv.querySelector('.post-detail');
+      postTitleElement.addEventListener('click', (e) => {
+        e.stopPropagation();
+        detailSection.style.display = detailSection.style.display === 'none' ? 'block' : 'none';
       });
 
-      // Add image click handler for full view
+      // Image click handler (from original)
       const postImages = postCardDiv.querySelectorAll('.post-image-preview');
       postImages.forEach(img => {
         img.addEventListener('click', (e) => {
           e.stopPropagation();
-          const fullView = document.createElement('div');
-          fullView.className = 'image-full-view';
-          fullView.innerHTML = `
-            <div class="image-full-view-content">
-              <img src="${img.src}" alt="Full size image">
-              <button class="close-full-view">×</button>
-            </div>
-          `;
-          document.body.appendChild(fullView);
-          
-          fullView.querySelector('.close-full-view').addEventListener('click', () => {
-            fullView.remove();
-          });
-          
-          fullView.addEventListener('click', (e) => {
-            if (e.target === fullView) {
-              fullView.remove();
-            }
-          });
+          // ... (image full view logic from original, kept as is) ...
+            const fullView = document.createElement('div');
+            fullView.className = 'image-full-view';
+            fullView.innerHTML = `
+                <div class="image-full-view-content">
+                <img src="${img.src}" alt="Full size image">
+                <button class="close-full-view">×</button>
+                </div>
+            `;
+            document.body.appendChild(fullView);
+            fullView.querySelector('.close-full-view').addEventListener('click', () => { fullView.remove(); });
+            fullView.addEventListener('click', (ev) => { if (ev.target === fullView) { fullView.remove(); } });
         });
       });
 
-      // Add recommend functionality
+      // Recommend functionality (from original)
       const recommendButton = postCardDiv.querySelector('.recommend-button');
+      if (localStorage.getItem(`recommended_${postId}`) === 'true') {
+        recommendButton.classList.add('recommended');
+      }
       recommendButton.addEventListener('click', async (e) => {
         e.stopPropagation();
         const hasRecommended = localStorage.getItem(`recommended_${postId}`) === 'true';
@@ -404,9 +913,7 @@
           return;
         }
         try {
-          await updateDoc(doc(db, 'freeBoardPosts', postId), {
-            recommends: increment(1)
-          });
+          await updateDoc(doc(db, 'freeBoardPosts', postId), { recommends: increment(1) });
           localStorage.setItem(`recommended_${postId}`, 'true');
           recommendButton.classList.add('recommended');
         } catch (error) {
@@ -415,89 +922,52 @@
         }
       });
 
-      // Load comments and store the unsubscribe function
-      const commentsList = postCardDiv.querySelector('.comments-list');
-      if (commentsList) {
-        const unsubscribe = loadAndDisplayComments(postId, commentsList);
-        unsubscribeFunctions.set(postId, unsubscribe);
-      }
+      // New Comment Toggle and Form Handling
+      const toggleBtn = postActionsFooterDiv.querySelector('.toggle-comments-btn');
+      const commentsListEl = commentsSectionDiv.querySelector('.comments-list');
+      
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isHidden = commentsSectionDiv.style.display === 'none';
+        if (isHidden) {
+          commentsSectionDiv.style.display = 'block';
+          toggleBtn.textContent = '댓글 숨기기';
+          loadAndDisplayEnhancedComments(postId, commentsListEl, postData); // Use new comment loader
+        } else {
+          commentsSectionDiv.style.display = 'none';
+          toggleBtn.textContent = '댓글 보기';
+          // Optionally, unsubscribe from comments here if listener is active
+          if (commentListeners[postId]) {
+            // commentListeners[postId](); // Detach listener
+            // delete commentListeners[postId];
+          }
+        }
+      });
+
+      const addCommentBtn = commentsSectionDiv.querySelector('.add-comment-btn');
+      const nicknameInput = commentsSectionDiv.querySelector('.comment-nickname-input');
+      const textInput = commentsSectionDiv.querySelector('.comment-text-input');
+
+      addCommentBtn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        const nickname = nicknameInput.value;
+        const text = textInput.value;
+        const commentId = await addCommentToFreeBoard(postId, nickname, text, null, postData);
+        if (commentId) {
+          textInput.value = ''; // Clear input after successful submission
+          // The onSnapshot listener for comments should automatically update the list.
+        }
+      });
     });
 
-    // Clean up old listeners when new data arrives
-    return () => {
-      unsubscribeFunctions.forEach(unsubscribe => unsubscribe());
-      unsubscribeFunctions.clear();
-    };
+    // Initial load of notifications for the current user
+    loadUserNotifications(currentUserNickname);
+
   }, error => {
     console.error('Error fetching free board posts:', error);
     if (freeBoardListElement) freeBoardListElement.innerHTML = '<p>게시글 목록을 불러오는 데 실패했습니다.</p>';
   });
 
-  function loadAndDisplayComments(postId, commentsListContainer) {
-    commentsListContainer.innerHTML = '<p>댓글을 불러오는 중...</p>';
-
-    const commentsQuery = query(
-      commentsCollectionRef,
-      where('postId', '==', postId),
-      orderBy('createdAt', 'asc')
-    );
-
-    const unsubscribe = onSnapshot(commentsQuery, 
-      (snapshot) => {
-        commentsListContainer.innerHTML = '';
-        if (snapshot.empty) {
-          commentsListContainer.innerHTML = '<p>아직 댓글이 없습니다.</p>';
-          return;
-        }
-
-        snapshot.forEach(commentDoc => {
-          const commentData = commentDoc.data();
-          const commentItemDiv = document.createElement('div');
-          commentItemDiv.className = 'comment-item';
-          commentItemDiv.innerHTML = `
-            <p class="comment-author">
-              ${escapeHTML(commentData.nickname)}
-              <span class="ip-address">(${escapeHTML(commentData.ipAddress || 'IP 정보 없음')})</span>
-            </p>
-            <p class="comment-text">${escapeHTML(commentData.text)}</p>
-            <p class="comment-meta">${commentData.createdAt ? new Date(commentData.createdAt.seconds * 1000).toLocaleString() : '날짜 없음'}</p>
-          `;
-          commentsListContainer.appendChild(commentItemDiv);
-        });
-      }, 
-      (error) => {
-        console.error(`Error fetching comments for post ${postId}:`, error);
-        
-        if (error.code === 'failed-precondition' && error.message.includes('requires an index')) {
-          const indexUrl = error.message.match(/https:\/\/console\.firebase\.google\.com[^\s]+/)?.[0];
-          
-          commentsListContainer.innerHTML = `
-            <div class="error-message">
-              <p>댓글을 불러오는 데 실패했습니다.</p>
-              <p>필요한 인덱스가 없습니다. 관리자에게 문의하세요.</p>
-              ${indexUrl ? `<p><a href="${indexUrl}" target="_blank">인덱스 생성하기</a></p>` : ''}
-            </div>
-          `;
-        } else {
-          commentsListContainer.innerHTML = `
-            <div class="error-message">
-              <p>댓글을 불러오는 데 실패했습니다.</p>
-              <p>잠시 후 다시 시도해주세요.</p>
-            </div>
-          `;
-        }
-      }
-    );
-
-    return unsubscribe;
-  }
-
-  function escapeHTML(str) {
-    if (str === null || str === undefined) return '';
-    return str.toString().replace(/[&<>'"/]/g, s => (
-      { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '/': '&#x2F;' }[s]
-    ));
-  }
 </script>
 </body>
-</html> 
+</html>
