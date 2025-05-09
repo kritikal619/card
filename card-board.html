@@ -20,6 +20,7 @@
   <div class="app-container">
     <header class="app-header">
       <h1 id="app-header-title">카드제작</h1>
+      <!-- Notification Bell and Dropdown -->
       <div class="notifications-container">
         <button id="notification-bell" aria-label="알림">
           🔔 <span id="notification-count">0</span>
@@ -59,7 +60,7 @@
       <div class="nav-item" data-tab="lettering-tab" data-title="글자">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9.93 13.5h4.14L12 7.98zM20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-4.05 16.5l-1.14-3H9.17l-1.12 3H5.96l5.11-13h1.86l5.11 13h-2.09z"/></svg>
         <span>글자</span>
-      </a>
+      </div>
       <a href="board.html" class="nav-item" data-title="게시판">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zm0-8h14V7H7v2z"/></svg>
         <span>게시판</span>
@@ -68,37 +69,7 @@
   </div>
 
 <style>
-body {
-    margin: 0;
-    padding-bottom: 60px; /* Default nav height */
-    -webkit-tap-highlight-color: transparent; /* iOS tap highlight 제거 */
-}
-
-.app-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; 
-}
-
-.app-content {
-    flex-grow: 1;
-    /* padding-bottom: 60px; */ /* Fixed nav일 경우 body에 padding-bottom 적용 */
-}
-
-.app-header {
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center;
-  padding: 10px 15px;
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #dee2e6;
-}
-
-#app-header-title {
-    margin: 0;
-    font-size: 1.5em;
-}
-
+/* Styles from card-board-original.html and card-board-modified-v2.html merged and adapted */
 .image-grid-container {
   padding: 15px;
 }
@@ -113,7 +84,7 @@ body {
 .card-item {
   position: relative;
   border-radius: 8px;
-  overflow: visible; 
+  overflow: hidden;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transition: transform 0.2s;
   background-color: #fff; 
@@ -129,15 +100,17 @@ body {
   aspect-ratio: 1;
   object-fit: cover;
   cursor: pointer; 
-  border-radius: 8px 8px 0 0; 
 }
 
 .card-info {
-  background: #f8f9fa; 
-  color: #333; 
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.7);
+  color: white;
   padding: 8px;
   font-size: 12px;
-  border-top: 1px solid #eee; 
 }
 
 .like-btn {
@@ -154,7 +127,7 @@ body {
   justify-content: center;
   cursor: pointer;
   transition: transform 0.2s;
-  z-index: 2; 
+  z-index: 2;
 }
 
 .like-btn:hover {
@@ -176,11 +149,11 @@ body {
   padding: 4px 8px;
   border-radius: 12px;
   font-size: 12px;
-  z-index: 2; 
+  z-index: 2;
 }
 
 .ip-address {
-  color: #666; 
+  color: #ccc;
   font-size: 0.9em;
   margin-left: 5px;
 }
@@ -222,6 +195,7 @@ body {
   padding: 5px;
 }
 
+/* Comment Section Styles */
 .card-item-footer {
   padding: 10px;
   border-top: 1px solid #eee;
@@ -234,7 +208,7 @@ body {
   font-size: 14px;
 }
 
-.comment-count-display { 
+.comment-count-display { /* Renamed to avoid conflict with original .comment-count if any */
   color: #555;
 }
 
@@ -251,6 +225,7 @@ body {
   margin-top: 10px;
   padding-top: 10px;
   border-top: 1px solid #f0f0f0;
+  /* display: none; */ /* Controlled by JS */
 }
 
 .comments-list {
@@ -337,6 +312,13 @@ body {
     border-top: 1px dashed #eee;
 }
 
+/* Notification Styles */
+.app-header {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+}
+
 .notifications-container {
   position: relative;
   margin-right: 15px; 
@@ -360,7 +342,7 @@ body {
   padding: 2px 5px;
   font-size: 10px;
   font-weight: bold;
-  display: none; 
+  display: none; /* Initially hidden */
 }
 
 .notification-dropdown {
@@ -410,50 +392,10 @@ body {
   margin-top: 4px;
 }
 
-/* Bottom Navigation Bar Styles */
-.app-bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 55px; /* Fixed height */
-    background-color: #ffffff;
-    border-top: 1px solid #e0e0e0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center; /* Vertically center items */
-    z-index: 1000;
-    box-sizing: border-box; /* Include padding and border in height */
-    padding-bottom: env(safe-area-inset-bottom); /* For iPhone X and newer */
-}
-
-.app-bottom-nav .nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; /* Center content vertically */
-    text-decoration: none;
-    color: #555;
-    font-size: 10px;
-    flex-grow: 1;
-    height: 100%; /* Make nav items take full height of nav bar */
-    -webkit-tap-highlight-color: transparent; /* iOS tap highlight 제거 */
-}
-
-.app-bottom-nav .nav-item svg {
-    width: 24px;
-    height: 24px;
-    margin-bottom: 2px;
-}
-
-.app-bottom-nav .nav-item.active {
-    color: #007bff; /* Active tab color */
-}
-
 </style>
 
 <script type="module">
-  import { db } from './firebase.js'; 
+  import { db } from './firebase.js'; // Assuming firebase.js is correctly configured
   import {
     collection,
     query,
@@ -497,6 +439,7 @@ body {
     localStorage.setItem(`liked_${cardId}_${today}`, 'true');
   }
 
+  // --- Notification Functions ---
   async function createNotification(type, cardId, commentId, actorNickname, actorUserId, recipientUserId, commentTextPreview, postTitle = '당신의 카드에') {
     if (!recipientUserId || recipientUserId === actorUserId) {
         console.log("Skipping self-notification or no recipient.");
@@ -593,7 +536,9 @@ body {
         notificationListEl.style.display = 'none';
     }
   });
+  // --- End Notification Functions ---
 
+  // --- Comment Functions ---
   async function addCommentToFirestore(cardId, nickname, text, parentId = null, cardData) {
     if (!nickname.trim() || !text.trim()) {
       alert('닉네임과 댓글 내용을 모두 입력해주세요.');
@@ -613,6 +558,7 @@ body {
         likes: 0,
         cardAuthorId: cardAuthorId 
       };
+      // Use 'comments' collection as per previous design for card-board
       const commentRef = await addDoc(collection(db, 'comments'), commentData);
       
       const cardRefDoc = doc(db, 'cards', cardId);
@@ -632,8 +578,8 @@ body {
       }
       return commentRef.id;
     } catch (error) {
-      console.error('Firestore Error:', error); // Enhanced error logging
-      alert('댓글 작성 또는 알림 생성에 실패했습니다. 개발자 콘솔을 확인해주세요.');
+      console.error('Error adding comment or notification: ', error);
+      alert('댓글 작성 또는 알림 생성에 실패했습니다.');
       return null;
     }
   }
@@ -711,6 +657,7 @@ body {
       return;
     }
     commentsListEl.innerHTML = '<p>댓글을 불러오는 중...</p>';
+    // Use 'comments' collection
     const q = query(collection(db, 'comments'), where('cardId', '==', cardId), orderBy('createdAt', 'asc'));
     
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -757,7 +704,9 @@ body {
     });
     commentListeners[cardId] = unsubscribe; 
   }
+  // --- End Comment Functions ---
 
+  // Main logic to load cards (adapted from original card-board.html, with comment/notification integration)
   const sharedCardsQuery = query(collection(db, 'cards'), orderBy('createdAt', 'desc'));
   onSnapshot(sharedCardsQuery, (snapshot) => {
     if (!cardCreationBoardList) return;
@@ -766,40 +715,29 @@ body {
     snapshot.forEach(cardDoc => {
       const cardData = cardDoc.data();
       const cardId = cardDoc.id;
-      cardData.id = cardId; 
+      cardData.id = cardId; // Make cardId available in cardData for comment functions
+      // cardData.userId and cardData.nickname should be present from original data structure
 
       const cardItemDiv = document.createElement('div');
       cardItemDiv.className = 'card-item';
-      cardItemDiv.id = `card-item-${cardId}`;
+      cardItemDiv.id = `card-item-${cardId}`; // ID for linking notifications
       
-      const cardImageEl = document.createElement('img');
-      cardImageEl.src = cardData.imageUrl;
-      cardImageEl.alt = "Shared card";
-      cardImageEl.className = 'card-image';
-      cardItemDiv.appendChild(cardImageEl);
-
-      const cardInfoDiv = document.createElement('div');
-      cardInfoDiv.className = 'card-info';
-      cardInfoDiv.innerHTML = `
-        <div>작성자: ${escapeHTML(cardData.nickname)} <span class="ip-address">(${escapeHTML(cardData.ipAddress || 'IP 정보 없음')})</span></div>
-        <div>${cardData.createdAt ? new Date(cardData.createdAt.seconds * 1000).toLocaleString() : '날짜 없음'}</div>
+      // Original card item structure
+      cardItemDiv.innerHTML = `
+        <img src="${cardData.imageUrl}" alt="Shared card" class="card-image">
+        <div class="card-info">
+          <div>작성자: ${escapeHTML(cardData.nickname)} <span class="ip-address">(${escapeHTML(cardData.ipAddress || 'IP 정보 없음')})</span></div>
+          <div>${cardData.createdAt ? new Date(cardData.createdAt.seconds * 1000).toLocaleString() : '날짜 없음'}</div>
+        </div>
+        <button class="like-btn" ${hasUserLikedCardToday(cardId) ? 'disabled' : ''}>
+          <svg viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+        <span class="like-count">${cardData.likes || 0}</span>
       `;
-      cardItemDiv.appendChild(cardInfoDiv);
       
-      const likeButton = document.createElement('button');
-      likeButton.className = 'like-btn';
-      likeButton.innerHTML = `<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
-      if (hasUserLikedCardToday(cardId)) {
-        likeButton.disabled = true;
-        likeButton.style.opacity = '0.7';
-      }
-      cardItemDiv.appendChild(likeButton);
-
-      const likeCountSpan = document.createElement('span');
-      likeCountSpan.className = 'like-count';
-      likeCountSpan.textContent = cardData.likes || 0;
-      cardItemDiv.appendChild(likeCountSpan);
-      
+      // Card Footer for actions and comments
       const cardFooterDiv = document.createElement('div');
       cardFooterDiv.className = 'card-item-footer';
 
@@ -827,13 +765,15 @@ body {
       cardItemDiv.appendChild(cardFooterDiv);
       cardCreationBoardList.appendChild(cardItemDiv);
 
-      cardImageEl.addEventListener('click', (e) => {
+      // Event listeners (image click, like button, comment toggle, add comment)
+      const cardImage = cardItemDiv.querySelector('.card-image');
+      cardImage.addEventListener('click', (e) => {
         e.stopPropagation();
         const fullView = document.createElement('div');
         fullView.className = 'image-full-view';
         fullView.innerHTML = `
           <div class="image-full-view-content">
-            <img src="${cardImageEl.src}" alt="Full size card">
+            <img src="${cardImage.src}" alt="Full size card">
             <button class="close-full-view">×</button>
           </div>
         `;
@@ -850,6 +790,11 @@ body {
         });
       });
 
+      const likeButton = cardItemDiv.querySelector('.like-btn');
+      if (hasUserLikedCardToday(cardId)) {
+        likeButton.disabled = true;
+        likeButton.style.opacity = '0.7';
+      }
       likeButton.addEventListener('click', async (e) => {
         e.stopPropagation();
         if (hasUserLikedCardToday(cardId)) {
@@ -861,7 +806,9 @@ body {
           setUserLikedCardToday(cardId);
           likeButton.disabled = true;
           likeButton.style.opacity = '0.7';
-          likeCountSpan.textContent = (parseInt(likeCountSpan.textContent) || 0) + 1;
+          // Update like count display immediately
+          const likeCountSpan = cardItemDiv.querySelector('.like-count');
+          if(likeCountSpan) likeCountSpan.textContent = (parseInt(likeCountSpan.textContent) || 0) + 1;
         } catch (error) {
           console.error('Error liking card:', error);
           alert('좋아요 처리에 실패했습니다.');
@@ -880,6 +827,10 @@ body {
         } else {
           commentsSectionDiv.style.display = 'none';
           toggleBtn.textContent = '댓글 보기';
+          if (commentListeners[cardId]) {
+            // commentListeners[cardId](); // Detach listener if needed
+            // delete commentListeners[cardId];
+          }
         }
       });
 
@@ -898,6 +849,7 @@ body {
       });
     });
 
+    // Initial load of notifications for the current user
     loadUserNotifications(currentUserNickname);
 
   }, error => {
@@ -905,27 +857,6 @@ body {
     if (cardCreationBoardList) cardCreationBoardList.innerHTML = '<p>카드 목록을 불러오는 데 실패했습니다.</p>';
   });
 
-  // Set active tab in bottom nav
-  document.addEventListener('DOMContentLoaded', () => {
-    const currentPath = window.location.pathname.split('/').pop();
-    const navItems = document.querySelectorAll('.app-bottom-nav .nav-item');
-    navItems.forEach(item => {
-        const itemPath = item.getAttribute('href') ? item.getAttribute('href').split('/').pop().split('#')[0] : null;
-        const itemTab = item.dataset.tab;
-        // For card-board.html, we need a specific check as it's not directly linked via href in the same way for all nav items
-        if (currentPath === 'card-board-original-firestore-v3.html' && item.dataset.title === '게시판') { // Assuming '게시판' is the title for card-board
-             // This logic might need adjustment based on how '게시판' tab is identified. 
-             // If '게시판' tab is actually 'board.html', then this specific highlight won't work directly.
-             // For now, let's assume card-board.html is part of '게시판' or a similar category.
-        } else if (itemPath === currentPath) {
-            item.classList.add('active');
-        } else if (itemTab && window.location.hash.includes(itemTab)) {
-            item.classList.add('active');
-        }
-    });
-  });
-
 </script>
 </body>
 </html>
-
