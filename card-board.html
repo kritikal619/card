@@ -20,15 +20,6 @@
   <div class="app-container">
     <header class="app-header">
       <h1 id="app-header-title">카드제작</h1>
-      <!-- Notification Bell and Dropdown -->
-      <div class="notifications-container">
-        <button id="notification-bell" aria-label="알림">
-          🔔 <span id="notification-count">0</span>
-        </button>
-        <div id="notification-list" class="notification-dropdown" style="display: none;">
-          <p>알림이 없습니다.</p>
-        </div>
-      </div>
     </header>
 
     <main class="app-content">
@@ -69,7 +60,6 @@
   </div>
 
 <style>
-/* Styles from card-board-original.html and card-board-modified-v2.html merged and adapted */
 .image-grid-container {
   padding: 15px;
 }
@@ -87,7 +77,7 @@
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transition: transform 0.2s;
-  background-color: #fff; 
+  cursor: pointer;
 }
 
 .card-item:hover {
@@ -99,7 +89,7 @@
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 .card-info {
@@ -194,208 +184,10 @@
   cursor: pointer;
   padding: 5px;
 }
-
-/* Comment Section Styles */
-.card-item-footer {
-  padding: 10px;
-  border-top: 1px solid #eee;
-}
-
-.card-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-}
-
-.comment-count-display { /* Renamed to avoid conflict with original .comment-count if any */
-  color: #555;
-}
-
-.toggle-comments-btn {
-  background: none;
-  border: none;
-  color: #007bff;
-  cursor: pointer;
-  padding: 5px;
-  font-size: 14px;
-}
-
-.comments-section {
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid #f0f0f0;
-  /* display: none; */ /* Controlled by JS */
-}
-
-.comments-list {
-  max-height: 200px; 
-  overflow-y: auto;
-  margin-bottom: 15px;
-}
-
-.comment-item {
-  padding: 8px 0;
-  border-bottom: 1px dashed #eee;
-}
-.comment-item:last-child {
-  border-bottom: none;
-}
-
-.comment-author {
-  font-weight: bold;
-  color: #333;
-  font-size: 13px;
-}
-
-.comment-timestamp {
-  font-size: 11px;
-  color: #777;
-  margin-left: 8px;
-}
-
-.comment-text {
-  font-size: 14px;
-  color: #555;
-  margin-top: 4px;
-  white-space: pre-wrap; 
-}
-
-.comment-form h4 {
-  font-size: 15px;
-  margin-bottom: 8px;
-  color: #333;
-}
-
-.comment-form input[type="text"],
-.comment-form textarea {
-  width: calc(100% - 16px); 
-  padding: 8px;
-  margin-bottom: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-.comment-form textarea {
-  min-height: 60px;
-  resize: vertical;
-}
-
-.comment-form .add-comment-btn {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-}
-.comment-form .add-comment-btn:hover {
-  background-color: #218838;
-}
-
-.reply-btn {
-    background: none;
-    border: none;
-    color: #007bff;
-    cursor: pointer;
-    font-size: 12px;
-    padding: 2px 0;
-    margin-top: 4px;
-}
-
-.reply-form-container {
-    margin-left: 20px; 
-    margin-top: 5px;
-    padding-top: 5px;
-    border-top: 1px dashed #eee;
-}
-
-/* Notification Styles */
-.app-header {
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center;
-}
-
-.notifications-container {
-  position: relative;
-  margin-right: 15px; 
-}
-
-#notification-bell {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  position: relative; 
-}
-
-#notification-count {
-  position: absolute;
-  top: -5px;
-  right: -8px;
-  background-color: red;
-  color: white;
-  border-radius: 50%;
-  padding: 2px 5px;
-  font-size: 10px;
-  font-weight: bold;
-  display: none; /* Initially hidden */
-}
-
-.notification-dropdown {
-  position: absolute;
-  top: 100%; 
-  right: 0;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  width: 300px;
-  max-height: 400px;
-  overflow-y: auto;
-  z-index: 1001; 
-}
-
-.notification-dropdown p {
-  padding: 10px;
-  text-align: center;
-  color: #777;
-}
-
-.notification-item {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
-}
-.notification-item:last-child {
-  border-bottom: none;
-}
-.notification-item:hover {
-  background-color: #f9f9f9;
-}
-.notification-item.is-read {
-  background-color: #e9ecef; 
-  opacity: 0.7;
-}
-
-.notification-text {
-  font-size: 13px;
-  color: #333;
-}
-
-.notification-timestamp {
-  font-size: 11px;
-  color: #888;
-  margin-top: 4px;
-}
-
 </style>
 
 <script type="module">
-  import { db } from './firebase.js'; // Assuming firebase.js is correctly configured
+  import { db } from './firebase.js';
   import {
     collection,
     query,
@@ -403,31 +195,10 @@
     onSnapshot,
     doc,
     updateDoc,
-    increment,
-    addDoc, 
-    serverTimestamp, 
-    where,
-    getDoc 
+    increment
   } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js';
 
   const cardCreationBoardList = document.getElementById('card-creation-board-list');
-  const notificationBell = document.getElementById('notification-bell');
-  const notificationCountEl = document.getElementById('notification-count');
-  const notificationListEl = document.getElementById('notification-list');
-  
-  let currentUserNickname = localStorage.getItem('currentUserNickname');
-  if (!currentUserNickname) {
-    currentUserNickname = prompt("알림 및 댓글 작성을 위한 닉네임을 입력해주세요 (예: user123):") || "guest" + Math.floor(Math.random() * 1000);
-    localStorage.setItem('currentUserNickname', currentUserNickname);
-  }
-  console.log(`Current user for notifications & comments: ${currentUserNickname}`);
-
-  function escapeHTML(str) {
-    if (str === null || str === undefined) return '';
-    return str.toString().replace(/[&<>'"/]/g, s => (
-      { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '/': '&#x2F;' }[s]
-    ));
-  }
 
   function hasUserLikedCardToday(cardId) {
     const today = new Date().toDateString();
@@ -439,274 +210,6 @@
     localStorage.setItem(`liked_${cardId}_${today}`, 'true');
   }
 
-  // --- Notification Functions ---
-  async function createNotification(type, cardId, commentId, actorNickname, actorUserId, recipientUserId, commentTextPreview, postTitle = '당신의 카드에') {
-    if (!recipientUserId || recipientUserId === actorUserId) {
-        console.log("Skipping self-notification or no recipient.");
-        return;
-    }
-    try {
-      await addDoc(collection(db, 'notifications'), {
-        recipientUserId: recipientUserId,
-        actorNickname: actorNickname,
-        actorUserId: actorUserId,
-        type: type, 
-        cardId: cardId, 
-        commentId: commentId,
-        commentTextPreview: commentTextPreview.substring(0, 50) + (commentTextPreview.length > 50 ? '...' : ''),
-        postTitle: postTitle, 
-        createdAt: serverTimestamp(),
-        isRead: false,
-        link: `#card-item-${cardId}`
-      });
-      console.log(`Notification created for ${recipientUserId} about action by ${actorNickname} on card ${cardId}`);
-    } catch (error) {
-      console.error('Error creating notification:', error);
-    }
-  }
-
-  async function loadUserNotifications(userId) {
-    if (!userId) return;
-    const q = query(
-      collection(db, 'notifications'), 
-      where('recipientUserId', '==', userId),
-      orderBy('createdAt', 'desc')
-    );
-
-    onSnapshot(q, (snapshot) => {
-      notificationListEl.innerHTML = '';
-      let unreadCount = 0;
-      if (snapshot.empty) {
-        notificationListEl.innerHTML = '<p>새 알림이 없습니다.</p>';
-        notificationCountEl.textContent = '0';
-        notificationCountEl.style.display = 'none';
-        return;
-      }
-      snapshot.forEach(docSnap => {
-        const notification = docSnap.data();
-        if (!notification.isRead) {
-          unreadCount++;
-        }
-        const item = document.createElement('div');
-        item.className = `notification-item ${notification.isRead ? 'is-read' : ''}`;
-        item.dataset.notificationId = docSnap.id;
-        item.innerHTML = `
-          <div class="notification-text"><strong>${escapeHTML(notification.actorNickname)}</strong>님이 ${notification.type === 'new_reply_to_comment' ? '회원님의 댓글에 답글을 남겼습니다' : `${escapeHTML(notification.postTitle)}에 댓글을 남겼습니다`}: ${escapeHTML(notification.commentTextPreview)}</div>
-          <div class="notification-timestamp">${notification.createdAt ? new Date(notification.createdAt.seconds * 1000).toLocaleString() : ''}</div>
-        `;
-        item.addEventListener('click', async () => {
-          if (!notification.isRead) {
-            await updateDoc(doc(db, 'notifications', docSnap.id), { isRead: true });
-          }
-          notificationListEl.style.display = 'none'; 
-          const targetCardElement = document.getElementById(`card-item-${notification.cardId}`);
-          if (targetCardElement) {
-            targetCardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            const commentsSection = targetCardElement.querySelector('.comments-section');
-            const toggleBtn = targetCardElement.querySelector('.toggle-comments-btn');
-            if (commentsSection && commentsSection.style.display === 'none' && toggleBtn) {
-                toggleBtn.click();
-            }
-          } else {
-            alert(`알림: ${item.querySelector('.notification-text').textContent}\n(카드를 찾을 수 없습니다. 페이지를 새로고침 해보세요.)`);
-          }
-        });
-        notificationListEl.appendChild(item);
-      });
-      notificationCountEl.textContent = unreadCount.toString();
-      notificationCountEl.style.display = unreadCount > 0 ? 'inline-block' : 'none';
-    }, error => {
-      console.error("Error loading notifications: ", error);
-      notificationListEl.innerHTML = '<p>알림을 불러오는데 실패했습니다.</p>';
-    });
-  }
-
-  notificationBell.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isHidden = notificationListEl.style.display === 'none';
-    if (isHidden) {
-      notificationListEl.style.display = 'block';
-      loadUserNotifications(currentUserNickname); 
-    } else {
-      notificationListEl.style.display = 'none';
-    }
-  });
-  document.addEventListener('click', (e) => {
-    if (!notificationBell.contains(e.target) && !notificationListEl.contains(e.target)) {
-        notificationListEl.style.display = 'none';
-    }
-  });
-  // --- End Notification Functions ---
-
-  // --- Comment Functions ---
-  async function addCommentToFirestore(cardId, nickname, text, parentId = null, cardData) {
-    if (!nickname.trim() || !text.trim()) {
-      alert('닉네임과 댓글 내용을 모두 입력해주세요.');
-      return null;
-    }
-    const cardAuthorId = cardData.userId || cardData.nickname; 
-    const cardTitle = cardData.title || `카드 '${cardId.substring(0,10)}...'`; 
-
-    try {
-      const commentData = {
-        cardId: cardId,
-        userId: nickname, 
-        nickname: nickname,
-        text: text,
-        parentId: parentId,
-        createdAt: serverTimestamp(),
-        likes: 0,
-        cardAuthorId: cardAuthorId 
-      };
-      // Use 'comments' collection as per previous design for card-board
-      const commentRef = await addDoc(collection(db, 'comments'), commentData);
-      
-      const cardRefDoc = doc(db, 'cards', cardId);
-      await updateDoc(cardRefDoc, { commentCount: increment(1) });
-      
-      console.log('Comment added with ID: ', commentRef.id);
-
-      if (parentId) { 
-        const parentCommentRef = doc(collection(db, 'comments'), parentId);
-        const parentCommentSnap = await getDoc(parentCommentRef);
-        if (parentCommentSnap.exists()) {
-          const parentCommentData = parentCommentSnap.data();
-          await createNotification('new_reply_to_comment', cardId, commentRef.id, nickname, nickname, parentCommentData.userId, text, `회원님의 댓글에`);
-        }
-      } else { 
-        await createNotification('new_comment_on_post', cardId, commentRef.id, nickname, nickname, cardAuthorId, text, `카드 '${escapeHTML(cardTitle)}'`);
-      }
-      return commentRef.id;
-    } catch (error) {
-      console.error('Error adding comment or notification: ', error);
-      alert('댓글 작성 또는 알림 생성에 실패했습니다.');
-      return null;
-    }
-  }
-
-  function renderComment(commentData, commentId, commentsListEl, cardId, cardData) {
-    const commentItem = document.createElement('div');
-    commentItem.className = 'comment-item';
-    commentItem.dataset.commentId = commentId;
-    commentItem.id = `comment-${commentId}`;
-
-    const authorEl = document.createElement('span');
-    authorEl.className = 'comment-author';
-    authorEl.textContent = escapeHTML(commentData.nickname);
-
-    const timestampEl = document.createElement('span');
-    timestampEl.className = 'comment-timestamp';
-    timestampEl.textContent = commentData.createdAt ? new Date(commentData.createdAt.seconds * 1000).toLocaleString() : '';
-
-    const textEl = document.createElement('p');
-    textEl.className = 'comment-text';
-    textEl.textContent = escapeHTML(commentData.text);
-    
-    commentItem.appendChild(authorEl);
-    commentItem.appendChild(timestampEl);
-    commentItem.appendChild(textEl);
-
-    const replyButton = document.createElement('button');
-    replyButton.className = 'reply-btn';
-    replyButton.textContent = '답글 달기';
-    replyButton.onclick = () => {
-        const existingReplyForm = commentItem.querySelector('.reply-form-container');
-        if (existingReplyForm) existingReplyForm.remove();
-
-        const replyFormContainer = document.createElement('div');
-        replyFormContainer.className = 'reply-form-container';
-        replyFormContainer.innerHTML = `
-            <input type="text" class="reply-nickname-input" placeholder="닉네임" value="${currentUserNickname}">
-            <textarea class="reply-text-input" placeholder="답글 내용을 입력하세요..."></textarea>
-            <button class="add-reply-btn">답글 작성</button>
-        `;
-        commentItem.appendChild(replyFormContainer);
-        replyFormContainer.querySelector('.add-reply-btn').onclick = async () => {
-            const replyNickname = replyFormContainer.querySelector('.reply-nickname-input').value;
-            const replyText = replyFormContainer.querySelector('.reply-text-input').value;
-            const newReplyId = await addCommentToFirestore(cardId, replyNickname, replyText, commentId, cardData);
-            if (newReplyId) {
-                replyFormContainer.remove(); 
-            }
-        };
-    };
-    commentItem.appendChild(replyButton);
-
-    if (commentData.parentId) {
-        commentItem.style.marginLeft = '20px'; 
-        const parentCommentEl = commentsListEl.querySelector(`.comment-item[data-comment-id="${commentData.parentId}"]`);
-        if (parentCommentEl) {
-            let replyContainerTarget = parentCommentEl.querySelector('.reply-form-container');
-            if (replyContainerTarget) {
-                parentCommentEl.insertBefore(commentItem, replyContainerTarget);
-            } else {
-                parentCommentEl.appendChild(commentItem);
-            }
-        } else {
-            commentsListEl.appendChild(commentItem); 
-        }
-    } else {
-        commentsListEl.appendChild(commentItem);
-    }
-  }
-
-  let commentListeners = {}; 
-
-  function loadComments(cardId, commentsListEl, cardData) {
-    if (commentListeners[cardId]) { 
-      return;
-    }
-    commentsListEl.innerHTML = '<p>댓글을 불러오는 중...</p>';
-    // Use 'comments' collection
-    const q = query(collection(db, 'comments'), where('cardId', '==', cardId), orderBy('createdAt', 'asc'));
-    
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      commentsListEl.innerHTML = ''; 
-      if (snapshot.empty) {
-        commentsListEl.innerHTML = '<p>아직 댓글이 없습니다.</p>';
-        return;
-      }
-      const allComments = {};
-      snapshot.forEach(doc => allComments[doc.id] = { id: doc.id, ...doc.data() });
-
-      const rootComments = [];
-      const replies = {};
-
-      for (const id in allComments) {
-          const comment = allComments[id];
-          if (comment.parentId) {
-              if (!replies[comment.parentId]) {
-                  replies[comment.parentId] = [];
-              }
-              replies[comment.parentId].push(comment);
-          } else {
-              rootComments.push(comment);
-          }
-      }
-      
-      function renderNestedComments(comment, container) {
-        renderComment(comment, comment.id, container, cardId, cardData);
-        const commentElement = container.querySelector(`.comment-item[data-comment-id="${comment.id}"]`);
-        if (commentElement && replies[comment.id]) {
-            replies[comment.id].sort((a,b) => a.createdAt.seconds - b.createdAt.seconds).forEach(reply => {
-                renderNestedComments(reply, commentElement); 
-            });
-        }
-      }
-
-      rootComments.forEach(comment => {
-          renderNestedComments(comment, commentsListEl);
-      });
-
-    }, (error) => {
-      console.error('Error loading comments:', error);
-      commentsListEl.innerHTML = '<p>댓글을 불러오는데 실패했습니다.</p>';
-    });
-    commentListeners[cardId] = unsubscribe; 
-  }
-  // --- End Comment Functions ---
-
-  // Main logic to load cards (adapted from original card-board.html, with comment/notification integration)
   const sharedCardsQuery = query(collection(db, 'cards'), orderBy('createdAt', 'desc'));
   onSnapshot(sharedCardsQuery, (snapshot) => {
     if (!cardCreationBoardList) return;
@@ -715,14 +218,8 @@
     snapshot.forEach(cardDoc => {
       const cardData = cardDoc.data();
       const cardId = cardDoc.id;
-      cardData.id = cardId; // Make cardId available in cardData for comment functions
-      // cardData.userId and cardData.nickname should be present from original data structure
-
       const cardItemDiv = document.createElement('div');
       cardItemDiv.className = 'card-item';
-      cardItemDiv.id = `card-item-${cardId}`; // ID for linking notifications
-      
-      // Original card item structure
       cardItemDiv.innerHTML = `
         <img src="${cardData.imageUrl}" alt="Shared card" class="card-image">
         <div class="card-info">
@@ -736,36 +233,9 @@
         </button>
         <span class="like-count">${cardData.likes || 0}</span>
       `;
-      
-      // Card Footer for actions and comments
-      const cardFooterDiv = document.createElement('div');
-      cardFooterDiv.className = 'card-item-footer';
-
-      const cardActionsDiv = document.createElement('div');
-      cardActionsDiv.className = 'card-actions';
-      cardActionsDiv.innerHTML = `
-        <span class="comment-count-display">💬 ${cardData.commentCount || 0}</span>
-        <button class="toggle-comments-btn">댓글 보기</button>
-      `;
-      cardFooterDiv.appendChild(cardActionsDiv);
-
-      const commentsSectionDiv = document.createElement('div');
-      commentsSectionDiv.className = 'comments-section';
-      commentsSectionDiv.style.display = 'none'; 
-      commentsSectionDiv.innerHTML = `
-        <div class="comments-list"></div>
-        <div class="comment-form">
-          <h4>새 댓글 작성</h4>
-          <input type="text" class="comment-nickname-input" placeholder="닉네임" value="${currentUserNickname}">
-          <textarea class="comment-text-input" placeholder="댓글을 입력하세요..."></textarea>
-          <button class="add-comment-btn">댓글 작성</button>
-        </div>
-      `;
-      cardFooterDiv.appendChild(commentsSectionDiv);
-      cardItemDiv.appendChild(cardFooterDiv);
       cardCreationBoardList.appendChild(cardItemDiv);
 
-      // Event listeners (image click, like button, comment toggle, add comment)
+      // Add image click handler for full view
       const cardImage = cardItemDiv.querySelector('.card-image');
       cardImage.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -783,8 +253,8 @@
           fullView.remove();
         });
         
-        fullView.addEventListener('click', (ev) => {
-          if (ev.target === fullView) {
+        fullView.addEventListener('click', (e) => {
+          if (e.target === fullView) {
             fullView.remove();
           }
         });
@@ -806,57 +276,23 @@
           setUserLikedCardToday(cardId);
           likeButton.disabled = true;
           likeButton.style.opacity = '0.7';
-          // Update like count display immediately
-          const likeCountSpan = cardItemDiv.querySelector('.like-count');
-          if(likeCountSpan) likeCountSpan.textContent = (parseInt(likeCountSpan.textContent) || 0) + 1;
         } catch (error) {
           console.error('Error liking card:', error);
           alert('좋아요 처리에 실패했습니다.');
         }
       });
-
-      const toggleBtn = cardActionsDiv.querySelector('.toggle-comments-btn');
-      const commentsListEl = commentsSectionDiv.querySelector('.comments-list');
-      toggleBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isHidden = commentsSectionDiv.style.display === 'none';
-        if (isHidden) {
-          commentsSectionDiv.style.display = 'block';
-          toggleBtn.textContent = '댓글 숨기기';
-          loadComments(cardId, commentsListEl, cardData);
-        } else {
-          commentsSectionDiv.style.display = 'none';
-          toggleBtn.textContent = '댓글 보기';
-          if (commentListeners[cardId]) {
-            // commentListeners[cardId](); // Detach listener if needed
-            // delete commentListeners[cardId];
-          }
-        }
-      });
-
-      const addCommentBtn = commentsSectionDiv.querySelector('.add-comment-btn');
-      const nicknameInput = commentsSectionDiv.querySelector('.comment-nickname-input');
-      const textInput = commentsSectionDiv.querySelector('.comment-text-input');
-
-      addCommentBtn.addEventListener('click', async (e) => {
-        e.stopPropagation();
-        const nickname = nicknameInput.value;
-        const text = textInput.value;
-        const newCommentId = await addCommentToFirestore(cardId, nickname, text, null, cardData);
-        if (newCommentId) {
-          textInput.value = ''; 
-        }
-      });
     });
-
-    // Initial load of notifications for the current user
-    loadUserNotifications(currentUserNickname);
-
   }, error => {
     console.error('Error fetching shared cards:', error);
     if (cardCreationBoardList) cardCreationBoardList.innerHTML = '<p>카드 목록을 불러오는 데 실패했습니다.</p>';
   });
 
+  function escapeHTML(str) {
+    if (str === null || str === undefined) return '';
+    return str.toString().replace(/[&<>'"/]/g, s => (
+      { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '/': '&#x2F;' }[s]
+    ));
+  }
 </script>
 </body>
-</html>
+</html> 
