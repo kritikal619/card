@@ -637,8 +637,110 @@ function downloadCardState() { /* … */ }
     });
   </script>
 
-  <!-- Supabase Module Script (Ensure supabase.js path is correct and Supabase SDK is loaded) -->
-  <script type="module" src="./gener_html_share_script_supabase.js"></script>
+  <!-- Firebase Module Script (Ensure firebase.js path is correct) -->
+  <script type="module">
+    try {
+        // Adjust path if firebase.js is not in the same directory
+        const { db, collection, addDoc } = await import('./firebase.js');
+
+        const shareBtn = document.getElementById('share-btn');
+        let isSharing = false; // Prevent double clicks
+
+        shareBtn.addEventListener('click', async () => {
+            if (isSharing) return;
+
+            // Rate limiting (1 share per minute)
+            const lastShareTime = localStorage.getItem('lastShareTime');
+            const sixtySeconds = 60 * 1000;
+            if (lastShareTime && (Date.now() - lastShareTime < sixtySeconds)) {
+                alert(`공유는 1분에 한 번만 가능합니다. 잠시 후에 다시 시도해 주세요.`);
+                return;
+            }
+
+            // Check for title
+            const title = document.getElementById('cardTitleInput').value.trim();
+            if (!title) {
+                alert('공유할 카드의 제목을 입력해주세요!');
+                document.getElementById('cardTitleInput').focus();
+                return;
+            }
+
+            // Confirmation dialog
+            if (!confirm(`'${title}' 카드를 게시판에 공유하시겠습니까?`)) {
+                return;
+            }
+
+            // --- Start Sharing Process ---
+            isSharing = true;
+            shareBtn.disabled = true;
+            const originalText = shareBtn.textContent;
+            shareBtn.textContent = '공유 중...';
+            shareBtn.classList.add('disabled'); // Visual feedback
+
+            // Temporarily hide handles for capture
+            const tmpActive = activeImage; const tmpMode = mode;
+            if (hideHandlesTimeout) { clearTimeout(hideHandlesTimeout); hideHandlesTimeout = null; }
+            activeImage = null; mode = '';
+            drawCard(); // Redraw without handles
+
+            // Use setTimeout to allow canvas redraw before capturing
+            setTimeout(async () => {
+                let imageUrl = '';
+                try {
+                    const canvasElem = document.getElementById('cardCanvas');
+                    imageUrl = canvasElem.toDataURL('image/png'); // Capture canvas as PNG
+                } catch (captureError) {
+                    console.error('Canvas capture error:', captureError);
+                    alert('이미지 생성 중 오류가 발생했습니다. 다시 시도해 주세요.\n(타사 이미지 사용 시 CORS 오류일 수 있습니다)');
+                    // Restore UI and re-enable button even on capture failure
+                    activeImage = tmpActive; mode = tmpMode; drawCard(); // Redraw with potential handles
+                    isSharing = false; shareBtn.disabled = false; shareBtn.textContent = originalText; shareBtn.classList.remove('disabled');
+                    return; // Stop execution
+                }
+
+                // Save to Firestore
+                try {
+                    const docRef = await addDoc(collection(db, 'cards'), {
+                        title: title,
+                        imageUrl: imageUrl, // Use the captured Data URL
+                        createdAt: new Date() // Use client time (configure server timestamp in Firestore rules if preferred)
+                    });
+                    console.log("Card shared with ID: ", docRef.id);
+                    alert('카드가 성공적으로 공유되었습니다!');
+                    localStorage.setItem('lastShareTime', Date.now()); // Update last share time on success
+                } catch (error) {
+                    console.error('Error sharing card to Firestore:', error);
+                    alert('카드 공유 중 오류가 발생했습니다. 잠시 후 다시 시도하거나 관리자에게 문의하세요.');
+                } finally {
+                    // Restore UI state regardless of Firestore success/failure
+                    activeImage = tmpActive; mode = tmpMode; drawCard(); // Redraw with potential handles restored
+
+                    // Re-enable button after a short delay
+                     setTimeout(() => {
+                        isSharing = false;
+                        shareBtn.disabled = false;
+                        shareBtn.textContent = originalText;
+                        shareBtn.classList.remove('disabled');
+                    }, 1000); // 1 second delay before re-enabling
+                }
+            }, 150); // Increased delay slightly for redraw stability
+
+        }); // End shareBtn listener
+
+    } catch (err) {
+         console.error("Failed to load Firebase module:", err);
+         // Disable share button and FAB if Firebase fails to load
+         const shareBtn = document.getElementById('share-btn');
+         if(shareBtn) {
+             shareBtn.textContent = '공유 불가 (오류)';
+             shareBtn.disabled = true;
+             shareBtn.classList.add('disabled');
+             alert("Firebase 초기화 실패! 카드 공유 기능을 사용할 수 없습니다.");
+         }
+         const shareFab = document.getElementById('share-fab');
+         if(shareFab) { shareFab.style.display = 'none'; } // Hide FAB too
+    }
+  </script>
 
   <!-- FAB Button & PIP Script (unchanged) -->
   <button id="share-fab" data-tooltip="게시판에 공유하기" title="게시판에 공유하기">공유</button>
