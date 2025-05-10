@@ -6,8 +6,8 @@
 // <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 // 2) Supabase Project URL and Anon Key (Replace with your actual credentials)
-const SUPABASE_URL = "YOUR_SUPABASE_URL"; // 사용자께서 직접 발급받으신 Supabase 프로젝트 URL을 입력해주세요.
-const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY"; // 사용자께서 직접 발급받으신 Supabase 프로젝트 anon key를 입력해주세요.
+const SUPABASE_URL = "https://quyentittezgivkqmqpe.supabase.co"; // 사용자께서 직접 발급받으신 Supabase 프로젝트 URL을 입력해주세요.
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF1eWVudGl0dGV6Z2l2a3FtcXBlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY4NTY2NDEsImV4cCI6MjA2MjQzMjY0MX0.fidSr05bcY3T2nTOkQcDQWjHXXhkgIUE2CGMMfjwTKo"; // 사용자께서 직접 발급받으신 Supabase 프로젝트 anon key를 입력해주세요.
 
 // 3) Initialize Supabase client
 let supabase = null;
