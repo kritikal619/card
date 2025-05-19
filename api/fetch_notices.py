@@ -9,7 +9,7 @@ from datetime import datetime
 
 # Google AI API 키 (실제 환경에서는 환경 변수나 안전한 방법으로 관리해야 함)
 # 이 예제에서는 실제 API 키를 사용하지 않고 요약 기능만 모방합니다
-GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"
+GEMINI_API_KEY = "AIzaSyAngUm3WU9N9X3S6NcwMwm5PgNzS49bqwI"
 
 def fetch_notices():
     """넥슨 FC 모바일 공지사항 페이지에서 최신 공지 2개를 가져옵니다."""
