@@ -24,13 +24,10 @@
   <script src="faceData2.js"></script>
   
 
-  <!-- 이미 분리해두신 fcmData.js -->
+    <!-- 이미 분리해두신 fcmData.js -->
   <script src="fcmData.js"></script>
-  
-  <!-- 클럽 로고 데이터 추가 -->
-  <script src="clubs.js"></script>
 
-  <!-- 메인 로직 (리사이즈 핸들, 드로잉 등) -->
+    <!-- 메인 로직 (리사이즈 핸들, 드로잉 등) -->
 
 
   <style>
@@ -75,63 +72,6 @@
     #share-fab:hover { transform: scale(1.1); }
     @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,160,0,0.7); } 50% { box-shadow: 0 0 0 15px rgba(255,160,0,0); } 100% { box-shadow: 0 0 0 0 rgba(255,160,0,0); } }
     #share-fab[data-tooltip]:hover:after { content: attr(data-tooltip); position: absolute; bottom: 70px; right: 0; background: rgba(0,0,0,0.75); color: #fff; padding: 5px 8px; border-radius: 3px; font-size: 12px; white-space: nowrap; }
-    
-    /* 클럽 선택 스타일 추가 */
-    .club-tabs {
-      display: flex;
-      margin-bottom: 10px;
-      border-bottom: 1px solid #ddd;
-      overflow-x: auto;
-      white-space: nowrap;
-    }
-    .club-tab {
-      padding: 8px 12px;
-      cursor: pointer;
-      border: 1px solid transparent;
-      border-bottom: none;
-      border-radius: 4px 4px 0 0;
-      margin-right: 2px;
-      background-color: #f8f9fa;
-    }
-    .club-tab.active {
-      background-color: #fff;
-      border-color: #ddd;
-      border-bottom-color: #fff;
-      font-weight: bold;
-    }
-    .club-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-    .club-item {
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      padding: 5px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .club-item:hover {
-      border-color: #aaa;
-      background-color: #f5f5f5;
-    }
-    .club-item.selected {
-      border-color: #007bff;
-      background-color: #e6f2ff;
-    }
-    .club-item img {
-      width: 100%;
-      height: 40px;
-      object-fit: contain;
-    }
-    .club-content {
-      display: none;
-    }
-    .club-content.active {
-      display: block;
-    }
   </style>
 </head>
 <body>
@@ -143,78 +83,7 @@
   <fieldset> <legend>오버롤 설정</legend> <div class="form-group"> <label for="ovr">오버롤</label> <input type="number" id="ovr" min="0" max="9999999999" value="129"> <label class="mt-2">좌표 (X, Y)</label> <div class="coord-inputs"> <input type="number" id="ovrX" aria-label="OVR X coordinate" placeholder="X" value="88"> <input type="number" id="ovrY" aria-label="OVR Y coordinate" placeholder="Y" value="63"> </div> </div> <div class="form-group"> <label for="ovrFontSize">오버롤 폰트 크기</label> <input type="number" id="ovrFontSize" placeholder="Font Size" value="35"> </div> <div class="form-group"> <label for="ovrFont">오버롤 폰트</label> <select id="ovrFont"> <option value="FontA" selected>FC모바일 오버롤 폰트</option> <option value="FontB">피파모바일 폰트</option> </select> </div> <div class="form-group"> <label for="ovrColor">오버롤 폰트 색상</label> <input type="color" id="ovrColor" value="#FFD700" title="오버롤 색상 선택"> </div> </fieldset>
   <fieldset> <legend>포지션 설정</legend> <div class="form-group"> <label for="position">포지션</label> <select id="position"> <option value="LW">LW</option> <option value="ST" selected>ST</option> <option value="RW">RW</option> <option value="CF">CF</option> <option value="LF">LF</option> <option value="RF">RF</option> <option value="CM">CM</option> <option value="RM">RM</option> <option value="LM">LM</option> <option value="CDM">CDM</option> <option value="CAM">CAM</option> <option value="LB">LB</option> <option value="CB">CB</option> <option value="RB">RB</option> <option value="GK">GK</option> </select> <label class="mt-2">좌표 (X, Y)</label> <div class="coord-inputs"> <input type="number" id="posX" aria-label="Position X coordinate" placeholder="X" value="78"> <input type="number" id="posY" aria-label="Position Y coordinate" placeholder="Y" value="89"> </div> </div> <div class="form-group"> <label for="posFont">포지션 폰트</label> <select id="posFont"> <option value="FontD">포지션 폰트</option> </select> </div> <div class="form-group"> <label for="posFontSize">포지션 폰트 크기</label> <input type="number" id="posFontSize" placeholder="Font Size" value="19"> </div> <div class="form-group"> <label for="posColor">포지션 폰트 색상</label> <input type="color" id="posColor" value="#FFFFFF" title="포지션 색상 선택"> </div> </fieldset>
   <fieldset> <legend>선수 이름 설정</legend> <div class="form-group"> <label for="playerName">선수 이름</label> <input type="text" id="playerName" value="R.레반도프스키"> <label class="mt-2">좌표 (X, Y)</label> <div class="coord-inputs"> <input type="number" id="nameX" aria-label="Name X coordinate" placeholder="X" value="150"> <input type="number" id="nameY" aria-label="Name Y coordinate" placeholder="Y" value="218"> </div> </div> <div class="form-group"> <label for="nameFont">이름 폰트</label> <select id="nameFont"> <option value="FontC" selected>이름 폰트</option> </select> </div> <div class="form-group"> <label for="nameFontSize">이름 폰트 크기</label> <input type="number" id="nameFontSize" placeholder="Font Size" value="20"> </div> <div class="form-group"> <label for="nameColor">이름 폰트 색상</label> <input type="color" id="nameColor" value="#FFFFFF" title="이름 색상 선택"> </div> </fieldset>
-  
-  <!-- 국기 선택 섹션 -->
-  <fieldset>
-    <legend>국기 선택</legend>
-    <div class="form-group">
-      <label for="flagSelect">국기 선택</label>
-      <select id="flagSelect" class="selectpicker" data-live-search="true" data-width="100%" title="국기를 선택하세요..."></select>
-      <label class="mt-2">좌표 (X, Y)</label>
-      <div class="coord-inputs">
-        <input type="number" id="flagX" aria-label="Flag X coordinate" placeholder="X" value="30">
-        <input type="number" id="flagY" aria-label="Flag Y coordinate" placeholder="Y" value="30">
-      </div>
-      <label class="mt-2">크기 (Width, Height)</label>
-      <div class="coord-inputs">
-        <input type="number" id="flagUploadWidth" aria-label="Flag width" placeholder="Width" value="40">
-        <input type="number" id="flagUploadHeight" aria-label="Flag height" placeholder="Height" value="40">
-      </div>
-      <button class="btn btn-danger btn-sm delete-btn" onclick="removeFlag()">국기 삭제</button>
-    </div>
-  </fieldset>
-  
-  <!-- 클럽 선택 섹션 추가 -->
-  <fieldset>
-    <legend>클럽 선택</legend>
-    <div class="form-group">
-      <div class="club-tabs">
-        <div class="club-tab active" data-league="premier">프리미어리그</div>
-        <div class="club-tab" data-league="laliga">라리가</div>
-        <div class="club-tab" data-league="bundesliga">분데스리가</div>
-        <div class="club-tab" data-league="serieA">세리에A</div>
-        <div class="club-tab" data-league="ligue1">리그1</div>
-      </div>
-      
-      <!-- 프리미어리그 클럽 -->
-      <div class="club-content active" id="premier-clubs">
-        <div class="club-grid" id="premier-grid"></div>
-      </div>
-      
-      <!-- 라리가 클럽 -->
-      <div class="club-content" id="laliga-clubs">
-        <div class="club-grid" id="laliga-grid"></div>
-      </div>
-      
-      <!-- 분데스리가 클럽 -->
-      <div class="club-content" id="bundesliga-clubs">
-        <div class="club-grid" id="bundesliga-grid"></div>
-      </div>
-      
-      <!-- 세리에A 클럽 -->
-      <div class="club-content" id="serieA-clubs">
-        <div class="club-grid" id="serieA-grid"></div>
-      </div>
-      
-      <!-- 리그1 클럽 -->
-      <div class="club-content" id="ligue1-clubs">
-        <div class="club-grid" id="ligue1-grid"></div>
-      </div>
-      
-      <label class="mt-2">좌표 (X, Y)</label>
-      <div class="coord-inputs">
-        <input type="number" id="clubX" aria-label="Club X coordinate" placeholder="X" value="30">
-        <input type="number" id="clubY" aria-label="Club Y coordinate" placeholder="Y" value="30">
-      </div>
-      <label class="mt-2">크기 (Width, Height)</label>
-      <div class="coord-inputs">
-        <input type="number" id="clubWidth" aria-label="Club width" placeholder="Width" value="40">
-        <input type="number" id="clubHeight" aria-label="Club height" placeholder="Height" value="40">
-      </div>
-      <button class="btn btn-danger btn-sm delete-btn" onclick="removeClub()">클럽 로고 삭제</button>
-    </div>
-  </fieldset>
-  
+  <div class="form-group"> <label for="flagSelect">국기 선택</label> <select id="flagSelect" class="selectpicker" data-live-search="true" data-width="100%" title="국기를 선택하세요..."></select> <label class="mt-2">좌표 (X, Y)</label> <div class="coord-inputs"> <input type="number" id="flagX" aria-label="Flag X coordinate" placeholder="X" value="30"> <input type="number" id="flagY" aria-label="Flag Y coordinate" placeholder="Y" value="30"> </div> <label class="mt-2">크기 (Width, Height)</label> <div class="coord-inputs"> <input type="number" id="flagUploadWidth" aria-label="Flag width" placeholder="Width" value="40"> <input type="number" id="flagUploadHeight" aria-label="Flag height" placeholder="Height" value="40"> </div> <button class="btn btn-danger btn-sm delete-btn" onclick="removeFlag()">국기 삭제</button> </div>
   <div class="form-group"> <label for="seasonUploadInput">시즌 아이콘 업로드</label> <input type="file" class="form-control" id="seasonUploadInput" accept="image/*"> <label class="mt-2">좌표 (X, Y)</label> <div class="coord-inputs"> <input type="number" id="seasonX" aria-label="Season X coordinate" placeholder="X" value="200"> <input type="number" id="seasonY" aria-label="Season Y coordinate" placeholder="Y" value="250"> </div> <label class="mt-2">크기 (Width, Height)</label> <div class="coord-inputs"> <input type="number" id="seasonUploadWidth" aria-label="Season width" placeholder="Width" value="40"> <input type="number" id="seasonUploadHeight" aria-label="Season height" placeholder="Height" value="40"> </div> <button class="btn btn-danger btn-sm delete-btn" onclick="removeSeason()">시즌 아이콘 삭제</button> </div>
 
   <!-- START: Modified Mini Faceon Section -->
@@ -232,6 +101,8 @@
       <label for="faceVersionSelect">3. 페이스온 버전 선택</label>
       <select id="faceVersionSelect" class="selectpicker" data-width="100%" title="버전 선택..."></select>
     </div>
+    <hr>
+    <label class="mt-2">공통 설정</label>
     <label class="mt-2">좌표 (X, Y)</label>
     <div class="coord-inputs">
       <input type="number" id="photoX" aria-label="Photo X coordinate" placeholder="X" value="50">
@@ -242,1405 +113,663 @@
       <input type="number" id="photoWidth" aria-label="Photo width" placeholder="Width" value="100">
       <input type="number" id="photoHeight" aria-label="Photo height" placeholder="Height" value="100">
     </div>
-    <button class="btn btn-danger btn-sm delete-btn" onclick="removePhoto()">페이스온 삭제</button>
+    <button class="btn btn-danger btn-sm delete-btn" onclick="removePhoto()">미니 페이스온 삭제</button>
   </fieldset>
   <!-- END: Modified Mini Faceon Section -->
 
-  <fieldset>
-    <legend>공통 설정</legend>
-    <div class="form-group">
-      <label for="newOption">라이브/아이콘 배경</label>
-      <select id="newOption">
-        <option value="live" selected>라이브 (기본)</option>
-        <option value="icon">아이콘 배경 표시</option>
-      </select>
-    </div>
-    <div id="iconOptions" style="display: none;">
-      <div class="form-group">
-        <label for="iconUploadInput">아이콘 배경 업로드</label>
-        <input type="file" class="form-control" id="iconUploadInput" accept="image/*">
-        <label class="mt-2">좌표 (X, Y)</label>
-        <div class="coord-inputs">
-          <input type="number" id="iconX" aria-label="Icon X coordinate" placeholder="X" value="20">
-          <input type="number" id="iconY" aria-label="Icon Y coordinate" placeholder="Y" value="20">
-        </div>
-        <label class="mt-2">크기 (Width, Height)</label>
-        <div class="coord-inputs">
-          <input type="number" id="iconWidth" aria-label="Icon width" placeholder="Width" value="40">
-          <input type="number" id="iconHeight" aria-label="Icon height" placeholder="Height" value="40">
-        </div>
-        <button class="btn btn-danger btn-sm delete-btn" onclick="removeIcon()">아이콘 삭제</button>
-      </div>
-    </div>
-  </fieldset>
+  <fieldset> <legend>라이브/아이콘 배경</legend> <div class="form-group"> <label for="newOption">옵션 선택</label> <select id="newOption" class="form-select"> <option value="live" selected>라이브 (기본)</option> <option value="icon">아이콘 배경 표시</option> </select> </div> <div id="iconOptions" style="display: none;"> <div class="form-group"> <label>아이콘 배경 좌표 및 크기</label> <label class="mt-2">좌표 (X, Y)</label> <div class="coord-inputs"> <input type="number" id="iconX" aria-label="Icon X coordinate" placeholder="X" value="20"> <input type="number" id="iconY" aria-label="Icon Y coordinate" placeholder="Y" value="20"> </div> <label class="mt-2">크기 (Width, Height)</label> <div class="coord-inputs"> <input type="number" id="iconWidth" aria-label="Icon width" placeholder="Width" value="40"> <input type="number" id="iconHeight" aria-label="Icon height" placeholder="Height" value="40"> </div> </div> <button class="btn btn-danger btn-sm delete-btn" onclick="removeIcon()">아이콘 배경 삭제</button> </div> </fieldset>
+  <div class="d-grid gap-2 mt-4"> <button class="btn btn-success" onclick="downloadCardImage()">이미지 다운로드</button> <button class="btn btn-info" onclick="downloadCardState()">저장 (편집 상태)</button> <button class="btn btn-secondary" onclick="document.getElementById('jsonLoadInput').click()">불러오기 (JSON)</button> <button id="share-btn" class="btn btn-warning">게시판에 카드 공유하기</button> </div> <input type="file" id="jsonLoadInput" style="display:none" accept=".json,application/json">
+  </div> </div> </div>
+  <div id="pipPreview"> <canvas id="pipCanvas" width="300" height="300"></canvas> </div>
+  <footer class="footer"> <p> <span>Data based on NEXON</span><br> <span>이메일 : <span id="email">jchae0619@gmail.com</span></span><br> <span>© 2025 kritikal619. All Rights Reserved.</span> </p> </footer>
 
-  <div class="form-group">
-    <div class="d-grid gap-2">
-      <button class="btn btn-primary" onclick="downloadCardImage()">카드 이미지 다운로드</button>
-      <button class="btn btn-secondary" onclick="downloadCardState()">카드 상태 저장</button>
-      <div class="input-group mt-2">
-        <input type="file" class="form-control" id="jsonLoadInput" accept=".json">
-        <label class="input-group-text" for="jsonLoadInput">카드 상태 불러오기</label>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
+  <!-- Scripts -->
 
-<div id="pipPreview">
-  <canvas id="pipCanvas"></canvas>
-</div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script>
+  <script>
+    // --- Constants and Globals ---
+    const FLAG_BASE_URL = "https://flagcdn.com/w40/"; const FLAG_EXTENSION = ".png";
+    // FACEON_BASE_URL and FACEON_EXTENSION are no longer needed
+    const countryFlags = { "대한민국 (South Korea)": "kr", "미국 (USA)": "us", "독일 (Germany)": "de", "프랑스 (France)": "fr", "영국 (UK)": "gb", "스페인 (Spain)": "es", "이탈리아 (Italy)": "it", "브라질 (Brazil)": "br", "아르헨티나 (Argentina)": "ar", "포르투갈 (Portugal)": "pt", "네덜란드 (Netherlands)": "nl", "벨기에 (Belgium)": "be", "일본 (Japan)": "jp", "크로아티아 (Croatia)": "hr", "우루과이 (Uruguay)": "uy", "멕시코 (Mexico)": "mx", "폴란드 (Poland)": "pl", "캐나다 (Canada)": "ca", "스위스 (Switzerland)": "ch", "스웨덴 (Sweden)": "se", "노르웨이 (Norway)": "no", "덴마크 (Denmark)": "dk", "오스트리아 (Austria)": "at", "나이지리아 (Nigeria)": "ng", "세네갈 (Senegal)": "sn", "이집트 (Egypt)": "eg", "가나 (Ghana)": "gh", "모로코 (Morocco)": "ma", "콜롬비아 (Colombia)": "co", "칠레 (Chile)": "cl", "카메룬 (Cameroon)": "cm", "코트디부아르 (Ivory Coast)": "ci", "세르비아 (Serbia)": "rs", };
+    const ICON_DEFAULT_PATH = 'icon.png';
 
-<button id="share-btn" class="btn btn-primary" style="display: none;">게시판에 공유</button>
-<button id="share-fab" data-tooltip="게시판에 공유">공유</button>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script>
-
-<script>
-  // --- Constants ---
-  const ICON_DEFAULT_PATH = './resources/icon.png';
-  
-  // --- Global Variables ---
-  let baseCard = new Image();
-  baseCard.crossOrigin = "anonymous";
-  
-  let customFlag = new Image();
-  customFlag.crossOrigin = "anonymous";
-  
-  let customClub = new Image(); // 클럽 로고 이미지 추가
-  customClub.crossOrigin = "anonymous";
-  
-  let customSeason = new Image();
-  customSeason.crossOrigin = "anonymous";
-  
-  let customPhoto = new Image();
-  customPhoto.crossOrigin = "anonymous";
-  
-  let customIcon = new Image();
-  customIcon.crossOrigin = "anonymous";
-  
-  let activeImage = null;
-  let mode = '';
-  let hideHandlesTimeout = null;
-  
-  const aspectRatios = {
-    flag: 1,
-    club: 1, // 클럽 로고 비율 추가
-    season: 1,
-    photo: 1,
-    icon: 1
-  };
-  
-  // --- Canvas Setup ---
-  const canvas = document.getElementById('cardCanvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = 350;
-  canvas.height = 500;
-  
-  // --- Helper Functions ---
-  function showLoading() {
-    document.getElementById('loadingOverlay').style.display = 'flex';
-  }
-  
-  function hideLoading() {
-    document.getElementById('loadingOverlay').style.display = 'none';
-  }
-  
-  function getFileName(cardNumber) {
-    return `Card ${cardNumber}.png`;
-  }
-  
-  function imageOnLoad(img, key) {
-    if (img === baseCard) {
-      drawCard();
-      hideLoading();
-    } else if (key && aspectRatios[key] !== undefined) {
-      aspectRatios[key] = img.width / img.height;
-      drawCard();
-    }
-    img.loading = false;
-  }
-  
-  function imageOnError(img, key) {
-    console.error(`Failed to load image: ${key}`);
-    img.error = true;
-    img.loading = false;
-    hideLoading();
-  }
-  
-  // --- Dropdown Population Functions ---
-  function populateBlankCardDropdown() {
-    const select = document.getElementById('blankCardSelect');
-    select.innerHTML = '';
-    
-    // Add blank cards from fcmData
-    fcmData.forEach(card => {
-      const option = document.createElement('option');
-      option.value = `Blank/${getFileName(card.id)}`;
-      option.textContent = card.name;
-      select.appendChild(option);
-    });
-    
-    // Refresh the selectpicker
-    $(select).selectpicker('refresh');
-    
-    // Set default selection
-    $(select).selectpicker('val', `Blank/${getFileName(264)}`);
-  }
-  
-  function populateFlagDropdown() {
-    const select = document.getElementById('flagSelect');
-    select.innerHTML = '';
-    
-    // Add empty option
-    const emptyOption = document.createElement('option');
-    emptyOption.value = '';
-    emptyOption.textContent = '국기 없음';
-    select.appendChild(emptyOption);
-    
-    // Add flag options from fcmData
-    Object.entries(flagData).forEach(([country, url]) => {
-      const option = document.createElement('option');
-      option.value = url;
-      option.textContent = country;
-      option.setAttribute('data-content', `<img src="${url}" width="20" height="20" style="margin-right: 5px;"> ${country}`);
-      select.appendChild(option);
-    });
-    
-    // Refresh the selectpicker
-    $(select).selectpicker('refresh');
-  }
-  
-  // --- 클럽 로고 그리드 생성 함수 ---
-  function populateClubGrids() {
-    // 각 리그별 그리드 채우기
-    Object.keys(clubsData).forEach(league => {
-      const grid = document.getElementById(`${league}-grid`);
-      grid.innerHTML = '';
-      
-      clubsData[league].forEach(club => {
-        const clubItem = document.createElement('div');
-        clubItem.className = 'club-item';
-        clubItem.setAttribute('data-logo', club.logo);
-        clubItem.setAttribute('title', club.name);
-        
-        const img = document.createElement('img');
-        img.src = club.logo;
-        img.alt = club.name;
-        
-        clubItem.appendChild(img);
-        grid.appendChild(clubItem);
-        
-        // 클럽 로고 클릭 이벤트
-        clubItem.addEventListener('click', function() {
-          // 모든 클럽 아이템에서 선택 클래스 제거
-          document.querySelectorAll('.club-item').forEach(item => {
-            item.classList.remove('selected');
-          });
-          
-          // 현재 클릭한 아이템에 선택 클래스 추가
-          this.classList.add('selected');
-          
-          // 클럽 로고 로드
-          loadClubLogo(club.logo);
-        });
-      });
-    });
-  }
-  
-  // --- 클럽 탭 전환 이벤트 설정 ---
-  function setupClubTabs() {
-    const tabs = document.querySelectorAll('.club-tab');
-    
-    tabs.forEach(tab => {
-      tab.addEventListener('click', function() {
-        // 모든 탭에서 active 클래스 제거
-        tabs.forEach(t => t.classList.remove('active'));
-        
-        // 현재 탭에 active 클래스 추가
-        this.classList.add('active');
-        
-        // 모든 콘텐츠 숨기기
-        document.querySelectorAll('.club-content').forEach(content => {
-          content.classList.remove('active');
-        });
-        
-        // 선택한 리그의 콘텐츠 표시
-        const league = this.getAttribute('data-league');
-        document.getElementById(`${league}-clubs`).classList.add('active');
-      });
-    });
-  }
-  
-  function populatePlayerSelectDropdown() {
-    const select = document.getElementById('playerSelect');
-    select.innerHTML = '';
-    
-    // Add empty option
-    const emptyOption = document.createElement('option');
-    emptyOption.value = '';
-    emptyOption.textContent = '선수 선택 안함';
-    select.appendChild(emptyOption);
-    
-    // Add player options from faceData
-    Object.entries(faceData).forEach(([pid, player]) => {
-      const option = document.createElement('option');
-      option.value = pid;
-      option.textContent = player.name;
-      select.appendChild(option);
-    });
-    
-    // Add player options from faceData2
-    Object.entries(faceData2).forEach(([pid, player]) => {
-      // Skip if already exists in faceData
-      if (faceData[pid]) return;
-      
-      const option = document.createElement('option');
-      option.value = pid;
-      option.textContent = player.name;
-      select.appendChild(option);
-    });
-    
-    // Refresh the selectpicker
-    $(select).selectpicker('refresh');
-    
-    // Add change event listener
-    select.addEventListener('change', function() {
-      const pid = this.value;
-      if (pid) {
-        populateFaceVersionDropdown(pid);
-        showFaceVersionDropdown();
-      } else {
-        hideFaceVersionDropdown();
-      }
-    });
-  }
-  
-  function populateFaceVersionDropdown(pid) {
-    const select = document.getElementById('faceVersionSelect');
-    select.innerHTML = '';
-    
-    const player = faceData[pid] || faceData2[pid];
-    if (!player) return;
-    
-    // Add face version options
-    Object.entries(player.versions).forEach(([version, url]) => {
-      const option = document.createElement('option');
-      option.value = url;
-      option.textContent = version;
-      select.appendChild(option);
-    });
-    
-    // Refresh the selectpicker
-    $(select).selectpicker('refresh');
-    
-    // Select first option and load it
-    if (select.options.length > 0) {
-      $(select).selectpicker('val', select.options[0].value);
-      loadSelectedFaceVersion();
-    }
-  }
-  
-  function showFaceVersionDropdown() {
-    document.getElementById('faceVersionGroup').style.display = 'block';
-  }
-  
-  function hideFaceVersionDropdown() {
-    document.getElementById('faceVersionGroup').style.display = 'none';
-  }
-  
-  // --- Image Loading Functions ---
-  function loadBaseCard(path) {
-    if (!path) return;
-    
-    showLoading();
-    baseCard.loading = true;
-    baseCard.onload = () => imageOnLoad(baseCard, 'base');
-    baseCard.onerror = () => imageOnError(baseCard, 'base');
-    baseCard.src = path;
-  }
-  
-  function loadSelectedFaceVersion() {
-    const url = document.getElementById('faceVersionSelect').value;
-    if (!url) return;
-    
-    showLoading();
-    customPhoto.loading = true;
-    customPhoto.onload = () => imageOnLoad(customPhoto, 'photo');
-    customPhoto.onerror = () => imageOnError(customPhoto, 'photo');
-    customPhoto.src = url;
-  }
-  
-  // --- 클럽 로고 로드 함수 ---
-  function loadClubLogo(url) {
-    if (!url) return;
-    
-    showLoading();
-    customClub.loading = true;
-    customClub.onload = () => imageOnLoad(customClub, 'club');
-    customClub.onerror = () => imageOnError(customClub, 'club');
-    customClub.src = url;
-  }
-  
-  // --- Remove Functions ---
-  function removeFlag() {
-    customFlag.src = '';
-    $('#flagSelect').selectpicker('val', '');
-    drawCard();
-  }
-  
-  // 클럽 로고 삭제 함수
-  function removeClub() {
-    customClub.src = '';
-    document.querySelectorAll('.club-item').forEach(item => {
-      item.classList.remove('selected');
-    });
-    drawCard();
-  }
-  
-  function removeSeason() {
-    customSeason.src = '';
-    document.getElementById('seasonUploadInput').value = '';
-    drawCard();
-  }
-  
-  function removePhoto() {
-    customPhoto.src = '';
-    document.getElementById('photoInput').value = '';
-    $('#playerSelect').selectpicker('val', '');
-    hideFaceVersionDropdown();
-    drawCard();
-  }
-  
-  function removeIcon() {
-    customIcon.src = '';
-    document.getElementById('iconUploadInput').value = '';
-    drawCard();
-  }
-  
-  // --- File Upload Handlers ---
-  document.getElementById('seasonUploadInput').addEventListener('change', function(e) {
-    if (!e.target.files || !e.target.files[0]) return;
-    
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    
-    reader.onload = function(event) {
-      showLoading();
-      customSeason.loading = true;
-      customSeason.onload = () => imageOnLoad(customSeason, 'season');
-      customSeason.onerror = () => imageOnError(customSeason, 'season');
-      customSeason.src = event.target.result;
-    };
-    
-    reader.readAsDataURL(file);
-  });
-  
-  document.getElementById('photoInput').addEventListener('change', function(e) {
-    if (!e.target.files || !e.target.files[0]) return;
-    
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    
-    reader.onload = function(event) {
-      showLoading();
-      customPhoto.loading = true;
-      customPhoto.onload = () => imageOnLoad(customPhoto, 'photo');
-      customPhoto.onerror = () => imageOnError(customPhoto, 'photo');
-      customPhoto.src = event.target.result;
-      
-      // Reset player select dropdown
-      $('#playerSelect').selectpicker('val', '');
-      hideFaceVersionDropdown();
-    };
-    
-    reader.readAsDataURL(file);
-  });
-  
-  document.getElementById('iconUploadInput').addEventListener('change', function(e) {
-    if (!e.target.files || !e.target.files[0]) return;
-    
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    
-    reader.onload = function(event) {
-      showLoading();
-      customIcon.loading = true;
-      customIcon.onload = () => imageOnLoad(customIcon, 'icon');
-      customIcon.onerror = () => imageOnError(customIcon, 'icon');
-      customIcon.src = event.target.result;
-    };
-    
-    reader.readAsDataURL(file);
-  });
-  
-  // --- Drawing Functions ---
-  function drawCard() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // Draw base card
-    if (baseCard.complete && baseCard.src && !baseCard.error) {
-      ctx.drawImage(baseCard, 0, 0, canvas.width, canvas.height);
-    }
-    
-    // Draw icon background if option is selected
-    const iconOption = document.getElementById('newOption').value;
-    if (iconOption === 'icon' && customIcon.complete && customIcon.src && !customIcon.error) {
-      const x = parseInt(document.getElementById('iconX').value) || 20;
-      const y = parseInt(document.getElementById('iconY').value) || 20;
-      const width = parseInt(document.getElementById('iconWidth').value) || 40;
-      const height = parseInt(document.getElementById('iconHeight').value) || 40;
-      
-      ctx.drawImage(customIcon, x, y, width, height);
-    }
-    
-    // Draw flag if selected
-    if (customFlag.complete && customFlag.src && !customFlag.error) {
-      const x = parseInt(document.getElementById('flagX').value) || 30;
-      const y = parseInt(document.getElementById('flagY').value) || 30;
-      const width = parseInt(document.getElementById('flagUploadWidth').value) || 40;
-      const height = parseInt(document.getElementById('flagUploadHeight').value) || 40;
-      
-      ctx.drawImage(customFlag, x, y, width, height);
-      
-      // Draw resize handles if this image is active
-      if (activeImage === customFlag) {
-        drawHandles(x, y, width, height);
-      }
-    }
-    
-    // 클럽 로고 그리기
-    if (customClub.complete && customClub.src && !customClub.error) {
-      const x = parseInt(document.getElementById('clubX').value) || 30;
-      const y = parseInt(document.getElementById('clubY').value) || 30;
-      const width = parseInt(document.getElementById('clubWidth').value) || 40;
-      const height = parseInt(document.getElementById('clubHeight').value) || 40;
-      
-      ctx.drawImage(customClub, x, y, width, height);
-      
-      // 리사이즈 핸들 그리기
-      if (activeImage === customClub) {
-        drawHandles(x, y, width, height);
-      }
-    }
-    
-    // Draw season icon if uploaded
-    if (customSeason.complete && customSeason.src && !customSeason.error) {
-      const x = parseInt(document.getElementById('seasonX').value) || 200;
-      const y = parseInt(document.getElementById('seasonY').value) || 250;
-      const width = parseInt(document.getElementById('seasonUploadWidth').value) || 40;
-      const height = parseInt(document.getElementById('seasonUploadHeight').value) || 40;
-      
-      ctx.drawImage(customSeason, x, y, width, height);
-      
-      // Draw resize handles if this image is active
-      if (activeImage === customSeason) {
-        drawHandles(x, y, width, height);
-      }
-    }
-    
-    // Draw photo if uploaded or selected
-    if (customPhoto.complete && customPhoto.src && !customPhoto.error) {
-      const x = parseInt(document.getElementById('photoX').value) || 50;
-      const y = parseInt(document.getElementById('photoY').value) || 50;
-      const width = parseInt(document.getElementById('photoWidth').value) || 100;
-      const height = parseInt(document.getElementById('photoHeight').value) || 100;
-      
-      ctx.drawImage(customPhoto, x, y, width, height);
-      
-      // Draw resize handles if this image is active
-      if (activeImage === customPhoto) {
-        drawHandles(x, y, width, height);
-      }
-    }
-    
-    // Draw text elements
-    drawTextElements();
-    
-    // Update PIP preview for mobile
-    updatePipPreview();
-  }
-  
-  function drawTextElements() {
-    // Draw OVR
-    const ovr = document.getElementById('ovr').value || '129';
-    const ovrX = parseInt(document.getElementById('ovrX').value) || 88;
-    const ovrY = parseInt(document.getElementById('ovrY').value) || 63;
-    const ovrFontSize = parseInt(document.getElementById('ovrFontSize').value) || 35;
-    const ovrFont = document.getElementById('ovrFont').value || 'FontA';
-    const ovrColor = document.getElementById('ovrColor').value || '#FFD700';
-    
-    ctx.font = `${ovrFontSize}px ${ovrFont}`;
-    ctx.fillStyle = ovrColor;
-    ctx.textAlign = 'center';
-    ctx.fillText(ovr, ovrX, ovrY);
-    
-    // Draw Position
-    const position = document.getElementById('position').value || 'ST';
-    const posX = parseInt(document.getElementById('posX').value) || 78;
-    const posY = parseInt(document.getElementById('posY').value) || 89;
-    const posFontSize = parseInt(document.getElementById('posFontSize').value) || 19;
-    const posFont = document.getElementById('posFont').value || 'FontD';
-    const posColor = document.getElementById('posColor').value || '#FFFFFF';
-    
-    ctx.font = `${posFontSize}px ${posFont}`;
-    ctx.fillStyle = posColor;
-    ctx.textAlign = 'center';
-    ctx.fillText(position, posX, posY);
-    
-    // Draw Player Name
-    const playerName = document.getElementById('playerName').value || 'R.레반도프스키';
-    const nameX = parseInt(document.getElementById('nameX').value) || 150;
-    const nameY = parseInt(document.getElementById('nameY').value) || 218;
-    const nameFontSize = parseInt(document.getElementById('nameFontSize').value) || 20;
-    const nameFont = document.getElementById('nameFont').value || 'FontC';
-    const nameColor = document.getElementById('nameColor').value || '#FFFFFF';
-    
-    ctx.font = `${nameFontSize}px ${nameFont}`;
-    ctx.fillStyle = nameColor;
-    ctx.textAlign = 'center';
-    ctx.fillText(playerName, nameX, nameY);
-  }
-  
-  function drawHandles(x, y, width, height) {
-    const handleSize = 8;
-    const halfHandle = handleSize / 2;
-    
-    // Draw corner handles
-    ctx.fillStyle = 'rgba(0, 120, 215, 0.8)';
-    ctx.fillRect(x - halfHandle, y - halfHandle, handleSize, handleSize); // Top-left
-    ctx.fillRect(x + width - halfHandle, y - halfHandle, handleSize, handleSize); // Top-right
-    ctx.fillRect(x - halfHandle, y + height - halfHandle, handleSize, handleSize); // Bottom-left
-    ctx.fillRect(x + width - halfHandle, y + height - halfHandle, handleSize, handleSize); // Bottom-right
-    
-    // Draw center handle for moving
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-    ctx.fillRect(x + width/2 - halfHandle, y + height/2 - halfHandle, handleSize, handleSize);
-  }
-  
-  function updatePipPreview() {
-    const pipPreview = document.getElementById('pipPreview');
+    // Canvas Setup
+    const totalImages = 271; // Adjust if you have more blank cards
+    const canvas = document.getElementById('cardCanvas');
+    const ctx = canvas.getContext('2d');
     const pipCanvas = document.getElementById('pipCanvas');
     const pipCtx = pipCanvas.getContext('2d');
-    
-    // Only show PIP on mobile and when scrolled down
-    if (window.innerWidth <= 768 && window.scrollY > 100) {
-      pipCanvas.width = 120;
-      pipCanvas.height = 120;
-      pipCtx.clearRect(0, 0, pipCanvas.width, pipCanvas.height);
-      
-      // Draw a scaled version of the main canvas
-      pipCtx.drawImage(canvas, 0, 0, pipCanvas.width, pipCanvas.height);
-      
-      // Show the preview
-      pipPreview.classList.add('show');
-    } else {
-      // Hide the preview
-      pipPreview.classList.remove('show');
+    let cardFileName = "card";
+    const canvasWidth = 300, canvasHeight = 300;
+    canvas.width = canvasWidth; canvas.height = canvasHeight;
+    pipCanvas.width = canvasWidth; pipCanvas.height = canvasHeight;
+
+    // Image Elements & State
+    let baseCard = new Image();     baseCard.crossOrigin = "anonymous";
+    let customFlag = new Image();     customFlag.crossOrigin = "anonymous";
+    let customSeason = new Image();   customSeason.crossOrigin = "anonymous";
+    let customPhoto = new Image();    customPhoto.crossOrigin = "anonymous"; // Shared for upload/select
+    let customIcon = new Image();     customIcon.crossOrigin = "anonymous";
+    const aspectRatios = {};
+
+    // Interaction State
+    let activeImage = null; let mode = '';
+    let startMouseX = 0, startMouseY = 0;
+    let startImageX = 0, startImageY = 0, startImageW = 0, startImageH = 0;
+    let dragOffsetX = 0, dragOffsetY = 0;
+    const minImageSize = 10;
+    let hideHandlesTimeout = null;
+
+    // --- Core Functions ---
+    function showLoading() { document.getElementById('loadingOverlay').style.display = "flex"; }
+    function hideLoading() { setTimeout(() => { const stillLoading = [baseCard, customFlag, customSeason, customPhoto, customIcon].some(img => img.src && !img.complete && !img.error && img.loading); if (!stillLoading) { document.getElementById('loadingOverlay').style.display = "none"; } }, 100); }
+
+    const imageOnLoad = function(img, aspectRatioKey) { hideLoading(); if (img.width > 0 && img.height > 0) { aspectRatios[aspectRatioKey] = img.width / img.height; } else { aspectRatios[aspectRatioKey] = undefined; img.error = true; console.warn(`Image ${aspectRatioKey} invalid dims`); } img.error = false; img.loading = false; drawCard(); };
+    const imageOnError = function(img, aspectRatioKey) { console.error(`Failed load ${aspectRatioKey}: ${img.src}`); aspectRatios[aspectRatioKey] = undefined; img.error = true; img.loading = false; hideLoading(); drawCard(); };
+    baseCard.onload = () => { hideLoading(); drawCard(); }; baseCard.onerror = () => { console.error("Failed base card load"); hideLoading(); drawCard(); };
+    customFlag.onload = () => imageOnLoad(customFlag, 'flag'); customFlag.onerror = () => imageOnError(customFlag, 'flag');
+    customSeason.onload = () => imageOnLoad(customSeason, 'season'); customSeason.onerror = () => imageOnError(customSeason, 'season');
+    customPhoto.onload = () => imageOnLoad(customPhoto, 'photo'); customPhoto.onerror = () => imageOnError(customPhoto, 'photo'); // Shared handler
+    customIcon.onerror = () => { console.error(`Failed load icon: ${customIcon.src}. Check path: ${ICON_DEFAULT_PATH}`); alert(`아이콘 배경 이미지(${ICON_DEFAULT_PATH})를 불러올 수 없습니다. 파일 경로를 확인하세요.`); imageOnError(customIcon, 'icon'); };
+    customIcon.onload = () => imageOnLoad(customIcon, 'icon');
+    customPhoto.crossOrigin = "anonymous"; // Needed for renderz images
+
+    function getFileName(number) { return `image(${number}).png`; }
+    function updatePipPreview() { pipCtx.clearRect(0, 0, pipCanvas.width, pipCanvas.height); pipCtx.drawImage(canvas, 0, 0, pipCanvas.width, pipCanvas.height); }
+
+    function getImageParams(key) { switch (key) { case 'flag': return { x: +document.getElementById('flagX').value, y: +document.getElementById('flagY').value, width: +document.getElementById('flagUploadWidth').value, height: +document.getElementById('flagUploadHeight').value, name: key }; case 'season': return { x: +document.getElementById('seasonX').value, y: +document.getElementById('seasonY').value, width: +document.getElementById('seasonUploadWidth').value, height: +document.getElementById('seasonUploadHeight').value, name: key }; case 'photo': return { x: +document.getElementById('photoX').value, y: +document.getElementById('photoY').value, width: +document.getElementById('photoWidth').value, height: +document.getElementById('photoHeight').value, name: key }; case 'icon': return { x: +document.getElementById('iconX').value, y: +document.getElementById('iconY').value, width: +document.getElementById('iconWidth').value, height: +document.getElementById('iconHeight').value, name: key }; default: return null; } }
+    function getImageObject(key) { switch (key) { case 'flag': return customFlag; case 'season': return customSeason; case 'photo': return customPhoto; case 'icon': return customIcon; default: return null; } }
+    function getInputElements(key) { switch (key) { case 'flag': return { xE: document.getElementById('flagX'), yE: document.getElementById('flagY'), wE: document.getElementById('flagUploadWidth'), hE: document.getElementById('flagUploadHeight') }; case 'season': return { xE: document.getElementById('seasonX'), yE: document.getElementById('seasonY'), wE: document.getElementById('seasonUploadWidth'), hE: document.getElementById('seasonUploadHeight') }; case 'photo': return { xE: document.getElementById('photoX'), yE: document.getElementById('photoY'), wE: document.getElementById('photoWidth'), hE: document.getElementById('photoHeight') }; case 'icon': return { xE: document.getElementById('iconX'), yE: document.getElementById('iconY'), wE: document.getElementById('iconWidth'), hE: document.getElementById('iconHeight') }; default: return null; } }
+
+    // --- Dropdown Population ---
+    function populateBlankCardDropdown() { const select = document.getElementById('blankCardSelect'); select.innerHTML = ''; for (let i = 1; i <= totalImages; i++) { const option = document.createElement('option'); const imagePath = `Blank/${getFileName(i)}`; option.value = imagePath; option.setAttribute('data-content', `<img src="${imagePath}" style="width:30px;height:auto;vertical-align:middle; margin-right: 5px;"> Card ${i}`); if (i === 264) option.selected = true; select.appendChild(option); } $(select).selectpicker('refresh'); select.addEventListener('change', function() { const cardPath = select.value; if (cardPath) { showLoading(); baseCard.src = cardPath; } }); }
+    function populateFlagDropdown() { const select = document.getElementById('flagSelect'); select.innerHTML = ''; const defaultOption = document.createElement('option'); defaultOption.value = ""; defaultOption.textContent = "국기 선택 안 함"; select.appendChild(defaultOption); const sortedCountryNames = Object.keys(countryFlags).sort((a, b) => a.localeCompare(b, 'ko')); sortedCountryNames.forEach(countryName => { const countryCode = countryFlags[countryName]; const flagUrl = `${FLAG_BASE_URL}${countryCode}${FLAG_EXTENSION}`; const option = document.createElement('option'); option.value = flagUrl; option.textContent = countryName; option.setAttribute('data-content', `<img src='${flagUrl}' style='width: 20px; height: auto; margin-right: 5px; vertical-align: middle; border: 1px solid #ccc;'> ${countryName}`); select.appendChild(option); }); $(select).selectpicker('refresh'); select.addEventListener('change', function(event) { const selectedUrl = event.target.value; if (selectedUrl) { showLoading(); customFlag.src = selectedUrl; } else { removeFlag(); } }); }
+
+    // Modified: Populates the *first* dropdown (#playerSelect) with players from fcmData
+    function populatePlayerSelectDropdown() {
+        const select = document.getElementById('playerSelect');
+        select.innerHTML = ''; // Clear existing
+
+        const defaultOption = document.createElement('option');
+        defaultOption.value = ""; // Use empty value for "none selected"
+        defaultOption.textContent = "선수 선택 안 함";
+        select.appendChild(defaultOption);
+
+        // Sort fcmData by nickname/name for easier searching
+        const sortedPlayers = [...fcmData].sort((a, b) => (a.nick || a.name || '').localeCompare(b.nick || b.name || '', 'ko'));
+
+        sortedPlayers.forEach(player => {
+            if (!player.pid) return; // Skip if no pid
+
+            // Check if this player exists in faceData and has images
+            const faceEntry = faceData.find(fd => fd.pid === player.pid);
+            if (!faceEntry || !faceEntry.images || faceEntry.images.length === 0) {
+                 return; // Skip players not in faceData or without images
+            }
+
+            const option = document.createElement('option');
+            option.value = player.pid; // Use PID as the value
+            const displayText = player.nick ? `${player.nick} (${player.name || ''})` : player.name || `Player ${player.pid}`;
+            option.textContent = displayText; // Text for search/display
+
+            // Option for preview (can be slow)
+            const previewUrl = faceEntry.images[0]; // Use the first image for preview
+            option.setAttribute('data-content', `<img src='${previewUrl}' style='width: 20px; height: auto; margin-right: 5px; vertical-align: middle; border: 1px solid #eee; object-fit: contain;'> ${displayText}`);
+
+            select.appendChild(option);
+        });
+
+        $(select).selectpicker('refresh'); // Refresh bootstrap-select
+
+        // Add event listener for player selection
+        select.addEventListener('change', function(event) {
+            const selectedPid = event.target.value;
+            if (selectedPid) {
+                populateFaceVersionDropdown(selectedPid); // Populate the second dropdown
+                document.getElementById('photoInput').value = ''; // Clear file input
+            } else {
+                removePhoto(); // Clear photo and hide version dropdown if "선택 안 함"
+                hideFaceVersionDropdown();
+            }
+        });
+    }
+
+    // New Function: Populates the *second* dropdown (#faceVersionSelect) based on selected player PID
+    function populateFaceVersionDropdown(pid) {
+        const versionSelect = document.getElementById('faceVersionSelect');
+        const versionGroup = document.getElementById('faceVersionGroup');
+        versionSelect.innerHTML = ''; // Clear previous options
+
+        const faceEntry = faceData.find(fd => fd.pid === pid);
+
+        if (!faceEntry || !faceEntry.images || faceEntry.images.length === 0) {
+            console.warn(`No face versions found in faceData.js for PID: ${pid}`);
+            hideFaceVersionDropdown();
+            customPhoto.src = ''; // Clear image source
+            drawCard();
+            return;
+        }
+
+        faceEntry.images.forEach((imageUrl, index) => {
+            const option = document.createElement('option');
+            option.value = imageUrl;
+
+            // Create a meaningful name from the URL (improved parsing)
+            let imageName = `Version ${index + 1}`; // Default fallback
+            try {
+                const urlParts = imageUrl.split('/');
+                let filename = urlParts[urlParts.length - 1];
+                if (filename === 'normal' && urlParts.length > 1) { // Handle renderz.app structure
+                    filename = urlParts[urlParts.length - 2];
+                }
+                const pidStr = `p${pid}_`;
+                const baseName = filename.replace(pidStr, '').replace('.png', '');
+                if (baseName && baseName !== filename) { // Check if replacement happened
+                    imageName = baseName.replace(/_/g, ' ').replace(/ FD24 INHERIT/i, ' Founders').replace(/ WILDCARD24/i, ' WC24').replace(/ NV24 ICON/i, ' NV ICON'); // Basic cleanup
+                }
+            } catch (e) { console.error("Error parsing face version name:", e); }
+
+
+            option.textContent = imageName;
+            option.setAttribute('data-content', `<img src='${imageUrl}' style='width: 20px; height: auto; margin-right: 5px; vertical-align: middle; border: 1px solid #eee; object-fit: contain;'> ${imageName}`);
+            versionSelect.appendChild(option);
+        });
+
+        $(versionSelect).selectpicker('refresh');
+        versionGroup.style.display = 'block'; // Show the dropdown
+
+        // Automatically select and load the first face version
+        if (versionSelect.options.length > 0) {
+            versionSelect.selectedIndex = 0;
+            loadSelectedFaceVersion(); // Trigger load
+        }
+    }
+
+    // New Function: Hides the face version dropdown
+    function hideFaceVersionDropdown() {
+         document.getElementById('faceVersionGroup').style.display = 'none';
+         $('#faceVersionSelect').selectpicker('val', ''); // Clear selection
+         document.getElementById('faceVersionSelect').innerHTML = ''; // Clear options
+         $('#faceVersionSelect').selectpicker('refresh');
+    }
+
+    // New Function: Loads the image selected in the version dropdown
+    function loadSelectedFaceVersion() {
+        const selectedUrl = document.getElementById('faceVersionSelect').value;
+        if (selectedUrl) {
+            showLoading();
+            customPhoto.src = selectedUrl; // Load into the shared customPhoto object
+            customPhoto.loading = true;
+            customPhoto.error = false;
+        } else {
+            customPhoto.src = '';
+            drawCard();
+        }
+    }
+
+    // --- Initial Load & Removal ---
+    function loadBaseCard(cardPath = `Blank/${getFileName(268)}`) { showLoading(); baseCard.src = cardPath; }
+
+    // Modified: removeImage handles resetting both selects if key is 'photo'
+    function removeImage(imgElement, aspectRatioKey, inputElementId = null) {
+        imgElement.src = ""; imgElement.error = false; imgElement.loading = false;
+        aspectRatios[aspectRatioKey] = undefined;
+        if (inputElementId) { const input = document.getElementById(inputElementId); if (input) input.value = ""; }
+
+        const coords = { x: null, y: null, w: null, h: null };
+        const defaults = { flag: [30, 30, 40, 40], season: [200, 250, 40, 40], photo: [50, 50, 100, 100], icon: [20, 20, 40, 40] };
+
+        switch(aspectRatioKey) {
+            case 'flag': coords.x = 'flagX'; coords.y = 'flagY'; coords.w = 'flagUploadWidth'; coords.h = 'flagUploadHeight'; $('#flagSelect').selectpicker('val', ''); break;
+            case 'season': coords.x = 'seasonX'; coords.y = 'seasonY'; coords.w = 'seasonUploadWidth'; coords.h = 'seasonUploadHeight'; break;
+            case 'photo': // Unified photo removal
+                coords.x = 'photoX'; coords.y = 'photoY'; coords.w = 'photoWidth'; coords.h = 'photoHeight';
+                $('#playerSelect').selectpicker('val', ''); // Reset player dropdown
+                hideFaceVersionDropdown(); // Hide and clear version dropdown
+                break;
+            case 'icon': coords.x = 'iconX'; coords.y = 'iconY'; coords.w = 'iconWidth'; coords.h = 'iconHeight'; document.getElementById('newOption').value = 'live'; document.getElementById('iconOptions').style.display = 'none'; break;
+        }
+
+        // Reset coordinates and size only if defaults exist
+        if (coords.x && defaults[aspectRatioKey]) { document.getElementById(coords.x).value = defaults[aspectRatioKey][0]; document.getElementById(coords.y).value = defaults[aspectRatioKey][1]; document.getElementById(coords.w).value = defaults[aspectRatioKey][2]; document.getElementById(coords.h).value = defaults[aspectRatioKey][3]; }
+
+        if (activeImage === aspectRatioKey) { activeImage = null; mode = ''; if (hideHandlesTimeout) clearTimeout(hideHandlesTimeout); hideHandlesTimeout = null; }
+        drawCard();
+    }
+    function removeFlag() { removeImage(customFlag, 'flag'); }
+    function removeSeason() { removeImage(customSeason, 'season', 'seasonUploadInput'); }
+    function removePhoto() { removeImage(customPhoto, 'photo', 'photoInput'); } // Handles both upload and select reset now
+    function removeIcon() { removeImage(customIcon, 'icon'); }
+
+    // --- File Input Handler (Ratio Logic & Clear Selects) ---
+    function handleFileInput(event, imageKey) {
+        const file = event.target.files[0]; if (!file) return; showLoading();
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+            const dataUrl = evt.target.result; const tempImg = new Image();
+            tempImg.onload = () => {
+                hideLoading();
+                if (tempImg.width > 0 && tempImg.height > 0) {
+                    const ratio = tempImg.width / tempImg.height; aspectRatios[imageKey] = ratio;
+                    const inputs = getInputElements(imageKey);
+                    if (inputs?.wE && inputs?.hE) { /* ... ratio adjustment unchanged ... */
+                        const currentWidth = +inputs.wE.value || tempImg.width;
+                        let newHeight = Math.max(minImageSize, currentWidth / ratio);
+                        let newWidth = Math.max(minImageSize, newHeight * ratio);
+                        if (newWidth < minImageSize) { newWidth = minImageSize; newHeight = newWidth / ratio; }
+                        inputs.wE.value = Math.round(newWidth); inputs.hE.value = Math.round(newHeight);
+                    }
+                    const imageObject = getImageObject(imageKey);
+                    if (imageObject) {
+                        imageObject.src = dataUrl; // Trigger draw
+                        imageObject.loading = true;
+                        imageObject.error = false;
+                        if (imageKey === 'photo') {
+                             $('#playerSelect').selectpicker('val', ''); // Clear player dropdown
+                             hideFaceVersionDropdown(); // Hide and clear version dropdown
+                        }
+                    }
+                } else { console.error(`Uploaded ${imageKey} invalid`); alert(`Uploaded image for ${imageKey} is invalid.`); const imageObject = getImageObject(imageKey); if (imageObject) imageObject.error = true; aspectRatios[imageKey] = undefined; drawCard(); }
+            };
+            tempImg.onerror = () => { hideLoading(); console.error(`Failed load uploaded ${imageKey}`); alert(`Failed read file for ${imageKey}.`); const imageObject = getImageObject(imageKey); if (imageObject) imageObject.error = true; aspectRatios[imageKey] = undefined; drawCard(); };
+            tempImg.src = dataUrl;
+        };
+        reader.onerror = () => { hideLoading(); console.error(`FileReader error ${imageKey}`); alert('Error reading file.'); };
+        reader.readAsDataURL(file);
+        event.target.value = ''; // Clear file input after processing starts
+    }
+    document.getElementById('seasonUploadInput').addEventListener('change', (e) => handleFileInput(e, 'season'));
+    document.getElementById('photoInput').addEventListener('change', (e) => handleFileInput(e, 'photo'));
+
+    // --- Draw Card & Text ---
+    function drawCard() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (baseCard.complete && baseCard.src && !baseCard.error) { ctx.drawImage(baseCard, 0, 0, canvas.width, canvas.height); }
+      else if (!baseCard.src) { ctx.fillStyle = "#eee"; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = "#999"; ctx.textAlign = 'center'; ctx.font = '12px sans-serif'; ctx.fillText("Select Base Card", canvas.width / 2, canvas.height / 2); ctx.textAlign = 'left'; }
+
+      // Draw images in order: photo -> flag -> season -> icon (if enabled)
+      drawImageElement(customPhoto, 'photo'); // Unified photo
+      drawImageElement(customFlag, 'flag');
+      drawImageElement(customSeason, 'season');
+
+      if (document.getElementById('newOption').value === 'icon') {
+          drawImageElement(customIcon, 'icon');
+          if (!customIcon.src && !customIcon.error && !customIcon.loading) {
+              customIcon.loading = true; console.log("Attempting load default icon:", ICON_DEFAULT_PATH); showLoading(); customIcon.src = ICON_DEFAULT_PATH;
+          }
+      }
+      drawText();
+      updatePipPreview();
+    }
+    function drawImageElement(imgElement, key) {
+        const params = getImageParams(key); if (!params) return;
+        if (imgElement.complete && imgElement.src && !imgElement.error && imgElement.width > 0 && imgElement.height > 0) {
+            imgElement.loading = false;
+            const drawWidth = Math.max(minImageSize, params.width); const drawHeight = Math.max(minImageSize, params.height);
+            const inputs = getInputElements(key); if (inputs) { if (+inputs.wE.value !== drawWidth) inputs.wE.value = drawWidth; if (+inputs.hE.value !== drawHeight) inputs.hE.value = drawHeight; }
+            ctx.drawImage(imgElement, params.x, params.y, drawWidth, drawHeight);
+            if (activeImage === key) { drawHandles({ x: params.x, y: params.y, width: drawWidth, height: drawHeight }); }
+        } else if (imgElement.error) { imgElement.loading = false; const x = params.x, y = params.y, w = params.width, h = params.height; ctx.save(); ctx.fillStyle = "rgba(255, 0, 0, 0.1)"; ctx.fillRect(x, y, w, h); ctx.strokeStyle = "red"; ctx.lineWidth = 1; ctx.strokeRect(x, y, w, h); ctx.fillStyle = "red"; ctx.font = '10px sans-serif'; ctx.textAlign = 'center'; ctx.fillText("Load Error", x + w / 2, y + h / 2); ctx.restore(); }
+        else if (imgElement.loading && imgElement.src) { const x = params.x, y = params.y, w = params.width, h = params.height; ctx.save(); ctx.fillStyle = "rgba(200, 200, 200, 0.2)"; ctx.fillRect(x, y, w, h); ctx.strokeStyle = "#ccc"; ctx.lineWidth = 1; ctx.setLineDash([2, 2]); ctx.strokeRect(x, y, w, h); ctx.fillStyle = "#999"; ctx.font = '10px sans-serif'; ctx.textAlign = 'center'; ctx.fillText("Loading...", x + w / 2, y + h / 2); ctx.restore(); }
+    }
+    function drawText() { ctx.save(); const ovrValue = document.getElementById('ovr').value, ovrX = +document.getElementById('ovrX').value, ovrY = +document.getElementById('ovrY').value, ovrFontSize = document.getElementById('ovrFontSize').value, ovrFont = document.getElementById('ovrFont').value, ovrColor = document.getElementById('ovrColor').value; const posValue = document.getElementById('position').value, posX = +document.getElementById('posX').value, posY = +document.getElementById('posY').value, posFontSize = document.getElementById('posFontSize').value, posFont = document.getElementById('posFont').value, posColor = document.getElementById('posColor').value; const nameValue = document.getElementById('playerName').value, nameX = +document.getElementById('nameX').value, nameY = +document.getElementById('nameY').value, nameFontSize = document.getElementById('nameFontSize').value, nameFont = document.getElementById('nameFont').value, nameColor = document.getElementById('nameColor').value; ctx.shadowColor = "rgba(0,0,0,0.6)"; ctx.shadowBlur = 3; ctx.shadowOffsetX = 1; ctx.shadowOffsetY = 1; ctx.fillStyle = ovrColor; ctx.font = `bold ${ovrFontSize}px "${ovrFont}", sans-serif`; ctx.textAlign = "center"; ctx.fillText(ovrValue, ovrX, ovrY); ctx.fillStyle = posColor; ctx.font = `bold ${posFontSize}px "${posFont}", sans-serif`; ctx.fillText(posValue, posX, posY); ctx.fillStyle = nameColor; ctx.font = `normal ${nameFontSize}px "${nameFont}", sans-serif`; ctx.fillText(nameValue, nameX, nameY); ctx.restore(); }
+    function drawHandles(p) { ctx.save(); ctx.setLineDash([5, 3]); ctx.strokeStyle = "red"; ctx.lineWidth = 1; ctx.strokeRect(p.x, p.y, p.width, p.height); const handleRadius = 4; const handleX = p.x + p.width; const handleY = p.y + p.height; ctx.fillStyle = "red"; ctx.beginPath(); ctx.arc(handleX, handleY, handleRadius, 0, Math.PI * 2); ctx.fill(); ctx.restore(); }
+
+    // --- Canvas Interaction Listeners --- (Unchanged)
+  
+// --- Canvas Interaction Listeners --- (Replace the placeholders with this)
+
+// pointerdown: 이미지 내부 클릭 → 이동, 우측하단 핸들 클릭 → 리사이즈 시작
+const imageKeys = ['photo','flag','season','icon'];
+
+canvas.addEventListener('pointerdown', e => {
+  const x = e.offsetX, y = e.offsetY;
+  let hit = false;
+
+  for (let key of imageKeys) {
+    const p = getImageParams(key);
+    if (!p) continue;
+
+    const hx = p.x + p.width, hy = p.y + p.height;
+    if (Math.hypot(x-hx, y-hy) <= 8) {
+      // 리사이즈 모드
+      activeImage = key;
+      mode = 'resize';
+      startMouseX = x; startMouseY = y;
+      startImageW = p.width; startImageH = p.height;
+      hit = true;
+      break;
+    } else if (x>=p.x && x<=p.x+p.width && y>=p.y && y<=p.y+p.height) {
+      // 이동 모드
+      activeImage = key;
+      mode = 'move';
+      dragOffsetX = x - p.x;
+      dragOffsetY = y - p.y;
+      hit = true;
+      break;
     }
   }
-  
-  // --- Event Listeners ---
-  // Flag dropdown change
-  document.getElementById('flagSelect').addEventListener('change', function() {
-    const flagUrl = this.value;
-    if (!flagUrl) {
-      removeFlag();
+
+  if (hit) {
+    clearTimeout(hideHandlesTimeout);
+    drawCard();
+  }
+});
+
+// pointermove: 이동 중이면 좌표 변경, 리사이즈 중이면 크기 변경
+// --- Canvas Interaction Listeners – pointermove (크기 조절 로직 일반화) ---
+canvas.addEventListener('pointermove', e => {
+  const x = e.offsetX, y = e.offsetY;
+
+  if (mode === 'move') {
+    // 이동 모드 (photo만이 아닌 모든 activeImage에 대응)
+    const inputs = getInputElements(activeImage);
+    if (inputs?.xE && inputs?.yE) {
+      inputs.xE.value = Math.round(x - dragOffsetX);
+      inputs.yE.value = Math.round(y - dragOffsetY);
+    }
+    drawCard();
+
+  } else if (mode === 'resize') {
+    // 리사이즈 모드 – activeImage에 맞춰 width/height 업데이트
+    // 43917번째 줄부터 대체
+const dx = x - startMouseX;
+const ratio = aspectRatios[activeImage] || (startImageW / startImageH);
+const newW = Math.max(minImageSize, startImageW + dx);
+const newH = Math.max(minImageSize, newW / ratio);
+    const inputs = getInputElements(activeImage);
+    if (inputs?.wE && inputs?.hE) {
+      inputs.wE.value = Math.round(newW);
+      inputs.hE.value = Math.round(newH);
+    }
+    drawCard();
+
+  } else {
+    // 커서 모양 변경을 activeImage 기준으로
+    const p = getImageParams(activeImage);
+    if (!p) {
+      canvas.style.cursor = 'default';
       return;
     }
-    
-    showLoading();
-    customFlag.loading = true;
-    customFlag.onload = () => imageOnLoad(customFlag, 'flag');
-    customFlag.onerror = () => imageOnError(customFlag, 'flag');
-    customFlag.src = flagUrl;
-  });
-  
-  // Blank card dropdown change
-  document.getElementById('blankCardSelect').addEventListener('change', function() {
-    loadBaseCard(this.value);
-  });
-  
-  // Canvas interaction events
-  canvas.addEventListener('pointerdown', function(e) {
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    const x = (e.clientX - rect.left) * scaleX;
-    const y = (e.clientY - rect.top) * scaleY;
-    
-    // Check if clicking on an image or handle
-    if (hideHandlesTimeout) {
-      clearTimeout(hideHandlesTimeout);
-      hideHandlesTimeout = null;
-    }
-    
-    // Function to check if point is inside rectangle
-    const isInside = (px, py, rx, ry, rw, rh) => {
-      return px >= rx && px <= rx + rw && py >= ry && py <= ry + rh;
-    };
-    
-    // Function to check if point is near handle
-    const isNearHandle = (px, py, hx, hy, handleSize = 8) => {
-      const halfHandle = handleSize / 2;
-      return isInside(px, py, hx - halfHandle, hy - halfHandle, handleSize, handleSize);
-    };
-    
-    // Check for handle interactions first if an image is active
-    if (activeImage) {
-      let x1, y1, w, h;
-      
-      if (activeImage === customFlag) {
-        x1 = parseInt(document.getElementById('flagX').value) || 30;
-        y1 = parseInt(document.getElementById('flagY').value) || 30;
-        w = parseInt(document.getElementById('flagUploadWidth').value) || 40;
-        h = parseInt(document.getElementById('flagUploadHeight').value) || 40;
-      } else if (activeImage === customClub) { // 클럽 로고 핸들 체크
-        x1 = parseInt(document.getElementById('clubX').value) || 30;
-        y1 = parseInt(document.getElementById('clubY').value) || 30;
-        w = parseInt(document.getElementById('clubWidth').value) || 40;
-        h = parseInt(document.getElementById('clubHeight').value) || 40;
-      } else if (activeImage === customSeason) {
-        x1 = parseInt(document.getElementById('seasonX').value) || 200;
-        y1 = parseInt(document.getElementById('seasonY').value) || 250;
-        w = parseInt(document.getElementById('seasonUploadWidth').value) || 40;
-        h = parseInt(document.getElementById('seasonUploadHeight').value) || 40;
-      } else if (activeImage === customPhoto) {
-        x1 = parseInt(document.getElementById('photoX').value) || 50;
-        y1 = parseInt(document.getElementById('photoY').value) || 50;
-        w = parseInt(document.getElementById('photoWidth').value) || 100;
-        h = parseInt(document.getElementById('photoHeight').value) || 100;
-      } else if (activeImage === customIcon) {
-        x1 = parseInt(document.getElementById('iconX').value) || 20;
-        y1 = parseInt(document.getElementById('iconY').value) || 20;
-        w = parseInt(document.getElementById('iconWidth').value) || 40;
-        h = parseInt(document.getElementById('iconHeight').value) || 40;
-      }
-      
-      // Check corner handles
-      if (isNearHandle(x, y, x1, y1)) {
-        mode = 'resize-tl';
-        canvas.style.cursor = 'nwse-resize';
-        return;
-      } else if (isNearHandle(x, y, x1 + w, y1)) {
-        mode = 'resize-tr';
-        canvas.style.cursor = 'nesw-resize';
-        return;
-      } else if (isNearHandle(x, y, x1, y1 + h)) {
-        mode = 'resize-bl';
-        canvas.style.cursor = 'nesw-resize';
-        return;
-      } else if (isNearHandle(x, y, x1 + w, y1 + h)) {
-        mode = 'resize-br';
-        canvas.style.cursor = 'nwse-resize';
-        return;
-      }
-      
-      // Check center handle
-      if (isNearHandle(x, y, x1 + w/2, y1 + h/2)) {
-        mode = 'move';
-        canvas.style.cursor = 'move';
-        return;
-      }
-    }
-    
-    // Check if clicking on images
-    let newActiveImage = null;
-    
-    // Check in reverse order of drawing (top-most first)
-    if (customPhoto.complete && customPhoto.src && !customPhoto.error) {
-      const photoX = parseInt(document.getElementById('photoX').value) || 50;
-      const photoY = parseInt(document.getElementById('photoY').value) || 50;
-      const photoWidth = parseInt(document.getElementById('photoWidth').value) || 100;
-      const photoHeight = parseInt(document.getElementById('photoHeight').value) || 100;
-      
-      if (isInside(x, y, photoX, photoY, photoWidth, photoHeight)) {
-        newActiveImage = customPhoto;
-      }
-    }
-    
-    if (!newActiveImage && customSeason.complete && customSeason.src && !customSeason.error) {
-      const seasonX = parseInt(document.getElementById('seasonX').value) || 200;
-      const seasonY = parseInt(document.getElementById('seasonY').value) || 250;
-      const seasonWidth = parseInt(document.getElementById('seasonUploadWidth').value) || 40;
-      const seasonHeight = parseInt(document.getElementById('seasonUploadHeight').value) || 40;
-      
-      if (isInside(x, y, seasonX, seasonY, seasonWidth, seasonHeight)) {
-        newActiveImage = customSeason;
-      }
-    }
-    
-    // 클럽 로고 클릭 체크
-    if (!newActiveImage && customClub.complete && customClub.src && !customClub.error) {
-      const clubX = parseInt(document.getElementById('clubX').value) || 30;
-      const clubY = parseInt(document.getElementById('clubY').value) || 30;
-      const clubWidth = parseInt(document.getElementById('clubWidth').value) || 40;
-      const clubHeight = parseInt(document.getElementById('clubHeight').value) || 40;
-      
-      if (isInside(x, y, clubX, clubY, clubWidth, clubHeight)) {
-        newActiveImage = customClub;
-      }
-    }
-    
-    if (!newActiveImage && customFlag.complete && customFlag.src && !customFlag.error) {
-      const flagX = parseInt(document.getElementById('flagX').value) || 30;
-      const flagY = parseInt(document.getElementById('flagY').value) || 30;
-      const flagWidth = parseInt(document.getElementById('flagUploadWidth').value) || 40;
-      const flagHeight = parseInt(document.getElementById('flagUploadHeight').value) || 40;
-      
-      if (isInside(x, y, flagX, flagY, flagWidth, flagHeight)) {
-        newActiveImage = customFlag;
-      }
-    }
-    
-    if (!newActiveImage && customIcon.complete && customIcon.src && !customIcon.error && document.getElementById('newOption').value === 'icon') {
-      const iconX = parseInt(document.getElementById('iconX').value) || 20;
-      const iconY = parseInt(document.getElementById('iconY').value) || 20;
-      const iconWidth = parseInt(document.getElementById('iconWidth').value) || 40;
-      const iconHeight = parseInt(document.getElementById('iconHeight').value) || 40;
-      
-      if (isInside(x, y, iconX, iconY, iconWidth, iconHeight)) {
-        newActiveImage = customIcon;
-      }
-    }
-    
-    if (newActiveImage) {
-      activeImage = newActiveImage;
-      mode = 'move';
+    const hx = p.x + p.width, hy = p.y + p.height;
+    if (Math.hypot(x - hx, y - hy) <= 8) {
+      canvas.style.cursor = 'nwse-resize';
+    } else if (x >= p.x && x <= p.x + p.width && y >= p.y && y <= p.y + p.height) {
       canvas.style.cursor = 'move';
-      drawCard(); // Redraw to show handles
-    } else {
-      activeImage = null;
-      mode = '';
-      canvas.style.cursor = 'default';
-      drawCard(); // Redraw to hide handles
-    }
-  });
-  
-  canvas.addEventListener('pointermove', function(e) {
-    if (!mode || !activeImage) return;
-    
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    const x = (e.clientX - rect.left) * scaleX;
-    const y = (e.clientY - rect.top) * scaleY;
-    
-    let xId, yId, widthId, heightId;
-    let aspectRatio = 1;
-    
-    if (activeImage === customFlag) {
-      xId = 'flagX';
-      yId = 'flagY';
-      widthId = 'flagUploadWidth';
-      heightId = 'flagUploadHeight';
-      aspectRatio = aspectRatios.flag;
-    } else if (activeImage === customClub) { // 클럽 로고 이동/리사이즈
-      xId = 'clubX';
-      yId = 'clubY';
-      widthId = 'clubWidth';
-      heightId = 'clubHeight';
-      aspectRatio = aspectRatios.club;
-    } else if (activeImage === customSeason) {
-      xId = 'seasonX';
-      yId = 'seasonY';
-      widthId = 'seasonUploadWidth';
-      heightId = 'seasonUploadHeight';
-      aspectRatio = aspectRatios.season;
-    } else if (activeImage === customPhoto) {
-      xId = 'photoX';
-      yId = 'photoY';
-      widthId = 'photoWidth';
-      heightId = 'photoHeight';
-      aspectRatio = aspectRatios.photo;
-    } else if (activeImage === customIcon) {
-      xId = 'iconX';
-      yId = 'iconY';
-      widthId = 'iconWidth';
-      heightId = 'iconHeight';
-      aspectRatio = aspectRatios.icon;
-    }
-    
-    const currentX = parseInt(document.getElementById(xId).value) || 0;
-    const currentY = parseInt(document.getElementById(yId).value) || 0;
-    const currentWidth = parseInt(document.getElementById(widthId).value) || 40;
-    const currentHeight = parseInt(document.getElementById(heightId).value) || 40;
-    
-    if (mode === 'move') {
-      document.getElementById(xId).value = Math.max(0, Math.min(canvas.width - currentWidth, x - currentWidth / 2));
-      document.getElementById(yId).value = Math.max(0, Math.min(canvas.height - currentHeight, y - currentHeight / 2));
-      drawCard();
-    } else if (mode.startsWith('resize-')) {
-      let newX = currentX, newY = currentY;
-      let newWidth = currentWidth, newHeight = currentHeight;
-      
-      if (mode === 'resize-br') {
-        newWidth = Math.max(20, x - currentX);
-        newHeight = newWidth / aspectRatio;
-      } else if (mode === 'resize-bl') {
-        newWidth = Math.max(20, currentX + currentWidth - x);
-        newHeight = newWidth / aspectRatio;
-        newX = x;
-      } else if (mode === 'resize-tr') {
-        newWidth = Math.max(20, x - currentX);
-        newHeight = newWidth / aspectRatio;
-        newY = currentY + currentHeight - newHeight;
-      } else if (mode === 'resize-tl') {
-        newWidth = Math.max(20, currentX + currentWidth - x);
-        newHeight = newWidth / aspectRatio;
-        newX = x;
-        newY = currentY + currentHeight - newHeight;
-      }
-      
-      // Update input values
-      document.getElementById(xId).value = Math.max(0, Math.min(canvas.width - newWidth, newX));
-      document.getElementById(yId).value = Math.max(0, Math.min(canvas.height - newHeight, newY));
-      document.getElementById(widthId).value = Math.min(canvas.width - newX, newWidth);
-      document.getElementById(heightId).value = Math.min(canvas.height - newY, newHeight);
-      
-      drawCard();
     } else {
       canvas.style.cursor = 'default';
     }
-  });
-  
-  canvas.addEventListener('pointerup', () => {
-    mode = '';
-    hideHandlesTimeout = setTimeout(() => {
-      activeImage = null;
-      drawCard();
-    }, 1500);
-  });
-  
-  canvas.addEventListener('pointerleave', () => {
-    mode = '';
-  });
-  
-  // --- Download/Save/Load Functions ---
-  function downloadCardImage() {
-    const canvasElem = document.getElementById('cardCanvas');
-    // 캔버스를 PNG 데이터 URL로 변환
-    const imageDataURL = canvasElem.toDataURL('image/png');
-    // 다운로드용 링크 생성
-    const link = document.createElement('a');
-    // 제목 입력값이 있으면 파일명으로 사용, 없으면 'card.png'
-    const title = document.getElementById('cardTitleInput').value.trim() || 'card';
-    link.href = imageDataURL;
-    link.download = `${title}.png`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
   }
-  
-  function downloadCardState() {
-    const state = {
-      blankCard: document.getElementById('blankCardSelect').value,
-      cardTitle: document.getElementById('cardTitleInput').value,
-      ovr: {
-        value: document.getElementById('ovr').value,
-        x: document.getElementById('ovrX').value,
-        y: document.getElementById('ovrY').value,
-        fontSize: document.getElementById('ovrFontSize').value,
-        font: document.getElementById('ovrFont').value,
-        color: document.getElementById('ovrColor').value
-      },
-      position: {
-        value: document.getElementById('position').value,
-        x: document.getElementById('posX').value,
-        y: document.getElementById('posY').value,
-        font: document.getElementById('posFont').value,
-        fontSize: document.getElementById('posFontSize').value,
-        color: document.getElementById('posColor').value
-      },
-      playerName: {
-        value: document.getElementById('playerName').value,
-        x: document.getElementById('nameX').value,
-        y: document.getElementById('nameY').value,
-        font: document.getElementById('nameFont').value,
-        fontSize: document.getElementById('nameFontSize').value,
-        color: document.getElementById('nameColor').value
-      },
-      flag: {
-        x: document.getElementById('flagX').value,
-        y: document.getElementById('flagY').value,
-        width: document.getElementById('flagUploadWidth').value,
-        height: document.getElementById('flagUploadHeight').value,
-        selectedUrl: document.getElementById('flagSelect').value
-      },
-      club: { // 클럽 로고 상태 저장
-        x: document.getElementById('clubX').value,
-        y: document.getElementById('clubY').value,
-        width: document.getElementById('clubWidth').value,
-        height: document.getElementById('clubHeight').value,
-        src: customClub.src
-      },
-      season: {
-        x: document.getElementById('seasonX').value,
-        y: document.getElementById('seasonY').value,
-        width: document.getElementById('seasonUploadWidth').value,
-        height: document.getElementById('seasonUploadHeight').value,
-        src: customSeason.src
-      },
-      photo: {
-        x: document.getElementById('photoX').value,
-        y: document.getElementById('photoY').value,
-        width: document.getElementById('photoWidth').value,
-        height: document.getElementById('photoHeight').value,
-        src: customPhoto.src,
-        selectedPid: document.getElementById('playerSelect').value,
-        selectedVersionUrl: document.getElementById('faceVersionSelect').value
-      },
-      iconOption: document.getElementById('newOption').value,
-      icon: {
-        x: document.getElementById('iconX').value,
-        y: document.getElementById('iconY').value,
-        width: document.getElementById('iconWidth').value,
-        height: document.getElementById('iconHeight').value,
-        src: customIcon.src
-      }
-    };
-    
-    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    const title = document.getElementById('cardTitleInput').value.trim() || 'cardState';
-    link.href = url;
-    link.download = `${title}_state.json`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  }
-  
-  document.getElementById('jsonLoadInput').addEventListener('change', function(e) {
-    if (!e.target.files || !e.target.files[0]) return;
-    
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    
-    reader.onload = function(event) {
-      try {
-        const state = JSON.parse(event.target.result);
-        applyCardState(state);
-      } catch (error) {
-        console.error('Error parsing card state:', error);
-        alert('카드 상태 파일을 불러오는 중 오류가 발생했습니다.');
-      }
-    };
-    
-    reader.readAsText(file);
-  });
-  
-  function applyCardState(s) {
+});
+// pointerup: 인터랙션 종료 후 핸들 1.5초 뒤 숨기기
+canvas.addEventListener('pointerup', () => {
+  mode = '';
+  hideHandlesTimeout = setTimeout(() => {
     activeImage = null;
-    mode = '';
-    if (hideHandlesTimeout) clearTimeout(hideHandlesTimeout);
-    hideHandlesTimeout = null;
-    
-    removeFlag();
-    removeClub(); // 클럽 로고 초기화
-    removeSeason();
-    removePhoto();
-    removeIcon();
-    
-    let imagesToLoadCount = 0;
-    
-    const originalHandlers = {
-      base: { onload: baseCard.onload, onerror: baseCard.onerror },
-      flag: { onload: customFlag.onload, onerror: customFlag.onerror },
-      club: { onload: customClub.onload, onerror: customClub.onerror }, // 클럽 핸들러 추가
-      season: { onload: customSeason.onload, onerror: customSeason.onerror },
-      photo: { onload: customPhoto.onload, onerror: customPhoto.onerror },
-      icon: { onload: customIcon.onload, onerror: customIcon.onerror }
-    };
-    
-    const checkCompletion = () => {
-      imagesToLoadCount--;
-      if (imagesToLoadCount <= 0) {
-        hideLoading();
-        setTimeout(() => {
-          baseCard.onload = originalHandlers.base.onload;
-          baseCard.onerror = originalHandlers.base.onerror;
-          customFlag.onload = originalHandlers.flag.onload;
-          customFlag.onerror = originalHandlers.flag.onerror;
-          customClub.onload = originalHandlers.club.onload; // 클럽 핸들러 복원
-          customClub.onerror = originalHandlers.club.onerror;
-          customSeason.onload = originalHandlers.season.onload;
-          customSeason.onerror = originalHandlers.season.onerror;
-          customPhoto.onload = originalHandlers.photo.onload;
-          customPhoto.onerror = originalHandlers.photo.onerror;
-          customIcon.onload = originalHandlers.icon.onload;
-          customIcon.onerror = originalHandlers.icon.onerror;
-        }, 0);
-        drawCard();
-      }
-    };
-    
-    const createLoadHandler = (img, key) => () => {
-      imageOnLoad(img, key);
-      checkCompletion();
-    };
-    
-    const createErrorHandler = (img, key) => () => {
-      imageOnError(img, key);
-      checkCompletion();
-    };
-    
-    const startImageLoad = (imgElement, src, key) => {
-      if (src) {
-        imagesToLoadCount++;
-        imgElement.error = false;
-        imgElement.loading = true;
-        imgElement.onload = createLoadHandler(imgElement, key);
-        imgElement.onerror = createErrorHandler(imgElement, key);
-        imgElement.src = src;
-        return true;
-      }
-      return false;
-    };
-    
-    document.getElementById('cardTitleInput').value = s.cardTitle || '';
-    
-    const blankCardPath = s.blankCard || `Blank/${getFileName(264)}`;
-    $('#blankCardSelect').selectpicker('val', blankCardPath);
-    
-    if ($('#blankCardSelect').val() === blankCardPath) {
-      showLoading();
-      startImageLoad(baseCard, blankCardPath, 'base');
-    } else {
-      console.warn("Saved blank card path invalid:", blankCardPath);
-      $('#blankCardSelect').selectpicker('val', `Blank/${getFileName(264)}`);
-      showLoading();
-      startImageLoad(baseCard, `Blank/${getFileName(264)}`, 'base');
-    }
-    
-    if (s.ovr) {
-      document.getElementById('ovr').value = s.ovr.value ?? 129;
-      document.getElementById('ovrX').value = s.ovr.x ?? 88;
-      document.getElementById('ovrY').value = s.ovr.y ?? 63;
-      document.getElementById('ovrFontSize').value = s.ovr.fontSize ?? 35;
-      document.getElementById('ovrFont').value = s.ovr.font ?? 'FontA';
-      document.getElementById('ovrColor').value = s.ovr.color ?? '#FFD700';
-    }
-    
-    if (s.position) {
-      document.getElementById('position').value = s.position.value ?? 'ST';
-      document.getElementById('posX').value = s.position.x ?? 78;
-      document.getElementById('posY').value = s.position.y ?? 89;
-      document.getElementById('posFontSize').value = s.position.fontSize ?? 19;
-      document.getElementById('posFont').value = s.position.font ?? 'FontD';
-      document.getElementById('posColor').value = s.position.color ?? '#FFFFFF';
-    }
-    
-    if (s.playerName) {
-      document.getElementById('playerName').value = s.playerName.value ?? 'R.레반도프스키';
-      document.getElementById('nameX').value = s.playerName.x ?? 150;
-      document.getElementById('nameY').value = s.playerName.y ?? 218;
-      document.getElementById('nameFontSize').value = s.playerName.fontSize ?? 20;
-      document.getElementById('nameFont').value = s.playerName.font ?? 'FontC';
-      document.getElementById('nameColor').value = s.playerName.color ?? '#FFFFFF';
-    }
-    
-    const applyCoords = (stateObj, defX, defY, defW, defH, xId, yId, wId, hId) => {
-      document.getElementById(xId).value = stateObj?.x ?? defX;
-      document.getElementById(yId).value = stateObj?.y ?? defY;
-      document.getElementById(wId).value = stateObj?.width ?? defW;
-      document.getElementById(hId).value = stateObj?.height ?? defH;
-    };
-    
-    if (s.flag) {
-      applyCoords(s.flag, 30, 30, 40, 40, 'flagX', 'flagY', 'flagUploadWidth', 'flagUploadHeight');
-      if (s.flag.selectedUrl) {
-        $('#flagSelect').selectpicker('val', s.flag.selectedUrl);
-        if ($('#flagSelect').val() === s.flag.selectedUrl) {
-          startImageLoad(customFlag, s.flag.selectedUrl, 'flag');
-        } else {
-          console.warn("Saved flag URL invalid:", s.flag.selectedUrl);
-          $('#flagSelect').selectpicker('val', '');
-        }
-      }
-    }
-    
-    // 클럽 로고 상태 적용
-    if (s.club) {
-      applyCoords(s.club, 30, 30, 40, 40, 'clubX', 'clubY', 'clubWidth', 'clubHeight');
-      if (s.club.src) {
-        startImageLoad(customClub, s.club.src, 'club');
-        
-        // 클럽 로고 선택 상태 표시
-        document.querySelectorAll('.club-item').forEach(item => {
-          if (item.getAttribute('data-logo') === s.club.src) {
-            item.classList.add('selected');
-          } else {
-            item.classList.remove('selected');
-          }
-        });
-      }
-    }
-    
-    if (s.season) {
-      applyCoords(s.season, 200, 250, 40, 40, 'seasonX', 'seasonY', 'seasonUploadWidth', 'seasonUploadHeight');
-      if (s.season.src) {
-        startImageLoad(customSeason, s.season.src, 'season');
-      }
-    }
-    
-    // Apply Photo state
-    if (s.photo) {
-      applyCoords(s.photo, 50, 50, 100, 100, 'photoX', 'photoY', 'photoWidth', 'photoHeight');
-      if (s.photo.selectedPid) {
-        $('#playerSelect').selectpicker('val', s.photo.selectedPid);
-        if ($('#playerSelect').val() === s.photo.selectedPid) {
-          populateFaceVersionDropdown(s.photo.selectedPid);
-          if (s.photo.selectedVersionUrl) {
-            $('#faceVersionSelect').selectpicker('val', s.photo.selectedVersionUrl);
-            if ($('#faceVersionSelect').val() === s.photo.selectedVersionUrl) {
-              const firstVersionUrl = document.getElementById('faceVersionSelect').options[0]?.value;
-              if (firstVersionUrl !== s.photo.selectedVersionUrl) {
-                startImageLoad(customPhoto, s.photo.selectedVersionUrl, 'photo');
-              }
-            } else {
-              console.warn("Saved face version URL invalid or not found:", s.photo.selectedVersionUrl);
-            }
-          }
-        } else {
-          console.warn("Saved player PID invalid:", s.photo.selectedPid);
-          $('#playerSelect').selectpicker('val', '');
-          hideFaceVersionDropdown();
-          if (s.photo.src && typeof s.photo.src === 'string' && !s.photo.src.includes('renderz.app') && !s.photo.src.startsWith('./resources/')) {
-            startImageLoad(customPhoto, s.photo.src, 'photo');
-          }
-        }
-      } else if (s.photo.src) {
-        startImageLoad(customPhoto, s.photo.src, 'photo');
-        $('#playerSelect').selectpicker('val', '');
-        hideFaceVersionDropdown();
-      }
-    }
-    
-    const iconOption = s.iconOption || 'live';
-    document.getElementById('newOption').value = iconOption;
-    document.getElementById('iconOptions').style.display = iconOption === 'icon' ? 'block' : 'none';
-    
-    if (s.icon) {
-      applyCoords(s.icon, 20, 20, 40, 40, 'iconX', 'iconY', 'iconWidth', 'iconHeight');
-      if (iconOption === 'icon' && s.icon.src) {
-        startImageLoad(customIcon, s.icon.src, 'icon');
-      }
-    }
-    
-    if (imagesToLoadCount === 0) {
-      hideLoading();
-      drawCard();
-      baseCard.onload = originalHandlers.base.onload;
-      baseCard.onerror = originalHandlers.base.onerror;
-      customFlag.onload = originalHandlers.flag.onload;
-      customFlag.onerror = originalHandlers.flag.onerror;
-      customClub.onload = originalHandlers.club.onload; // 클럽 핸들러 복원
-      customClub.onerror = originalHandlers.club.onerror;
-      customSeason.onload = originalHandlers.season.onload;
-      customSeason.onerror = originalHandlers.season.onerror;
-      customPhoto.onload = originalHandlers.photo.onload;
-      customPhoto.onerror = originalHandlers.photo.onerror;
-      customIcon.onload = originalHandlers.icon.onload;
-      customIcon.onerror = originalHandlers.icon.onerror;
-    }
-  }
-  
-  // --- Initial Setup ---
-  document.addEventListener('DOMContentLoaded', () => {
-    $('.selectpicker').selectpicker();
-    populateBlankCardDropdown();
-    populateFlagDropdown();
-    populatePlayerSelectDropdown();
-    populateClubGrids(); // 클럽 로고 그리드 생성
-    setupClubTabs(); // 클럽 탭 이벤트 설정
-    
-    const initialCardPath = document.getElementById('blankCardSelect').value;
-    loadBaseCard(initialCardPath || undefined);
-    
-    // General redraw listeners
-    document.querySelectorAll('.editor input[type="number"], .editor input[type="text"], .editor input[type="color"], .editor select').forEach(el => {
-      if (el.id === 'blankCardSelect' || el.id === 'flagSelect' || el.id === 'playerSelect' || el.id === 'faceVersionSelect' || el.id === 'newOption' || el.classList.contains('coord-inputs') || el.id.match(/X$|Y$|Width$|Height$/)) return;
-      const eventType = (el.tagName === 'SELECT' || el.type === 'color') ? 'change' : 'input';
-      el.addEventListener(eventType, drawCard);
-    });
-    
-    // Change listeners for coordinate/size inputs
-    document.querySelectorAll('.coord-inputs input[type="number"], input#flagUploadWidth, input#flagUploadHeight, input#clubWidth, input#clubHeight, input#seasonUploadWidth, input#seasonUploadHeight, input#photoWidth, input#photoHeight, input#iconWidth, input#iconHeight').forEach(el => {
-      el.addEventListener('change', drawCard);
-    });
-    
-    // Add listener for the face version dropdown change
-    document.getElementById('faceVersionSelect').addEventListener('change', loadSelectedFaceVersion);
-    
-    // Icon option listener
-    document.getElementById('newOption').addEventListener('change', () => {
-      const optionValue = document.getElementById('newOption').value;
-      document.getElementById('iconOptions').style.display = optionValue === 'icon' ? "block" : "none";
-      if (optionValue === 'icon' && !customIcon.src && !customIcon.error && !customIcon.loading) {
-        showLoading();
-        customIcon.loading = true;
-        customIcon.src = ICON_DEFAULT_PATH;
-      } else {
-        drawCard();
-      }
-    });
-    
-    // Preload icon
-    const tempIconLoader = new Image();
-    tempIconLoader.crossOrigin = "anonymous";
-    tempIconLoader.onload = () => {
-      if (tempIconLoader.width > 0 && tempIconLoader.height > 0) {
-        aspectRatios.icon = tempIconLoader.width / tempIconLoader.height;
-        if (document.getElementById('newOption').value === 'icon' && !customIcon.src && !customIcon.error && !customIcon.loading) {
-          showLoading();
-          customIcon.loading = true;
-          customIcon.src = ICON_DEFAULT_PATH;
-        }
-      } else {
-        console.error("Preloaded icon.png invalid dimensions.");
-      }
-    };
-    tempIconLoader.onerror = () => {
-      console.error("Failed to preload icon.png");
-    };
-    tempIconLoader.src = ICON_DEFAULT_PATH;
-    
-    // Safety timeout
-    setTimeout(() => {
-      if (document.getElementById('loadingOverlay').style.display === 'flex') {
-        hideLoading();
-        console.warn("Loading overlay forced hide (timeout).");
-        if (!baseCard.complete || !baseCard.src) drawCard();
-      }
-    }, 20000);
-  });
-</script>
+    drawCard();
+  }, 1500);
+});
 
-<!-- Firebase Module Script (Ensure firebase.js path is correct) -->
-<script type="module">
-  try {
-    // Adjust path if firebase.js is not in the same directory
-    const { db, collection, addDoc } = await import('./firebase.js');
-    
-    const shareBtn = document.getElementById('share-btn');
-    let isSharing = false; // Prevent double clicks
-    
-    shareBtn.addEventListener('click', async () => {
-      if (isSharing) return;
-      
-      // Rate limiting (1 share per minute)
-      const lastShareTime = localStorage.getItem('lastShareTime');
-      const sixtySeconds = 60 * 1000;
-      if (lastShareTime && (Date.now() - lastShareTime < sixtySeconds)) {
-        alert(`공유는 1분에 한 번만 가능합니다. 잠시 후에 다시 시도해 주세요.`);
-        return;
-      }
-      
-      // Check for title
-      const title = document.getElementById('cardTitleInput').value.trim();
-      if (!title) {
-        alert('공유할 카드의 제목을 입력해주세요!');
-        document.getElementById('cardTitleInput').focus();
-        return;
-      }
-      
-      // Confirmation dialog
-      if (!confirm(`'${title}' 카드를 게시판에 공유하시겠습니까?`)) {
-        return;
-      }
-      
-      // --- Start Sharing Process ---
-      isSharing = true;
-      shareBtn.disabled = true;
-      const originalText = shareBtn.textContent;
-      shareBtn.textContent = '공유 중...';
-      shareBtn.classList.add('disabled'); // Visual feedback
-      
-      // Temporarily hide handles for capture
-      const tmpActive = activeImage;
-      const tmpMode = mode;
-      if (hideHandlesTimeout) {
-        clearTimeout(hideHandlesTimeout);
-        hideHandlesTimeout = null;
-      }
-      activeImage = null;
-      mode = '';
-      drawCard(); // Redraw without handles
-      
-      // Use setTimeout to allow canvas redraw before capturing
-      setTimeout(async () => {
-        let imageUrl = '';
-        try {
-          const canvasElem = document.getElementById('cardCanvas');
-          imageUrl = canvasElem.toDataURL('image/png'); // Capture canvas as PNG
-        } catch (captureError) {
-          console.error('Canvas capture error:', captureError);
-          alert('이미지 생성 중 오류가 발생했습니다. 다시 시도해 주세요.\n(타사 이미지 사용 시 CORS 오류일 수 있습니다)');
-          // Restore UI and re-enable button even on capture failure
-          activeImage = tmpActive;
-          mode = tmpMode;
-          drawCard(); // Redraw with potential handles
-          isSharing = false;
-          shareBtn.disabled = false;
-          shareBtn.textContent = originalText;
-          shareBtn.classList.remove('disabled');
-          return; // Stop execution
+// pointerleave: 캔버스 밖으로 나가면 모드 초기화
+canvas.addEventListener('pointerleave', () => {
+  mode = '';
+});
+
+
+    // --- Download/Save/Load Functions ---
+    // --- Download/Save/Load Functions ---
+  function downloadCardImage() {
+  const canvasElem = document.getElementById('cardCanvas');
+  // 캔버스를 PNG 데이터 URL로 변환
+  const imageDataURL = canvasElem.toDataURL('image/png');
+  // 다운로드용 링크 생성
+  const link = document.createElement('a');
+  // 제목 입력값이 있으면 파일명으로 사용, 없으면 'card.png'
+  const title = document.getElementById('cardTitleInput').value.trim() || 'card';
+  link.href = imageDataURL;
+  link.download = `${title}.png`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+// 기존 downloadCardState() 함수는 그대로 둡니다.
+function downloadCardState() { /* … */ }
+    // Modified: downloadCardState includes selected PID and face version URL
+    function downloadCardState() { const state={ blankCard:document.getElementById('blankCardSelect').value, cardTitle:document.getElementById('cardTitleInput').value, ovr:{value:document.getElementById('ovr').value, x:document.getElementById('ovrX').value, y:document.getElementById('ovrY').value, fontSize:document.getElementById('ovrFontSize').value, font:document.getElementById('ovrFont').value, color:document.getElementById('ovrColor').value}, position:{value:document.getElementById('position').value, x:document.getElementById('posX').value, y:document.getElementById('posY').value, font:document.getElementById('posFont').value, fontSize:document.getElementById('posFontSize').value, color:document.getElementById('posColor').value}, playerName:{value:document.getElementById('playerName').value, x:document.getElementById('nameX').value, y:document.getElementById('nameY').value, font:document.getElementById('nameFont').value, fontSize:document.getElementById('nameFontSize').value, color:document.getElementById('nameColor').value}, flag:{x:document.getElementById('flagX').value, y:document.getElementById('flagY').value, width:document.getElementById('flagUploadWidth').value, height:document.getElementById('flagUploadHeight').value, selectedUrl:document.getElementById('flagSelect').value}, season:{x:document.getElementById('seasonX').value, y:document.getElementById('seasonY').value, width:document.getElementById('seasonUploadWidth').value, height:document.getElementById('seasonUploadHeight').value, src:customSeason.src}, photo:{ x:document.getElementById('photoX').value, y:document.getElementById('photoY').value, width:document.getElementById('photoWidth').value, height:document.getElementById('photoHeight').value, src: customPhoto.src, selectedPid: document.getElementById('playerSelect').value, selectedVersionUrl: document.getElementById('faceVersionSelect').value }, iconOption:document.getElementById('newOption').value, icon:{x:document.getElementById('iconX').value, y:document.getElementById('iconY').value, width:document.getElementById('iconWidth').value, height:document.getElementById('iconHeight').value, src:customIcon.src}}; const blob=new Blob([JSON.stringify(state, null, 2)], {type:'application/json'}); const url=URL.createObjectURL(blob); const link=document.createElement('a'); const title=document.getElementById('cardTitleInput').value.trim() || 'cardState'; link.href=url; link.download=`${title}_state.json`; document.body.appendChild(link); link.click(); document.body.removeChild(link); URL.revokeObjectURL(url); }
+    document.getElementById('jsonLoadInput').addEventListener('change', e => { /* ... unchanged file reading ... */ });
+    // Modified: applyCardState handles new photo state structure
+    function applyCardState(s) {
+        activeImage = null; mode = ''; if (hideHandlesTimeout) clearTimeout(hideHandlesTimeout); hideHandlesTimeout = null;
+        removeFlag(); removeSeason(); removePhoto(); removeIcon(); // removePhoto clears both dropdowns
+        let imagesToLoadCount = 0;
+        const originalHandlers = { base: { onload: baseCard.onload, onerror: baseCard.onerror }, flag: { onload: customFlag.onload, onerror: customFlag.onerror }, season: { onload: customSeason.onload, onerror: customSeason.onerror }, photo: { onload: customPhoto.onload, onerror: customPhoto.onerror }, icon: { onload: customIcon.onload, onerror: customIcon.onerror } };
+        const checkCompletion = () => { imagesToLoadCount--; if (imagesToLoadCount <= 0) { hideLoading(); setTimeout(() => { baseCard.onload = originalHandlers.base.onload; baseCard.onerror = originalHandlers.base.onerror; customFlag.onload = originalHandlers.flag.onload; customFlag.onerror = originalHandlers.flag.onerror; customSeason.onload = originalHandlers.season.onload; customSeason.onerror = originalHandlers.season.onerror; customPhoto.onload = originalHandlers.photo.onload; customPhoto.onerror = originalHandlers.photo.onerror; customIcon.onload = originalHandlers.icon.onload; customIcon.onerror = originalHandlers.icon.onerror; }, 0); drawCard(); } };
+        const createLoadHandler = (img, key) => () => { imageOnLoad(img, key); checkCompletion(); };
+        const createErrorHandler = (img, key) => () => { imageOnError(img, key); checkCompletion(); };
+        const startImageLoad = (imgElement, src, key) => { if (src) { imagesToLoadCount++; imgElement.error = false; imgElement.loading = true; imgElement.onload = createLoadHandler(imgElement, key); imgElement.onerror = createErrorHandler(imgElement, key); imgElement.src = src; return true; } return false; };
+
+        document.getElementById('cardTitleInput').value = s.cardTitle || '';
+        const blankCardPath = s.blankCard || `Blank/${getFileName(264)}`;
+        $('#blankCardSelect').selectpicker('val', blankCardPath);
+        if ($('#blankCardSelect').val() === blankCardPath) { showLoading(); startImageLoad(baseCard, blankCardPath, 'base'); } else { console.warn("Saved blank card path invalid:", blankCardPath); $('#blankCardSelect').selectpicker('val', `Blank/${getFileName(264)}`); showLoading(); startImageLoad(baseCard, `Blank/${getFileName(264)}`, 'base'); }
+        if (s.ovr) { document.getElementById('ovr').value = s.ovr.value ?? 129; document.getElementById('ovrX').value = s.ovr.x ?? 88; document.getElementById('ovrY').value = s.ovr.y ?? 63; document.getElementById('ovrFontSize').value = s.ovr.fontSize ?? 35; document.getElementById('ovrFont').value = s.ovr.font ?? 'FontA'; document.getElementById('ovrColor').value = s.ovr.color ?? '#FFD700'; }
+        if (s.position) { document.getElementById('position').value = s.position.value ?? 'ST'; document.getElementById('posX').value = s.position.x ?? 78; document.getElementById('posY').value = s.position.y ?? 89; document.getElementById('posFontSize').value = s.position.fontSize ?? 19; document.getElementById('posFont').value = s.position.font ?? 'FontD'; document.getElementById('posColor').value = s.position.color ?? '#FFFFFF'; }
+        if (s.playerName) { document.getElementById('playerName').value = s.playerName.value ?? 'R.레반도프스키'; document.getElementById('nameX').value = s.playerName.x ?? 150; document.getElementById('nameY').value = s.playerName.y ?? 218; document.getElementById('nameFontSize').value = s.playerName.fontSize ?? 20; document.getElementById('nameFont').value = s.playerName.font ?? 'FontC'; document.getElementById('nameColor').value = s.playerName.color ?? '#FFFFFF'; }
+
+        const applyCoords = (stateObj, defX, defY, defW, defH, xId, yId, wId, hId) => { document.getElementById(xId).value = stateObj?.x ?? defX; document.getElementById(yId).value = stateObj?.y ?? defY; document.getElementById(wId).value = stateObj?.width ?? defW; document.getElementById(hId).value = stateObj?.height ?? defH; };
+        if (s.flag) { applyCoords(s.flag, 30, 30, 40, 40, 'flagX', 'flagY', 'flagUploadWidth', 'flagUploadHeight'); if (s.flag.selectedUrl) { $('#flagSelect').selectpicker('val', s.flag.selectedUrl); if ($('#flagSelect').val() === s.flag.selectedUrl) startImageLoad(customFlag, s.flag.selectedUrl, 'flag'); else { console.warn("Saved flag URL invalid:", s.flag.selectedUrl); $('#flagSelect').selectpicker('val', ''); } } }
+        if (s.season) { applyCoords(s.season, 200, 250, 40, 40, 'seasonX', 'seasonY', 'seasonUploadWidth', 'seasonUploadHeight'); if (s.season.src) startImageLoad(customSeason, s.season.src, 'season'); }
+
+        // Apply Photo state
+        if (s.photo) {
+            applyCoords(s.photo, 50, 50, 100, 100, 'photoX', 'photoY', 'photoWidth', 'photoHeight');
+            if (s.photo.selectedPid) {
+                $('#playerSelect').selectpicker('val', s.photo.selectedPid);
+                if ($('#playerSelect').val() === s.photo.selectedPid) {
+                    populateFaceVersionDropdown(s.photo.selectedPid); // This might load the first image
+                    if (s.photo.selectedVersionUrl) {
+                        $('#faceVersionSelect').selectpicker('val', s.photo.selectedVersionUrl);
+                         // Check if the value was actually set before trying to load
+                         if ($('#faceVersionSelect').val() === s.photo.selectedVersionUrl) {
+                            // Only load if it's different from the first one (which might be loaded by populate)
+                            // Or if populateFaceVersionDropdown doesn't auto-load, always load here.
+                            // Assuming populateFaceVersionDropdown auto-loads the first, only load if different:
+                            const firstVersionUrl = document.getElementById('faceVersionSelect').options[0]?.value;
+                            if (firstVersionUrl !== s.photo.selectedVersionUrl) {
+                                startImageLoad(customPhoto, s.photo.selectedVersionUrl, 'photo');
+                            }
+                         } else {
+                             console.warn("Saved face version URL invalid or not found:", s.photo.selectedVersionUrl);
+                             // Keep the first version loaded by populateFaceVersionDropdown
+                         }
+                    } // else: only PID saved, first version already loaded by populate
+                } else { // Invalid PID saved
+                    console.warn("Saved player PID invalid:", s.photo.selectedPid);
+                    $('#playerSelect').selectpicker('val', '');
+                    hideFaceVersionDropdown();
+                    if (s.photo.src && typeof s.photo.src === 'string' && !s.photo.src.includes('renderz.app') && !s.photo.src.startsWith('./resources/')) {
+                        startImageLoad(customPhoto, s.photo.src, 'photo'); // Fallback to uploaded src
+                    }
+                }
+            } else if (s.photo.src) { // Only direct src saved (uploaded)
+                startImageLoad(customPhoto, s.photo.src, 'photo');
+                $('#playerSelect').selectpicker('val', '');
+                hideFaceVersionDropdown();
+            }
         }
-        
-        try {
-          // Prepare card data
-          const cardData = {
-            title: title,
-            imageUrl: imageUrl, // Base64 image data
-            createdAt: new Date(),
-            // Add any other metadata you want to store
-          };
-          
-          // Add to Firestore
-          const docRef = await addDoc(collection(db, "cards"), cardData);
-          console.log("Card shared with ID: ", docRef.id);
-          
-          // Update rate limiting
-          localStorage.setItem('lastShareTime', Date.now().toString());
-          
-          // Success message
-          alert('카드가 성공적으로 공유되었습니다!');
-          
-          // Redirect to board page
-          window.location.href = 'card-board.html';
-        } catch (error) {
-          console.error("Error sharing card: ", error);
-          alert('카드 공유 중 오류가 발생했습니다. 다시 시도해 주세요.');
-          
-          // Restore UI
-          activeImage = tmpActive;
-          mode = tmpMode;
-          drawCard();
-        } finally {
-          // Re-enable button
-          isSharing = false;
-          shareBtn.disabled = false;
-          shareBtn.textContent = originalText;
-          shareBtn.classList.remove('disabled');
-        }
-      }, 100);
+
+        const iconOption = s.iconOption || 'live'; document.getElementById('newOption').value = iconOption; document.getElementById('iconOptions').style.display = iconOption === 'icon' ? 'block' : 'none';
+        if (s.icon) { applyCoords(s.icon, 20, 20, 40, 40, 'iconX', 'iconY', 'iconWidth', 'iconHeight'); if (iconOption === 'icon' && s.icon.src) startImageLoad(customIcon, s.icon.src, 'icon'); }
+
+        if (imagesToLoadCount === 0) { hideLoading(); drawCard(); baseCard.onload = originalHandlers.base.onload; baseCard.onerror = originalHandlers.base.onerror; customFlag.onload = originalHandlers.flag.onload; customFlag.onerror = originalHandlers.flag.onerror; customSeason.onload = originalHandlers.season.onload; customSeason.onerror = originalHandlers.season.onerror; customPhoto.onload = originalHandlers.photo.onload; customPhoto.onerror = originalHandlers.photo.onerror; customIcon.onload = originalHandlers.icon.onload; customIcon.onerror = originalHandlers.icon.onerror; }
+    }
+
+    // --- Initial Setup ---
+    document.addEventListener('DOMContentLoaded', () => {
+        $('.selectpicker').selectpicker();
+        populateBlankCardDropdown();
+        populateFlagDropdown();
+        populatePlayerSelectDropdown(); // Changed to populate player list first
+        const initialCardPath = document.getElementById('blankCardSelect').value;
+        loadBaseCard(initialCardPath || undefined);
+
+        // General redraw listeners
+        document.querySelectorAll('.editor input[type="number"], .editor input[type="text"], .editor input[type="color"], .editor select').forEach(el => {
+            if (el.id === 'blankCardSelect' || el.id === 'flagSelect' || el.id === 'playerSelect' || el.id === 'faceVersionSelect' || el.id === 'newOption' || el.classList.contains('coord-inputs') || el.id.match(/X$|Y$|Width$|Height$/)) return;
+            const eventType = (el.tagName === 'SELECT' || el.type === 'color') ? 'change' : 'input';
+            el.addEventListener(eventType, drawCard);
+        });
+        // Change listeners for coordinate/size inputs
+        document.querySelectorAll('.coord-inputs input[type="number"], input#flagUploadWidth, input#flagUploadHeight, input#seasonUploadWidth, input#seasonUploadHeight, input#photoWidth, input#photoHeight, input#iconWidth, input#iconHeight').forEach(el => {
+            el.addEventListener('change', drawCard);
+        });
+        // Add listener for the face version dropdown change
+        document.getElementById('faceVersionSelect').addEventListener('change', loadSelectedFaceVersion);
+        // Icon option listener
+        document.getElementById('newOption').addEventListener('change', () => { const optionValue = document.getElementById('newOption').value; document.getElementById('iconOptions').style.display = optionValue === 'icon' ? "block" : "none"; if (optionValue === 'icon' && !customIcon.src && !customIcon.error && !customIcon.loading) { showLoading(); customIcon.loading = true; customIcon.src = ICON_DEFAULT_PATH; } else { drawCard(); } });
+        // Preload icon
+        const tempIconLoader = new Image(); tempIconLoader.crossOrigin = "anonymous"; tempIconLoader.onload = () => { if (tempIconLoader.width > 0 && tempIconLoader.height > 0) { aspectRatios.icon = tempIconLoader.width / tempIconLoader.height; if (document.getElementById('newOption').value === 'icon' && !customIcon.src && !customIcon.error && !customIcon.loading) { showLoading(); customIcon.loading = true; customIcon.src = ICON_DEFAULT_PATH; } } else { console.error("Preloaded icon.png invalid dimensions."); } }; tempIconLoader.onerror = () => { console.error("Failed to preload icon.png"); }; tempIconLoader.src = ICON_DEFAULT_PATH;
+        // Safety timeout
+        setTimeout(() => { if (document.getElementById('loadingOverlay').style.display === 'flex') { hideLoading(); console.warn("Loading overlay forced hide (timeout)."); if (!baseCard.complete || !baseCard.src) drawCard(); } }, 20000);
     });
-    
-    // Connect share-fab to share-btn
-    document.getElementById('share-fab').addEventListener('click', () => {
-      document.getElementById('share-btn').click();
-    });
-  } catch (error) {
-    console.error("Firebase module error:", error);
-    // Hide share buttons if Firebase is not available
-    document.getElementById('share-btn').style.display = 'none';
-    document.getElementById('share-fab').style.display = 'none';
-  }
-</script>
+  </script>
+
+  <!-- Firebase Module Script (Ensure firebase.js path is correct) -->
+  <script type="module">
+    try {
+        // Adjust path if firebase.js is not in the same directory
+        const { db, collection, addDoc } = await import('./firebase.js');
+
+        const shareBtn = document.getElementById('share-btn');
+        let isSharing = false; // Prevent double clicks
+
+        shareBtn.addEventListener('click', async () => {
+            if (isSharing) return;
+
+            // Rate limiting (1 share per minute)
+            const lastShareTime = localStorage.getItem('lastShareTime');
+            const sixtySeconds = 60 * 1000;
+            if (lastShareTime && (Date.now() - lastShareTime < sixtySeconds)) {
+                alert(`공유는 1분에 한 번만 가능합니다. 잠시 후에 다시 시도해 주세요.`);
+                return;
+            }
+
+            // Check for title
+            const title = document.getElementById('cardTitleInput').value.trim();
+            if (!title) {
+                alert('공유할 카드의 제목을 입력해주세요!');
+                document.getElementById('cardTitleInput').focus();
+                return;
+            }
+
+            // Confirmation dialog
+            if (!confirm(`'${title}' 카드를 게시판에 공유하시겠습니까?`)) {
+                return;
+            }
+
+            // --- Start Sharing Process ---
+            isSharing = true;
+            shareBtn.disabled = true;
+            const originalText = shareBtn.textContent;
+            shareBtn.textContent = '공유 중...';
+            shareBtn.classList.add('disabled'); // Visual feedback
+
+            // Temporarily hide handles for capture
+            const tmpActive = activeImage; const tmpMode = mode;
+            if (hideHandlesTimeout) { clearTimeout(hideHandlesTimeout); hideHandlesTimeout = null; }
+            activeImage = null; mode = '';
+            drawCard(); // Redraw without handles
+
+            // Use setTimeout to allow canvas redraw before capturing
+            setTimeout(async () => {
+                let imageUrl = '';
+                try {
+                    const canvasElem = document.getElementById('cardCanvas');
+                    imageUrl = canvasElem.toDataURL('image/png'); // Capture canvas as PNG
+                } catch (captureError) {
+                    console.error('Canvas capture error:', captureError);
+                    alert('이미지 생성 중 오류가 발생했습니다. 다시 시도해 주세요.\n(타사 이미지 사용 시 CORS 오류일 수 있습니다)');
+                    // Restore UI and re-enable button even on capture failure
+                    activeImage = tmpActive; mode = tmpMode; drawCard(); // Redraw with potential handles
+                    isSharing = false; shareBtn.disabled = false; shareBtn.textContent = originalText; shareBtn.classList.remove('disabled');
+                    return; // Stop execution
+                }
+
+                // Save to Firestore
+                try {
+                    const docRef = await addDoc(collection(db, 'cards'), {
+                        title: title,
+                        imageUrl: imageUrl, // Use the captured Data URL
+                        createdAt: new Date() // Use client time (configure server timestamp in Firestore rules if preferred)
+                    });
+                    console.log("Card shared with ID: ", docRef.id);
+                    alert('카드가 성공적으로 공유되었습니다!');
+                    localStorage.setItem('lastShareTime', Date.now()); // Update last share time on success
+                } catch (error) {
+                    console.error('Error sharing card to Firestore:', error);
+                    alert('카드 공유 중 오류가 발생했습니다. 잠시 후 다시 시도하거나 관리자에게 문의하세요.');
+                } finally {
+                    // Restore UI state regardless of Firestore success/failure
+                    activeImage = tmpActive; mode = tmpMode; drawCard(); // Redraw with potential handles restored
+
+                    // Re-enable button after a short delay
+                     setTimeout(() => {
+                        isSharing = false;
+                        shareBtn.disabled = false;
+                        shareBtn.textContent = originalText;
+                        shareBtn.classList.remove('disabled');
+                    }, 1000); // 1 second delay before re-enabling
+                }
+            }, 150); // Increased delay slightly for redraw stability
+
+        }); // End shareBtn listener
+
+    } catch (err) {
+         console.error("Failed to load Firebase module:", err);
+         // Disable share button and FAB if Firebase fails to load
+         const shareBtn = document.getElementById('share-btn');
+         if(shareBtn) {
+             shareBtn.textContent = '공유 불가 (오류)';
+             shareBtn.disabled = true;
+             shareBtn.classList.add('disabled');
+             alert("Firebase 초기화 실패! 카드 공유 기능을 사용할 수 없습니다.");
+         }
+         const shareFab = document.getElementById('share-fab');
+         if(shareFab) { shareFab.style.display = 'none'; } // Hide FAB too
+    }
+  </script>
+
+  <!-- FAB Button & PIP Script (unchanged) -->
+  <button id="share-fab" data-tooltip="게시판에 공유하기" title="게시판에 공유하기">공유</button>
+  <script>
+    // ... unchanged FAB and PIP logic ...
+    const shareFab = document.getElementById('share-fab');
+    if (shareFab) {
+        shareFab.addEventListener('click', () => {
+            const shareBtn = document.getElementById('share-btn');
+            if (shareBtn && !shareBtn.disabled) {
+                 shareBtn.click();
+            }
+        });
+    } else {
+        console.warn("Share FAB button not found.");
+    }
+    const cardCanvasObserverTarget = document.getElementById('cardCanvas');
+    const pipPreviewElement = document.getElementById('pipPreview');
+    if (cardCanvasObserverTarget && pipPreviewElement) {
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+        const intersectionCallback = (entries) => { entries.forEach(entry => { const isMobile = window.innerWidth < 768; if (isMobile) { pipPreviewElement.classList.toggle('show', !entry.isIntersecting || entry.intersectionRatio < 0.1); } else { pipPreviewElement.classList.remove('show'); } }); };
+        const observer = new IntersectionObserver(intersectionCallback, observerOptions);
+        observer.observe(cardCanvasObserverTarget);
+        const checkPipVisibility = () => { const isMobile = window.innerWidth < 768; if (!isMobile) { pipPreviewElement.classList.remove('show'); } else { const rect = cardCanvasObserverTarget.getBoundingClientRect(); const viewportHeight = window.innerHeight; const isCurrentlyIntersecting = rect.top < viewportHeight && rect.bottom > 0; const visibleHeight = Math.max(0, Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0)); const intersectionRatio = rect.height > 0 ? visibleHeight / rect.height : 0; pipPreviewElement.classList.toggle('show', !isCurrentlyIntersecting || intersectionRatio < 0.1); } };
+        window.addEventListener('resize', checkPipVisibility);
+        window.addEventListener('scroll', checkPipVisibility, { passive: true });
+        setTimeout(checkPipVisibility, 150);
+    } else { console.warn("Canvas or PIP element not found for IntersectionObserver setup."); }
+  </script>
+
 </body>
 </html>
