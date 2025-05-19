@@ -106,6 +106,7 @@ const FCMobileNotices = {
     };
     xhr.send();
   // 오류 처리 함수
+  // 오류 처리 함수
   handleLoadError: function() {
     console.error('공지사항 로드 오류 발생');
     this.noticesContainer.innerHTML = `
@@ -124,8 +125,6 @@ const FCMobileNotices = {
     }
   },
 
-      });
-  },
   
   // 공지사항 표시 함수
   displayNotices: function(data) {
