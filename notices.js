@@ -180,5 +180,5 @@ document.addEventListener('DOMContentLoaded', function() {
   // 기존 DOMContentLoaded 이벤트 핸들러가 실행된 후 실행되도록 setTimeout 사용
   setTimeout(() => {
     FCMobileNotices.init();
-  }, 0);
+  }, 500);
 });
