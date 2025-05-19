@@ -1,12 +1,10 @@
 /**
  * FC 모바일 공지사항 관리 모듈
-
  * 
  * 이 모듈은 FC 모바일 공지사항을 가져오고 표시하는 기능을 제공합니다.
  * 1시간마다 자동 새로고침 대신 페이지 로드 시 최신 데이터를 가져오고,
  * 수동 새로고침 버튼을 통해 사용자가 원할 때 업데이트할 수 있습니다.
  */
-
 const FCMobileNotices = {
   // 공지사항 컨테이너 요소
   noticesContainer: null,
@@ -88,6 +86,7 @@ const FCMobileNotices = {
     // 로컬 파일 시스템에서는 fetch가 제대로 동작하지 않으므로 XMLHttpRequest 사용
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `./api/notices.json${cacheBuster}`, true);
+    
     xhr.onload = () => {
       if (xhr.status >= 200 && xhr.status < 300) {
         try {
@@ -101,11 +100,14 @@ const FCMobileNotices = {
         this.handleLoadError();
       }
     };
+    
     xhr.onerror = () => {
       this.handleLoadError();
     };
+    
     xhr.send();
-  // 오류 처리 함수
+  },  // loadNotices 함수 끝에 콤마 추가
+  
   // 오류 처리 함수
   handleLoadError: function() {
     console.error('공지사항 로드 오류 발생');
@@ -124,7 +126,6 @@ const FCMobileNotices = {
       });
     }
   },
-
   
   // 공지사항 표시 함수
   displayNotices: function(data) {
@@ -147,13 +148,11 @@ const FCMobileNotices = {
     data.notices.forEach(notice => {
       const noticeElement = document.createElement('div');
       noticeElement.className = 'notice-card';
-      
       noticeElement.innerHTML = `
         <h3 class="notice-title">${this.escapeHTML(notice.title)}</h3>
         <p class="notice-summary">${this.escapeHTML(notice.summary)}</p>
         <a href="${this.escapeHTML(notice.href)}" class="notice-more" target="_blank">더보기</a>
       `;
-      
       this.noticesContainer.appendChild(noticeElement);
     });
   },
