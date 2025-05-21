@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="피모합성소 - FC모바일 카드 제작, 빈카드, 공지사항, 게시판">
-  <meta name="keywords" content="FC모바일,카드합성,카드 만들기,사이트,합성,피모합성소">
+  <meta name="description" content="피모합성소 - FC모바일 카드 제작, 빈카드, 공지사항, 게시판, 갱신시간">
+  <meta name="keywords" content="FC모바일,카드합성,카드 만들기,사이트,합성,피모합성소,갱신시간">
   <meta name="author" content="해리지팡이">
   <meta property="og:title" content="피모합성소 - FC모바일 카드 제작 & 커뮤니티">
-  <meta property="og:description" content="FC모바일 카드 제작, 빈카드, 최신 공지, 게시판 기능을 제공합니다.">
+  <meta property="og:description" content="FC모바일 카드 제작, 빈카드, 최신 공지, 게시판 기능, 갱신시간 정보를 제공합니다.">
 
   <meta property="og:image" content="https://kritikal619.github.io/card/logo/Favicon.png">
   <meta property="og:url" content="https://kritikal619.github.io/card/">
@@ -25,6 +25,214 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="manifest" href="./favicons/manifest.json" />
   <title>피모합성소</title>
+  <style>
+    /* 갱신시간 탭 스타일 */
+    .refresh-time-container {
+      padding: 15px;
+    }
+    
+    .search-container {
+      display: flex;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+    
+    .search-container input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    
+    .search-container button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    
+    .search-container button:hover {
+      background-color: #45a049;
+    }
+    
+    .refresh-time-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .refresh-time-table th, 
+    .refresh-time-table td {
+      padding: 12px 15px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+    
+    .refresh-time-table th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    .refresh-time-table tr:hover {
+      background-color: #f9f9f9;
+    }
+    
+    .card-image {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+    }
+    
+    .refresh-soon {
+      color: #e74c3c;
+      font-weight: bold;
+    }
+    
+    /* 관심 시즌 관련 스타일 */
+    .tab-buttons {
+      display: flex;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .tab-button {
+      padding: 10px 20px;
+      background-color: #f8f8f8;
+      border: 1px solid #ddd;
+      border-bottom: none;
+      border-radius: 4px 4px 0 0;
+      margin-right: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .tab-button.active {
+      background-color: white;
+      border-bottom: 2px solid #4CAF50;
+      color: #4CAF50;
+    }
+    
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    .interest-button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      color: #ccc;
+      transition: color 0.3s;
+    }
+    
+    .interest-button.active {
+      color: #FFD700;
+    }
+    
+    .notification-settings {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
+      padding: 10px;
+      background-color: #f8f8f8;
+      border-radius: 4px;
+    }
+    
+    .notification-settings label {
+      margin-left: 10px;
+      font-weight: bold;
+    }
+    
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+    
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 24px;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .slider {
+      background-color: #4CAF50;
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    
+    .empty-message {
+      text-align: center;
+      padding: 30px;
+      color: #666;
+      font-style: italic;
+    }
+    
+    .other-names {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+    
+    @media screen and (max-width: 768px) {
+      .refresh-time-table {
+        font-size: 14px;
+      }
+      
+      .refresh-time-table th, 
+      .refresh-time-table td {
+        padding: 8px 10px;
+      }
+      
+      .card-image {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .tab-button {
+        padding: 8px 15px;
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="app-container">
@@ -52,6 +260,7 @@
           <li class="list-item"><div data-tab="blank-cards-tab">빈카드 <span class="arrow-icon">›</span></div></li>
           <li class="list-item"><div data-tab="flags-tab">국기 <span class="arrow-icon">›</span></div></li>
           <li class="list-item"><div data-tab="lettering-tab">글자 <span class="arrow-icon">›</span></div></li>
+          <li class="list-item"><div data-tab="refresh-time-tab">갱신시간 <span class="arrow-icon">›</span></div></li>
           <li class="list-item"><a href="gener.html">만들기 툴 <span class="arrow-icon">›</span></a></li>
           <li class="list-item"><a href="board.html">게시판 <span class="arrow-icon">›</span></a></li>
         </ul>
@@ -82,6 +291,69 @@
         </div>
       </div>
       
+      <!-- 갱신시간 Tab Content -->
+      <div class="app-tab-content" id="refresh-time-tab">
+        <div class="refresh-time-container">
+          <div class="notification-settings">
+            <label class="switch">
+              <input type="checkbox" id="notificationToggle">
+              <span class="slider"></span>
+            </label>
+            <label for="notificationToggle">갱신 5분 전 알림 받기</label>
+          </div>
+          
+          <div class="tab-buttons">
+            <div class="tab-button active" data-tab="all-seasons">전체 시즌</div>
+            <div class="tab-button" data-tab="interest-seasons">관심 시즌</div>
+          </div>
+          
+          <div class="search-container">
+            <input type="text" id="searchInput" placeholder="시즌/클래스명 입력">
+            <button id="searchButton">검색</button>
+          </div>
+          
+          <div class="tab-content active" id="all-seasons">
+            <table class="refresh-time-table" id="allCardTable">
+              <thead>
+                <tr>
+                  <th>카드</th>
+                  <th>이름</th>
+                  <th>갱신 시간</th>
+                  <th>남은 시간</th>
+                  <th>관심</th>
+                </tr>
+              </thead>
+              <tbody id="allTableBody">
+                <!-- 데이터는 JavaScript로 동적 생성됨 -->
+                <tr>
+                  <td colspan="5">카드 데이터를 불러오는 중입니다...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="tab-content" id="interest-seasons">
+            <table class="refresh-time-table" id="interestCardTable">
+              <thead>
+                <tr>
+                  <th>카드</th>
+                  <th>이름</th>
+                  <th>갱신 시간</th>
+                  <th>남은 시간</th>
+                  <th>관심</th>
+                </tr>
+              </thead>
+              <tbody id="interestTableBody">
+                <!-- 관심 시즌 데이터는 JavaScript로 동적 생성됨 -->
+              </tbody>
+            </table>
+            <div id="emptyInterestMessage" class="empty-message">
+              관심 시즌이 없습니다. 전체 시즌 탭에서 별표를 클릭하여 관심 시즌을 추가해보세요.
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <!-- This tab is for the redirect button, not directly shown via bottom nav usually -->
       <div class="app-tab-content" id="tool-redirect-tab">
         <button type="button" class="tool-redirect-button" onclick="location.href=\'gener.html\'">카드 만들기 툴로 이동</button>
@@ -101,14 +373,14 @@
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg>
         <span>국기</span>
       </div>
+      <div class="nav-item" data-tab="refresh-time-tab" data-title="갱신시간">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+        <span>갱신시간</span>
+      </div>
       <a href="gener.html" class="nav-item" data-title="만들기">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
         <span>만들기</span>
       </a>
-      <div class="nav-item" data-tab="lettering-tab" data-title="글자">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9.93 13.5h4.14L12 7.98zM20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-4.05 16.5l-1.14-3H9.17l-1.12 3H5.96l5.11-13h1.86l5.11 13h-2.09z"/></svg>
-        <span>글자</span>
-      </div>
       <a href="board.html" class="nav-item" data-title="게시판">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zm0-8h14V7H7v2z"/></svg>
         <span>게시판</span>
@@ -123,8 +395,15 @@
             <h2>업데이트 안내</h2>
         </div>
         <div class="modal-dialog-content">
-            <h3>2025-05-07</h3>
-            <h3>전체 UI 변경 및 게시판 BETA 기능 추가</h3>
+            <h3>2025-05-21</h3>
+            <h3>갱신시간 탭 개선</h3>
+            <p>FC 모바일 카드 갱신 시간 정보를 확인할 수 있는 갱신시간 탭이 개선되었습니다.</p>
+            <ul>
+              <li>전체 시즌 데이터 추가</li>
+              <li>관심 시즌 등록 기능</li>
+              <li>갱신 5분 전 알림 기능</li>
+              <li>별칭(other names) 표시</li>
+            </ul>
         </div>
         <div class="modal-dialog-footer">
             <button class="modal-button primary" id="close-welcome-modal">확인</button>
@@ -133,6 +412,7 @@
   </div>
 
   <script src="notices.js"></script>
+  <script src="interest_manager.js"></script>
   <script>
     // --- Cookie Functions ---
     function getCookie(name) {
@@ -149,7 +429,7 @@
 
     // --- Show Welcome Modal ---
     function showWelcomeModalOncePerDay() {
-      if (getCookie('welcome_shown_app_v1')) return;
+      if (getCookie('welcome_shown_app_v3')) return; // 버전 업데이트
       const modal = document.getElementById('welcome-modal');
       if(modal) modal.style.display = 'flex';
       const closeModalButton = document.getElementById('close-welcome-modal');
@@ -159,7 +439,7 @@
       if(modal) modal.addEventListener('click', e => {
         if (e.target === modal) modal.style.display = 'none';
       });
-      setCookie('welcome_shown_app_v1', 'yes', 1);
+      setCookie('welcome_shown_app_v3', 'yes', 1); // 버전 업데이트
     }
     
     function escapeHTML(str) {
@@ -192,10 +472,10 @@
         // To make summary shorter if it's same as title
         const processedNotices = noticesData.map(notice => {
             let summaryText = notice.summary;
-            if (notice.summary.length > 60) { // Arbitrary length for summary
+            if (notice.summary && notice.summary.length > 60) { // Arbitrary length for summary
                 summaryText = notice.summary.substring(0, 57) + "...";
             }
-            return {...notice, summary: summaryText};
+            return {...notice, summary: summaryText || "내용을 불러올 수 없습니다."};
         });
 
         if (processedNotices && processedNotices.length > 0) {
@@ -206,7 +486,7 @@
             noticeDiv.innerHTML = `
               <h3 class="notice-title">${escapeHTML(notice.title)}</h3>
               <p class="notice-summary">${escapeHTML(notice.summary)}</p>
-              <a href="${escapeHTML(notice.href)}" class="notice-more" target="_blank">더보기</a>
+              <a href="${escapeHTML(notice.href || '#')}" class="notice-more" target="_blank">더보기</a>
             `;
             noticesListContainer.appendChild(noticeDiv);
           });
@@ -219,7 +499,7 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', async function() {
       const appHeaderTitle = document.getElementById('app-header-title');
       const navItems = document.querySelectorAll('.app-bottom-nav .nav-item[data-tab]');
       const tabContents = document.querySelectorAll('.app-content .app-tab-content');
@@ -310,8 +590,295 @@
       switchTab(initialTab, initialTitle);
       
       showWelcomeModalOncePerDay();
+      
+      // 갱신시간 탭 기능
+      const searchInput = document.getElementById('searchInput');
+      const searchButton = document.getElementById('searchButton');
+      const allTableBody = document.getElementById('allTableBody');
+      const interestTableBody = document.getElementById('interestTableBody');
+      const emptyInterestMessage = document.getElementById('emptyInterestMessage');
+      const tabButtons = document.querySelectorAll('.tab-button');
+      const tabContents = document.querySelectorAll('.tab-content');
+      
+      // 탭 전환 기능
+      tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const tabId = this.dataset.tab;
+          
+          // 탭 버튼 활성화
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          
+          // 탭 컨텐츠 활성화
+          tabContents.forEach(content => {
+            content.classList.remove('active');
+            if (content.id === tabId) {
+              content.classList.add('active');
+            }
+          });
+          
+          // 관심 시즌 탭 선택 시 데이터 갱신
+          if (tabId === 'interest-seasons') {
+            renderInterestTable();
+          }
+        });
+      });
+      
+      // 카드 데이터 로드
+      let cardData = [];
+      
+      async function loadCardData() {
+        try {
+          const response = await fetch('./api/card_data.json');
+          const data = await response.json();
+          cardData = data.cards || [];
+          renderAllTable(cardData);
+          renderInterestTable();
+          
+          // 알림 타이머 시작
+          RefreshTimeManager.startNotificationTimer(cardData);
+        } catch (error) {
+          console.error('카드 데이터를 불러오는 중 오류가 발생했습니다:', error);
+          allTableBody.innerHTML = '<tr><td colspan="5">카드 데이터를 불러오지 못했습니다.</td></tr>';
+        }
+      }
+      
+      // 전체 테이블 렌더링
+      function renderAllTable(data) {
+        if (!allTableBody) return;
+        
+        allTableBody.innerHTML = '';
+        
+        if (data.length === 0) {
+          allTableBody.innerHTML = '<tr><td colspan="5">검색 결과가 없습니다.</td></tr>';
+          return;
+        }
+        
+        data.forEach(card => {
+          const row = document.createElement('tr');
+          
+          // 남은 시간 계산
+          const remaining = RefreshTimeManager.calculateRemainingTime(card);
+          
+          // 관심 상태 확인
+          const isInterest = InterestManager.getInterestSeasons().includes(card.id);
+          
+          // 별칭 표시
+          const otherNamesHtml = card.otherNames && card.otherNames.length > 0 
+            ? `<div class="other-names">${escapeHTML(card.otherNames.join(', '))}</div>` 
+            : '';
+          
+          row.innerHTML = `
+            <td><img src="${card.image}" alt="${card.name}" class="card-image" onerror="this.src='./favicons/favicon-96x96.png'"></td>
+            <td>
+              ${escapeHTML(card.name)}
+              ${otherNamesHtml}
+            </td>
+            <td>${escapeHTML(card.refreshTime)}</td>
+            <td class="${remaining.text.includes('후 갱신') ? 'refresh-soon' : ''}">${escapeHTML(remaining.text)}</td>
+            <td>
+              <button class="interest-button ${isInterest ? 'active' : ''}" data-id="${card.id}">
+                ★
+              </button>
+            </td>
+          `;
+          
+          allTableBody.appendChild(row);
+        });
+        
+        // 관심 버튼 이벤트 연결
+        document.querySelectorAll('.interest-button').forEach(button => {
+          button.addEventListener('click', function() {
+            const cardId = parseInt(this.dataset.id, 10);
+            const isActive = this.classList.contains('active');
+            
+            if (isActive) {
+              InterestManager.removeInterestSeason(cardId);
+              this.classList.remove('active');
+            } else {
+              InterestManager.addInterestSeason(cardId);
+              this.classList.add('active');
+            }
+            
+            // 관심 탭이 활성화된 상태라면 테이블 갱신
+            if (document.querySelector('.tab-button[data-tab="interest-seasons"]').classList.contains('active')) {
+              renderInterestTable();
+            }
+          });
+        });
+      }
+      
+      // 관심 시즌 테이블 렌더링
+      function renderInterestTable() {
+        if (!interestTableBody || !emptyInterestMessage) return;
+        
+        const interestIds = InterestManager.getInterestSeasons();
+        const interestCards = cardData.filter(card => interestIds.includes(card.id));
+        
+        interestTableBody.innerHTML = '';
+        
+        if (interestCards.length === 0) {
+          emptyInterestMessage.style.display = 'block';
+          return;
+        }
+        
+        emptyInterestMessage.style.display = 'none';
+        
+        interestCards.forEach(card => {
+          const row = document.createElement('tr');
+          
+          // 남은 시간 계산
+          const remaining = RefreshTimeManager.calculateRemainingTime(card);
+          
+          // 별칭 표시
+          const otherNamesHtml = card.otherNames && card.otherNames.length > 0 
+            ? `<div class="other-names">${escapeHTML(card.otherNames.join(', '))}</div>` 
+            : '';
+          
+          row.innerHTML = `
+            <td><img src="${card.image}" alt="${card.name}" class="card-image" onerror="this.src='./favicons/favicon-96x96.png'"></td>
+            <td>
+              ${escapeHTML(card.name)}
+              ${otherNamesHtml}
+            </td>
+            <td>${escapeHTML(card.refreshTime)}</td>
+            <td class="${remaining.text.includes('후 갱신') ? 'refresh-soon' : ''}">${escapeHTML(remaining.text)}</td>
+            <td>
+              <button class="interest-button active" data-id="${card.id}">
+                ★
+              </button>
+            </td>
+          `;
+          
+          interestTableBody.appendChild(row);
+        });
+        
+        // 관심 버튼 이벤트 연결
+        interestTableBody.querySelectorAll('.interest-button').forEach(button => {
+          button.addEventListener('click', function() {
+            const cardId = parseInt(this.dataset.id, 10);
+            InterestManager.removeInterestSeason(cardId);
+            
+            // 관심 테이블 갱신
+            renderInterestTable();
+            
+            // 전체 테이블의 해당 버튼 상태도 업데이트
+            const allTableButton = allTableBody.querySelector(`.interest-button[data-id="${cardId}"]`);
+            if (allTableButton) {
+              allTableButton.classList.remove('active');
+            }
+          });
+        });
+      }
+      
+      // 검색 기능
+      function searchCards() {
+        if (!searchInput || !cardData) return;
+        
+        const searchTerm = searchInput.value.toLowerCase();
+        
+        if (searchTerm === '') {
+          renderAllTable(cardData);
+          return;
+        }
+        
+        const filteredData = cardData.filter(card => {
+          // 이름 검색
+          if (card.name.toLowerCase().includes(searchTerm)) {
+            return true;
+          }
+          
+          // 별칭 검색
+          if (card.otherNames && card.otherNames.some(name => name.toLowerCase().includes(searchTerm))) {
+            return true;
+          }
+          
+          return false;
+        });
+        
+        renderAllTable(filteredData);
+      }
+      
+      // 이벤트 리스너 등록
+      if (searchButton) {
+        searchButton.addEventListener('click', searchCards);
+      }
+      
+      if (searchInput) {
+        searchInput.addEventListener('keyup', function(event) {
+          if (event.key === 'Enter') {
+            searchCards();
+          }
+        });
+      }
+      
+      // 알림 설정 UI 초기화
+      const notificationToggle = document.getElementById('notificationToggle');
+      if (notificationToggle) {
+        notificationToggle.checked = InterestManager.isNotificationEnabled();
+        
+        notificationToggle.addEventListener('change', function() {
+          if (this.checked) {
+            InterestManager.requestNotificationPermission().then(granted => {
+              if (granted) {
+                InterestManager.setNotificationEnabled(true);
+              } else {
+                this.checked = false;
+                alert('알림을 보내려면 알림 권한이 필요합니다.');
+              }
+            });
+          } else {
+            InterestManager.setNotificationEnabled(false);
+          }
+        });
+      }
+      
+      // 1초마다 테이블 업데이트 (남은 시간 갱신)
+      setInterval(() => {
+        // 전체 테이블 업데이트
+        if (allTableBody) {
+          const rows = allTableBody.querySelectorAll('tr');
+          
+          rows.forEach(row => {
+            const cardId = parseInt(row.querySelector('.interest-button')?.dataset.id, 10);
+            if (!cardId) return;
+            
+            const card = cardData.find(c => c.id === cardId);
+            if (!card) return;
+            
+            const timeCell = row.querySelector('td:nth-child(4)');
+            if (timeCell) {
+              const remaining = RefreshTimeManager.calculateRemainingTime(card);
+              timeCell.textContent = remaining.text;
+              timeCell.className = remaining.text.includes('후 갱신') ? 'refresh-soon' : '';
+            }
+          });
+        }
+        
+        // 관심 테이블 업데이트
+        if (interestTableBody) {
+          const rows = interestTableBody.querySelectorAll('tr');
+          
+          rows.forEach(row => {
+            const cardId = parseInt(row.querySelector('.interest-button')?.dataset.id, 10);
+            if (!cardId) return;
+            
+            const card = cardData.find(c => c.id === cardId);
+            if (!card) return;
+            
+            const timeCell = row.querySelector('td:nth-child(4)');
+            if (timeCell) {
+              const remaining = RefreshTimeManager.calculateRemainingTime(card);
+              timeCell.textContent = remaining.text;
+              timeCell.className = remaining.text.includes('후 갱신') ? 'refresh-soon' : '';
+            }
+          });
+        }
+      }, 1000);
+      
+      // 초기 데이터 로드
+      loadCardData();
     });
   </script>
 </body>
 </html>
-
