@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+  <title>자유게시판 - 피모합성소</title>
+  <meta name="description" content="FC모바일 카드 제작 공유 및 자유게시판 - 피모합성소 커뮤니티"/>
+  <meta name="keywords" content="FC모바일, 카드합성, 카드 만들기, 게시판, 자유게시판, 커뮤니티"/>
+  <meta name="author" content="해리지팡이"/>
+  <link rel="stylesheet" href="app_styles.css"/>
+  <link rel="icon" type="image/png" href="./favicons/favicon-96x96.png" sizes="96x96" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="피모합성소" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="./favicons/manifest.json" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <h1 id="app-header-title">자유게시판</h1>
+    </header>
+
+    <main class="app-content">
+      <div id="free-board-list">
+        <!-- Free board posts from Firebase will be loaded here -->
+      </div>
+      <a href="write-post.html" class="floating-write-button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+        </svg>
+      </a>
+    </main>
+
+    <nav class="app-bottom-nav">
+      <a href="index.html" class="nav-item" data-title="홈">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        <span>홈</span>
+      </a>
+      <a href="index.html#blank-cards-tab" class="nav-item" data-title="빈카드">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H4V4h16v16z"/></svg>
+        <span>빈카드</span>
+      </a>
+      <div class="nav-item" data-tab="flags-tab" data-title="국기">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg>
+        <span>국기</span>
+      </div>
+      <a href="gener.html" class="nav-item" data-title="만들기">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+        <span>만들기</span>
+      </a>
+      <div class="nav-item" data-tab="lettering-tab" data-title="글자">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9.93 13.5h4.14L12 7.98zM20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-4.05 16.5l-1.14-3H9.17l-1.12 3H5.96l5.11-13h1.86l5.11 13h-2.09z"/></svg>
+        <span>글자</span>
+      </div>
+      <a href="board.html" class="nav-item" data-title="게시판">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zm0-8h14V7H7v2z"/></svg>
+        <span>게시판</span>
+      </a>
+    </nav>
+  </div>
+
+<style>
+.floating-write-button {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: transform 0.2s;
+  text-decoration: none;
+}
+
+.floating-write-button:hover {
+  transform: scale(1.1);
+}
+
+.post-card {
+  background: white;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.post-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.post-meta {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.post-content-preview {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-stats {
+  display: flex;
+  gap: 15px;
+  font-size: 12px;
+  color: #666;
+}
+
+.post-stat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.post-detail {
+  display: none;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.post-detail.active {
+  display: block;
+}
+
+.recommend-button {
+  background: none;
+  border: 1px solid #ddd;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.recommend-button.recommended {
+  background: #e3f2fd;
+  color: #1976D2;
+  border-color: #1976D2;
+}
+
+.comments-section {
+  margin-top: 15px;
+}
+
+.comment-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.comment-author {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.comment-text {
+  margin-bottom: 5px;
+}
+
+.comment-meta {
+  font-size: 12px;
+  color: #666;
+}
+
+.post-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.post-image-preview {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.post-image-preview:hover {
+  opacity: 0.9;
+}
+
+.post-detail .post-images {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.post-detail .post-image-preview {
+  aspect-ratio: auto;
+  max-height: 300px;
+}
+
+.image-full-view {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.image-full-view-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.image-full-view-content img {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+.close-full-view {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.error-message {
+  padding: 10px;
+  background-color: #ffebee;
+  border: 1px solid #ffcdd2;
+  border-radius: 4px;
+  margin: 10px 0;
+  color: #c62828;
+}
+
+.error-message a {
+  color: #1565c0;
+  text-decoration: underline;
+}
+
+.error-message a:hover {
+  color: #0d47a1;
+}
+
+.ip-address {
+  color: #666;
+  font-size: 0.9em;
+  margin-left: 5px;
+}
+</style>
+
+<script type="module">
+  import { db } from './firebase.js';
+  import {
+    collection,
+    query,
+    orderBy,
+    onSnapshot,
+    doc,
+    updateDoc,
+    increment,
+    addDoc,
+    serverTimestamp,
+    where
+  } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js';
+
+  const freeBoardListElement = document.getElementById('free-board-list');
+  const postsCollectionRef = collection(db, 'freeBoardPosts');
+  const commentsCollectionRef = collection(db, 'freeBoardComments');
+
+  const freePostsQuery = query(postsCollectionRef, orderBy('createdAt', 'desc'));
+  onSnapshot(freePostsQuery, (snapshot) => {
+    if (!freeBoardListElement) return;
+    freeBoardListElement.innerHTML = '';
+    
+    const unsubscribeFunctions = new Map();
+
+    snapshot.forEach(postDoc => {
+      const postData = postDoc.data();
+      const postId = postDoc.id;
+      const postCardDiv = document.createElement('div');
+      postCardDiv.className = 'post-card';
+      postCardDiv.innerHTML = `
+        <h3 class="post-title">${escapeHTML(postData.title)}</h3>
+        <p class="post-meta">
+          작성자: ${escapeHTML(postData.nickname)}
+          <span class="ip-address">(${escapeHTML(postData.ipAddress || 'IP 정보 없음')})</span>
+          - ${postData.createdAt ? new Date(postData.createdAt.seconds * 1000).toLocaleString() : '날짜 없음'}
+        </p>
+        <p class="post-content-preview">${escapeHTML(postData.content)}</p>
+        ${postData.imageUrls && postData.imageUrls.length > 0 ? `
+          <div class="post-images">
+            ${postData.imageUrls.map(url => `
+              <img src="${escapeHTML(url)}" alt="Post image" class="post-image-preview">
+            `).join('')}
+          </div>
+        ` : ''}
+        <div class="post-stats">
+          <span class="post-stat">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            <span class="recommend-count">${postData.recommends || 0}</span>
+          </span>
+          <span class="post-stat">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/>
+            </svg>
+            <span class="comment-count">${postData.commentCount || 0}</span>
+          </span>
+        </div>
+        <div class="post-detail">
+          <div class="post-actions">
+            <button class="recommend-button" data-post-id="${postId}">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+              추천
+            </button>
+          </div>
+          <div class="comments-section">
+            <h4>댓글</h4>
+            <div class="comments-list" id="comments-for-${postId}"></div>
+            <form class="comment-form" data-post-id="${postId}">
+              <input type="text" name="comment-nickname" placeholder="닉네임" required>
+              <textarea name="comment-text" placeholder="댓글을 입력하세요..." rows="2" required></textarea>
+              <button type="submit">댓글 작성</button>
+            </form>
+          </div>
+        </div>
+      `;
+      freeBoardListElement.appendChild(postCardDiv);
+
+      // Add click handler for post expansion
+      postCardDiv.addEventListener('click', (e) => {
+        if (!e.target.closest('.recommend-button') && !e.target.closest('.comment-form') && !e.target.closest('.post-image-preview')) {
+          const detailSection = postCardDiv.querySelector('.post-detail');
+          detailSection.classList.toggle('active');
+        }
+      });
+
+      // Add image click handler for full view
+      const postImages = postCardDiv.querySelectorAll('.post-image-preview');
+      postImages.forEach(img => {
+        img.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const fullView = document.createElement('div');
+          fullView.className = 'image-full-view';
+          fullView.innerHTML = `
+            <div class="image-full-view-content">
+              <img src="${img.src}" alt="Full size image">
+              <button class="close-full-view">×</button>
+            </div>
+          `;
+          document.body.appendChild(fullView);
+          
+          fullView.querySelector('.close-full-view').addEventListener('click', () => {
+            fullView.remove();
+          });
+          
+          fullView.addEventListener('click', (e) => {
+            if (e.target === fullView) {
+              fullView.remove();
+            }
+          });
+        });
+      });
+
+      // Add recommend functionality
+      const recommendButton = postCardDiv.querySelector('.recommend-button');
+      recommendButton.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        const hasRecommended = localStorage.getItem(`recommended_${postId}`) === 'true';
+        if (hasRecommended) {
+          alert('이미 추천하셨습니다.');
+          return;
+        }
+        try {
+          await updateDoc(doc(db, 'freeBoardPosts', postId), {
+            recommends: increment(1)
+          });
+          localStorage.setItem(`recommended_${postId}`, 'true');
+          recommendButton.classList.add('recommended');
+        } catch (error) {
+          console.error('Error recommending post:', error);
+          alert('추천 처리에 실패했습니다.');
+        }
+      });
+
+      // Load comments and store the unsubscribe function
+      const commentsList = postCardDiv.querySelector('.comments-list');
+      if (commentsList) {
+        const unsubscribe = loadAndDisplayComments(postId, commentsList);
+        unsubscribeFunctions.set(postId, unsubscribe);
+      }
+    });
+
+    // Clean up old listeners when new data arrives
+    return () => {
+      unsubscribeFunctions.forEach(unsubscribe => unsubscribe());
+      unsubscribeFunctions.clear();
+    };
+  }, error => {
+    console.error('Error fetching free board posts:', error);
+    if (freeBoardListElement) freeBoardListElement.innerHTML = '<p>게시글 목록을 불러오는 데 실패했습니다.</p>';
+  });
+
+  function loadAndDisplayComments(postId, commentsListContainer) {
+    commentsListContainer.innerHTML = '<p>댓글을 불러오는 중...</p>';
+
+    const commentsQuery = query(
+      commentsCollectionRef,
+      where('postId', '==', postId),
+      orderBy('createdAt', 'asc')
+    );
+
+    const unsubscribe = onSnapshot(commentsQuery, 
+      (snapshot) => {
+        commentsListContainer.innerHTML = '';
+        if (snapshot.empty) {
+          commentsListContainer.innerHTML = '<p>아직 댓글이 없습니다.</p>';
+          return;
+        }
+
+        snapshot.forEach(commentDoc => {
+          const commentData = commentDoc.data();
+          const commentItemDiv = document.createElement('div');
+          commentItemDiv.className = 'comment-item';
+          commentItemDiv.innerHTML = `
+            <p class="comment-author">
+              ${escapeHTML(commentData.nickname)}
+              <span class="ip-address">(${escapeHTML(commentData.ipAddress || 'IP 정보 없음')})</span>
+            </p>
+            <p class="comment-text">${escapeHTML(commentData.text)}</p>
+            <p class="comment-meta">${commentData.createdAt ? new Date(commentData.createdAt.seconds * 1000).toLocaleString() : '날짜 없음'}</p>
+          `;
+          commentsListContainer.appendChild(commentItemDiv);
+        });
+      }, 
+      (error) => {
+        console.error(`Error fetching comments for post ${postId}:`, error);
+        
+        if (error.code === 'failed-precondition' && error.message.includes('requires an index')) {
+          const indexUrl = error.message.match(/https:\/\/console\.firebase\.google\.com[^\s]+/)?.[0];
+          
+          commentsListContainer.innerHTML = `
+            <div class="error-message">
+              <p>댓글을 불러오는 데 실패했습니다.</p>
+              <p>필요한 인덱스가 없습니다. 관리자에게 문의하세요.</p>
+              ${indexUrl ? `<p><a href="${indexUrl}" target="_blank">인덱스 생성하기</a></p>` : ''}
+            </div>
+          `;
+        } else {
+          commentsListContainer.innerHTML = `
+            <div class="error-message">
+              <p>댓글을 불러오는 데 실패했습니다.</p>
+              <p>잠시 후 다시 시도해주세요.</p>
+            </div>
+          `;
+        }
+      }
+    );
+
+    return unsubscribe;
+  }
+
+  function escapeHTML(str) {
+    if (str === null || str === undefined) return '';
+    return str.toString().replace(/[&<>'"/]/g, s => (
+      { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '/': '&#x2F;' }[s]
+    ));
+  }
+</script>
+</body>
+</html> 

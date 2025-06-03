@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="피모합성소 - FC모바일 카드 제작, 빈카드, 공지사항, 게시판, 갱신시간">
+  <meta name="keywords" content="FC모바일,카드합성,카드 만들기,사이트,합성,피모합성소,갱신시간">
+  <meta name="author" content="해리지팡이">
+  <meta property="og:title" content="피모합성소 - FC모바일 카드 제작 & 커뮤니티">
+  <meta property="og:description" content="FC모바일 카드 제작, 빈카드, 최신 공지, 게시판 기능, 갱신시간 정보를 제공합니다.">
+
+  <meta property="og:image" content="https://kritikal619.github.io/card/logo/Favicon.png">
+  <meta property="og:url" content="https://kritikal619.github.io/card/">
+  <meta property="og:site_name" content="피모합성소">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="app_styles.css"> <!-- New app-like styles -->
+  <link rel="stylesheet" href="notices.css"> <!-- 공지사항 스타일 -->
+  <link rel="icon" type="image/png" href="./favicons/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="./favicons/favicon.svg" />
+  <link rel="shortcut icon" href="./favicons/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="피모합성소" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="./favicons/manifest.json" />
+  <title>피모합성소</title>
+  
+  <style>
+    /* 갱신시간 탭 스타일 */
+    .refresh-time-container {
+      padding: 15px;
+    }
+    
+    .search-container {
+      display: flex;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+    
+    .search-container input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    
+    .search-container button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    
+    .search-container button:hover {
+      background-color: #45a049;
+    }
+    
+    .refresh-time-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .refresh-time-table th, 
+    .refresh-time-table td {
+      padding: 12px 15px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+    
+    .refresh-time-table th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    .refresh-time-table tr:hover {
+      background-color: #f9f9f9;
+    }
+    
+    .card-image {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+    }
+    
+    .refresh-soon {
+      color: #e74c3c;
+      font-weight: bold;
+    }
+    
+    /* 관심 시즌 관련 스타일 */
+    .tab-buttons {
+      display: flex;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .tab-button {
+      padding: 10px 20px;
+      background-color: #f8f8f8;
+      border: 1px solid #ddd;
+      border-bottom: none;
+      border-radius: 4px 4px 0 0;
+      margin-right: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .tab-button.active {
+      background-color: white;
+      border-bottom: 2px solid #4CAF50;
+      color: #4CAF50;
+    }
+    
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    .interest-button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      color: #ccc;
+      transition: color 0.3s;
+    }
+    
+    .interest-button.active {
+      color: #FFD700;
+    }
+    
+    .notification-settings {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
+      padding: 10px;
+      background-color: #f8f8f8;
+      border-radius: 4px;
+    }
+    
+    .notification-settings label {
+      margin-left: 10px;
+      font-weight: bold;
+    }
+    
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+    
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 24px;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .slider {
+      background-color: #4CAF50;
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    
+    .empty-message {
+      text-align: center;
+      padding: 30px;
+      color: #666;
+      font-style: italic;
+    }
+    
+    .other-names {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+    
+    @media screen and (max-width: 768px) {
+      .refresh-time-table {
+        font-size: 14px;
+      }
+      
+      .refresh-time-table th, 
+      .refresh-time-table td {
+        padding: 8px 10px;
+      }
+      
+      .card-image {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .tab-button {
+        padding: 8px 15px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <h1 id="app-header-title">홈</h1>
+    </header>
+
+    <main class="app-content">
+      <!-- Home Tab Content -->
+      <div class="app-tab-content active" id="home-tab">
+        <div class="home-greeting">
+          <h2>피모합성소에 오신 것을 환영합니다!</h2>
+          <p>넥슨 FC모바일 카드 제작부터 최신 정보, 커뮤니티까지 한 곳에서 즐겨보세요.</p>
+        </div>
+
+        <div class="notices-section">
+          <h2>FC 모바일 최신 공지사항</h2>
+          <div id="fc-mobile-notices-list">
+            <!-- Notices will be loaded here by JS -->
+            <p>공지사항을 불러오는 중입니다...</p>
+          </div>
+        </div>
+
+        <ul class="home-navigation-list">
+          <li class="list-item"><div data-tab="blank-cards-tab">빈카드 <span class="arrow-icon">›</span></div></li>
+          <li class="list-item"><div data-tab="flags-tab">국기 <span class="arrow-icon">›</span></div></li>
+          <li class="list-item"><div data-tab="lettering-tab">글자 <span class="arrow-icon">›</span></div></li>
+          <li class="list-item"><div data-tab="refresh-time-tab">갱신시간 <span class="arrow-icon">›</span></div></li>
+          <li class="list-item"><a href="gener.html">만들기 툴 <span class="arrow-icon">›</span></a></li>
+          <li class="list-item"><a href="board.html">게시판 <span class="arrow-icon">›</span></a></li>
+        </ul>
+         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4347323294488780" crossorigin="anonymous"></script>
+      </div>
+
+      <!-- Blank Cards Tab Content -->
+      <div class="app-tab-content" id="blank-cards-tab">
+        <div class="image-grid-container">
+            <p>FC모바일 카드 합성에 사용되는 다양한 빈 카드 이미지입니다. 원하는 카드를 선택하여 다운로드하세요.</p>
+            <div class="image-grid" id="blank-image-grid"></div>
+        </div>
+      </div>
+
+      <!-- Flags Tab Content -->
+      <div class="app-tab-content" id="flags-tab">
+         <div class="image-grid-container">
+            <p>카드 제작에 필요한 국기 이미지들입니다. 필요한 국기를 찾아 다운로드할 수 있습니다.</p>
+            <div class="image-grid" id="text-image-grid"></div> <!-- textNumbers in JS will populate this -->
+        </div>
+      </div>
+
+      <!-- Lettering Tab Content -->
+      <div class="app-tab-content" id="lettering-tab">
+        <div class="image-grid-container">
+            <p>선수 이름, 능력치 등에 사용될 수 있는 글자 이미지입니다. (흰색 글자는 배경에 따라 잘 안 보일 수 있습니다.)</p>
+            <div class="image-grid" id="blankletter-image-grid"></div>
+        </div>
+      </div>
+      
+      <!-- 갱신시간 Tab Content -->
+      <div class="app-tab-content" id="refresh-time-tab">
+        <div class="refresh-time-container">
+          <div class="notification-settings">
+            <label class="switch">
+              <input type="checkbox" id="notificationToggle">
+              <span class="slider"></span>
+            </label>
+            <label for="notificationToggle">갱신 5분 전 알림 받기</label>
+          </div>
+          
+          <div class="tab-buttons">
+            <div class="tab-button active" data-tab="all-seasons">전체 시즌</div>
+            <div class="tab-button" data-tab="interest-seasons">관심 시즌</div>
+          </div>
+          
+          <div class="search-container">
+            <input type="text" id="searchInput" placeholder="시즌/클래스명 입력">
+            <button id="searchButton">검색</button>
+          </div>
+          
+          <div class="tab-content active" id="all-seasons">
+            <table class="refresh-time-table" id="allCardTable">
+              <thead>
+                <tr>
+                  <th>카드</th>
+                  <th>이름</th>
+                  <th>갱신 시간</th>
+                  <th>남은 시간</th>
+                  <th>관심</th>
+                </tr>
+              </thead>
+              <tbody id="allTableBody">
+                <!-- 데이터는 JavaScript로 동적 생성됨 -->
+                <tr>
+                  <td colspan="5">카드 데이터를 불러오는 중입니다...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="tab-content" id="interest-seasons">
+            <table class="refresh-time-table" id="interestCardTable">
+              <thead>
+                <tr>
+                  <th>카드</th>
+                  <th>이름</th>
+                  <th>갱신 시간</th>
+                  <th>남은 시간</th>
+                  <th>관심</th>
+                </tr>
+              </thead>
+              <tbody id="interestTableBody">
+                <!-- 관심 시즌 데이터는 JavaScript로 동적 생성됨 -->
+              </tbody>
+            </table>
+            <div id="emptyInterestMessage" class="empty-message">
+              관심 시즌이 없습니다. 전체 시즌 탭에서 별표를 클릭하여 관심 시즌을 추가해보세요.
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- This tab is for the redirect button, not directly shown via bottom nav usually -->
+      <div class="app-tab-content" id="tool-redirect-tab">
+        <button type="button" class="tool-redirect-button" onclick="location.href=\'gener.html\'">카드 만들기 툴로 이동</button>
+      </div>
+    </main>
+
+        <nav class="app-bottom-nav">
+      <div class="nav-item active" data-tab="home-tab" data-title="홈">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        <span>홈</span>
+      </div>
+      <div class="nav-item" data-tab="blank-cards-tab" data-title="빈카드">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H4V4h16v16z"/></svg>
+        <span>빈카드</span>
+      </div>
+      <div class="nav-item" data-tab="flags-tab" data-title="국기">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg>
+        <span>국기</span>
+      </div>
+      <a href="gener.html" class="nav-item" data-title="만들기">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+        <span>만들기</span>
+      </a>
+      <div class="nav-item" data-tab="lettering-tab" data-title="글자">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9.93 13.5h4.14L12 7.98zM20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-4.05 16.5l-1.14-3H9.17l-1.12 3H5.96l5.11-13h1.86l5.11 13h-2.09z"/></svg>
+        <span>글자</span>
+      </div>
+      <a href="board.html" class="nav-item" data-title="게시판">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zm0-8h14V7H7v2z"/></svg>
+        <span>게시판</span>
+      </a>
+        </nav>
+  </div>
+
+  <!-- Welcome Modal -->
+  <div id="welcome-modal" class="modal-overlay">
+    <div class="modal-dialog">
+        <div class="modal-dialog-header">
+            <h2>업데이트 안내</h2>
+        </div>
+        <div class="modal-dialog-content">
+            <h3>2025-05-21</h3>
+            <h3>갱신시간 탭 개선</h3>
+            <p>FC 모바일 카드 갱신 시간 정보를 확인할 수 있는 갱신시간 탭이 개선되었습니다.</p>
+            <ul>
+              <li>전체 시즌 데이터 추가</li>
+              <li>관심 시즌 등록 기능</li>
+              <li>갱신 5분 전 알림 기능</li>
+              <li>별칭(other names) 표시</li>
+            </ul>
+        </div>
+        <div class="modal-dialog-footer">
+            <button class="modal-button primary" id="close-welcome-modal">확인</button>
+        </div>
+    </div>
+  </div>
+
+  <script src="notices.js"></script>
+  <script src="interest_manager.js"></script>
+  <script>
+    // --- Cookie Functions ---
+    function getCookie(name) {
+      const matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([.$?*|{}()[\]\\\\\\\\/+^])/g, '\\$1') + "=([^;]*)"
+      ));
+      return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+    function setCookie(name, value, days) {
+      const date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      document.cookie = `${name}=${encodeURIComponent(value)}; path=/; expires=${date.toUTCString()}`;
+    }
+
+    // --- Show Welcome Modal ---
+    function showWelcomeModalOncePerDay() {
+      if (getCookie('welcome_shown_app_v3')) return; // 버전 업데이트
+      const modal = document.getElementById('welcome-modal');
+      if(modal) modal.style.display = 'flex';
+      const closeModalButton = document.getElementById('close-welcome-modal');
+      if(closeModalButton) closeModalButton.addEventListener('click', () => {
+        if(modal) modal.style.display = 'none';
+      });
+      if(modal) modal.addEventListener('click', e => {
+        if (e.target === modal) modal.style.display = 'none';
+      });
+      setCookie('welcome_shown_app_v3', 'yes', 1); // 버전 업데이트
+    }
+    
+    function escapeHTML(str) {
+        if (str === null || str === undefined) return '';
+        return str.toString().replace(/[&<>'"\/]/g, function (s) {
+            return {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;',
+                '/': '&#x2F;'
+            }[s];
+        });
+    }
+
+    // --- FC Mobile Notices --- 
+    async function fetchAndDisplayNotices() {
+      const noticesListContainer = document.getElementById('fc-mobile-notices-list');
+      if (!noticesListContainer) return;
+      noticesListContainer.innerHTML = '<p>공지사항을 불러오는 중입니다...</p>'; // Loading message
+
+      try {
+        // In a real scenario, this would be a fetch call to a backend proxy/API for scraping.
+        // For demonstration, using the data previously acquired via browser_console_exec.
+        const noticesData = [
+          {"title":"로딩중..."},
+          {"title":"로딩중..."}
+        ];
+        // To make summary shorter if it's same as title
+        const processedNotices = noticesData.map(notice => {
+            let summaryText = notice.summary;
+            if (notice.summary && notice.summary.length > 60) { // Arbitrary length for summary
+                summaryText = notice.summary.substring(0, 57) + "...";
+            }
+            return {...notice, summary: summaryText || "내용을 불러올 수 없습니다."};
+        });
+
+        if (processedNotices && processedNotices.length > 0) {
+          noticesListContainer.innerHTML = ''; // Clear loading message
+          processedNotices.forEach(notice => {
+            const noticeDiv = document.createElement('div');
+            noticeDiv.className = 'notice-card';
+            noticeDiv.innerHTML = `
+              <h3 class="notice-title">${escapeHTML(notice.title)}</h3>
+              <p class="notice-summary">${escapeHTML(notice.summary)}</p>
+              <a href="${escapeHTML(notice.href || '#')}" class="notice-more" target="_blank">더보기</a>
+            `;
+            noticesListContainer.appendChild(noticeDiv);
+          });
+        } else {
+          noticesListContainer.innerHTML = '<p>최신 공지사항을 불러오지 못했습니다.</p>';
+        }
+      } catch (error) {
+        console.error('Error fetching or displaying notices:', error);
+        noticesListContainer.innerHTML = '<p>공지사항 로드 중 오류가 발생했습니다.</p>';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', async function() {
+      const appHeaderTitle = document.getElementById('app-header-title');
+      const navItems = document.querySelectorAll('.app-bottom-nav .nav-item[data-tab]');
+      const tabContents = document.querySelectorAll('.app-content .app-tab-content');
+      const homeNavListItems = document.querySelectorAll('.home-navigation-list .list-item div[data-tab]');
+
+      function switchTab(targetTabId, newTitle) {
+        navItems.forEach(item => {
+          item.classList.toggle('active', item.dataset.tab === targetTabId);
+        });
+        tabContents.forEach(content => {
+          content.classList.toggle('active', content.id === targetTabId);
+        });
+        if (appHeaderTitle && newTitle) {
+          appHeaderTitle.textContent = newTitle;
+        }
+        const activeContent = document.querySelector('.app-tab-content.active');
+        if (activeContent) activeContent.scrollTop = 0;
+      }
+
+      navItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const targetTabId = this.dataset.tab;
+          const newTitle = this.dataset.title;
+          switchTab(targetTabId, newTitle);
+        });
+      });
+
+      homeNavListItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const targetTabId = this.dataset.tab;
+          const correspondingBottomNavItem = document.querySelector(`.app-bottom-nav .nav-item[data-tab='${targetTabId}']`);
+          const newTitle = correspondingBottomNavItem ? correspondingBottomNavItem.dataset.title : '피모합성소';
+          switchTab(targetTabId, newTitle);
+        });
+      });
+
+      fetchAndDisplayNotices(); // Fetch notices on load
+
+      const blankCardFolder = "Blank";
+      const blankLetterFolder = "BlankLetter";
+      const textNumbers = [130,131,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,162,214,219,225,237];
+      const downloadButtonText = '다운로드';
+
+      function createImageGridItem(src, alt) {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'image-item-card';
+        itemDiv.innerHTML = `
+          <img src="${escapeHTML(src)}" alt="${escapeHTML(alt)}" onerror="this.style.display='none'; this.parentElement.style.display='none';">
+          <button class="img-download-btn">${escapeHTML(downloadButtonText)}</button>
+        `;
+        itemDiv.querySelector('.img-download-btn').addEventListener('click', function() {
+          const link = document.createElement('a');
+          link.href = src;
+          link.download = alt.replace(/\s+/g, '_') + '.png';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
+        return itemDiv;
+      }
+
+      const blankImageGrid = document.getElementById('blank-image-grid');
+      const textImageGrid = document.getElementById('text-image-grid');
+      if (blankImageGrid && textImageGrid) {
+          for (let i = 1; i <= 271; i++) {
+            const src = `${blankCardFolder}/image(${i}).png`;
+            const alt = `빈카드 ${i}`;
+            const item = createImageGridItem(src, alt);
+            if (textNumbers.includes(i)) {
+                textImageGrid.appendChild(item);
+            } else {
+                blankImageGrid.appendChild(item);
+            }
+          }
+      }
+
+      const blankLetterGrid = document.getElementById('blankletter-image-grid');
+      if (blankLetterGrid) {
+          for (let i = 1; i <= 15; i++) {
+            const src = `${blankLetterFolder}/image(${i}).png`;
+            const alt = `글자 ${i}`;
+            blankLetterGrid.appendChild(createImageGridItem(src, alt));
+          }
+      }
+
+      const initialTab = window.location.hash.substring(1) || 'home-tab';
+      const initialTitle = document.querySelector(`.app-bottom-nav .nav-item[data-tab='${initialTab}']`)?.dataset.title || '홈';
+      switchTab(initialTab, initialTitle);
+      
+      showWelcomeModalOncePerDay();
+      
+      // 갱신시간 탭 기능
+      const searchInput = document.getElementById('searchInput');
+      const searchButton = document.getElementById('searchButton');
+      const allTableBody = document.getElementById('allTableBody');
+      const interestTableBody = document.getElementById('interestTableBody');
+      const emptyInterestMessage = document.getElementById('emptyInterestMessage');
+      const tabButtons = document.querySelectorAll('.tab-button');
+      const tabContents = document.querySelectorAll('.tab-content');
+      
+      // 탭 전환 기능
+      tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const tabId = this.dataset.tab;
+          
+          // 탭 버튼 활성화
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          
+          // 탭 컨텐츠 활성화
+          tabContents.forEach(content => {
+            content.classList.remove('active');
+            if (content.id === tabId) {
+              content.classList.add('active');
+            }
+          });
+          
+          // 관심 시즌 탭 선택 시 데이터 갱신
+          if (tabId === 'interest-seasons') {
+            renderInterestTable();
+          }
+        });
+      });
+      
+      // 카드 데이터 로드
+      let cardData = [];
+      
+      async function loadCardData() {
+        try {
+          const response = await fetch('./api/card_data.json');
+          const data = await response.json();
+          cardData = data.cards || [];
+          renderAllTable(cardData);
+          renderInterestTable();
+          
+          // 알림 타이머 시작
+          RefreshTimeManager.startNotificationTimer(cardData);
+        } catch (error) {
+          console.error('카드 데이터를 불러오는 중 오류가 발생했습니다:', error);
+          allTableBody.innerHTML = '<tr><td colspan="5">카드 데이터를 불러오지 못했습니다.</td></tr>';
+        }
+      }
+      
+      // 전체 테이블 렌더링
+      function renderAllTable(data) {
+        if (!allTableBody) return;
+        
+        allTableBody.innerHTML = '';
+        
+        if (data.length === 0) {
+          allTableBody.innerHTML = '<tr><td colspan="5">검색 결과가 없습니다.</td></tr>';
+          return;
+        }
+        
+        data.forEach(card => {
+          const row = document.createElement('tr');
+          
+          // 남은 시간 계산
+          const remaining = RefreshTimeManager.calculateRemainingTime(card);
+          
+          // 관심 상태 확인
+          const isInterest = InterestManager.getInterestSeasons().includes(card.id);
+          
+          // 별칭 표시
+          const otherNamesHtml = card.otherNames && card.otherNames.length > 0 
+            ? `<div class="other-names">${escapeHTML(card.otherNames.join(', '))}</div>` 
+            : '';
+          
+          row.innerHTML = `
+            <td><img src="${card.image}" alt="${card.name}" class="card-image" onerror="this.src='./favicons/favicon-96x96.png'"></td>
+            <td>
+              ${escapeHTML(card.name)}
+              ${otherNamesHtml}
+            </td>
+            <td>${escapeHTML(card.refreshTime)}</td>
+            <td class="${remaining.text.includes('후 갱신') ? 'refresh-soon' : ''}">${escapeHTML(remaining.text)}</td>
+            <td>
+              <button class="interest-button ${isInterest ? 'active' : ''}" data-id="${card.id}">
+                ★
+              </button>
+            </td>
+          `;
+          
+          allTableBody.appendChild(row);
+        });
+        
+        // 관심 버튼 이벤트 연결
+        document.querySelectorAll('.interest-button').forEach(button => {
+          button.addEventListener('click', function() {
+            const cardId = parseInt(this.dataset.id, 10);
+            const isActive = this.classList.contains('active');
+            
+            if (isActive) {
+              InterestManager.removeInterestSeason(cardId);
+              this.classList.remove('active');
+            } else {
+              InterestManager.addInterestSeason(cardId);
+              this.classList.add('active');
+            }
+            
+            // 관심 탭이 활성화된 상태라면 테이블 갱신
+            if (document.querySelector('.tab-button[data-tab="interest-seasons"]').classList.contains('active')) {
+              renderInterestTable();
+            }
+          });
+        });
+      }
+      
+      // 관심 시즌 테이블 렌더링
+      function renderInterestTable() {
+        if (!interestTableBody || !emptyInterestMessage) return;
+        
+        const interestIds = InterestManager.getInterestSeasons();
+        const interestCards = cardData.filter(card => interestIds.includes(card.id));
+        
+        interestTableBody.innerHTML = '';
+        
+        if (interestCards.length === 0) {
+          emptyInterestMessage.style.display = 'block';
+          return;
+        }
+        
+        emptyInterestMessage.style.display = 'none';
+        
+        interestCards.forEach(card => {
+          const row = document.createElement('tr');
+          
+          // 남은 시간 계산
+          const remaining = RefreshTimeManager.calculateRemainingTime(card);
+          
+          // 별칭 표시
+          const otherNamesHtml = card.otherNames && card.otherNames.length > 0 
+            ? `<div class="other-names">${escapeHTML(card.otherNames.join(', '))}</div>` 
+            : '';
+          
+          row.innerHTML = `
+            <td><img src="${card.image}" alt="${card.name}" class="card-image" onerror="this.src='./favicons/favicon-96x96.png'"></td>
+            <td>
+              ${escapeHTML(card.name)}
+              ${otherNamesHtml}
+            </td>
+            <td>${escapeHTML(card.refreshTime)}</td>
+            <td class="${remaining.text.includes('후 갱신') ? 'refresh-soon' : ''}">${escapeHTML(remaining.text)}</td>
+            <td>
+              <button class="interest-button active" data-id="${card.id}">
+                ★
+              </button>
+            </td>
+          `;
+          
+          interestTableBody.appendChild(row);
+        });
+        
+        // 관심 버튼 이벤트 연결
+        interestTableBody.querySelectorAll('.interest-button').forEach(button => {
+          button.addEventListener('click', function() {
+            const cardId = parseInt(this.dataset.id, 10);
+            InterestManager.removeInterestSeason(cardId);
+            
+            // 관심 테이블 갱신
+            renderInterestTable();
+            
+            // 전체 테이블의 해당 버튼 상태도 업데이트
+            const allTableButton = allTableBody.querySelector(`.interest-button[data-id="${cardId}"]`);
+            if (allTableButton) {
+              allTableButton.classList.remove('active');
+            }
+          });
+        });
+      }
+      
+      // 검색 기능
+      function searchCards() {
+        if (!searchInput || !cardData) return;
+        
+        const searchTerm = searchInput.value.toLowerCase();
+        
+        if (searchTerm === '') {
+          renderAllTable(cardData);
+          return;
+        }
+        
+        const filteredData = cardData.filter(card => {
+          // 이름 검색
+          if (card.name.toLowerCase().includes(searchTerm)) {
+            return true;
+          }
+          
+          // 별칭 검색
+          if (card.otherNames && card.otherNames.some(name => name.toLowerCase().includes(searchTerm))) {
+            return true;
+          }
+          
+          return false;
+        });
+        
+        renderAllTable(filteredData);
+      }
+      
+      // 이벤트 리스너 등록
+      if (searchButton) {
+        searchButton.addEventListener('click', searchCards);
+      }
+      
+      if (searchInput) {
+        searchInput.addEventListener('keyup', function(event) {
+          if (event.key === 'Enter') {
+            searchCards();
+          }
+        });
+      }
+      
+      // 알림 설정 UI 초기화
+      const notificationToggle = document.getElementById('notificationToggle');
+      if (notificationToggle) {
+        notificationToggle.checked = InterestManager.isNotificationEnabled();
+        
+        notificationToggle.addEventListener('change', function() {
+          if (this.checked) {
+            InterestManager.requestNotificationPermission().then(granted => {
+              if (granted) {
+                InterestManager.setNotificationEnabled(true);
+              } else {
+                this.checked = false;
+                alert('알림을 보내려면 알림 권한이 필요합니다.');
+              }
+            });
+          } else {
+            InterestManager.setNotificationEnabled(false);
+          }
+        });
+      }
+      
+      // 1초마다 테이블 업데이트 (남은 시간 갱신)
+      setInterval(() => {
+        // 전체 테이블 업데이트
+        if (allTableBody) {
+          const rows = allTableBody.querySelectorAll('tr');
+          
+          rows.forEach(row => {
+            const cardId = parseInt(row.querySelector('.interest-button')?.dataset.id, 10);
+            if (!cardId) return;
+            
+            const card = cardData.find(c => c.id === cardId);
+            if (!card) return;
+            
+            const timeCell = row.querySelector('td:nth-child(4)');
+            if (timeCell) {
+              const remaining = RefreshTimeManager.calculateRemainingTime(card);
+              timeCell.textContent = remaining.text;
+              timeCell.className = remaining.text.includes('후 갱신') ? 'refresh-soon' : '';
+            }
+          });
+        }
+        
+        // 관심 테이블 업데이트
+        if (interestTableBody) {
+          const rows = interestTableBody.querySelectorAll('tr');
+          
+          rows.forEach(row => {
+            const cardId = parseInt(row.querySelector('.interest-button')?.dataset.id, 10);
+            if (!cardId) return;
+            
+            const card = cardData.find(c => c.id === cardId);
+            if (!card) return;
+            
+            const timeCell = row.querySelector('td:nth-child(4)');
+            if (timeCell) {
+              const remaining = RefreshTimeManager.calculateRemainingTime(card);
+              timeCell.textContent = remaining.text;
+              timeCell.className = remaining.text.includes('후 갱신') ? 'refresh-soon' : '';
+            }
+          });
+        }
+      }, 1000);
+      
+      // 초기 데이터 로드
+      loadCardData();
+    });
+  </script>
+</body>
+</html>

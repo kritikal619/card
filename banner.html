@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+    
+  <!-- 검색 엔진 최적화 (SEO) -->
+  <meta name="description" content="유로 빈카드, 토티 빈카드, 센츄리온 빈카드, 트로피 아이콘 빈카드, 월드컵 빈카드, 발롱도르 빈카드">
+  <meta name="keywords" content="FC모바일, 특성 재료, 패스 마스터, 라인 브레이커, 예리한 감아차기, 선수 정보, 오버롤, 넥슨, 빈카드, 합성, 카드 제작, 카드, 제작">
+  <meta name="author" content="해리지팡이">
+    
+  <!-- Open Graph 데이터 -->
+  <meta property="og:title" content="피모 합성소">
+  <meta property="og:description" content="FC모바일 합성 툴!: 다양한 빈카드와 카드 제작 툴을 만나보세요!">
+  <meta property="og:image" content="https://kritikal619.github.io/card/logo/Favicon.png">
+  <meta property="og:url" content="https://kritikal619.github.io/card/">
+  <meta property="og:site_name" content="FC모바일 카드 합성 툴">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="styles.css">
+    
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./favicons/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="./favicons/favicon.svg" />
+  <link rel="shortcut icon" href="./favicons/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="피모 합성소" />
+  <link rel="manifest" href="./favicons/site.webmanifest" />
+
+  <title>FC모바일 카드 제작기</title>
+  
+  <style>
+    .pdf-page {
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+      max-width: 100%;
+    }
+    /* 네비게이션 바 */
+    #navbar {
+      background: #73685d;
+      padding: 0.3rem 1rem;
+    }
+  </style>
+  
+  <!-- PDF.js 라이브러리 포함 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css">
+</head>
+<body>
+  <!-- 네비게이션 바 -->
+  <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container-fluid">
+      <!-- 뒤로가기 버튼: 클릭 시 window.history.back() 호출 -->
+      <a class="navbar-brand" href="#" id="toolTabButton">뒤로가기</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="https://kritikal619.github.io/card/" target="_blank">피모합성소</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://kritikal619.github.io/trait/" target="_blank">피모 특성</a></li>
+          <li class="nav-item"><a class="nav-link" href="http://fcevol.kro.kr" target="_blank">진화 시뮬레이션</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://kritikal619.github.io/calcu" target="_blank">수수료 계산기</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  >
+  <!-- PDF 페이지들이 추가될 영역 -->
+  <div id="pdf-container"></div>
+
+  <script>
+    // 뒤로가기 버튼 클릭 시 이전 페이지로 돌아가기
+    document.getElementById("toolTabButton").addEventListener("click", function(e) {
+      e.preventDefault();
+      window.history.back();
+    });
+
+    // PDF.js 라이브러리 초기 설정
+    const pdfjsLib = window['pdfjs-dist/build/pdf'];
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+    // PDF 파일의 경로 (필요에 따라 경로 수정)
+    const pdfUrl = 'pdfs/BannerInfo.pdf';
+
+    // PDF 문서 로드
+    pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc) {
+      const container = document.getElementById('pdf-container');
+      // 총 페이지 수 확인
+      const totalPages = pdfDoc.numPages;
+      
+      // 모든 페이지 순회
+      for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+        // 페이지를 위한 캔버스 생성
+        const canvas = document.createElement('canvas');
+        canvas.className = 'pdf-page';
+        container.appendChild(canvas);
+        const context = canvas.getContext('2d');
+
+        // 각 페이지 렌더링
+        pdfDoc.getPage(pageNum).then(function(page) {
+          // 축소 비율 설정 (필요에 따라 scale 값을 조절)
+          const scale = 1.5;
+          const viewport = page.getViewport({ scale: scale });
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+
+          const renderContext = {
+            canvasContext: context,
+            viewport: viewport
+          };
+
+          page.render(renderContext).promise.catch(err => {
+            console.error('페이지 렌더링 에러:', err);
+          });
+        });
+      }
+    }).catch(function(error) {
+      console.error('PDF 로드 실패:', error);
+    });
+  </script>
+</body>
+</html>

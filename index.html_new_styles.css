@@ -1,0 +1,298 @@
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f2f5; /* Light gray background, common in apps */
+      color: #1c1e21; /* Darker text for better contrast */
+    }
+    #tabs { display: none; } /* This seems to be unused or legacy, keeping as is */
+
+    /* 바텀 네비게이션 - React Native TabBar 느낌 */
+    #bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #ffffff; /* White background for nav */
+      border-top: 1px solid #d1d1d6; /* Subtle top border */
+      box-shadow: 0 -1px 3px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-around;
+      z-index: 1000;
+    }
+    #bottom-nav .nav-item {
+      flex: 1;
+      text-align: center;
+      padding: 12px 0;
+      cursor: pointer;
+      color: #606770; /* Default icon/text color */
+      font-size: 13px;
+      font-weight: 500;
+      transition: color 0.2s, border-top-color 0.2s;
+      border-top: 3px solid transparent; /* Placeholder for active state */
+    }
+    #bottom-nav .nav-item:hover {
+      color: #1877f2; /* Accent color on hover */
+    }
+    #bottom-nav .nav-item.active {
+      color: #1877f2; /* Accent color for active tab */
+      border-top: 3px solid #1877f2;
+      font-weight: 600;
+    }
+    /* 홈 탭용 네비게이션 컨테이너 - 카드/버튼 리스트 느낌 */
+    .home-nav-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px 0;
+      padding: 0 16px;
+      background: none;
+    }
+    .home-nav-container .nav-item, .home-nav-container a.nav-item {
+      width: 100%;
+      max-width: 480px;
+      margin: 8px 0;
+      padding: 15px 0;
+      background: #ffffff;
+      border-radius: 12px; /* Rounded corners for card-like feel */
+      text-align: center;
+      cursor: pointer;
+      color: #1c1e21;
+      font-size: 16px;
+      font-weight: 500;
+      transition: background-color 0.2s, transform 0.1s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      text-decoration: none;
+    }
+    .home-nav-container .nav-item:hover, .home-nav-container a.nav-item:hover {
+      background-color: #f0f2f5; /* Slight change on hover */
+      transform: translateY(-1px);
+    }
+    .home-nav-container .nav-item.active {
+      background-color: #e7f3ff; /* Light blue for active/selected item */
+      color: #1877f2;
+      font-weight: 600;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 16px;
+      padding-bottom: 80px; /* Space for bottom nav */
+    }
+    .tab-content h1 {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1c1e21;
+        text-align: center;
+        margin-bottom: 8px;
+    }
+    .tab-content p {
+        font-size: 16px;
+        color: #606770;
+        text-align: center;
+        line-height: 1.5;
+        margin-bottom: 24px;
+    }
+
+    .image-grid {
+      display: grid; /* Using grid for more control */
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive columns */
+      gap: 16px;
+    }
+    .image-item {
+      background: #ffffff;
+      border: 1px solid #dddfe2;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      padding: 8px;
+    }
+    .image-item img {
+      width: 100%;
+      height: auto; /* Maintain aspect ratio */
+      max-height: 150px; /* Limit image height */
+      object-fit: contain; /* Ensure image fits well */
+      display: block;
+      border-radius: 8px; /* Rounded corners for images */
+      margin-bottom: 8px;
+    }
+
+    .img-download-btn {
+      background-color: #1877f2; /* Primary accent color */
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 50%; /* Circular button */
+      transition: background-color 0.2s, transform 0.1s;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 36px; /* Fixed size */
+      height: 36px;
+      align-self: center; /* Center button in flex container */
+    }
+    .img-download-btn:hover {
+      background-color: #166fe5; /* Darker shade on hover */
+      transform: scale(1.1);
+    }
+    .img-download-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: #ffffff;
+    }
+
+    /* '만들기 툴로 이동' 버튼 스타일 */
+    #tab3 button {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 12px 24px;
+      border: none;
+      background-color: #1877f2;
+      color: #ffffff;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background-color 0.2s, transform 0.1s;
+      display: block;
+      width: fit-content;
+      margin: 20px auto;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    #tab3 button:hover {
+      background-color: #166fe5;
+      transform: translateY(-1px);
+    }
+
+    .footer {
+      /* Footer is currently fixed, might need adjustment if content is short */
+      position: fixed;
+      bottom: 60px; /* Adjust if bottom nav height changes */
+      left: 0;
+      width: 100%;
+      background: #f0f2f5;
+      text-align: center;
+      padding: 10px 0;
+      border-top: 1px solid #d1d1d6;
+      z-index: 500;
+      font-size: 12px;
+      color: #606770;
+    }
+
+    /* --- 모달 스타일 --- */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6); /* Darker overlay */
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      position: relative;
+      background: #ffffff;
+      border-radius: 16px; /* More rounded corners */
+      padding: 24px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+      animation: fadeInModal 0.3s ease-out;
+    }
+    .modal-content h2 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #1c1e21;
+        margin-bottom: 8px;
+    }
+    .modal-content h3 {
+        font-size: 14px;
+        font-weight: 400;
+        color: #606770;
+        margin-bottom: 16px;
+        line-height: 1.4;
+    }
+    .close-btn {
+      position: absolute;
+      top: 16px; right: 16px;
+      font-size: 28px;
+      font-weight: 300;
+      cursor: pointer;
+      color: #606770;
+      line-height: 1;
+    }
+    .close-btn:hover {
+        color: #1c1e21;
+    }
+    @keyframes fadeInModal {
+      from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+  
+
+
+/* FC Mobile Notices Section */
+#fc-mobile-notices {
+  background-color: #ffffff;
+  padding: 16px;
+  margin: 16px 0; /* Add some margin around the notices section */
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+#fc-mobile-notices h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1c1e21;
+  margin-bottom: 12px;
+  text-align: left; /* Align title to the left */
+}
+
+.notice-item {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e0e0e0; /* Separator for notice items */
+}
+
+.notice-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none; /* No border for the last item */
+}
+
+.notice-item .notice-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1c1e21;
+  margin-bottom: 6px;
+}
+
+.notice-item .notice-summary {
+  font-size: 14px;
+  color: #606770;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  text-align: left; /* Align summary to the left */
+}
+
+.notice-item .notice-more {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1877f2; /* Accent color for the link */
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background-color: #e7f3ff; /* Light blue background for the button-like link */
+  transition: background-color 0.2s;
+}
+
+.notice-item .notice-more:hover {
+  background-color: #d0e7ff; /* Slightly darker on hover */
+  text-decoration: none;
+}
+

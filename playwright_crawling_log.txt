@@ -1,0 +1,44 @@
+크롤링 시작 시간: 2025-05-21 02:47:30
+
+게시판 441 (공지사항) 크롤링 시작
+페이지 로드 완료: https://forum.nexon.com/fcmobile/board_list?board=441
+스크린샷 저장: /home/ubuntu/workspace/card/api/board_441_screenshot.png
+찾은 링크 수: 27
+1. 5/31(토) Apple과 함께 하는 'Today At Apple' 오프라인 행사 안내 - https://forum.nexon.com/fcmobile/board_view?board=441&thread=2896831
+공지사항 추가 완료: 5/31(토) Apple과 함께 하는 'Today At Apple' 오프라인 행사 안내
+요약: 내용을 불러올 수 없습니다....
+2. 5/15(목) 점검 후 이슈 안내 - https://forum.nexon.com/fcmobile/board_view?board=441&thread=2894984
+공지사항 추가 완료: 5/15(목) 점검 후 이슈 안내
+요약: 내용을 불러올 수 없습니다....
+3. K리그-EA SPORTS FC FUTURES 축구 페스티벌 개최 ⚽ - https://forum.nexon.com/fcmobile/board_view?board=441&thread=2875225
+공지사항 추가 완료: K리그-EA SPORTS FC FUTURES 축구 페스티벌 개최 ⚽
+요약: 내용을 불러올 수 없습니다....
+
+게시판 442 (업데이트) 크롤링 시작
+페이지 로드 완료: https://forum.nexon.com/fcmobile/board_list?board=442
+스크린샷 저장: /home/ubuntu/workspace/card/api/board_442_screenshot.png
+찾은 링크 수: 16
+1. 5/22(목) 점검 안내 (오전 3시 ~ 오전 8시) - https://forum.nexon.com/fcmobile/board_view?board=442&thread=2903631
+공지사항 추가 완료: 5/22(목) 점검 안내 (오전 3시 ~ 오전 8시)
+요약: 내용을 불러올 수 없습니다....
+2. 5/22(목) 점검 안내 (오전 3시 ~ 오전 8시) - https://forum.nexon.com/fcmobile/board_view?board=442&thread=2903631
+3. (완료) 5/15(목) 점검 안내 (오전 8시 ~ 오후 1시 40분) - https://forum.nexon.com/fcmobile/board_view?board=442&thread=2890579
+공지사항 추가 완료: (완료) 5/15(목) 점검 안내 (오전 8시 ~ 오후 1시 40분)
+요약: 내용을 불러올 수 없습니다....
+
+게시판 445 (이벤트) 크롤링 시작
+페이지 로드 완료: https://forum.nexon.com/fcmobile/board_list?board=445
+스크린샷 저장: /home/ubuntu/workspace/card/api/board_445_screenshot.png
+찾은 링크 수: 19
+1. 5/15(목) 신규 클래스 / 이벤트 안내 [Pitch Beats 25] - https://forum.nexon.com/fcmobile/board_view?board=445&thread=2892423
+공지사항 추가 완료: 5/15(목) 신규 클래스 / 이벤트 안내 [Pitch Beats 25]
+요약: 내용을 불러올 수 없습니다....
+2. (챕터1 FINAL 추가) 4/3(목) 신규 클래스 / 이벤트 안내 [UCL 25] - https://forum.nexon.com/fcmobile/board_view?board=445&thread=2781196
+공지사항 추가 완료: (챕터1 FINAL 추가) 4/3(목) 신규 클래스 / 이벤트 안내 [UCL 25]
+요약: 내용을 불러올 수 없습니다....
+3. 4/24(목) 신규 클래스 / 이벤트 안내 [LALIGA 25] - https://forum.nexon.com/fcmobile/board_view?board=445&thread=2838516
+공지사항 추가 완료: 4/24(목) 신규 클래스 / 이벤트 안내 [LALIGA 25]
+요약: 내용을 불러올 수 없습니다....
+
+크롤링 완료 시간: 2025-05-21 02:48:34
+수집된 공지사항 수: 6

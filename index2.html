@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+    
+    <!-- 검색 엔진 최적화 (SEO) -->
+    <meta name="description" content="FC모바일 합성 툴!: 다양한 빈카드와 카드 제작 툴을 만나보세요!"> <!-- 작동함 -->
+    <meta name="keywords" content="FC모바일, 특성 재료, 패스 마스터, 라인 브레이커, 예리한 감아차기, 선수 정보, 오버롤, 넥슨, 빈카드, 합성, 카드 제작, 카드, 제작">
+    <meta name="author" content="해리지팡이">
+    
+    <!-- Open Graph 데이터 -->
+    <meta property="og:title" content="FC모바일 카드 합성 툴"> <!-- 도대체 뭐하는지 모르겠다...-->
+    <meta property="og:description" content="FC모바일 합성 툴!: 다양한 빈카드와 카드 제작 툴을 만나보세요!">
+    <meta property="og:image" content="https://kritikal619.github.io/logo/Favicon.png">
+    <meta property="og:url" content="https://kritikal619.github.io/trait/">
+    <meta property="og:site_name" content="FC모바일 카드 하벙 툴">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./favicons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./favicons/favicon.svg" />
+    <link rel="shortcut icon" href="./favicons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="피모 합성" />
+    <link rel="manifest" href="./favicons/site.webmanifest" />
+    <!-- 검증 메타 -->
+    <meta name="google-site-verification" content="">
+    <meta name="naver-site-verification" content="">
+    <title>FC모바일 카드 합성 툴</title>
+</head>
+<body>
+  <h1>FC모바일 카드 합성 툴</h1>
+  <h3>공지: 안녕하세요</h3>
+  <a href="http://fcevol.kro.kr/">진화 시뮬레이션을 하고 싶다면?</a>
+  <a href="https://kritikal619.github.io/trait/">특성 재료를 찾고 싶다면?</a>
+  <br><br>
+  
+  <div id="card-builder">
+    <!-- 탭 버튼 영역 (총 5개의 탭) -->
+    <div id="tabs">
+      <button class="tab-button active" data-tab="tab1">빈카드 다운도르</button>
+      <button class="tab-button" data-tab="tab2">글자 다운도르</button>
+      <button class="tab-button" data-tab="tab3">만들기 툴 (미공개)</button>
+      <button class="tab-button" data-tab="tab4">빈 글자 탭</button>
+      <button class="tab-button" data-tab="tab5">BlankLetter 다운도르</button>
+    </div>
+    
+    <!-- 탭 콘텐츠 영역 -->
+    <div id="tab-contents">
+      <!-- 탭1: 빈카드 다운도르 (BlankCard 폴더의 이미지, textNumbers에 없는 것) -->
+      <div class="tab-content" id="tab1">
+        <p>여기에 빈카드 다운로드 관련 옵션 및 정보를 표시합니다.</p>
+        <div class="image-grid" id="blank-image-grid">
+          <!-- 동적으로 생성 -->
+        </div>
+      </div>
+      
+      <!-- 탭2: 글자 다운도르 (BlankCard 폴더의 이미지, textNumbers에 포함된 것) -->
+      <div class="tab-content" id="tab2">
+        <p>여기에 글자 다운로드 관련 옵션 및 정보를 표시합니다.</p>
+        <div class="image-grid" id="text-image-grid">
+          <!-- 동적으로 생성 -->
+        </div>
+      </div>
+      
+      <!-- 탭3: 만들기 툴 (미공개) -->
+      <div class="tab-content" id="tab3">
+        <p>만들기 툴은 아직 미공개입니다.</p>
+      </div>
+      
+      <!-- 탭4: 빈 글자 탭 (탭2의 내용을 복제) -->
+      <div class="tab-content" id="tab4">
+        <!-- 아래 내용은 스크립트에서 탭2의 내용을 복제하여 채워집니다 -->
+      </div>
+      
+      <!-- 탭5: BlankLetter 다운도르 (BlankLetter 폴더의 이미지 1~15) -->
+      <div class="tab-content" id="tab5">
+        <p>여기에 BlankLetter 폴더의 이미지(1~15)를 표시합니다.</p>
+        <div class="image-grid" id="blankletter-image-grid">
+          <!-- 동적으로 생성 -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 폴더 설정
+      const blankCardFolder = "BlankCard";
+      const blankLetterFolder = "BlankLetter";
+      
+      // 글자 카드로 분류할 번호 배열 (BlankCard 폴더 내의 이미지 번호 중)
+      const textNumbers = [130, 131, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 162, 214, 219, 225, 237];
+      
+      // 컨테이너 요소 가져오기 (탭1, 탭2)
+      const blankImageGrid = document.getElementById('blank-image-grid');
+      const textImageGrid = document.getElementById('text-image-grid');
+      
+      // 1부터 249까지 이미지 항목 생성 (BlankCard 폴더)
+      for (let i = 1; i <= 249; i++) {
+        const imgHTML = `<img src="${blankCardFolder}/image(${i}).png" alt="이미지 ${i}" onerror="this.style.display='none'">`;
+        // 버튼 타입: textNumbers에 포함되면 "text", 그렇지 않으면 "blank"
+        const btnType = textNumbers.includes(i) ? 'text' : 'blank';
+        
+        const imageItemDiv = document.createElement('div');
+        imageItemDiv.className = 'image-item';
+        imageItemDiv.innerHTML = `
+          ${imgHTML}
+          <button class="img-download-btn" data-type="${btnType}">다운로드</button>
+        `;
+        
+        // textNumbers에 포함되면 탭2, 아니면 탭1에 추가
+        if (textNumbers.includes(i)) {
+          textImageGrid.appendChild(imageItemDiv);
+        } else {
+          blankImageGrid.appendChild(imageItemDiv);
+        }
+      }
+      
+      // 탭 전환 기능 (총 5개 탭)
+      const tabButtons = document.querySelectorAll('#tabs .tab-button');
+      const tabContents = document.querySelectorAll('#tab-contents .tab-content');
+      tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          tabContents.forEach(content => content.style.display = 'none');
+          this.classList.add('active');
+          const targetTab = this.getAttribute('data-tab');
+          document.getElementById(targetTab).style.display = 'block';
+        });
+      });
+      // 초기에는 탭1 보이기
+      document.getElementById('tab1').style.display = 'block';
+      
+      // 다운로드 버튼 클릭 이벤트 처리
+      document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('img-download-btn')) {
+          const imageItem = e.target.closest('.image-item');
+          const imgSrc = imageItem.querySelector('img').getAttribute('src');
+          const downloadType = e.target.getAttribute('data-type');
+          if (downloadType === 'blank') {
+            downloadBlankCard(imgSrc);
+          } else if (downloadType === 'text') {
+            downloadTextCard(imgSrc);
+          } else if (downloadType === 'blankletter') {
+            downloadBlankLetter(imgSrc);
+          }
+        }
+      });
+      
+      function downloadBlankCard(src) {
+        const link = document.createElement('a');
+        link.href = src;
+        link.download = src.substring(src.lastIndexOf('/') + 1);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+      
+      function downloadTextCard(src) {
+        const link = document.createElement('a');
+        link.href = src;
+        link.download = src.substring(src.lastIndexOf('/') + 1);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+      
+      function downloadBlankLetter(src) {
+        const link = document.createElement('a');
+        link.href = src;
+        link.download = src.substring(src.lastIndexOf('/') + 1);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+      
+      // 탭4: 빈 글자 탭 -> 탭2의 내용을 복제하여 채움
+      const tab4 = document.getElementById('tab4');
+      tab4.innerHTML = document.getElementById('tab2').innerHTML;
+      
+      // 탭5: BlankLetter 다운도르 -> BlankLetter 폴더의 이미지 1~15 생성
+      const blankLetterImageGrid = document.getElementById('blankletter-image-grid');
+      for (let i = 1; i <= 15; i++) {
+        const imgHTML = `<img src="${blankLetterFolder}/image(${i}).png" alt="BlankLetter 이미지 ${i}" onerror="this.style.display='none'">`;
+        // download 버튼 타입을 "blankletter"로 지정
+        const imageItemDiv = document.createElement('div');
+        imageItemDiv.className = 'image-item';
+        imageItemDiv.innerHTML = `
+          ${imgHTML}
+          <button class="img-download-btn" data-type="blankletter">다운로드</button>
+        `;
+        blankLetterImageGrid.appendChild(imageItemDiv);
+      }
+    });
+  </script>
+</body>
+</html>

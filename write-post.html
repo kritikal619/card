@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+  <title>글 작성 - 피모합성소</title>
+  <meta name="description" content="FC모바일 카드 제작 공유 및 자유게시판 - 피모합성소 커뮤니티"/>
+  <meta name="keywords" content="FC모바일, 카드합성, 카드 만들기, 게시판, 자유게시판, 커뮤니티"/>
+  <meta name="author" content="해리지팡이"/>
+  <link rel="stylesheet" href="app_styles.css"/>
+  <link rel="icon" type="image/png" href="./favicons/favicon-96x96.png" sizes="96x96" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="피모합성소" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="./favicons/manifest.json" />
+  <style>
+    .write-post-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .write-post-form {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .form-group input[type="text"],
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .form-group textarea {
+      min-height: 200px;
+      resize: vertical;
+    }
+
+    .image-preview-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .image-preview {
+      position: relative;
+      aspect-ratio: 1;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .image-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-preview .remove-image {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-upload-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: #f5f5f5;
+      border: 1px dashed #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .image-upload-btn:hover {
+      background: #eee;
+    }
+
+    .submit-btn {
+      background: #2196F3;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .submit-btn:hover {
+      background: #1976D2;
+    }
+
+    .submit-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <h1 id="app-header-title">글 작성</h1>
+    </header>
+
+    <main class="app-content">
+      <div class="write-post-container">
+        <form id="write-post-form" class="write-post-form">
+          <div class="form-group">
+            <label for="post-nickname">닉네임</label>
+            <input type="text" id="post-nickname" required>
+          </div>
+          <div class="form-group">
+            <label for="post-title">제목</label>
+            <input type="text" id="post-title" required>
+          </div>
+          <div class="form-group">
+            <label for="post-content">내용</label>
+            <textarea id="post-content" required></textarea>
+          </div>
+          <div class="form-group">
+            <label>이미지 첨부</label>
+            <div class="image-preview-container" id="image-preview-container"></div>
+            <label class="image-upload-btn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+              </svg>
+              이미지 추가
+              <input type="file" id="image-upload" accept="image/*" multiple style="display: none;">
+            </label>
+          </div>
+          <button type="submit" class="submit-btn" id="submit-post">글 작성하기</button>
+        </form>
+      </div>
+    </main>
+
+    <nav class="app-bottom-nav">
+      <a href="index.html" class="nav-item" data-title="홈">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        <span>홈</span>
+      </a>
+      <a href="index.html#blank-cards-tab" class="nav-item" data-title="빈카드">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H4V4h16v16z"/></svg>
+        <span>빈카드</span>
+      </a>
+      <div class="nav-item" data-tab="flags-tab" data-title="국기">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg>
+        <span>국기</span>
+      </div>
+      <a href="gener.html" class="nav-item" data-title="만들기">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+        <span>만들기</span>
+      </a>
+      <div class="nav-item" data-tab="lettering-tab" data-title="글자">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9.93 13.5h4.14L12 7.98zM20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-4.05 16.5l-1.14-3H9.17l-1.12 3H5.96l5.11-13h1.86l5.11 13h-2.09z"/></svg>
+        <span>글자</span>
+      </div>
+      <a href="board.html" class="nav-item active" data-title="게시판">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zm0-8h14V7H7v2z"/></svg>
+        <span>게시판</span>
+      </a>
+    </nav>
+  </div>
+
+  <script type="module">
+    import { db } from './firebase.js';
+    import { 
+      collection, 
+      addDoc, 
+      serverTimestamp,
+      updateDoc,
+      doc
+    } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js';
+    import { 
+      getStorage, 
+      ref, 
+      uploadBytes, 
+      getDownloadURL 
+    } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-storage.js';
+
+    const storage = getStorage();
+    const writePostForm = document.getElementById('write-post-form');
+    const imageUpload = document.getElementById('image-upload');
+    const imagePreviewContainer = document.getElementById('image-preview-container');
+    const submitButton = document.getElementById('submit-post');
+    
+    let selectedImages = [];
+
+    writePostForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitButton.disabled = true;
+      submitButton.textContent = '업로드 중...';
+
+      try {
+        const nickname = document.getElementById('post-nickname').value.trim();
+        const title = document.getElementById('post-title').value.trim();
+        const content = document.getElementById('post-content').value.trim();
+
+        if (!nickname || !title || !content) {
+          throw new Error('모든 필드를 입력해주세요.');
+        }
+
+        // Upload images first
+        const imageUrls = [];
+        for (const image of selectedImages) {
+          try {
+            // Sanitize filename
+            const sanitizedFileName = image.name.replace(/[^a-zA-Z0-9.-]/g, '_');
+            const timestamp = Date.now();
+            const imageRef = ref(storage, `post-images/${timestamp}-${sanitizedFileName}`);
+            
+            // Set metadata for the upload
+            const metadata = {
+              contentType: image.type,
+              customMetadata: {
+                'uploadedBy': nickname
+              }
+            };
+
+            // Upload with metadata
+            await uploadBytes(imageRef, image, metadata);
+            const downloadURL = await getDownloadURL(imageRef);
+            imageUrls.push(downloadURL);
+          } catch (uploadError) {
+            console.error('Error uploading image:', uploadError);
+            // Continue with other images even if one fails
+            continue;
+          }
+        }
+
+        // Create post with image URLs
+        const postRef = await addDoc(collection(db, 'freeBoardPosts'), {
+          nickname,
+          title,
+          content,
+          imageUrls,
+          createdAt: serverTimestamp(),
+          recommends: 0,
+          commentCount: 0,
+          ipAddress: 'IP_정보_수집_필요'
+        });
+
+        // Redirect back to board
+        window.location.href = 'board.html';
+      } catch (error) {
+        console.error('Error creating post:', error);
+        alert(error.message || '글 작성에 실패했습니다.');
+        submitButton.disabled = false;
+        submitButton.textContent = '글 작성하기';
+      }
+    });
+
+    // Add file size and type validation
+    imageUpload.addEventListener('change', (e) => {
+      const files = Array.from(e.target.files);
+      const maxFileSize = 5 * 1024 * 1024; // 5MB
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+
+      files.forEach(file => {
+        if (!allowedTypes.includes(file.type)) {
+          alert('지원하지 않는 이미지 형식입니다. (지원 형식: JPG, PNG, GIF, WEBP)');
+          return;
+        }
+
+        if (file.size > maxFileSize) {
+          alert('이미지 크기는 5MB를 초과할 수 없습니다.');
+          return;
+        }
+
+        if (file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const imagePreview = document.createElement('div');
+            imagePreview.className = 'image-preview';
+            imagePreview.innerHTML = `
+              <img src="${e.target.result}" alt="Preview">
+              <button type="button" class="remove-image">×</button>
+            `;
+            imagePreviewContainer.appendChild(imagePreview);
+            selectedImages.push(file);
+
+            imagePreview.querySelector('.remove-image').addEventListener('click', () => {
+              const index = selectedImages.indexOf(file);
+              if (index > -1) {
+                selectedImages.splice(index, 1);
+              }
+              imagePreview.remove();
+            });
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    });
+  </script>
+</body>
+</html> 
