@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "㈜영원소와 함께하는 넥슨 라이브",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=2943158",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "5주년 쇼케이스 요약 및 향후 업데이트 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=2920836",
       "summary": "내용을 불러올 수 없습니다.",
@@ -10,13 +17,6 @@
     {
       "title": "(수정) 트레저 헌터",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=2904233",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "2025 KOREAN ESPORTS LEAGUE(KEL) 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=2897103",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -36,12 +36,12 @@
       "board_id": "442"
     },
     {
-      "title": "6/5(목) 신규 클래스 / 이벤트 안내 [ICON 크로니클]",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=445&thread=2914154",
+      "title": "6/12(목) 신규 클래스 안내 [UCL25 XI/STAR, UEL25 STAR]",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=445&thread=2942576",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "이벤트",
       "board_id": "445"
     }
   ],
-  "last_updated": "2025-06-11 06:37:25"
+  "last_updated": "2025-06-11 07:25:13"
 }
