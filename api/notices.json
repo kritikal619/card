@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "6/26(목) 점검 후 이슈 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=2989061",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "(쿠폰 안내) PB25 프로그램 힙합 챕터 주말 플레이 오류 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=2977297",
       "summary": "내용을 불러올 수 없습니다.",
@@ -15,14 +22,7 @@
       "board_id": "441"
     },
     {
-      "title": "6/19(목) 점검 후 이슈 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=2959612",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "6/26(목) 점검 안내 (오전 8시 ~ 오후 2시)",
+      "title": "(완료) 6/26(목) 점검 안내 (오전 8시 ~ 오후 2시)",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=2984822",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "업데이트",
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2025-06-26 04:35:58"
+  "last_updated": "2025-06-26 05:27:12"
 }
