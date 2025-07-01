@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "7/31(목) 일부 장기 휴면 감독님의 감독명 초기화 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=2894465",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "(추가) 6/26(목) 점검 후 이슈 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=2989061",
       "summary": "내용을 불러올 수 없습니다.",
@@ -10,13 +17,6 @@
     {
       "title": "게임 최대 프레임 옵션 설정 방법 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=2959490",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "(수정) 트레저 헌터",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=2904233",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2025-07-01 04:03:11"
+  "last_updated": "2025-07-01 05:29:24"
 }
