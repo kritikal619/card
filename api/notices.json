@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "트래핑의 신: Hot Summer",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3026459",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "7/4(금) 이벤트 센터 점검 안내 (오후 2시 30분 ~ 오후 3시)",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3014712",
       "summary": "내용을 불러올 수 없습니다.",
@@ -10,13 +17,6 @@
     {
       "title": "넥슨 라이브 판매 상품 정가 판매 종료 및 청약철회 일정 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=2999261",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "7/31(목) 일부 장기 휴면 감독님의 감독명 초기화 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=2894465",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2025-07-16 07:27:49"
+  "last_updated": "2025-07-16 08:36:20"
 }
