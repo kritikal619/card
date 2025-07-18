@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "(내용 추가) 트래핑의 신: Hot Summer 4P 보상 수령 임시 제한",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3043826",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "트래핑의 신: Hot Summer",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3026459",
       "summary": "내용을 불러올 수 없습니다.",
@@ -10,13 +17,6 @@
     {
       "title": "7/31(목) 일부 장기 휴면 감독님의 감독명 초기화 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=2894465",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "게임 최대 프레임 옵션 설정 방법 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=2959490",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -36,12 +36,12 @@
       "board_id": "442"
     },
     {
-      "title": "6/26(목) 신규 클래스 / 이벤트 안내 [25TOTS]",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=445&thread=2984083",
+      "title": "(완료) 7/10(목) 점검 안내 (오전 8시 ~ 낮 12시 40분)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3024393",
       "summary": "내용을 불러올 수 없습니다.",
-      "board": "이벤트",
-      "board_id": "445"
+      "board": "업데이트",
+      "board_id": "442"
     }
   ],
-  "last_updated": "2025-07-18 05:32:35"
+  "last_updated": "2025-07-18 06:40:02"
 }
