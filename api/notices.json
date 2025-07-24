@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "구매 멤버십 기준 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3038179",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "(내용 추가) 트래핑의 신: Hot Summer 4P 보상 수령 임시 제한",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3043826",
       "summary": "내용을 불러올 수 없습니다.",
@@ -10,13 +17,6 @@
     {
       "title": "트래핑의 신: Hot Summer",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3026459",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "7/31(목) 일부 장기 휴면 감독님의 감독명 초기화 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=2894465",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2025-07-23 23:27:40"
+  "last_updated": "2025-07-24 02:12:26"
 }
