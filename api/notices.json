@@ -8,13 +8,6 @@
       "board_id": "441"
     },
     {
-      "title": "테스트 쿠폰 노출 오류 현상 안내 (수정완료)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3078674",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
       "title": "(내용 추가) 🍀 럭키 리턴 🍀 (~8/31 23:59)",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3062949",
       "summary": "내용을 불러올 수 없습니다.",
@@ -22,15 +15,22 @@
       "board_id": "441"
     },
     {
-      "title": "8/7(목) 무점검 패치 안내 (오후 3시 45분 ~ 오후 3시 55분)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3081382",
+      "title": "AI 매치 이벤트 오류 쿠폰 보상 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3065756",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
+      "title": "8/7(목) 점검 안내 (오전 7시 ~ 오후 1시)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3077928",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "업데이트",
       "board_id": "442"
     },
     {
-      "title": "8/7(목) 점검 안내 (오전 7시 ~ 오후 1시)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3077928",
+      "title": "8/7(목) 무점검 패치 안내 (오후 3시 45분 ~ 오후 3시 55분)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3081382",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "업데이트",
       "board_id": "442"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2025-08-08 05:35:23"
+  "last_updated": "2025-08-08 06:42:57"
 }
