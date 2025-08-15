@@ -136,7 +136,7 @@
     const ICON_DEFAULT_PATH = 'icon.png';
 
     // Canvas Setup
-    const totalImages = 287; // Adjust if you have more blank cards
+    const totalImages = 304; // Adjust if you have more blank cards
     const canvas = document.getElementById('cardCanvas');
     const ctx = canvas.getContext('2d');
     const pipCanvas = document.getElementById('pipCanvas');
@@ -552,9 +552,9 @@ function downloadCardState() { /* … */ }
         const startImageLoad = (imgElement, src, key) => { if (src) { imagesToLoadCount++; imgElement.error = false; imgElement.loading = true; imgElement.onload = createLoadHandler(imgElement, key); imgElement.onerror = createErrorHandler(imgElement, key); imgElement.src = src; return true; } return false; };
 
         document.getElementById('cardTitleInput').value = s.cardTitle || '';
-        const blankCardPath = s.blankCard || `Blank/${getFileName(272)}`;
+        const blankCardPath = s.blankCard || `Blank/${getFileName(300)}`;
         $('#blankCardSelect').selectpicker('val', blankCardPath);
-        if ($('#blankCardSelect').val() === blankCardPath) { showLoading(); startImageLoad(baseCard, blankCardPath, 'base'); } else { console.warn("Saved blank card path invalid:", blankCardPath); $('#blankCardSelect').selectpicker('val', `Blank/${getFileName(264)}`); showLoading(); startImageLoad(baseCard, `Blank/${getFileName(264)}`, 'base'); }
+        if ($('#blankCardSelect').val() === blankCardPath) { showLoading(); startImageLoad(baseCard, blankCardPath, 'base'); } else { console.warn("Saved blank card path invalid:", blankCardPath); $('#blankCardSelect').selectpicker('val', `Blank/${getFileName(300)}`); showLoading(); startImageLoad(baseCard, `Blank/${getFileName(264)}`, 'base'); }
         if (s.ovr) { document.getElementById('ovr').value = s.ovr.value ?? 129; document.getElementById('ovrX').value = s.ovr.x ?? 88; document.getElementById('ovrY').value = s.ovr.y ?? 63; document.getElementById('ovrFontSize').value = s.ovr.fontSize ?? 35; document.getElementById('ovrFont').value = s.ovr.font ?? 'FontA'; document.getElementById('ovrColor').value = s.ovr.color ?? '#FFD700'; }
         if (s.position) { document.getElementById('position').value = s.position.value ?? 'ST'; document.getElementById('posX').value = s.position.x ?? 78; document.getElementById('posY').value = s.position.y ?? 89; document.getElementById('posFontSize').value = s.position.fontSize ?? 19; document.getElementById('posFont').value = s.position.font ?? 'FontD'; document.getElementById('posColor').value = s.position.color ?? '#FFFFFF'; }
         if (s.playerName) { document.getElementById('playerName').value = s.playerName.value ?? 'R.레반도프스키'; document.getElementById('nameX').value = s.playerName.x ?? 150; document.getElementById('nameY').value = s.playerName.y ?? 218; document.getElementById('nameFontSize').value = s.playerName.fontSize ?? 20; document.getElementById('nameFont').value = s.playerName.font ?? 'FontC'; document.getElementById('nameColor').value = s.playerName.color ?? '#FFFFFF'; }
