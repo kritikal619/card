@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "2025 NEXON ICONS MATCH 티켓 당첨자 대상 티켓 수령 방법 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3114406",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "(추가) 이벤트 센터 정상화 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3097387",
       "summary": "내용을 불러올 수 없습니다.",
@@ -15,22 +22,15 @@
       "board_id": "441"
     },
     {
-      "title": "8/14(목) 점검 후 이슈 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3093478",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "(완료) 8/21(목) 점검 안내 (오전 8시 ~ 오후 2시)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3100304",
+      "title": "8/28(목) 점검 안내 (오전 6시 ~ 오후 2시)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3114392",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "업데이트",
       "board_id": "442"
     },
     {
-      "title": "(완료) 8/14(목) 점검 안내 (오전 8시 ~ 오후 1시)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3090456",
+      "title": "(완료) 8/21(목) 점검 안내 (오전 8시 ~ 오후 2시)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3100304",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "업데이트",
       "board_id": "442"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2025-08-26 06:38:17"
+  "last_updated": "2025-08-26 07:25:14"
 }
