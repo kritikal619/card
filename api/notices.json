@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "👊 SUPER POWER UP 👊 (~10/2 23:59)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3114243",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "2025 NEXON ICONS MATCH 티켓 당첨자 대상 티켓 수령 방법 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3114406",
       "summary": "내용을 불러올 수 없습니다.",
@@ -10,13 +17,6 @@
     {
       "title": "(추가) 이벤트 센터 정상화 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3097387",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "8-9월 업데이트 로드맵 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3091501",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -36,12 +36,12 @@
       "board_id": "442"
     },
     {
-      "title": "8/21(목) 신규 클래스 / 이벤트 안내 [ZLATAN ICON 크로니클]",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=445&thread=3079684",
+      "title": "8/28(목) 신규 이벤트 안내 [ICONS MATCH 25]",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=445&thread=3114042",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "이벤트",
       "board_id": "445"
     }
   ],
-  "last_updated": "2025-08-27 07:23:55"
+  "last_updated": "2025-08-27 08:32:50"
 }
