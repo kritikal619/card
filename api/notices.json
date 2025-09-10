@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "[ICONS MATCH] 프랭크 리베리 선수 참석 불가 및 프로그램 토큰 교환 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3133922",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "9/4(목) 점검 후 이슈 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3126439",
       "summary": "내용을 불러올 수 없습니다.",
@@ -10,13 +17,6 @@
     {
       "title": "SPECIAL COMBO 1탄 with 2025 ICONS MATCH (~10/2 점검 전)",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3118738",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "(추가) 8/28(목) 점검 후 이슈 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3117173",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2025-09-10 09:25:58"
+  "last_updated": "2025-09-10 10:25:10"
 }
