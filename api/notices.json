@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "[ZLATAN ICON 크로니클] 챕터2 오류 및 쿠폰보상 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3153062",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "🌕 달빛 리턴 🌕",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3148392",
       "summary": "내용을 불러올 수 없습니다.",
@@ -10,13 +17,6 @@
     {
       "title": "SPECIAL COMBO 2탄 with 한가위 (~10/23 점검 전)",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3142496",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "(내용 추가) 9/18(목) 점검 후 이슈 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3142242",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2025-09-25 09:27:01"
+  "last_updated": "2025-09-25 10:26:49"
 }
