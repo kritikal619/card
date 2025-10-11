@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "[FCA26] 주간 컵대회 참여 횟수가 초기화 되지 않는 현상 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3177709",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "손흥민과 함께 추석 대잔치 이벤트 보상 관련 이슈 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3174572",
       "summary": "내용을 불러올 수 없습니다.",
@@ -10,13 +17,6 @@
     {
       "title": "추석 연휴 이벤트 & 4분기 업데이트 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3165038",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "미스터리 에그 : 달걀 농장 (~11/06 점검 전)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3161688",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2025-10-11 07:20:40"
+  "last_updated": "2025-10-11 08:28:33"
 }
