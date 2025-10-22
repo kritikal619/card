@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "손흥민과 함께 추석 대잔치 이벤트 이슈 케이스 별 상세 교환 방법 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3189424",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "(내용 추가) 손흥민과 함께 추석 대잔치 이벤트 이슈 후속 대응안 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3184465",
       "summary": "내용을 불러올 수 없습니다.",
@@ -10,13 +17,6 @@
     {
       "title": "[FCA26] 챕터2 일일 보상 잠김 현상 관련 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3184977",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "(내용 추가) 10/15(수) 비정상적인 게임 이용 행위 제재 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3183043",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2025-10-22 07:25:25"
+  "last_updated": "2025-10-22 08:36:24"
 }
