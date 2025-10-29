@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "손흥민과 함께 추석 대잔치 이벤트 이슈 최종 대응안 및 보상 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3201790",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "🍁 단풍 POWER UP 🍁",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3198960",
       "summary": "내용을 불러올 수 없습니다.",
@@ -8,15 +15,8 @@
       "board_id": "441"
     },
     {
-      "title": "손흥민과 함께 추석 대잔치 이벤트 이슈 관련 추가 대응안 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3192948",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "손흥민과 함께 추석 대잔치 이벤트 이슈 케이스 별 상세 교환 방법 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3189424",
+      "title": "추석 연휴 이벤트 & 4분기 업데이트 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3165038",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2025-10-29 10:28:52"
+  "last_updated": "2025-10-29 11:22:57"
 }
