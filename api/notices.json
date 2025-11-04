@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "11/6(목) 점검 안내 (오전 8시 ~ 오후 1시)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3210743",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "10/30(목) 점검 후 이슈 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3203161",
       "summary": "내용을 불러올 수 없습니다.",
@@ -10,13 +17,6 @@
     {
       "title": "(내용 추가) 손흥민과 함께 추석 대잔치 이벤트 이슈 최종 대응안 및 보상 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3201790",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "🍁 단풍 POWER UP 🍁",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3198960",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2025-11-04 05:26:17"
+  "last_updated": "2025-11-04 06:38:43"
 }
