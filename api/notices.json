@@ -1,7 +1,14 @@
 {
   "notices": [
     {
-      "title": "11/20(목) 로스터 업데이트 안내",
+      "title": "11/6(목) 점검 후 이슈 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3215053",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
+      "title": "(추가) 11/20(목) 로스터 업데이트 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3213521",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
@@ -10,13 +17,6 @@
     {
       "title": "트레저 헌터 : 폭탄광",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3209333",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "10/30(목) 점검 후 이슈 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3203161",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2025-11-07 04:30:05"
+  "last_updated": "2025-11-07 05:26:07"
 }
