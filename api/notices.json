@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "일부 페이지 일시적인 접속 불안정 현상 및 엪모 러닝클럽 이벤트 이슈 추가 수정 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3225741",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "(수정 완료) 엪모 러닝클럽 이벤트 플레이 횟수가 누적되지 않는 현상",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3225494",
       "summary": "내용을 불러올 수 없습니다.",
@@ -10,13 +17,6 @@
     {
       "title": "11/6(목) 점검 후 이슈 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3215053",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "(추가) 11/20(목) 로스터 업데이트 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3213521",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2025-11-14 05:26:05"
+  "last_updated": "2025-11-14 06:39:06"
 }
