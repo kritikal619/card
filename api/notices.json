@@ -22,6 +22,13 @@
       "board_id": "441"
     },
     {
+      "title": "11/20(목) 점검 안내 (오전 4시 30분 ~ 오후 2시)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3253362",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "업데이트",
+      "board_id": "442"
+    },
+    {
       "title": "(완료) 11/13(목) 점검 안내 (오전 8시 ~ 낮 12시)",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3219649",
       "summary": "내용을 불러올 수 없습니다.",
@@ -29,19 +36,12 @@
       "board_id": "442"
     },
     {
-      "title": "(완료) 11/6(목) 점검 안내 (오전 8시 ~ 낮 12시 35분)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3210743",
+      "title": "11/6(목) 신규 클래스 / 이벤트 안내 [Captains 26]",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=445&thread=3202834",
       "summary": "내용을 불러올 수 없습니다.",
-      "board": "업데이트",
-      "board_id": "442"
-    },
-    {
-      "title": "(완료) 10/30(목) 점검 안내 (오전 8시 ~ 오후 1시)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3200534",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "업데이트",
-      "board_id": "442"
+      "board": "이벤트",
+      "board_id": "445"
     }
   ],
-  "last_updated": "2025-11-18 08:35:28"
+  "last_updated": "2025-11-18 09:29:19"
 }
