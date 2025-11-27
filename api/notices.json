@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "11/27(목) 점검 후 이슈 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3275632",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "🍀 럭키 리턴 : WINTER 🍀(~26/1/15 점검 전)",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3260454",
       "summary": "내용을 불러올 수 없습니다.",
@@ -15,14 +22,7 @@
       "board_id": "441"
     },
     {
-      "title": "🗝️ 글로리 스페셜 찬스 🗝️ (~12/25 00:00)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3253109",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "11/27(목) 점검 안내 (오전 8시 ~ 오후 1시)",
+      "title": "(완료) 11/27(목) 점검 안내 (오전 8시 ~ 낮 12시 40분)",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3272644",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "업데이트",
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2025-11-27 03:18:01"
+  "last_updated": "2025-11-27 04:32:40"
 }
