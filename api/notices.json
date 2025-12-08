@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "12/8(월) 게임 접속 오류 현상 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3299975",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "12/4(목) 점검 후 이슈 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3295707",
       "summary": "내용을 불러올 수 없습니다.",
@@ -15,22 +22,15 @@
       "board_id": "441"
     },
     {
-      "title": "🍀 럭키 리턴 : WINTER 🍀(~26/1/15 점검 전)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3260454",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "(완료) 12/4(목) 점검 안내 (오전 8시 ~ 낮 12시 20분)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3293395",
+      "title": "12/8(월) 임시 점검 안내 (낮 12시 55분 ~ 오후 4시)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3300015",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "업데이트",
       "board_id": "442"
     },
     {
-      "title": "12/1(월) 무점검 패치 (오후 3시 ~ 오후 3시 10분)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3292332",
+      "title": "(완료) 12/4(목) 점검 안내 (오전 8시 ~ 낮 12시 20분)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3293395",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "업데이트",
       "board_id": "442"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2025-12-08 02:05:17"
+  "last_updated": "2025-12-08 03:58:19"
 }
