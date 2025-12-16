@@ -1,25 +1,32 @@
 {
   "notices": [
     {
-      "title": "12/11(목) 점검 후 이슈 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3303394",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "12/8(월) 임시점검 보상 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3300081",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
       "title": "12/4(목) 점검 후 이슈 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3295707",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
+    },
+    {
+      "title": "🍀 럭키 리턴 : WINTER 🍀(~26/1/15 점검 전)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3260454",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
+      "title": "🗝️ 글로리 스페셜 찬스 🗝️ (~12/25 00:00)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3253109",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
+      "title": "12/18(목) 점검 안내 (오전 7시 ~ 오후 3시)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3310706",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "업데이트",
+      "board_id": "442"
     },
     {
       "title": "12/11(목) 무점검 패치 (오후 1시 20분 ~ 오후 1시 30분)",
@@ -29,19 +36,12 @@
       "board_id": "442"
     },
     {
-      "title": "(완료) 12/11(목) 점검 안내 (오전 8시 ~ 낮 12시 10분)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3301333",
+      "title": "(챕터5 추가) 11/20(목) 신규 클래스 / 이벤트 안내 [Glorious Eras 26]",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=445&thread=3221220",
       "summary": "내용을 불러올 수 없습니다.",
-      "board": "업데이트",
-      "board_id": "442"
-    },
-    {
-      "title": "(완료) 12/8(월) 임시 점검 안내 (낮 12시 55분 ~ 오후 4시)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3300015",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "업데이트",
-      "board_id": "442"
+      "board": "이벤트",
+      "board_id": "445"
     }
   ],
-  "last_updated": "2025-12-16 07:29:38"
+  "last_updated": "2025-12-16 08:39:43"
 }
