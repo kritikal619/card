@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "12/18(목) 이벤트 센터 점검 연장 안내 (~오후 5시)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3314777",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "(추가) 트래핑의 신: WINTER SEASON",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3304596",
       "summary": "내용을 불러올 수 없습니다.",
@@ -10,13 +17,6 @@
     {
       "title": "넥슨 히어로 2025년 기부 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3312082",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "12/4(목) 점검 후 이슈 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3295707",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2025-12-18 05:30:32"
+  "last_updated": "2025-12-18 06:42:09"
 }
