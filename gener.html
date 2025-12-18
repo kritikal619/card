@@ -18,13 +18,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css">
 
-  <!-- fcmData와 facedata 불러오기-->
-   
-  <script src="faceData.js"></script>
-  <script src="faceData2.js"></script>
-  
-
-    <!-- 이미 분리해두신 fcmData.js -->
+  <!-- fcmData (기존 선수 메타 데이터) -->
   <script src="fcmData.js"></script>
 
     <!-- 메인 로직 (리사이즈 핸들, 드로잉 등) -->
@@ -81,7 +75,7 @@
   <!-- Editor Form Sections -->
   <div class="form-group"> <label for="blankCardSelect">빈카드 선택</label> <select id="blankCardSelect" class="selectpicker" data-live-search="true" data-width="100%"></select> </div>
   <fieldset> <legend>오버롤 설정</legend> <div class="form-group"> <label for="ovr">오버롤</label> <input type="number" id="ovr" min="0" max="9999999999" value="129"> <label class="mt-2">좌표 (X, Y)</label> <div class="coord-inputs"> <input type="number" id="ovrX" aria-label="OVR X coordinate" placeholder="X" value="88"> <input type="number" id="ovrY" aria-label="OVR Y coordinate" placeholder="Y" value="63"> </div> </div> <div class="form-group"> <label for="ovrFontSize">오버롤 폰트 크기</label> <input type="number" id="ovrFontSize" placeholder="Font Size" value="35"> </div> <div class="form-group"> <label for="ovrFont">오버롤 폰트</label> <select id="ovrFont"> <option value="FontA" selected>FC모바일 오버롤 폰트</option> <option value="FontB">피파모바일 폰트</option> </select> </div> <div class="form-group"> <label for="ovrColor">오버롤 폰트 색상</label> <input type="color" id="ovrColor" value="#FFD700" title="오버롤 색상 선택"> </div> </fieldset>
-  <fieldset> <legend>포지션 설정</legend> <div class="form-group"> <label for="position">포지션</label> <select id="position"> <option value="LW">LW</option> <option value="ST" selected>ST</option> <option value="RW">RW</option> <option value="CF">CF</option> <option value="LF">LF</option> <option value="RF">RF</option> <option value="CM">CM</option> <option value="RM">RM</option> <option value="LM">LM</option> <option value="CDM">CDM</option> <option value="CAM">CAM</option> <option value="LB">LB</option> <option value="CB">CB</option> <option value="RB">RB</option> <option value="GK">GK</option> </select> <label class="mt-2">좌표 (X, Y)</label> <div class="coord-inputs"> <input type="number" id="posX" aria-label="Position X coordinate" placeholder="X" value="86"> <input type="number" id="posY" aria-label="Position Y coordinate" placeholder="Y" value="89"> </div> </div> <div class="form-group"> <label for="posFont">포지션 폰트</label> <select id="posFont"> <option value="FontD">포지션 폰트</option> </select> </div> <div class="form-group"> <label for="posFontSize">포지션 폰트 크기</label> <input type="number" id="posFontSize" placeholder="Font Size" value="19"> </div> <div class="form-group"> <label for="posColor">포지션 폰트 색상</label> <input type="color" id="posColor" value="#FFFFFF" title="포지션 색상 선택"> </div> </fieldset>
+  <fieldset> <legend>포지션 설정</legend> <div class="form-group"> <label for="position">포지션</label> <select id="position"> <option value="LW">LW</option> <option value="ST" selected>ST</option> <option value="RW">RW</option> <option value="CF">CF</option> <option value="LF">LF</option> <option value="RF">RF</option> <option value="CM">CM</option> <option value="RM">RM</option> <option value="LM">LM</option> <option value="CDM">CDM</option> <option value="CAM">CAM</option> <option value="LB">LB</option> <option value="CB">CB</option> <option value="RB">RB</option> <option value="GK">GK</option> </select> <label class="mt-2">좌표 (X, Y)</label> <div class="coord-inputs"> <input type="number" id="posX" aria-label="Position X coordinate" placeholder="X" value="78"> <input type="number" id="posY" aria-label="Position Y coordinate" placeholder="Y" value="89"> </div> </div> <div class="form-group"> <label for="posFont">포지션 폰트</label> <select id="posFont"> <option value="FontD">포지션 폰트</option> </select> </div> <div class="form-group"> <label for="posFontSize">포지션 폰트 크기</label> <input type="number" id="posFontSize" placeholder="Font Size" value="19"> </div> <div class="form-group"> <label for="posColor">포지션 폰트 색상</label> <input type="color" id="posColor" value="#FFFFFF" title="포지션 색상 선택"> </div> </fieldset>
   <fieldset> <legend>선수 이름 설정</legend> <div class="form-group"> <label for="playerName">선수 이름</label> <input type="text" id="playerName" value="R.레반도프스키"> <label class="mt-2">좌표 (X, Y)</label> <div class="coord-inputs"> <input type="number" id="nameX" aria-label="Name X coordinate" placeholder="X" value="150"> <input type="number" id="nameY" aria-label="Name Y coordinate" placeholder="Y" value="218"> </div> </div> <div class="form-group"> <label for="nameFont">이름 폰트</label> <select id="nameFont"> <option value="FontC" selected>이름 폰트</option> </select> </div> <div class="form-group"> <label for="nameFontSize">이름 폰트 크기</label> <input type="number" id="nameFontSize" placeholder="Font Size" value="20"> </div> <div class="form-group"> <label for="nameColor">이름 폰트 색상</label> <input type="color" id="nameColor" value="#FFFFFF" title="이름 색상 선택"> </div> </fieldset>
   <div class="form-group"> <label for="flagSelect">국기 선택</label> <select id="flagSelect" class="selectpicker" data-live-search="true" data-width="100%" title="국기를 선택하세요..."></select> <label class="mt-2">좌표 (X, Y)</label> <div class="coord-inputs"> <input type="number" id="flagX" aria-label="Flag X coordinate" placeholder="X" value="30"> <input type="number" id="flagY" aria-label="Flag Y coordinate" placeholder="Y" value="30"> </div> <label class="mt-2">크기 (Width, Height)</label> <div class="coord-inputs"> <input type="number" id="flagUploadWidth" aria-label="Flag width" placeholder="Width" value="40"> <input type="number" id="flagUploadHeight" aria-label="Flag height" placeholder="Height" value="40"> </div> <button class="btn btn-danger btn-sm delete-btn" onclick="removeFlag()">국기 삭제</button> </div>
   <div class="form-group"> <label for="seasonUploadInput">시즌 아이콘 업로드</label> <input type="file" class="form-control" id="seasonUploadInput" accept="image/*"> <label class="mt-2">좌표 (X, Y)</label> <div class="coord-inputs"> <input type="number" id="seasonX" aria-label="Season X coordinate" placeholder="X" value="200"> <input type="number" id="seasonY" aria-label="Season Y coordinate" placeholder="Y" value="250"> </div> <label class="mt-2">크기 (Width, Height)</label> <div class="coord-inputs"> <input type="number" id="seasonUploadWidth" aria-label="Season width" placeholder="Width" value="40"> <input type="number" id="seasonUploadHeight" aria-label="Season height" placeholder="Height" value="40"> </div> <button class="btn btn-danger btn-sm delete-btn" onclick="removeSeason()">시즌 아이콘 삭제</button> </div>
@@ -92,10 +86,42 @@
     <div class="form-group">
       <label for="photoInput">1. 미니 페이스온 직접 업로드</label>
       <input type="file" class="form-control" id="photoInput" accept="image/*">
+      <div class="form-check mt-2">
+        <input class="form-check-input" type="checkbox" value="" id="miricanvasEffect">
+        <label class="form-check-label" for="miricanvasEffect">
+          미리캔버스 효과 적용 (업로드 이미지 전용)
+        </label>
+      </div>
+      <div class="form-check mt-2">
+        <input class="form-check-input" type="checkbox" value="" id="gradientMaskEnabled">
+        <label class="form-check-label" for="gradientMaskEnabled">
+          그라데이션 마스크 적용 (업로드 이미지 전용)
+        </label>
+      </div>
+      <div id="gradientMaskControls" class="mt-2" style="display:none;">
+        <label class="form-label">타입</label>
+        <select id="gradientMaskType" class="form-select form-select-sm">
+          <option value="linear" selected>선형</option>
+          <option value="radial">원형</option>
+        </select>
+        <div class="mt-2">
+          <label class="form-label d-flex justify-content-between align-items-center">
+            <span>방향 (°)</span><span id="gradientMaskAngleValue">180°</span>
+          </label>
+          <input type="range" class="form-range" id="gradientMaskAngle" min="0" max="360" step="1" value="180">
+        </div>
+        <div class="mt-2">
+          <label class="form-label d-flex justify-content-between align-items-center">
+            <span>범위 (%)</span><span id="gradientMaskRangeValue">40%</span>
+          </label>
+          <input type="range" class="form-range" id="gradientMaskRange" min="0" max="100" step="1" value="40">
+        </div>
+      </div>
     </div>
     <div class="form-group">
-      <label for="playerSelect">2. 선수 선택 (페이스온 목록)</label>
+      <label for="playerSelect">2. 선수 선택 (player_data.json)</label>
       <select id="playerSelect" class="selectpicker" data-live-search="true" data-width="100%" title="선수 이름 검색..."></select>
+      <small class="text-muted">fastcrawl.py로 만든 player_data.json의 pimage를 사용합니다.</small>
     </div>
     <div class="form-group" id="faceVersionGroup" style="display: none;"> <!-- Initially hidden -->
       <label for="faceVersionSelect">3. 페이스온 버전 선택</label>
@@ -132,11 +158,39 @@
     // --- Constants and Globals ---
     const FLAG_BASE_URL = "https://flagcdn.com/w40/"; const FLAG_EXTENSION = ".png";
     // FACEON_BASE_URL and FACEON_EXTENSION are no longer needed
-    const countryFlags = { "대한민국 (South Korea)": "kr", "미국 (USA)": "us", "독일 (Germany)": "de", "프랑스 (France)": "fr", "영국 (UK)": "gb", "스페인 (Spain)": "es", "이탈리아 (Italy)": "it", "브라질 (Brazil)": "br", "아르헨티나 (Argentina)": "ar", "포르투갈 (Portugal)": "pt", "네덜란드 (Netherlands)": "nl", "벨기에 (Belgium)": "be", "일본 (Japan)": "jp", "크로아티아 (Croatia)": "hr", "우루과이 (Uruguay)": "uy", "멕시코 (Mexico)": "mx", "폴란드 (Poland)": "pl", "캐나다 (Canada)": "ca", "스위스 (Switzerland)": "ch", "스웨덴 (Sweden)": "se", "노르웨이 (Norway)": "no", "덴마크 (Denmark)": "dk", "오스트리아 (Austria)": "at", "나이지리아 (Nigeria)": "ng", "세네갈 (Senegal)": "sn", "이집트 (Egypt)": "eg", "가나 (Ghana)": "gh", "모로코 (Morocco)": "ma", "콜롬비아 (Colombia)": "co", "칠레 (Chile)": "cl", "카메룬 (Cameroon)": "cm", "코트디부아르 (Ivory Coast)": "ci", "세르비아 (Serbia)": "rs", };
+    const countryFlags = {
+      "대한민국 (South Korea)": "kr", "미국 (USA)": "us", "독일 (Germany)": "de", "프랑스 (France)": "fr", "영국 (UK)": "gb",
+      "스페인 (Spain)": "es", "이탈리아 (Italy)": "it", "브라질 (Brazil)": "br", "아르헨티나 (Argentina)": "ar", "포르투갈 (Portugal)": "pt",
+      "네덜란드 (Netherlands)": "nl", "벨기에 (Belgium)": "be", "일본 (Japan)": "jp", "크로아티아 (Croatia)": "hr", "우루과이 (Uruguay)": "uy",
+      "멕시코 (Mexico)": "mx", "폴란드 (Poland)": "pl", "캐나다 (Canada)": "ca", "스위스 (Switzerland)": "ch", "스웨덴 (Sweden)": "se",
+      "노르웨이 (Norway)": "no", "덴마크 (Denmark)": "dk", "오스트리아 (Austria)": "at", "나이지리아 (Nigeria)": "ng", "세네갈 (Senegal)": "sn",
+      "이집트 (Egypt)": "eg", "가나 (Ghana)": "gh", "모로코 (Morocco)": "ma", "콜롬비아 (Colombia)": "co", "칠레 (Chile)": "cl",
+      "카메룬 (Cameroon)": "cm", "코트디부아르 (Ivory Coast)": "ci", "세르비아 (Serbia)": "rs",
+      // 추가 국기
+      "호주 (Australia)": "au", "뉴질랜드 (New Zealand)": "nz", "러시아 (Russia)": "ru", "우크라이나 (Ukraine)": "ua", "체코 (Czech Republic)": "cz",
+      "슬로바키아 (Slovakia)": "sk", "헝가리 (Hungary)": "hu", "루마니아 (Romania)": "ro", "불가리아 (Bulgaria)": "bg", "그리스 (Greece)": "gr",
+      "터키 (Turkey)": "tr", "이스라엘 (Israel)": "il", "사우디아라비아 (Saudi Arabia)": "sa", "카타르 (Qatar)": "qa", "아랍에미리트 (UAE)": "ae",
+      "이라크 (Iraq)": "iq", "이란 (Iran)": "ir", "중국 (China)": "cn", "홍콩 (Hong Kong)": "hk", "대만 (Taiwan)": "tw",
+      "베트남 (Vietnam)": "vn", "태국 (Thailand)": "th", "말레이시아 (Malaysia)": "my", "인도네시아 (Indonesia)": "id", "필리핀 (Philippines)": "ph",
+      "인도 (India)": "in", "파키스탄 (Pakistan)": "pk", "방글라데시 (Bangladesh)": "bd", "싱가포르 (Singapore)": "sg",
+      "핀란드 (Finland)": "fi", "아일랜드 (Ireland)": "ie", "웨일스 (Wales)": "gb-wls", "스코틀랜드 (Scotland)": "gb-sct",
+      "코스타리카 (Costa Rica)": "cr", "파나마 (Panama)": "pa", "온두라스 (Honduras)": "hn", "과테말라 (Guatemala)": "gt",
+      "에콰도르 (Ecuador)": "ec", "페루 (Peru)": "pe", "파라과이 (Paraguay)": "py", "베네수엘라 (Venezuela)": "ve", "볼리비아 (Bolivia)": "bo",
+      "알제리 (Algeria)": "dz", "튀니지 (Tunisia)": "tn", "콩고 민주 공화국 (DR Congo)": "cd", "남아프리카 공화국 (South Africa)": "za"
+    };
     const ICON_DEFAULT_PATH = 'icon.png';
+    const PLAYER_DATA_URL = 'player_data.json'; // fastcrawl.py 결과물
+    let playerData = [];
+    let isPhotoFromUpload = false;
+    let useMiricanvasEffect = false;
+    let useGradientMask = false;
+    let gradientMaskType = 'linear';
+    let gradientMaskAngle = 180;
+    let gradientMaskRange = 40; // percent
+    let isRestoringState = false;
 
     // Canvas Setup
-    const totalImages = 304; // Adjust if you have more blank cards
+    const totalImages = 276; // Adjust if you have more blank cards
     const canvas = document.getElementById('cardCanvas');
     const ctx = canvas.getContext('2d');
     const pipCanvas = document.getElementById('pipCanvas');
@@ -145,6 +199,14 @@
     const canvasWidth = 300, canvasHeight = 300;
     canvas.width = canvasWidth; canvas.height = canvasHeight;
     pipCanvas.width = canvasWidth; pipCanvas.height = canvasHeight;
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => {
+            drawCard();
+            updatePipPreview();
+        }).catch(() => {
+            // Ignore font readiness failures, proceed with normal draw flow
+        });
+    }
 
     // Image Elements & State
     let baseCard = new Image();     baseCard.crossOrigin = "anonymous";
@@ -168,7 +230,8 @@
 
     const imageOnLoad = function(img, aspectRatioKey) { hideLoading(); if (img.width > 0 && img.height > 0) { aspectRatios[aspectRatioKey] = img.width / img.height; } else { aspectRatios[aspectRatioKey] = undefined; img.error = true; console.warn(`Image ${aspectRatioKey} invalid dims`); } img.error = false; img.loading = false; drawCard(); };
     const imageOnError = function(img, aspectRatioKey) { console.error(`Failed load ${aspectRatioKey}: ${img.src}`); aspectRatios[aspectRatioKey] = undefined; img.error = true; img.loading = false; hideLoading(); drawCard(); };
-    baseCard.onload = () => { hideLoading(); drawCard(); }; baseCard.onerror = () => { console.error("Failed base card load"); hideLoading(); drawCard(); };
+    baseCard.onload = () => { hideLoading(); applyAutoThemeFromCard(); drawCard(); };
+    baseCard.onerror = () => { console.error("Failed base card load"); hideLoading(); drawCard(); };
     customFlag.onload = () => imageOnLoad(customFlag, 'flag'); customFlag.onerror = () => imageOnError(customFlag, 'flag');
     customSeason.onload = () => imageOnLoad(customSeason, 'season'); customSeason.onerror = () => imageOnError(customSeason, 'season');
     customPhoto.onload = () => imageOnLoad(customPhoto, 'photo'); customPhoto.onerror = () => imageOnError(customPhoto, 'photo'); // Shared handler
@@ -179,6 +242,71 @@
     function getFileName(number) { return `image(${number}).png`; }
     function updatePipPreview() { pipCtx.clearRect(0, 0, pipCanvas.width, pipCanvas.height); pipCtx.drawImage(canvas, 0, 0, pipCanvas.width, pipCanvas.height); }
 
+    function applyAutoThemeFromCard() {
+        if (isRestoringState) return;
+        if (!baseCard || !baseCard.complete || baseCard.error) return;
+
+        // Sample dominant brightness from the upper third of the card
+        const sampleW = 60, sampleH = 90;
+        const tmp = document.createElement('canvas');
+        tmp.width = sampleW; tmp.height = sampleH;
+        const tctx = tmp.getContext('2d');
+        tctx.drawImage(baseCard, 0, 0, sampleW, sampleH);
+        const data = tctx.getImageData(0, 0, sampleW, sampleH).data;
+        let rSum = 0, gSum = 0, bSum = 0;
+        for (let i = 0; i < data.length; i += 4) {
+            rSum += data[i]; gSum += data[i + 1]; bSum += data[i + 2];
+        }
+        const count = data.length / 4;
+        const avgR = rSum / count, avgG = gSum / count, avgB = bSum / count;
+        const luminance = 0.2126 * avgR + 0.7152 * avgG + 0.0722 * avgB;
+        const isDarkCard = luminance < 140;
+
+        // Position presets (relative to canvas 300x300)
+        const ovrX = Math.round(canvasWidth * 0.28);
+        const ovrY = Math.round(canvasHeight * 0.22);
+        const posX = Math.round(canvasWidth * 0.26);
+        const posY = Math.round(canvasHeight * 0.31);
+        const nameX = Math.round(canvasWidth * 0.52);
+        const nameY = Math.round(canvasHeight * 0.73);
+
+        // Color presets inspired by renderz style
+        const ovrColor = isDarkCard ? '#FFD34D' : '#0E2242';
+        const posColor = isDarkCard ? '#F2F5FF' : '#1B2D4A';
+        const nameColor = isDarkCard ? '#FFFFFF' : '#111111';
+
+        document.getElementById('ovrX').value = ovrX;
+        document.getElementById('ovrY').value = ovrY;
+        document.getElementById('posX').value = posX;
+        document.getElementById('posY').value = posY;
+        document.getElementById('nameX').value = nameX;
+        document.getElementById('nameY').value = nameY;
+
+        document.getElementById('ovrColor').value = ovrColor;
+        document.getElementById('posColor').value = posColor;
+        document.getElementById('nameColor').value = nameColor;
+    }
+
+    function setPhotoSource(uploaded) {
+        isPhotoFromUpload = uploaded;
+        const effectToggle = document.getElementById('miricanvasEffect');
+        const gradToggle = document.getElementById('gradientMaskEnabled');
+        const gradControls = document.getElementById('gradientMaskControls');
+        if (!effectToggle) return;
+        if (uploaded) {
+            effectToggle.disabled = false;
+            if (gradToggle) gradToggle.disabled = false;
+            if (gradControls) gradControls.style.display = gradToggle?.checked ? 'block' : 'none';
+        } else {
+            useMiricanvasEffect = false;
+            effectToggle.checked = false;
+            effectToggle.disabled = true;
+            useGradientMask = false;
+            if (gradToggle) { gradToggle.checked = false; gradToggle.disabled = true; }
+            if (gradControls) gradControls.style.display = 'none';
+        }
+    }
+
     function getImageParams(key) { switch (key) { case 'flag': return { x: +document.getElementById('flagX').value, y: +document.getElementById('flagY').value, width: +document.getElementById('flagUploadWidth').value, height: +document.getElementById('flagUploadHeight').value, name: key }; case 'season': return { x: +document.getElementById('seasonX').value, y: +document.getElementById('seasonY').value, width: +document.getElementById('seasonUploadWidth').value, height: +document.getElementById('seasonUploadHeight').value, name: key }; case 'photo': return { x: +document.getElementById('photoX').value, y: +document.getElementById('photoY').value, width: +document.getElementById('photoWidth').value, height: +document.getElementById('photoHeight').value, name: key }; case 'icon': return { x: +document.getElementById('iconX').value, y: +document.getElementById('iconY').value, width: +document.getElementById('iconWidth').value, height: +document.getElementById('iconHeight').value, name: key }; default: return null; } }
     function getImageObject(key) { switch (key) { case 'flag': return customFlag; case 'season': return customSeason; case 'photo': return customPhoto; case 'icon': return customIcon; default: return null; } }
     function getInputElements(key) { switch (key) { case 'flag': return { xE: document.getElementById('flagX'), yE: document.getElementById('flagY'), wE: document.getElementById('flagUploadWidth'), hE: document.getElementById('flagUploadHeight') }; case 'season': return { xE: document.getElementById('seasonX'), yE: document.getElementById('seasonY'), wE: document.getElementById('seasonUploadWidth'), hE: document.getElementById('seasonUploadHeight') }; case 'photo': return { xE: document.getElementById('photoX'), yE: document.getElementById('photoY'), wE: document.getElementById('photoWidth'), hE: document.getElementById('photoHeight') }; case 'icon': return { xE: document.getElementById('iconX'), yE: document.getElementById('iconY'), wE: document.getElementById('iconWidth'), hE: document.getElementById('iconHeight') }; default: return null; } }
@@ -187,9 +315,43 @@
     function populateBlankCardDropdown() { const select = document.getElementById('blankCardSelect'); select.innerHTML = ''; for (let i = 1; i <= totalImages; i++) { const option = document.createElement('option'); const imagePath = `Blank/${getFileName(i)}`; option.value = imagePath; option.setAttribute('data-content', `<img src="${imagePath}" style="width:30px;height:auto;vertical-align:middle; margin-right: 5px;"> Card ${i}`); if (i === 264) option.selected = true; select.appendChild(option); } $(select).selectpicker('refresh'); select.addEventListener('change', function() { const cardPath = select.value; if (cardPath) { showLoading(); baseCard.src = cardPath; } }); }
     function populateFlagDropdown() { const select = document.getElementById('flagSelect'); select.innerHTML = ''; const defaultOption = document.createElement('option'); defaultOption.value = ""; defaultOption.textContent = "국기 선택 안 함"; select.appendChild(defaultOption); const sortedCountryNames = Object.keys(countryFlags).sort((a, b) => a.localeCompare(b, 'ko')); sortedCountryNames.forEach(countryName => { const countryCode = countryFlags[countryName]; const flagUrl = `${FLAG_BASE_URL}${countryCode}${FLAG_EXTENSION}`; const option = document.createElement('option'); option.value = flagUrl; option.textContent = countryName; option.setAttribute('data-content', `<img src='${flagUrl}' style='width: 20px; height: auto; margin-right: 5px; vertical-align: middle; border: 1px solid #ccc;'> ${countryName}`); select.appendChild(option); }); $(select).selectpicker('refresh'); select.addEventListener('change', function(event) { const selectedUrl = event.target.value; if (selectedUrl) { showLoading(); customFlag.src = selectedUrl; } else { removeFlag(); } }); }
 
-    // Modified: Populates the *first* dropdown (#playerSelect) with players from fcmData
+    function normalizePimage(url) {
+        if (!url) return '';
+        const trimmed = url.trim();
+        if (trimmed.startsWith('data:')) return trimmed;
+        if (trimmed.startsWith('//')) return `https:${trimmed}`;
+        return trimmed;
+    }
+
+    async function loadPlayerData() {
+        const select = document.getElementById('playerSelect');
+        try {
+            const res = await fetch(PLAYER_DATA_URL, { cache: 'no-cache' });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+            if (!Array.isArray(data)) throw new Error('Invalid data format');
+            playerData = data;
+            populatePlayerSelectDropdown();
+        } catch (err) {
+            console.error("Failed to load player_data.json:", err);
+            playerData = [];
+            hideFaceVersionDropdown();
+            if (select) {
+                select.innerHTML = '';
+                const fallbackOption = document.createElement('option');
+                fallbackOption.value = "";
+                fallbackOption.textContent = "player_data.json을 불러올 수 없습니다";
+                select.appendChild(fallbackOption);
+                select.disabled = true;
+                $(select).selectpicker('refresh');
+            }
+        }
+    }
+
     function populatePlayerSelectDropdown() {
         const select = document.getElementById('playerSelect');
+        if (!select) return;
+        select.disabled = false;
         select.innerHTML = ''; // Clear existing
 
         const defaultOption = document.createElement('option');
@@ -197,120 +359,74 @@
         defaultOption.textContent = "선수 선택 안 함";
         select.appendChild(defaultOption);
 
-        // Sort fcmData by nickname/name for easier searching
-        const sortedPlayers = [...fcmData].sort((a, b) => (a.nick || a.name || '').localeCompare(b.nick || b.name || '', 'ko'));
+        const sortedPlayers = [...playerData].sort((a, b) => (a.playerKor || a.className || '').localeCompare(b.playerKor || b.className || '', 'ko'));
 
         sortedPlayers.forEach(player => {
-            if (!player.pid) return; // Skip if no pid
-
-            // Check if this player exists in faceData and has images
-            const faceEntry = faceData.find(fd => fd.pid === player.pid);
-            if (!faceEntry || !faceEntry.images || faceEntry.images.length === 0) {
-                 return; // Skip players not in faceData or without images
-            }
+            const imageUrl = normalizePimage(player.pimage);
+            if (!imageUrl) return; // Skip entries without image
 
             const option = document.createElement('option');
-            option.value = player.pid; // Use PID as the value
-            const displayText = player.nick ? `${player.nick} (${player.name || ''})` : player.name || `Player ${player.pid}`;
-            option.textContent = displayText; // Text for search/display
+            const value = String(player.cid || player.playerKor || imageUrl);
+            option.value = value; // Use CID as the value when possible
+            option.dataset.pimage = imageUrl;
 
-            // Option for preview (can be slow)
-            const previewUrl = faceEntry.images[0]; // Use the first image for preview
-            option.setAttribute('data-content', `<img src='${previewUrl}' style='width: 20px; height: auto; margin-right: 5px; vertical-align: middle; border: 1px solid #eee; object-fit: contain;'> ${displayText}`);
+            const displayText = player.playerKor || player.className || `Player ${value}`;
+            const meta = [];
+            if (player.className) meta.push(player.className);
+            if (player.position) meta.push(player.position);
+            if (player.ovr) meta.push(`OVR ${player.ovr}`);
+            const metaText = meta.length ? ` <small class="text-muted">${meta.join(' / ')}</small>` : '';
+
+            option.textContent = displayText; // Text for search/display
+            option.setAttribute('data-content', `<img src='${imageUrl}' style='width: 20px; height: 20px; object-fit: contain; margin-right: 5px; border: 1px solid #eee; vertical-align: middle;'> ${displayText}${metaText}`);
 
             select.appendChild(option);
         });
 
         $(select).selectpicker('refresh'); // Refresh bootstrap-select
-
-        // Add event listener for player selection
-        select.addEventListener('change', function(event) {
-            const selectedPid = event.target.value;
-            if (selectedPid) {
-                populateFaceVersionDropdown(selectedPid); // Populate the second dropdown
-                document.getElementById('photoInput').value = ''; // Clear file input
-            } else {
-                removePhoto(); // Clear photo and hide version dropdown if "선택 안 함"
-                hideFaceVersionDropdown();
-            }
-        });
+        select.onchange = (event) => { handlePlayerChange(event.target.value); };
+        hideFaceVersionDropdown(); // Version 선택은 더 이상 사용하지 않음
     }
 
-    // New Function: Populates the *second* dropdown (#faceVersionSelect) based on selected player PID
-    function populateFaceVersionDropdown(pid) {
-        const versionSelect = document.getElementById('faceVersionSelect');
-        const versionGroup = document.getElementById('faceVersionGroup');
-        versionSelect.innerHTML = ''; // Clear previous options
-
-        const faceEntry = faceData.find(fd => fd.pid === pid);
-
-        if (!faceEntry || !faceEntry.images || faceEntry.images.length === 0) {
-            console.warn(`No face versions found in faceData.js for PID: ${pid}`);
-            hideFaceVersionDropdown();
-            customPhoto.src = ''; // Clear image source
-            drawCard();
+    function handlePlayerChange(selectedId) {
+        if (!selectedId) {
+            removePhoto();
             return;
         }
-
-        faceEntry.images.forEach((imageUrl, index) => {
-            const option = document.createElement('option');
-            option.value = imageUrl;
-
-            // Create a meaningful name from the URL (improved parsing)
-            let imageName = `Version ${index + 1}`; // Default fallback
-            try {
-                const urlParts = imageUrl.split('/');
-                let filename = urlParts[urlParts.length - 1];
-                if (filename === 'normal' && urlParts.length > 1) { // Handle renderz.app structure
-                    filename = urlParts[urlParts.length - 2];
-                }
-                const pidStr = `p${pid}_`;
-                const baseName = filename.replace(pidStr, '').replace('.png', '');
-                if (baseName && baseName !== filename) { // Check if replacement happened
-                    imageName = baseName.replace(/_/g, ' ').replace(/ FD24 INHERIT/i, ' Founders').replace(/ WILDCARD24/i, ' WC24').replace(/ NV24 ICON/i, ' NV ICON'); // Basic cleanup
-                }
-            } catch (e) { console.error("Error parsing face version name:", e); }
-
-
-            option.textContent = imageName;
-            option.setAttribute('data-content', `<img src='${imageUrl}' style='width: 20px; height: auto; margin-right: 5px; vertical-align: middle; border: 1px solid #eee; object-fit: contain;'> ${imageName}`);
-            versionSelect.appendChild(option);
-        });
-
-        $(versionSelect).selectpicker('refresh');
-        versionGroup.style.display = 'block'; // Show the dropdown
-
-        // Automatically select and load the first face version
-        if (versionSelect.options.length > 0) {
-            versionSelect.selectedIndex = 0;
-            loadSelectedFaceVersion(); // Trigger load
-        }
-    }
-
-    // New Function: Hides the face version dropdown
-    function hideFaceVersionDropdown() {
-         document.getElementById('faceVersionGroup').style.display = 'none';
-         $('#faceVersionSelect').selectpicker('val', ''); // Clear selection
-         document.getElementById('faceVersionSelect').innerHTML = ''; // Clear options
-         $('#faceVersionSelect').selectpicker('refresh');
-    }
-
-    // New Function: Loads the image selected in the version dropdown
-    function loadSelectedFaceVersion() {
-        const selectedUrl = document.getElementById('faceVersionSelect').value;
-        if (selectedUrl) {
+        setPhotoSource(false);
+        const matched = playerData.find(p => String(p.cid || p.playerKor || '') === selectedId);
+        const imageUrl = normalizePimage(matched?.pimage);
+        if (imageUrl) {
             showLoading();
-            customPhoto.src = selectedUrl; // Load into the shared customPhoto object
             customPhoto.loading = true;
             customPhoto.error = false;
+            customPhoto.src = imageUrl; // Load into the shared customPhoto object
         } else {
-            customPhoto.src = '';
-            drawCard();
+            alert('선택한 선수의 pimage가 없습니다. fastcrawl.py 결과를 확인하세요.');
+            removePhoto();
         }
+        document.getElementById('photoInput').value = ''; // Clear file input
+    }
+
+    function hideFaceVersionDropdown() {
+         const versionGroup = document.getElementById('faceVersionGroup');
+         const versionSelect = document.getElementById('faceVersionSelect');
+         if (versionGroup) versionGroup.style.display = 'none';
+         if (versionSelect) {
+             versionSelect.innerHTML = '';
+             $('#faceVersionSelect').selectpicker('val', ''); // Clear selection
+             $('#faceVersionSelect').selectpicker('refresh');
+         }
+    }
+
+    function getSelectedPlayerInfo() {
+        const selectedId = document.getElementById('playerSelect').value;
+        const matched = playerData.find(p => String(p.cid || p.playerKor || '') === selectedId);
+        return { id: selectedId, image: normalizePimage(matched?.pimage || '') };
     }
 
     // --- Initial Load & Removal ---
-    function loadBaseCard(cardPath = `Blank/${getFileName(275)}`) { showLoading(); baseCard.src = cardPath; }
+    function loadBaseCard(cardPath = `Blank/${getFileName(272)}`) { showLoading(); baseCard.src = cardPath; }
 
     // Modified: removeImage handles resetting both selects if key is 'photo'
     function removeImage(imgElement, aspectRatioKey, inputElementId = null) {
@@ -328,6 +444,7 @@
                 coords.x = 'photoX'; coords.y = 'photoY'; coords.w = 'photoWidth'; coords.h = 'photoHeight';
                 $('#playerSelect').selectpicker('val', ''); // Reset player dropdown
                 hideFaceVersionDropdown(); // Hide and clear version dropdown
+                setPhotoSource(false);
                 break;
             case 'icon': coords.x = 'iconX'; coords.y = 'iconY'; coords.w = 'iconWidth'; coords.h = 'iconHeight'; document.getElementById('newOption').value = 'live'; document.getElementById('iconOptions').style.display = 'none'; break;
         }
@@ -369,6 +486,7 @@
                         if (imageKey === 'photo') {
                              $('#playerSelect').selectpicker('val', ''); // Clear player dropdown
                              hideFaceVersionDropdown(); // Hide and clear version dropdown
+                             setPhotoSource(true);
                         }
                     }
                 } else { console.error(`Uploaded ${imageKey} invalid`); alert(`Uploaded image for ${imageKey} is invalid.`); const imageObject = getImageObject(imageKey); if (imageObject) imageObject.error = true; aspectRatios[imageKey] = undefined; drawCard(); }
@@ -382,6 +500,34 @@
     }
     document.getElementById('seasonUploadInput').addEventListener('change', (e) => handleFileInput(e, 'season'));
     document.getElementById('photoInput').addEventListener('change', (e) => handleFileInput(e, 'photo'));
+    document.getElementById('miricanvasEffect').addEventListener('change', () => {
+        const toggle = document.getElementById('miricanvasEffect');
+        useMiricanvasEffect = isPhotoFromUpload && toggle.checked;
+        if (!isPhotoFromUpload) toggle.checked = false;
+        drawCard();
+    });
+    document.getElementById('gradientMaskEnabled').addEventListener('change', () => {
+        const toggle = document.getElementById('gradientMaskEnabled');
+        useGradientMask = isPhotoFromUpload && toggle.checked;
+        const controls = document.getElementById('gradientMaskControls');
+        if (controls) controls.style.display = useGradientMask ? 'block' : 'none';
+        if (!isPhotoFromUpload) toggle.checked = false;
+        drawCard();
+    });
+    document.getElementById('gradientMaskType').addEventListener('change', (e) => {
+        gradientMaskType = e.target.value;
+        drawCard();
+    });
+    document.getElementById('gradientMaskAngle').addEventListener('input', (e) => {
+        gradientMaskAngle = +e.target.value;
+        document.getElementById('gradientMaskAngleValue').textContent = `${gradientMaskAngle}°`;
+        drawCard();
+    });
+    document.getElementById('gradientMaskRange').addEventListener('input', (e) => {
+        gradientMaskRange = +e.target.value;
+        document.getElementById('gradientMaskRangeValue').textContent = `${gradientMaskRange}%`;
+        drawCard();
+    });
 
     // --- Draw Card & Text ---
     function drawCard() {
@@ -409,7 +555,47 @@
             imgElement.loading = false;
             const drawWidth = Math.max(minImageSize, params.width); const drawHeight = Math.max(minImageSize, params.height);
             const inputs = getInputElements(key); if (inputs) { if (+inputs.wE.value !== drawWidth) inputs.wE.value = drawWidth; if (+inputs.hE.value !== drawHeight) inputs.hE.value = drawHeight; }
-            ctx.drawImage(imgElement, params.x, params.y, drawWidth, drawHeight);
+            const applyMiricanvas = key === 'photo' && isPhotoFromUpload && useMiricanvasEffect;
+            const applyGradient = key === 'photo' && isPhotoFromUpload && useGradientMask;
+
+            if (applyMiricanvas || applyGradient) {
+                const off = document.createElement('canvas');
+                off.width = drawWidth;
+                off.height = drawHeight;
+                const octx = off.getContext('2d');
+                if (applyMiricanvas) {
+                    octx.filter = 'contrast(1.08) saturate(1.05) brightness(1.03) drop-shadow(0 0 6px rgba(0,0,0,0.35))';
+                }
+                octx.drawImage(imgElement, 0, 0, drawWidth, drawHeight);
+                if (applyGradient) {
+                    octx.save();
+                    octx.globalCompositeOperation = 'destination-in';
+                    const stop = Math.max(0, Math.min(gradientMaskRange, 100)) / 100;
+                    if (gradientMaskType === 'radial') {
+                        const outerR = Math.hypot(drawWidth, drawHeight) * 0.5 + 1;
+                        const innerR = Math.max(0, outerR * (1 - stop));
+                        const g = octx.createRadialGradient(drawWidth / 2, drawHeight / 2, innerR, drawWidth / 2, drawHeight / 2, outerR);
+                        g.addColorStop(0, 'rgba(255,255,255,1)');
+                        g.addColorStop(1, 'rgba(255,255,255,0)');
+                        octx.fillStyle = g;
+                        octx.fillRect(0, 0, drawWidth, drawHeight);
+                    } else {
+                        // Linear: keep full opacity then fade out toward the bottom (miricanvas style)
+                        const fadeLen = Math.max(0, Math.min(1, stop)) * drawHeight;
+                        const fadeStartY = drawHeight - fadeLen;
+                        const g = octx.createLinearGradient(0, 0, 0, drawHeight);
+                        g.addColorStop(0, 'rgba(255,255,255,1)');
+                        g.addColorStop(Math.max(0, fadeStartY / drawHeight), 'rgba(255,255,255,1)');
+                        g.addColorStop(1, 'rgba(255,255,255,0)');
+                        octx.fillStyle = g;
+                        octx.fillRect(0, 0, drawWidth, drawHeight);
+                    }
+                    octx.restore();
+                }
+                ctx.drawImage(off, params.x, params.y, drawWidth, drawHeight);
+            } else {
+                ctx.drawImage(imgElement, params.x, params.y, drawWidth, drawHeight);
+            }
             if (activeImage === key) { drawHandles({ x: params.x, y: params.y, width: drawWidth, height: drawHeight }); }
         } else if (imgElement.error) { imgElement.loading = false; const x = params.x, y = params.y, w = params.width, h = params.height; ctx.save(); ctx.fillStyle = "rgba(255, 0, 0, 0.1)"; ctx.fillRect(x, y, w, h); ctx.strokeStyle = "red"; ctx.lineWidth = 1; ctx.strokeRect(x, y, w, h); ctx.fillStyle = "red"; ctx.font = '10px sans-serif'; ctx.textAlign = 'center'; ctx.fillText("Load Error", x + w / 2, y + h / 2); ctx.restore(); }
         else if (imgElement.loading && imgElement.src) { const x = params.x, y = params.y, w = params.width, h = params.height; ctx.save(); ctx.fillStyle = "rgba(200, 200, 200, 0.2)"; ctx.fillRect(x, y, w, h); ctx.strokeStyle = "#ccc"; ctx.lineWidth = 1; ctx.setLineDash([2, 2]); ctx.strokeRect(x, y, w, h); ctx.fillStyle = "#999"; ctx.font = '10px sans-serif'; ctx.textAlign = 'center'; ctx.fillText("Loading...", x + w / 2, y + h / 2); ctx.restore(); }
@@ -535,27 +721,66 @@ canvas.addEventListener('pointerleave', () => {
   document.body.removeChild(link);
 }
 
-// 기존 downloadCardState() 함수는 그대로 둡니다.
-function downloadCardState() { /* … */ }
-    // Modified: downloadCardState includes selected PID and face version URL
-    function downloadCardState() { const state={ blankCard:document.getElementById('blankCardSelect').value, cardTitle:document.getElementById('cardTitleInput').value, ovr:{value:document.getElementById('ovr').value, x:document.getElementById('ovrX').value, y:document.getElementById('ovrY').value, fontSize:document.getElementById('ovrFontSize').value, font:document.getElementById('ovrFont').value, color:document.getElementById('ovrColor').value}, position:{value:document.getElementById('position').value, x:document.getElementById('posX').value, y:document.getElementById('posY').value, font:document.getElementById('posFont').value, fontSize:document.getElementById('posFontSize').value, color:document.getElementById('posColor').value}, playerName:{value:document.getElementById('playerName').value, x:document.getElementById('nameX').value, y:document.getElementById('nameY').value, font:document.getElementById('nameFont').value, fontSize:document.getElementById('nameFontSize').value, color:document.getElementById('nameColor').value}, flag:{x:document.getElementById('flagX').value, y:document.getElementById('flagY').value, width:document.getElementById('flagUploadWidth').value, height:document.getElementById('flagUploadHeight').value, selectedUrl:document.getElementById('flagSelect').value}, season:{x:document.getElementById('seasonX').value, y:document.getElementById('seasonY').value, width:document.getElementById('seasonUploadWidth').value, height:document.getElementById('seasonUploadHeight').value, src:customSeason.src}, photo:{ x:document.getElementById('photoX').value, y:document.getElementById('photoY').value, width:document.getElementById('photoWidth').value, height:document.getElementById('photoHeight').value, src: customPhoto.src, selectedPid: document.getElementById('playerSelect').value, selectedVersionUrl: document.getElementById('faceVersionSelect').value }, iconOption:document.getElementById('newOption').value, icon:{x:document.getElementById('iconX').value, y:document.getElementById('iconY').value, width:document.getElementById('iconWidth').value, height:document.getElementById('iconHeight').value, src:customIcon.src}}; const blob=new Blob([JSON.stringify(state, null, 2)], {type:'application/json'}); const url=URL.createObjectURL(blob); const link=document.createElement('a'); const title=document.getElementById('cardTitleInput').value.trim() || 'cardState'; link.href=url; link.download=`${title}_state.json`; document.body.appendChild(link); link.click(); document.body.removeChild(link); URL.revokeObjectURL(url); }
+    // Modified: downloadCardState includes selected player id/image from player_data.json
+    function downloadCardState() {
+        const selectedPlayerInfo = getSelectedPlayerInfo();
+        const state={
+            blankCard:document.getElementById('blankCardSelect').value,
+            cardTitle:document.getElementById('cardTitleInput').value,
+            ovr:{value:document.getElementById('ovr').value, x:document.getElementById('ovrX').value, y:document.getElementById('ovrY').value, fontSize:document.getElementById('ovrFontSize').value, font:document.getElementById('ovrFont').value, color:document.getElementById('ovrColor').value},
+            position:{value:document.getElementById('position').value, x:document.getElementById('posX').value, y:document.getElementById('posY').value, font:document.getElementById('posFont').value, fontSize:document.getElementById('posFontSize').value, color:document.getElementById('posColor').value},
+            playerName:{value:document.getElementById('playerName').value, x:document.getElementById('nameX').value, y:document.getElementById('nameY').value, font:document.getElementById('nameFont').value, fontSize:document.getElementById('nameFontSize').value, color:document.getElementById('nameColor').value},
+            flag:{x:document.getElementById('flagX').value, y:document.getElementById('flagY').value, width:document.getElementById('flagUploadWidth').value, height:document.getElementById('flagUploadHeight').value, selectedUrl:document.getElementById('flagSelect').value},
+            season:{x:document.getElementById('seasonX').value, y:document.getElementById('seasonY').value, width:document.getElementById('seasonUploadWidth').value, height:document.getElementById('seasonUploadHeight').value, src:customSeason.src},
+            photo:{
+                x:document.getElementById('photoX').value,
+                y:document.getElementById('photoY').value,
+                width:document.getElementById('photoWidth').value,
+                height:document.getElementById('photoHeight').value,
+                src: customPhoto.src,
+                selectedPlayerId: selectedPlayerInfo.id,
+                selectedPlayerImage: selectedPlayerInfo.image,
+                isUploaded: isPhotoFromUpload,
+                miricanvasEffect: useMiricanvasEffect,
+                gradientMask: {
+                    enabled: useGradientMask,
+                    type: gradientMaskType,
+                    angle: gradientMaskAngle,
+                    range: gradientMaskRange
+                }
+            },
+            iconOption:document.getElementById('newOption').value,
+            icon:{x:document.getElementById('iconX').value, y:document.getElementById('iconY').value, width:document.getElementById('iconWidth').value, height:document.getElementById('iconHeight').value, src:customIcon.src}
+        };
+        const blob=new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+        const url=URL.createObjectURL(blob);
+        const link=document.createElement('a');
+        const title=document.getElementById('cardTitleInput').value.trim() || 'cardState';
+        link.href=url;
+        link.download=`${title}_state.json`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }
     document.getElementById('jsonLoadInput').addEventListener('change', e => { /* ... unchanged file reading ... */ });
     // Modified: applyCardState handles new photo state structure
     function applyCardState(s) {
         activeImage = null; mode = ''; if (hideHandlesTimeout) clearTimeout(hideHandlesTimeout); hideHandlesTimeout = null;
         removeFlag(); removeSeason(); removePhoto(); removeIcon(); // removePhoto clears both dropdowns
         let imagesToLoadCount = 0;
+        isRestoringState = true;
         const originalHandlers = { base: { onload: baseCard.onload, onerror: baseCard.onerror }, flag: { onload: customFlag.onload, onerror: customFlag.onerror }, season: { onload: customSeason.onload, onerror: customSeason.onerror }, photo: { onload: customPhoto.onload, onerror: customPhoto.onerror }, icon: { onload: customIcon.onload, onerror: customIcon.onerror } };
-        const checkCompletion = () => { imagesToLoadCount--; if (imagesToLoadCount <= 0) { hideLoading(); setTimeout(() => { baseCard.onload = originalHandlers.base.onload; baseCard.onerror = originalHandlers.base.onerror; customFlag.onload = originalHandlers.flag.onload; customFlag.onerror = originalHandlers.flag.onerror; customSeason.onload = originalHandlers.season.onload; customSeason.onerror = originalHandlers.season.onerror; customPhoto.onload = originalHandlers.photo.onload; customPhoto.onerror = originalHandlers.photo.onerror; customIcon.onload = originalHandlers.icon.onload; customIcon.onerror = originalHandlers.icon.onerror; }, 0); drawCard(); } };
+        const checkCompletion = () => { imagesToLoadCount--; if (imagesToLoadCount <= 0) { hideLoading(); setTimeout(() => { baseCard.onload = originalHandlers.base.onload; baseCard.onerror = originalHandlers.base.onerror; customFlag.onload = originalHandlers.flag.onload; customFlag.onerror = originalHandlers.flag.onerror; customSeason.onload = originalHandlers.season.onload; customSeason.onerror = originalHandlers.season.onerror; customPhoto.onload = originalHandlers.photo.onload; customPhoto.onerror = originalHandlers.photo.onerror; customIcon.onload = originalHandlers.icon.onload; customIcon.onerror = originalHandlers.icon.onerror; isRestoringState = false; }, 0); drawCard(); } };
         const createLoadHandler = (img, key) => () => { imageOnLoad(img, key); checkCompletion(); };
         const createErrorHandler = (img, key) => () => { imageOnError(img, key); checkCompletion(); };
         const startImageLoad = (imgElement, src, key) => { if (src) { imagesToLoadCount++; imgElement.error = false; imgElement.loading = true; imgElement.onload = createLoadHandler(imgElement, key); imgElement.onerror = createErrorHandler(imgElement, key); imgElement.src = src; return true; } return false; };
 
         document.getElementById('cardTitleInput').value = s.cardTitle || '';
-        const blankCardPath = s.blankCard || `Blank/${getFileName(300)}`;
+        const blankCardPath = s.blankCard || `Blank/${getFileName(264)}`;
         $('#blankCardSelect').selectpicker('val', blankCardPath);
-        if ($('#blankCardSelect').val() === blankCardPath) { showLoading(); startImageLoad(baseCard, blankCardPath, 'base'); } else { console.warn("Saved blank card path invalid:", blankCardPath); $('#blankCardSelect').selectpicker('val', `Blank/${getFileName(300)}`); showLoading(); startImageLoad(baseCard, `Blank/${getFileName(264)}`, 'base'); }
-        if (s.ovr) { document.getElementById('ovr').value = s.ovr.value ?? 129; document.getElementById('ovrX').value = s.ovr.x ?? 88; document.getElementById('ovrY').value = s.ovr.y ?? 63; document.getElementById('ovrFontSize').value = s.ovr.fontSize ?? 35; document.getElementById('ovrFont').value = s.ovr.font ?? 'FontA'; document.getElementById('ovrColor').value = s.ovr.color ?? '#FFFFFF'; }
+        if ($('#blankCardSelect').val() === blankCardPath) { showLoading(); startImageLoad(baseCard, blankCardPath, 'base'); } else { console.warn("Saved blank card path invalid:", blankCardPath); $('#blankCardSelect').selectpicker('val', `Blank/${getFileName(264)}`); showLoading(); startImageLoad(baseCard, `Blank/${getFileName(264)}`, 'base'); }
+        if (s.ovr) { document.getElementById('ovr').value = s.ovr.value ?? 129; document.getElementById('ovrX').value = s.ovr.x ?? 88; document.getElementById('ovrY').value = s.ovr.y ?? 63; document.getElementById('ovrFontSize').value = s.ovr.fontSize ?? 35; document.getElementById('ovrFont').value = s.ovr.font ?? 'FontA'; document.getElementById('ovrColor').value = s.ovr.color ?? '#FFD700'; }
         if (s.position) { document.getElementById('position').value = s.position.value ?? 'ST'; document.getElementById('posX').value = s.position.x ?? 78; document.getElementById('posY').value = s.position.y ?? 89; document.getElementById('posFontSize').value = s.position.fontSize ?? 19; document.getElementById('posFont').value = s.position.font ?? 'FontD'; document.getElementById('posColor').value = s.position.color ?? '#FFFFFF'; }
         if (s.playerName) { document.getElementById('playerName').value = s.playerName.value ?? 'R.레반도프스키'; document.getElementById('nameX').value = s.playerName.x ?? 150; document.getElementById('nameY').value = s.playerName.y ?? 218; document.getElementById('nameFontSize').value = s.playerName.fontSize ?? 20; document.getElementById('nameFont').value = s.playerName.font ?? 'FontC'; document.getElementById('nameColor').value = s.playerName.color ?? '#FFFFFF'; }
 
@@ -566,45 +791,72 @@ function downloadCardState() { /* … */ }
         // Apply Photo state
         if (s.photo) {
             applyCoords(s.photo, 50, 50, 100, 100, 'photoX', 'photoY', 'photoWidth', 'photoHeight');
-            if (s.photo.selectedPid) {
-                $('#playerSelect').selectpicker('val', s.photo.selectedPid);
-                if ($('#playerSelect').val() === s.photo.selectedPid) {
-                    populateFaceVersionDropdown(s.photo.selectedPid); // This might load the first image
-                    if (s.photo.selectedVersionUrl) {
-                        $('#faceVersionSelect').selectpicker('val', s.photo.selectedVersionUrl);
-                         // Check if the value was actually set before trying to load
-                         if ($('#faceVersionSelect').val() === s.photo.selectedVersionUrl) {
-                            // Only load if it's different from the first one (which might be loaded by populate)
-                            // Or if populateFaceVersionDropdown doesn't auto-load, always load here.
-                            // Assuming populateFaceVersionDropdown auto-loads the first, only load if different:
-                            const firstVersionUrl = document.getElementById('faceVersionSelect').options[0]?.value;
-                            if (firstVersionUrl !== s.photo.selectedVersionUrl) {
-                                startImageLoad(customPhoto, s.photo.selectedVersionUrl, 'photo');
-                            }
-                         } else {
-                             console.warn("Saved face version URL invalid or not found:", s.photo.selectedVersionUrl);
-                             // Keep the first version loaded by populateFaceVersionDropdown
-                         }
-                    } // else: only PID saved, first version already loaded by populate
-                } else { // Invalid PID saved
-                    console.warn("Saved player PID invalid:", s.photo.selectedPid);
-                    $('#playerSelect').selectpicker('val', '');
-                    hideFaceVersionDropdown();
-                    if (s.photo.src && typeof s.photo.src === 'string' && !s.photo.src.includes('renderz.app') && !s.photo.src.startsWith('./resources/')) {
-                        startImageLoad(customPhoto, s.photo.src, 'photo'); // Fallback to uploaded src
-                    }
+            const savedPlayerId = s.photo.selectedPlayerId || s.photo.selectedPid;
+            const savedPlayerImage = normalizePimage(s.photo.selectedPlayerImage || s.photo.selectedVersionUrl || '');
+            const effectToggle = document.getElementById('miricanvasEffect');
+            const gradToggle = document.getElementById('gradientMaskEnabled');
+            const gradControls = document.getElementById('gradientMaskControls');
+            const wasUploaded = !!(s.photo.isUploaded || (s.photo.src && typeof s.photo.src === 'string' && s.photo.src.startsWith('data:')));
+
+            if (savedPlayerId) {
+                setPhotoSource(false);
+                if (effectToggle) { effectToggle.checked = false; effectToggle.disabled = true; }
+                if (gradToggle) { gradToggle.checked = false; gradToggle.disabled = true; }
+                if (gradControls) gradControls.style.display = 'none';
+                $('#playerSelect').selectpicker('val', savedPlayerId);
+                const matched = playerData.find(p => String(p.cid || p.playerKor || '') === savedPlayerId);
+                const imageToLoad = normalizePimage(matched?.pimage || savedPlayerImage || s.photo.src);
+
+                if ($('#playerSelect').val() === savedPlayerId && imageToLoad) {
+                    startImageLoad(customPhoto, imageToLoad, 'photo');
+                } else if (s.photo.src) {
+                    startImageLoad(customPhoto, s.photo.src, 'photo');
+                } else if (savedPlayerImage) {
+                    startImageLoad(customPhoto, savedPlayerImage, 'photo');
+                } else {
+                    console.warn("Saved player ID is invalid or image missing:", savedPlayerId);
                 }
             } else if (s.photo.src) { // Only direct src saved (uploaded)
                 startImageLoad(customPhoto, s.photo.src, 'photo');
                 $('#playerSelect').selectpicker('val', '');
-                hideFaceVersionDropdown();
+            } else if (savedPlayerImage) {
+                startImageLoad(customPhoto, savedPlayerImage, 'photo');
+                $('#playerSelect').selectpicker('val', '');
             }
+            if (!savedPlayerId) {
+                setPhotoSource(wasUploaded);
+                useMiricanvasEffect = wasUploaded && !!s.photo.miricanvasEffect;
+                useGradientMask = wasUploaded && !!s.photo.gradientMask?.enabled;
+                gradientMaskType = s.photo.gradientMask?.type || 'linear';
+                gradientMaskAngle = s.photo.gradientMask?.angle ?? 180;
+                gradientMaskRange = s.photo.gradientMask?.range ?? 38;
+                if (effectToggle) {
+                    effectToggle.checked = useMiricanvasEffect;
+                    effectToggle.disabled = !wasUploaded;
+                }
+                if (gradToggle) {
+                    gradToggle.checked = useGradientMask;
+                    gradToggle.disabled = !wasUploaded;
+                }
+                if (gradControls) {
+                    gradControls.style.display = useGradientMask && wasUploaded ? 'block' : 'none';
+                }
+                const angleEl = document.getElementById('gradientMaskAngle');
+                const angleValEl = document.getElementById('gradientMaskAngleValue');
+                const rangeEl = document.getElementById('gradientMaskRange');
+                const rangeValEl = document.getElementById('gradientMaskRangeValue');
+                const typeEl = document.getElementById('gradientMaskType');
+                if (angleEl && angleValEl) { angleEl.value = gradientMaskAngle; angleValEl.textContent = `${gradientMaskAngle}°`; }
+                if (rangeEl && rangeValEl) { rangeEl.value = gradientMaskRange; rangeValEl.textContent = `${gradientMaskRange}%`; }
+                if (typeEl) { typeEl.value = gradientMaskType; }
+            }
+            hideFaceVersionDropdown();
         }
 
         const iconOption = s.iconOption || 'live'; document.getElementById('newOption').value = iconOption; document.getElementById('iconOptions').style.display = iconOption === 'icon' ? 'block' : 'none';
         if (s.icon) { applyCoords(s.icon, 20, 20, 40, 40, 'iconX', 'iconY', 'iconWidth', 'iconHeight'); if (iconOption === 'icon' && s.icon.src) startImageLoad(customIcon, s.icon.src, 'icon'); }
 
-        if (imagesToLoadCount === 0) { hideLoading(); drawCard(); baseCard.onload = originalHandlers.base.onload; baseCard.onerror = originalHandlers.base.onerror; customFlag.onload = originalHandlers.flag.onload; customFlag.onerror = originalHandlers.flag.onerror; customSeason.onload = originalHandlers.season.onload; customSeason.onerror = originalHandlers.season.onerror; customPhoto.onload = originalHandlers.photo.onload; customPhoto.onerror = originalHandlers.photo.onerror; customIcon.onload = originalHandlers.icon.onload; customIcon.onerror = originalHandlers.icon.onerror; }
+        if (imagesToLoadCount === 0) { hideLoading(); drawCard(); baseCard.onload = originalHandlers.base.onload; baseCard.onerror = originalHandlers.base.onerror; customFlag.onload = originalHandlers.flag.onload; customFlag.onerror = originalHandlers.flag.onerror; customSeason.onload = originalHandlers.season.onload; customSeason.onerror = originalHandlers.season.onerror; customPhoto.onload = originalHandlers.photo.onload; customPhoto.onerror = originalHandlers.photo.onerror; customIcon.onload = originalHandlers.icon.onload; customIcon.onerror = originalHandlers.icon.onerror; isRestoringState = false; }
     }
 
     // --- Initial Setup ---
@@ -612,7 +864,8 @@ function downloadCardState() { /* … */ }
         $('.selectpicker').selectpicker();
         populateBlankCardDropdown();
         populateFlagDropdown();
-        populatePlayerSelectDropdown(); // Changed to populate player list first
+        loadPlayerData(); // fastcrawl.py에서 생성한 player_data.json 로드
+        setPhotoSource(false); // 업로드 전 효과 비활성화
         const initialCardPath = document.getElementById('blankCardSelect').value;
         loadBaseCard(initialCardPath || undefined);
 
@@ -626,8 +879,6 @@ function downloadCardState() { /* … */ }
         document.querySelectorAll('.coord-inputs input[type="number"], input#flagUploadWidth, input#flagUploadHeight, input#seasonUploadWidth, input#seasonUploadHeight, input#photoWidth, input#photoHeight, input#iconWidth, input#iconHeight').forEach(el => {
             el.addEventListener('change', drawCard);
         });
-        // Add listener for the face version dropdown change
-        document.getElementById('faceVersionSelect').addEventListener('change', loadSelectedFaceVersion);
         // Icon option listener
         document.getElementById('newOption').addEventListener('change', () => { const optionValue = document.getElementById('newOption').value; document.getElementById('iconOptions').style.display = optionValue === 'icon' ? "block" : "none"; if (optionValue === 'icon' && !customIcon.src && !customIcon.error && !customIcon.loading) { showLoading(); customIcon.loading = true; customIcon.src = ICON_DEFAULT_PATH; } else { drawCard(); } });
         // Preload icon
