@@ -25,40 +25,42 @@
     <main class="app-content">
       <div class="image-grid-container">
         <p>다른 사용자들이 만든 카드들을 확인하고 '좋아요'를 눌러보세요. 직접 만든 카드는 만들기 툴에서 공유할 수 있습니다.</p>
+        <div id="board-loading" class="board-loading" aria-live="polite">
+          <div class="spinner"></div>
+          <span class="loading-text">불러오는 중...</span>
+        </div>
         <div class="image-grid" id="card-creation-board-list">
           <!-- Cards from Firebase will be loaded here -->
         </div>
       </div>
     </main>
 
-        <nav class="app-bottom-nav">
-      <div class="nav-item active" data-tab="home-tab" data-title="홈">
+    <nav class="app-bottom-nav">
+      <a href="index.html" class="nav-item" data-title="홈">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
         <span>홈</span>
+      </a>
+      <a href="index.html#blank-cards-tab" class="nav-item" data-title="빈카드">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H4V4h16v16z"/></svg>
+        <span>빈카드</span>
+      </a>
+      <div class="nav-item" data-tab="flags-tab" data-title="국기">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg>
+        <span>국기</span>
       </div>
-      <a href="https://www.fcbook.info" class="nav-item" data-title="선수 검색">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M15.5 14h-.79l-.28-.27a6.471 6.471 0 001.48-5.34C15.08 5.59 12.51 3 9.25 3S3.42 5.59 3.09 8.89c-.33 3.31 2.25 6.11 5.55 6.47a6.471 6.471 0 005.34-1.48l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6.25 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-        </svg>
-        선수 검색
-      </a>
-      <a href="https://www.fcbook.info" class="nav-item" data-title="특성 검색">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M10 18h4v-2h-4v2zm-7-6h18v-2H3v2zm3-6v2h12V6H6z"/>
-        </svg>
-        특성 검색
-      </a>
-
-
       <a href="gener.html" class="nav-item" data-title="만들기">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
         <span>만들기</span>
       </a>
+      <div class="nav-item" data-tab="lettering-tab" data-title="글자">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9.93 13.5h4.14L12 7.98zM20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-4.05 16.5l-1.14-3H9.17l-1.12 3H5.96l5.11-13h1.86l5.11 13h-2.09z"/></svg>
+        <span>글자</span>
+      </div>
       <a href="board.html" class="nav-item" data-title="게시판">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zm0-8h14V7H7v2z"/></svg>
         <span>게시판</span>
       </a>
-        </nav>
+    </nav>
   </div>
 
 <style>
@@ -186,6 +188,28 @@
   cursor: pointer;
   padding: 5px;
 }
+
+.board-loading {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  color: #555;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e0e0e0;
+  border-top: 3px solid #f9a825;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 </style>
 
 <script type="module">
@@ -201,6 +225,12 @@
   } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js';
 
   const cardCreationBoardList = document.getElementById('card-creation-board-list');
+  const boardLoading = document.getElementById('board-loading');
+
+  function setLoading(isLoading) {
+    if (!boardLoading) return;
+    boardLoading.style.display = isLoading ? 'flex' : 'none';
+  }
 
   function hasUserLikedCardToday(cardId) {
     const today = new Date().toDateString();
@@ -213,10 +243,12 @@
   }
 
   const sharedCardsQuery = query(collection(db, 'cards'), orderBy('createdAt', 'desc'));
+  setLoading(true);
   onSnapshot(sharedCardsQuery, (snapshot) => {
     if (!cardCreationBoardList) return;
     cardCreationBoardList.innerHTML = '';
-    
+    setLoading(false);
+
     snapshot.forEach(cardDoc => {
       const cardData = cardDoc.data();
       const cardId = cardDoc.id;
@@ -286,6 +318,7 @@
     });
   }, error => {
     console.error('Error fetching shared cards:', error);
+    setLoading(false);
     if (cardCreationBoardList) cardCreationBoardList.innerHTML = '<p>카드 목록을 불러오는 데 실패했습니다.</p>';
   });
 
