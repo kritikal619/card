@@ -1,19 +1,47 @@
 {
   "notices": [
     {
-      "title": "5/31(토) Apple과 함께 하는 'Today At Apple' 오프라인 행사 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=2896831",
-      "summary": "FC 모바일과 Apple이 함께하는 특별 오프라인 이벤트를 안내합니다.",
+      "title": "연말연시 점검 미진행 & 쿠폰 이벤트 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3315134",
+      "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
     },
     {
-      "title": "5/15(목) 점검 후 이슈 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=2894984",
-      "summary": "5월 15일 점검 이후 발생한 문제점과 해결 방안을 안내합니다.",
+      "title": "(수정) 12/18(목) 일부 콘텐츠 보상 변경 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3312117",
+      "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
+    },
+    {
+      "title": "(완료) 12/18(목) 이벤트 센터 점검 연장 안내 (~오후 3시 45분)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3314777",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
+      "title": "(완료) 12/18(목) 점검 안내 (오전 7시 ~ 오후 3시)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3310706",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "업데이트",
+      "board_id": "442"
+    },
+    {
+      "title": "12/11(목) 무점검 패치 (오후 1시 20분 ~ 오후 1시 30분)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3303401",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "업데이트",
+      "board_id": "442"
+    },
+    {
+      "title": "12/18(목) 신규 클래스 / 이벤트 안내 [영웅]",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=445&thread=3260116",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "이벤트",
+      "board_id": "445"
     }
   ],
-  "last_updated": "2025-12-25 23:25:39"
+  "last_updated": "2025-12-26 02:07:49"
 }
