@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "🥤 울트라 POWER UP 🥤 (~2/5 점검 전)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3334693",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "연말연시 점검 미진행 & 쿠폰 이벤트 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3315134",
       "summary": "내용을 불러올 수 없습니다.",
@@ -10,13 +17,6 @@
     {
       "title": "(수정) 12/18(목) 일부 콘텐츠 보상 변경 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3312117",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "(완료) 12/18(목) 이벤트 센터 점검 연장 안내 (~오후 3시 45분)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3314777",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2026-01-07 08:39:47"
+  "last_updated": "2026-01-07 09:35:42"
 }
