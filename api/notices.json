@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "2026 설날 인사 & 설날 이벤트 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3374818",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "🛠️ SSS 정비 마스터 🛠️ (~3/12 점검 전)",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3365943",
       "summary": "내용을 불러올 수 없습니다.",
@@ -15,13 +22,6 @@
       "board_id": "441"
     },
     {
-      "title": "미스터리 에그 : RED (~2/19 점검 전)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3353010",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
       "title": "(완료) 2/12(목) 점검 안내 (오전 8시 ~ 낮 12시 50분)",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3373513",
       "summary": "내용을 불러올 수 없습니다.",
@@ -29,8 +29,8 @@
       "board_id": "442"
     },
     {
-      "title": "(완료) 2/5(목) 점검 안내 (오전 8시 ~ 낮 12시 25분)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3367040",
+      "title": "2/5(목) 무점검 패치 (오후 6시 ~ 오후 6시 10분)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3369337",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "업데이트",
       "board_id": "442"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2026-02-12 07:11:57"
+  "last_updated": "2026-02-12 08:57:25"
 }
