@@ -22,6 +22,13 @@
       "board_id": "441"
     },
     {
+      "title": "2/26(목) 점검 안내 (오전 8시 ~ 오후 1시)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3386289",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "업데이트",
+      "board_id": "442"
+    },
+    {
       "title": "2/19(목) 점검/패치 미진행 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3375991",
       "summary": "내용을 불러올 수 없습니다.",
@@ -29,19 +36,12 @@
       "board_id": "442"
     },
     {
-      "title": "(완료) 2/12(목) 점검 안내 (오전 8시 ~ 낮 12시 50분)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3373513",
+      "title": "(수정) 2/12(목) 신규 클래스 안내 [RH26]",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=445&thread=3374233",
       "summary": "내용을 불러올 수 없습니다.",
-      "board": "업데이트",
-      "board_id": "442"
-    },
-    {
-      "title": "2/5(목) 무점검 패치 (오후 6시 ~ 오후 6시 10분)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3369337",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "업데이트",
-      "board_id": "442"
+      "board": "이벤트",
+      "board_id": "445"
     }
   ],
-  "last_updated": "2026-02-24 07:55:38"
+  "last_updated": "2026-02-24 08:58:35"
 }
