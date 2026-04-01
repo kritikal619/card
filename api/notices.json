@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "미스터리 에그 (~4/23 점검 전)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3414543",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "NEXT FOOTBALL 업데이트 관련 추가 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3407986",
       "summary": "내용을 불러올 수 없습니다.",
@@ -10,13 +17,6 @@
     {
       "title": "🍀 럭키 리턴 🍀 (~4/23 00:00)",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3407286",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "3/21(토) NEXTFOOTBALL 쇼케이스 쿠폰 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3405575",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -36,12 +36,12 @@
       "board_id": "442"
     },
     {
-      "title": "3/5(목) 신규 클래스 / 이벤트 안내 [Capped Legends 26]",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=445&thread=3374827",
+      "title": "4/2(목) 신규 클래스 / 이벤트 안내 [UCL26]",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=445&thread=3374833",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "이벤트",
       "board_id": "445"
     }
   ],
-  "last_updated": "2026-04-01 07:48:52"
+  "last_updated": "2026-04-01 09:16:27"
 }
