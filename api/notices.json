@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "[E-ICON] 팬카드 훈련 재료 소모 건 복구 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3431320",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "사전등록 시 NEXT FOOTBALL 업데이트 이후 제공되는 쿠폰 발송 일정 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3430298",
       "summary": "내용을 불러올 수 없습니다.",
@@ -10,13 +17,6 @@
     {
       "title": "4/23(목) 점검 후 이슈 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3429717",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "NEXT FOOTBALL 업데이트 장시간 점검에 따른 쿠폰 보상 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3429055",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2026-04-24 06:14:47"
+  "last_updated": "2026-04-24 09:05:09"
 }
