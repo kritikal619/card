@@ -1,7 +1,7 @@
 {
   "notices": [
     {
-      "title": "진화 시스템 비정상 이용 계정 이적시장 임시 이용 제한 안내",
+      "title": "(추가) 진화 시스템 비정상 이용 계정 이적시장 임시 이용 제한 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3432619",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
@@ -29,8 +29,8 @@
       "board_id": "442"
     },
     {
-      "title": "(완료) 4/16(목) 점검 안내 (오전 7시 ~ 오후 1시 10분)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3423457",
+      "title": "(추가) 4/26(일) 임시점검 안내 (오후 6시 30분 ~ 오후 8시)",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3433059",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "업데이트",
       "board_id": "442"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2026-04-26 08:19:14"
+  "last_updated": "2026-04-26 09:59:39"
 }
