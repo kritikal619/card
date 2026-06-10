@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "FC 모바일 원스토어 입점 및 사전예약 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3473693",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "(내용 추가) 6/4(목) 점검 후 이슈 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3468733",
       "summary": "내용을 불러올 수 없습니다.",
@@ -10,13 +17,6 @@
     {
       "title": "운영정책 신규 정책 추가 안내 (26/6/11 적용)",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3441478",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "🍀 럭키 리턴 🍀 (~7/2 점검 전)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3453374",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2026-06-09 23:22:09"
+  "last_updated": "2026-06-10 04:19:53"
 }
