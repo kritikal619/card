@@ -1,6 +1,20 @@
 {
   "notices": [
     {
+      "title": "7/16(목) 점검 연장 보상 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3501752",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
+      "title": "7/16(목) 점검 후 이슈 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3501623",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "26UTOTS/TOTS 선수 리스트 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3501202",
       "summary": "내용을 불러올 수 없습니다.",
@@ -8,21 +22,7 @@
       "board_id": "441"
     },
     {
-      "title": "소원 공작소 (~8/6 점검 전)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3489048",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "7/2(목) 7월 로스터 업데이트 안내 (1)",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3490843",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "7/16(목) 점검 안내 (오전 7시 ~ 오후 1시)",
+      "title": "(완료) 7/16(목) 점검 안내 (오전 7시 ~ 오후 1시 45분)",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3500450",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "업데이트",
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2026-07-16 03:17:43"
+  "last_updated": "2026-07-16 06:25:20"
 }
