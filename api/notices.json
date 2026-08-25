@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "감독명 생성 최소 글자 수 변경 현상 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3532055",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "오공 잡화점 상품 판매 종료 및 리뉴얼 판매 예정 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3528132",
       "summary": "내용을 불러올 수 없습니다.",
@@ -10,13 +17,6 @@
     {
       "title": "8/13(목) '레벨업하라' 이벤트 임시 비활성화 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3521670",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "FC PRO 모바일 미드 시즌 플레이오프 개막 및 이벤트 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3511541",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2026-08-25 05:37:26"
+  "last_updated": "2026-08-25 06:57:56"
 }
