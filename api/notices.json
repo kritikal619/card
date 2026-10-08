@@ -1,13 +1,6 @@
 {
   "notices": [
     {
-      "title": "9/22(화) 무점검 패치 후 이슈 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3556827",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
       "title": "(추가) [뚝딱] 교환 토큰 및 교환 관련 후속 조치 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3550833",
       "summary": "내용을 불러올 수 없습니다.",
@@ -15,14 +8,21 @@
       "board_id": "441"
     },
     {
-      "title": "[뚝딱] 교환 토큰 및 교환 관련 쿠폰 보상 안내",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3550867",
+      "title": "10/22(목) 로스터 업데이트 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3559980",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "공지사항",
       "board_id": "441"
     },
     {
-      "title": "10/8(목) 점검 안내 (오전 8시 ~ 낮 12시)",
+      "title": "9/22(화) 무점검 패치 후 이슈 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3556827",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
+      "title": "(완료) 10/8(목) 점검 안내 (오전 8시 ~ 낮 12시)",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3558868",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "업데이트",
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2026-10-08 01:42:42"
+  "last_updated": "2026-10-08 08:43:25"
 }
