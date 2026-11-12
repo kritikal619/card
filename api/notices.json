@@ -1,6 +1,13 @@
 {
   "notices": [
     {
+      "title": "11/12(목) 앱 업데이트 안내",
+      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3579606",
+      "summary": "내용을 불러올 수 없습니다.",
+      "board": "공지사항",
+      "board_id": "441"
+    },
+    {
       "title": "(추가) 10/15(목) 이적시장 업데이트 안내",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3563327",
       "summary": "내용을 불러올 수 없습니다.",
@@ -15,14 +22,7 @@
       "board_id": "441"
     },
     {
-      "title": "10/22(목) 자유 계약 업데이트",
-      "href": "https://forum.nexon.com/fcmobile/board_view?board=441&thread=3566391",
-      "summary": "내용을 불러올 수 없습니다.",
-      "board": "공지사항",
-      "board_id": "441"
-    },
-    {
-      "title": "11/12(목) 점검 안내 (오전 7시 ~ 오후 1시)",
+      "title": "(완료) 11/12(목) 점검 안내 (오전 7시 ~ 낮 12시 25분)",
       "href": "https://forum.nexon.com/fcmobile/board_view?board=442&thread=3578874",
       "summary": "내용을 불러올 수 없습니다.",
       "board": "업데이트",
@@ -43,5 +43,5 @@
       "board_id": "445"
     }
   ],
-  "last_updated": "2026-11-12 01:25:35"
+  "last_updated": "2026-11-12 09:36:07"
 }
